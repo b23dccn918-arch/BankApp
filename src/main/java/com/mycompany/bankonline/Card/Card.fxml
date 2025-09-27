@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="600.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.bankonline.Card.CardController">
+
+    <!-- Header -->
+    <top>
+        <AnchorPane prefHeight="60.0" style="-fx-background-color: #2E86C1; -fx-padding: 10;">
+            <children>
+                <Label layoutX="20" layoutY="15" text="Your Cards" textFill="WHITE">
+                    <font><Font name="System Bold" size="24" /></font>
+                </Label>
+                <Button fx:id="logoutButton" layoutX="680" layoutY="15" style="-fx-background-color: #E74C3C; -fx-text-fill: white;" text="logout">
+                    <font><Font name="System Bold" size="16" /></font>
+                </Button>
+            </children>
+        </AnchorPane>
+    </top>
+
+    <!-- Sidebar -->
+    <left>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: Gray;" BorderPane.alignment="CENTER">
+            
+        <Button fx:id="accountButton" layoutX="-17.0" layoutY="57.0" maxWidth="Infinity" prefHeight="50.0" prefWidth="217.0" style="-fx-background-color: transparent;" styleClass="sidebar-button" text="Account">
+        <font>
+            <Font name="System Bold" size="16.0" />
+        </font></Button>
+        <Button fx:id="transferButton" layoutX="-17.0" layoutY="191.0" maxWidth="Infinity" prefHeight="43.0" prefWidth="217.0" style="-fx-background-color: transparent;" styleClass="sidebar-button" text="  Transfer">
+        <font>
+            <Font name="System Bold" size="16.0" />
+        </font></Button>
+        <Button fx:id="historyButton" layoutX="-17.0" layoutY="149.0" maxWidth="Infinity" prefHeight="42.0" prefWidth="217.0" style="-fx-background-color: transparent;" styleClass="sidebar-button" text="History">
+        <font>
+            <Font name="System Bold" size="16.0" />
+        </font></Button>
+        <Button fx:id="cardButton" layoutX="-45.0" layoutY="107.0" maxWidth="Infinity" prefHeight="42.0" prefWidth="217.0" style="-fx-background-color: transparent;" styleClass="sidebar-button" text="💳   Card">
+        <font>
+            <Font name="System Bold" size="16.0" />
+        </font></Button>
+        <Button fx:id="homeButton" layoutX="-45.0" layoutY="14.0" maxWidth="Infinity" prefHeight="51.0" prefWidth="217.0" style="-fx-background-color: transparent;" styleClass="sidebar-button" text="   🏠  Home">
+        <font>
+            <Font name="System Bold" size="16.0" />
+        </font></Button>
+      </AnchorPane>
+    </left>
+
+    <!-- Content: list of cards -->
+    <center>
+        <ScrollPane fitToWidth="true">
+            <content>
+                <VBox spacing="15" style="-fx-padding: 20;">
+                    <!-- Example card item -->
+                    <HBox spacing="20" style="-fx-background-color: #D6EAF8; -fx-padding: 15; -fx-background-radius: 10;">
+                        <VBox>
+                            <Label style="-fx-font-weight: bold;" text="Card Number:" />
+                            <Label text="1234 **** **** 5678" />
+                        </VBox>
+                        <VBox>
+                            <Label style="-fx-font-weight: bold;" text="Card Type:" />
+                            <Label text="VISA" />
+                        </VBox>
+                        <VBox>
+                            <Label style="-fx-font-weight: bold;" text="Expired Date:" />
+                            <Label text="12/2026" />
+                        </VBox>
+                        <VBox>
+                            <Label style="-fx-font-weight: bold;" text="Status:" />
+                            <Label text="Active" />
+                        </VBox>
+                        <Button style="-fx-background-color: #2E86C1; -fx-text-fill: white;" text="View Details" />
+                    </HBox>
+
+                    <!-- Copy HBox này để hiển thị nhiều thẻ khác -->
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+</BorderPane>

@@ -1,28 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
-package com.mycompany.bankonline.Transfer;
-
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import com.mycompany.bankonline.MainApp.Main;
+package com.mycompany.bankonline.Account;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author vietnh
- */
-public class TransferController implements Initializable {
+import java.io.IOException;
+import java.math.BigDecimal;
+
+import com.mycompany.bankonline.MainApp.Main;
+
+public class AccountController {
+
     @FXML
     private Button homeButton;
 
@@ -40,11 +31,18 @@ public class TransferController implements Initializable {
 
     @FXML
     private Button logoutButton;
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
+
+    @FXML private Label fullNameLabel;
+    @FXML private Label phoneLabel;
+    @FXML private Label citizenIdLabel;
+    @FXML private Label jobLabel;
+    @FXML private Label addressLabel;
+    @FXML private Label accountTypeLabel;
+    @FXML private Label balanceLabel;
+    @FXML private Label statusLabel;
+
+    @FXML
+    public void initialize() {
         // Gán sự kiện cho các nút
         homeButton.setOnAction(event -> {
             try {
@@ -87,16 +85,7 @@ public class TransferController implements Initializable {
             }
         });
         logoutButton.setOnAction(e -> handleLogout());
-    }    
-
-    private void showMessage(String title, String content) {
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(content);
-        alert.showAndWait();
     }
-
     private void handleLogout() {
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Đăng xuất");
@@ -104,5 +93,25 @@ public class TransferController implements Initializable {
         alert.setContentText("Bạn có chắc muốn đăng xuất?");
         alert.showAndWait();
     } 
-    
+
+    public void setUserData(int userId) {
+        // TODO: load dữ liệu thật từ DB
+        String fullName = "Nguyen Van A";
+        String phone = "0123456789";
+        String citizenId = "123456789";
+        String job = "Engineer";
+        String address = "123 Nguyen Trai, Hanoi";
+        String accountType = "checking";
+        BigDecimal balance = new BigDecimal("15000000");
+        String status = "active";
+
+        fullNameLabel.setText("Full Name: " + fullName);
+        phoneLabel.setText("Phone: " + phone);
+        citizenIdLabel.setText("Citizen ID: " + citizenId);
+        jobLabel.setText("Job: " + job);
+        addressLabel.setText("Address: " + address);
+        accountTypeLabel.setText("Account Type: " + accountType);
+        balanceLabel.setText("Balance: " + balance + " VND");
+        statusLabel.setText("Status: " + status);
+    }
 }

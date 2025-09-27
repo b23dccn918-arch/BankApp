@@ -50,6 +50,24 @@ public class Main extends Application {
         stage.show();
     }
 
+    public static void Card(Stage stage) throws IOException {
+        Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/Card/Card.fxml"));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/Card/Card.css").toExternalForm());
+        stage.setTitle("Card Scene");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static void Account(Stage stage) throws IOException {
+        Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/Account/Account.fxml"));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/Account/Account.css").toExternalForm());
+        stage.setTitle("Account Scene");
+        stage.setScene(scene);
+        stage.show();
+    }
+
     public static void DashBoard(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/DashBoard/DashBoard2.fxml"));
         Scene scene = new Scene(root);
@@ -63,6 +81,15 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/Transfer/Transfer.fxml"));
         Scene scene = new Scene(root);
         scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/Transfer/transfer.css").toExternalForm());
+        stage.setTitle("DashBoard Scene");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static void History(Stage stage) throws IOException {
+        Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/History/History.fxml"));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/History/History.css").toExternalForm());
         stage.setTitle("DashBoard Scene");
         stage.setScene(scene);
         stage.show();

@@ -41,8 +41,22 @@ public class DashBoardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Gán sự kiện cho các nút
-        homeButton.setOnAction(e -> showMessage("🏠 Home", "Bạn đang ở trang Home."));
-        accountButton.setOnAction(e -> showMessage("💳 Account", "Mở trang Tài khoản."));
+        homeButton.setOnAction(event -> {
+            try {
+                Stage stage = (Stage) transferButton.getScene().getWindow();
+                Main.DashBoard(stage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        accountButton.setOnAction(event -> {
+            try {
+                Stage stage = (Stage) transferButton.getScene().getWindow();
+                Main.Account(stage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
         transferButton.setOnAction(event -> {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
@@ -51,8 +65,22 @@ public class DashBoardController implements Initializable {
                 e.printStackTrace();
             }
         });
-        historyButton.setOnAction(e -> showMessage("📜 History", "Mở trang Lịch sử giao dịch."));
-        cardButton.setOnAction(e -> showMessage("💳 Card", "Mở trang Quản lý thẻ."));
+        historyButton.setOnAction(event -> {
+            try {
+                Stage stage = (Stage) transferButton.getScene().getWindow();
+                Main.History(stage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        cardButton.setOnAction(event -> {
+            try {
+                Stage stage = (Stage) transferButton.getScene().getWindow();
+                Main.Card(stage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
         logoutButton.setOnAction(e -> handleLogout());
     }
 
@@ -70,7 +98,6 @@ public class DashBoardController implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText("Bạn có chắc muốn đăng xuất?");
         alert.showAndWait();
-        // TODO: thực hiện logout, quay lại màn hình login
     } 
     
 }

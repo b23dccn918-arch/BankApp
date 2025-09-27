@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600" prefWidth="800" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.bankonline.Transfer.TransferController">
+<BorderPane prefHeight="600" prefWidth="1000" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.bankonline.History.HistoryController">
 
     <!-- Top bar -->
     <top>
         <AnchorPane prefHeight="60" style="-fx-background-color: #2E86C1; -fx-padding: 15;">
             <children>
-                <Label layoutX="27.0" layoutY="21.0" style="-fx-font-size: 26px; -fx-font-weight: bold;" text="Bank Transfer" textFill="WHITE" />
-                <Button fx:id="logoutButton" layoutX="686.0" layoutY="26.0" style="-fx-background-color: #E74C3C; -fx-text-fill: white;" text="Logout" />
+                <Label layoutX="34.0" layoutY="27.0" style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Transaction History" textFill="WHITE" />
+                <Button fx:id="logoutButton" layoutX="896.0" layoutY="33.0" style="-fx-background-color: #E74C3C; -fx-text-fill: white;" text="Logout" />
             </children>
         </AnchorPane>
     </top>
@@ -49,30 +52,29 @@
 
     <!-- Main content -->
     <center>
-        <VBox spacing="20" style="-fx-padding: 30;">
-            <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2E86C1;" text="Chuyển tiền" />
+        <VBox spacing="15" style="-fx-padding: 20;">
+            <!-- Bộ lọc ngày -->
+            <HBox spacing="10">
+                <Label text="Từ ngày:" />
+                <DatePicker fx:id="fromDate" />
+                <Label text="Đến ngày:" />
+                <DatePicker fx:id="toDate" />
+                <Button fx:id="filterButton" style="-fx-background-color: #2E86C1; -fx-text-fill: white;" text="Lọc" />
+            </HBox>
 
-            <VBox spacing="15">
-
-                <VBox spacing="5">
-                    <Label style="-fx-font-weight: bold;" text="Tài khoản người nhận:" />
-                    <TextField fx:id="recipientAccountField" promptText="Nhập số tài khoản" />
-                </VBox>
-
-                <VBox spacing="5">
-                    <Label style="-fx-font-weight: bold;" text="Số tiền:" />
-                    <TextField fx:id="amountField" promptText="Nhập số tiền" />
-                </VBox>
-
-                <VBox spacing="5">
-                    <Label style="-fx-font-weight: bold;" text="Nội dung chuyển tiền:" />
-                    <TextField fx:id="noteField" promptText="Ví dụ: Thanh toán hóa đơn" />
-                </VBox>
-
-                <Button fx:id="transferButtonSubmit" prefWidth="200" style="-fx-background-color: #2E86C1; -fx-text-fill: white; -fx-font-weight: bold;" text="Chuyển tiền" />
-            </VBox>
-
-            <Label fx:id="statusLabel" style="-fx-text-fill: red; -fx-font-weight: bold;" text="" />
+            <!-- Bảng giao dịch -->
+            <TableView fx:id="transactionTable" prefHeight="500">
+                <columns>
+                    <TableColumn fx:id="colId" prefWidth="80" text="Mã GD" />
+                    <TableColumn fx:id="colFrom" prefWidth="120" text="Người gửi" />
+                    <TableColumn fx:id="colTo" prefWidth="120" text="Người nhận" />
+                    <TableColumn fx:id="colType" prefWidth="100" text="Loại" />
+                    <TableColumn fx:id="colAmount" prefWidth="120" text="Số tiền" />
+                    <TableColumn fx:id="colDescription" prefWidth="180" text="Mô tả" />
+                    <TableColumn fx:id="colDate" prefWidth="150" text="Ngày tạo" />
+                    <TableColumn fx:id="colStatus" prefWidth="100" text="Trạng thái" />
+                </columns>
+            </TableView>
         </VBox>
     </center>
 

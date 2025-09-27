@@ -9,7 +9,7 @@
 /* Khi di chuột vào button */
 .button:hover {
     -fx-background-color: #2E86C1; /* xanh dương */
-    -fx-text-fill: white;         /* đổi chữ thành trắng */
+    -fx-text-fill: rgb(3, 179, 248);         /* đổi chữ thành trắng */
     -fx-background-radius: 8;     /* bo góc */
 }
 

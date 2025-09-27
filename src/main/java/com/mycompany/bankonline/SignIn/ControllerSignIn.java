@@ -34,25 +34,25 @@ public class ControllerSignIn {
     }
 	
 	public void getLoginInformaton(ActionEvent event) {
-		// String username = Username.getText();
-		// String password = Password.getText();
+		String username = Username.getText();
+		String password = Password.getText();
 		Button clickedButton = (Button) event.getSource();
 		Scene currentScene = clickedButton.getScene();
 		Stage currentStage = (Stage) currentScene.getWindow();
 		try {
-			Main.DashBoard(currentStage); // Gọi phương thức DashBoard từ Main class
+			Main.DashBoard(currentStage);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		// if(checkSignIn(username, password)) {
-		// 	alert.setHeaderText("Login Success");
-	    //     alert.setContentText("Welcome to BASOUR BANK");
-	    //     alert.show();
-		// } else {
-	    //     alert.setHeaderText("Login Failed");
-	    //     alert.setContentText("Username or Password is incorrect!");
-	    //     alert.show();
-		// }
+		if(checkSignIn(username, password)) {
+			alert.setHeaderText("Login Success");
+	        alert.setContentText("Welcome to BASOUR BANK");
+	        alert.show();
+		} else {
+	        alert.setHeaderText("Login Failed");
+	        alert.setContentText("Username or Password is incorrect!");
+	        alert.show();
+		}
 	}
 	
 	  public void handleSignUpButton(ActionEvent event) {
