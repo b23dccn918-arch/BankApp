@@ -1,0 +1,40 @@
+.button {
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-cursor: hand;
+}
+
+/* Khi di chuột vào button */
+.button:hover {
+    -fx-background-color: #2E86C1; /* xanh dương */
+    -fx-text-fill: white;         /* đổi chữ thành trắng */
+    -fx-background-radius: 8;     /* bo góc */
+}
+
+/* Khi nhấn giữ chuột */
+.button:pressed {
+    -fx-background-color: #1B4F72; /* xanh đậm hơn */
+}
+
+/* Style mặc định cho các nút sidebar */
+.sidebar-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-cursor: hand;
+}
+
+/* Hover */
+.sidebar-button:hover {
+    -fx-background-color: #EAF2F8;  /* xanh dương nhạt */
+    -fx-text-fill: #2E86C1;         /* chữ xanh */
+    -fx-background-radius: 8;
+}
+
+/* Khi nhấn */
+.sidebar-button:pressed {
+    -fx-background-color: #D6EAF8; /* xanh hơi đậm hơn */
+}
