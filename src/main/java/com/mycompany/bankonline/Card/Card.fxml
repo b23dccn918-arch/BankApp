@@ -27,7 +27,7 @@
 
     <!-- Sidebar -->
     <left>
-        <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: Gray;" BorderPane.alignment="CENTER">
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: gray;" BorderPane.alignment="CENTER">
             
         <Button fx:id="accountButton" layoutX="-17.0" layoutY="57.0" maxWidth="Infinity" prefHeight="50.0" prefWidth="217.0" style="-fx-background-color: transparent;" styleClass="sidebar-button" text="Account">
         <font>

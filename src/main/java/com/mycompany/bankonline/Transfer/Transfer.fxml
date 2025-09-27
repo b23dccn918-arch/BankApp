@@ -52,6 +52,11 @@
         <VBox spacing="20" style="-fx-padding: 30;">
             <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2E86C1;" text="Chuyển tiền" />
 
+            <VBox style="-fx-background-color: #D6EAF8; -fx-padding: 15; -fx-background-radius: 10;">
+                <Label text="Số dư hiện tại" style="-fx-font-weight: bold;"/>
+                <Label fx:id="currentBalanceLabel" text="15,000,000 VND" style="-fx-font-size: 18px; -fx-text-fill: #2E86C1;"/>
+            </VBox>
+
             <VBox spacing="15">
 
                 <VBox spacing="5">

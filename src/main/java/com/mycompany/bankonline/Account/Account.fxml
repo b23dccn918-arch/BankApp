@@ -13,7 +13,7 @@
     <top>
         <AnchorPane prefHeight="60" style="-fx-background-color: #2E86C1; -fx-padding: 15;">
             <children>
-                <Label layoutX="39.0" layoutY="23.0" text="Your Cards" textFill="WHITE">
+                <Label layoutX="39.0" layoutY="23.0" text="Account Infomation" textFill="WHITE">
                     <font><Font name="System Bold" size="24" /></font>
                 </Label>
                 <Button fx:id="logoutButton" layoutX="684.0" layoutY="25.0" style="-fx-background-color: #E74C3C; -fx-text-fill: white;" text="logout">
@@ -25,15 +25,29 @@
 
     <!-- Left sidebar -->
     <left>
-        <AnchorPane prefWidth="200" style="-fx-background-color: Gray;">
-            <children>
-                <Button fx:id="homeButton" layoutX="0" layoutY="20" prefHeight="50" prefWidth="200" style="-fx-background-color: transparent; -fx-font-weight: bold;" text="🏠 Home" />
-                <Button fx:id="accountButton" layoutX="0" layoutY="80" prefHeight="50" prefWidth="200" style="-fx-background-color: transparent; -fx-font-weight: bold;" text="Account" />
-                <Button fx:id="transferButton" layoutX="0" layoutY="140" prefHeight="50" prefWidth="200" style="-fx-background-color: transparent; -fx-font-weight: bold;" text="Transfer" />
-                <Button fx:id="historyButton" layoutX="0" layoutY="200" prefHeight="50" prefWidth="200" style="-fx-background-color: transparent; -fx-font-weight: bold;" text="History" />
-                <Button fx:id="cardButton" layoutX="0" layoutY="260" prefHeight="50" prefWidth="200" style="-fx-background-color: transparent; -fx-font-weight: bold;" text="💳 Card" />
-            </children>
-        </AnchorPane>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: gray;" BorderPane.alignment="CENTER">
+            
+        <Button fx:id="accountButton" layoutX="-17.0" layoutY="57.0" maxWidth="Infinity" prefHeight="50.0" prefWidth="217.0" style="-fx-background-color: transparent;" styleClass="sidebar-button" text="Account">
+        <font>
+            <Font name="System Bold" size="16.0" />
+        </font></Button>
+        <Button fx:id="transferButton" layoutX="-17.0" layoutY="191.0" maxWidth="Infinity" prefHeight="43.0" prefWidth="217.0" style="-fx-background-color: transparent;" styleClass="sidebar-button" text="  Transfer">
+        <font>
+            <Font name="System Bold" size="16.0" />
+        </font></Button>
+        <Button fx:id="historyButton" layoutX="-17.0" layoutY="149.0" maxWidth="Infinity" prefHeight="42.0" prefWidth="217.0" style="-fx-background-color: transparent;" styleClass="sidebar-button" text="History">
+        <font>
+            <Font name="System Bold" size="16.0" />
+        </font></Button>
+        <Button fx:id="cardButton" layoutX="-45.0" layoutY="107.0" maxWidth="Infinity" prefHeight="42.0" prefWidth="217.0" style="-fx-background-color: transparent;" styleClass="sidebar-button" text="💳   Card">
+        <font>
+            <Font name="System Bold" size="16.0" />
+        </font></Button>
+        <Button fx:id="homeButton" layoutX="-45.0" layoutY="14.0" maxWidth="Infinity" prefHeight="51.0" prefWidth="217.0" style="-fx-background-color: transparent;" styleClass="sidebar-button" text="   🏠  Home">
+        <font>
+            <Font name="System Bold" size="16.0" />
+        </font></Button>
+      </AnchorPane>
     </left>
 
     <!-- Main content -->
