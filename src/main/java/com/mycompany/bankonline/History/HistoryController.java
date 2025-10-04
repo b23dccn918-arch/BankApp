@@ -35,18 +35,18 @@ public class HistoryController {
     @FXML private DatePicker fromDate;
     @FXML private DatePicker toDate;
     @FXML private Button filterButton;
-    @FXML private TableView<Transaction> transactionTable;
+    @FXML private TableView<TransactionView> transactionTable;
 
-    @FXML private TableColumn<Transaction, Long> colId;
-    @FXML private TableColumn<Transaction, String> colFrom;
-    @FXML private TableColumn<Transaction, String> colTo;
-    @FXML private TableColumn<Transaction, String> colType;
-    @FXML private TableColumn<Transaction, Double> colAmount;
-    @FXML private TableColumn<Transaction, String> colDescription;
-    @FXML private TableColumn<Transaction, String> colDate;
-    @FXML private TableColumn<Transaction, String> colStatus;
+    @FXML private TableColumn<TransactionView, Long> colId;
+    @FXML private TableColumn<TransactionView, String> colFrom;
+    @FXML private TableColumn<TransactionView, String> colTo;
+    @FXML private TableColumn<TransactionView, String> colType;
+    @FXML private TableColumn<TransactionView, Double> colAmount;
+    @FXML private TableColumn<TransactionView, String> colDescription;
+    @FXML private TableColumn<TransactionView, String> colDate;
+    @FXML private TableColumn<TransactionView, String> colStatus;
 
-    private ObservableList<Transaction> transactions = FXCollections.observableArrayList();
+    private ObservableList<TransactionView> transactions = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {
@@ -104,8 +104,8 @@ public class HistoryController {
         colStatus.setCellValueFactory(data -> data.getValue().statusProperty());
 
         // load mẫu
-        transactions.add(new Transaction(1L,"User A","User B","transfer",1000.0,"Chuyển tiền","2025-09-28","success"));
-        transactions.add(new Transaction(2L,"User A",null,"deposit",5000.0,"Nạp tiền","2025-09-25","success"));
+        transactions.add(new TransactionView(1L,"User A","User B","transfer",1000.0,"Chuyển tiền","2025-09-28","success"));
+        transactions.add(new TransactionView(2L,"User A",null,"deposit",5000.0,"Nạp tiền","2025-09-25","success"));
 
         transactionTable.setItems(transactions);
 
@@ -117,8 +117,6 @@ public class HistoryController {
         LocalDate from = fromDate.getValue();
         LocalDate to = toDate.getValue();
 
-        // TODO: query DB thay vì lọc trong danh sách
-        // Hiện tại giả sử đã có dữ liệu mẫu
     }
 
     private void handleLogout() {
