@@ -4,6 +4,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import com.mycompany.bankonline.MainApp.*;
+import com.mycompany.bankonline.Session.Session;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -39,12 +41,17 @@ public class ControllerSignIn {
 		Button clickedButton = (Button) event.getSource();
 		Scene currentScene = clickedButton.getScene();
 		Stage currentStage = (Stage) currentScene.getWindow();
-		try {
-			Main.DashBoard(currentStage);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		if(checkSignIn(username, password)) {
+
+		int userId = checkSignIn(username, password);
+
+		
+		if(userId!=-1) {
+			Session.getInstance().setUser(0, username);
+			try {
+				Main.DashBoard(currentStage);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			alert.setHeaderText("Login Success");
 	        alert.setContentText("Welcome to BASOUR BANK");
 	        alert.show();
@@ -67,22 +74,27 @@ public class ControllerSignIn {
 	        }
 	    }
 	
-	private static boolean checkSignIn(String username, String password) {
-		String query = "SELECT * FROM Accounts WHERE username = ? AND password = ?";
+	private static int checkSignIn(String username, String password) {
+		String query = "SELECT user_id FROM users WHERE phone = ? AND password_hash = ?"; 
+
 		Connection con = Main.getConnection();
 		try {
 			PreparedStatement stmt = con.prepareStatement(query);
 			stmt.setString(1, username);
 			stmt.setString(2, password);
 			ResultSet rs = stmt.executeQuery();
-			return rs.next();
-		}catch (Exception e){
+
+			if (rs.next()) {
+				return rs.getInt("user_id"); // Lấy user_id từ DB
+			}
+			return -1;
+		} catch (Exception e) {
 			e.printStackTrace();
 			alert.setHeaderText("Database Error");
-	        alert.setContentText("Cannot connect to database!");
-	        alert.show();
-	        return false;
+			alert.setContentText("Cannot connect to database!");
+			alert.show();
+			return -1;
 		}
-	}
+		}
 	
 }
