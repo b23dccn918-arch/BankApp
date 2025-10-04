@@ -1,5 +1,7 @@
 package com.mycompany.bankonline.Session;
 
+
+//luu thong tin nguoi dung
 public class Session {
     private static Session instance;
     private int userId;

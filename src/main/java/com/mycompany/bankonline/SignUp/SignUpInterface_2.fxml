@@ -12,6 +12,7 @@
 
 <AnchorPane prefHeight="468.0" prefWidth="638.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SignUp.ControllerSignUp" >
    <children>
+
       <Pane layoutX="-2.0" prefHeight="468.0" prefWidth="223.0" styleClass="left-signup-container">
          <children>
             <ImageView fitHeight="97.0" fitWidth="85.0" layoutX="70.0" layoutY="149.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
@@ -33,34 +34,39 @@
       </Pane>
       <Pane layoutX="221.0" prefHeight="468.0" prefWidth="418.0" styleClass="right-signup-container">
          <children>
-            <Button fx:id="Finish" layoutX="257.0" layoutY="373.0" mnemonicParsing="false" onAction="#BackToSignIn" text="Finish">
+            <Button fx:id="FinishButton" layoutX="248.0" layoutY="373.0" mnemonicParsing="false" onAction="#getFinishButton" text="Finish">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
             <Label layoutX="94.0" layoutY="38.0" />
-            <Button fx:id="BackButton2" layoutX="137.0" layoutY="373.0" mnemonicParsing="false" onAction="#BackToSignIn" text="Back">
+            <Button fx:id="BackButton2" layoutX="137.0" layoutY="373.0" mnemonicParsing="false" onAction="#BackToSignUp_1" text="Back">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
             <Label layoutX="86.0" layoutY="47.0" prefWidth="75.0" />
-            <TextField fx:id="Username" layoutX="109.0" layoutY="64.0" prefHeight="30.0" prefWidth="215.0" promptText="Username">
+            <TextField fx:id="Username" layoutX="109.0" layoutY="61.0" prefHeight="30.0" prefWidth="215.0" promptText="Username ( Phone Number )">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <TextField fx:id="PinID" layoutX="109.0" layoutY="299.0" prefHeight="30.0" prefWidth="215.0" promptText="Pin">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </TextField>
-            <PasswordField fx:id="Password" layoutX="109.0" layoutY="150.0" prefHeight="30.0" prefWidth="215.0" promptText="Password">
+            <PasswordField fx:id="Password" layoutX="109.0" layoutY="123.0" prefHeight="30.0" prefWidth="215.0" promptText="Password">
                <font>
                   <Font size="14.0" />
                </font>
             </PasswordField>
-            <PasswordField layoutX="109.0" layoutY="227.0" prefHeight="30.0" prefWidth="215.0" promptText="Confirm Password">
+            <PasswordField fx:id="ConfirmPass" layoutX="109.0" layoutY="186.0" prefHeight="30.0" prefWidth="215.0" promptText="Confirm Password">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </PasswordField>
+            <TextField fx:id="PaymentAccount" layoutX="109.0" layoutY="313.0" prefHeight="30.0" prefWidth="215.0" promptText="Payment Account">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <PasswordField fx:id="PinCode" layoutX="109.0" layoutY="251.0" prefHeight="30.0" prefWidth="215.0" promptText="PIN code">
                <font>
                   <Font size="14.0" />
                </font>
