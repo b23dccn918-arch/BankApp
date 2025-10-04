@@ -44,6 +44,11 @@ public class ControllerSignIn {
 
 		int userId = checkSignIn(username, password);
 
+		try {
+			Main.DashBoard(currentStage);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		if(userId!=-1) {
 			Session.getInstance().setUser(0, username);
