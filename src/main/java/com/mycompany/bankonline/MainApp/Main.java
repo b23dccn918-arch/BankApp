@@ -1,4 +1,4 @@
-package com.mycompany.bankonline.MainApp;
+	package com.mycompany.bankonline.MainApp;
 
 import java.io.IOException;
 import javafx.application.Application;
@@ -12,18 +12,6 @@ import java.sql.SQLException;
 
 public class Main extends Application {
 
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/bank";
-    private static final String DB_USER = "bankuser"; 
-    private static final String DB_PASS = "1234"; 
-
-    public static Connection getConnection() {
-        try {
-            return DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null; // trả về null nếu lỗi
-        }
-    }
 
     @Override
     public void start(Stage primaryStage) throws IOException {

@@ -1,4 +1,4 @@
-package com.mycompany.bankonline.Scene;
+package com.mycompany.bankonline.DisplayScene;
 
 import java.io.IOException;
 
@@ -11,9 +11,9 @@ import javafx.stage.Stage;
 
 public class toDashBoard {
     public static void DashBoard(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/DashBoard/DashBoard2.fxml"));
+        Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/DashBoard/DashBoard2.fxml"));
         Scene scene = new Scene(root);
-        scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/DashBoard/dashboard.css").toExternalForm());
+        scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/DashBoard/dashboard.css").toExternalForm());
         stage.setTitle("DashBoard Scene");
         stage.setScene(scene);
         stage.show();

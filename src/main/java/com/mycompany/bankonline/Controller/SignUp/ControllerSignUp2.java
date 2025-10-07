@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.Arrays;
 
+import com.mycompany.bankonline.Database.Connect;
 import com.mycompany.bankonline.MainApp.Main;
 
 import javafx.event.ActionEvent;
@@ -70,7 +71,7 @@ public class ControllerSignUp2 {
 
 		if (allFilled) {
 			if (password.equals(confirmPass) && username.equals(PhoneNumber)) {
-				Connection con = Main.getConnection();
+				Connection con = Connect.getConnection();
 				con.setAutoCommit(false);
 				try {
 	                // INSERT INTO ACCOUNTS - DÙNG BIẾN stmtAccount

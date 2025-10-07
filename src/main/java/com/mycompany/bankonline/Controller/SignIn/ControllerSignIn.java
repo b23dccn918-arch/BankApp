@@ -1,9 +1,12 @@
 package com.mycompany.bankonline.Controller.SignIn;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import com.mycompany.bankonline.MainApp.*;
+import com.mycompany.bankonline.Database.SignIn.SignInHandler;
+import com.mycompany.bankonline.DisplayScene.*;
+import com.mycompany.bankonline.MainApp.Main;
 import com.mycompany.bankonline.Session.Session;
 
 import javafx.event.ActionEvent;
@@ -14,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
 
 public class ControllerSignIn {
 	@FXML
@@ -35,37 +39,23 @@ public class ControllerSignIn {
         );
     }
 	
-	public void getLoginInformaton(ActionEvent event) {
+	public void handleSignInButton(ActionEvent event) throws IOException {
 		String username = Username.getText();
 		String password = Password.getText();
 		Button clickedButton = (Button) event.getSource();
 		Scene currentScene = clickedButton.getScene();
-		Stage currentStage = (Stage) currentScene.getWindow();
-
-		int userId = checkSignIn(username, password);
-
-		try {
-			Main.DashBoard(currentStage);
-		} catch (Exception e) {
-			e.printStackTrace();
+		Stage currentStage = (Stage) currentScene.getWindow();	
+		if(SignInHandler.checkSignIn(username, password) == true) {
+			toDashBoard.DashBoard(currentStage);
 		}
-		
-		if(userId!=-1) {
-			Session.getInstance().setUser(0, username);
-			try {
-				Main.DashBoard(currentStage);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			alert.setHeaderText("Login Success");
-	        alert.setContentText("Welcome to BASOUR BANK");
-	        alert.show();
-		} else {
-	        alert.setHeaderText("Login Failed");
-	        alert.setContentText("Username or Password is incorrect!");
-	        alert.show();
+		else {
+			Alert signInFailed = new Alert(Alert.AlertType.ERROR);
+			signInFailed.setTitle("Sign In Failed");
+			signInFailed.setContentText("Username or password is incorrect !");
+			signInFailed.show();
 		}
-	}
+	} 
+
 	
 	  public void handleSignUpButton(ActionEvent event) {
 	        // Lấy stage hiện tại từ nút được nhấn
@@ -73,34 +63,10 @@ public class ControllerSignIn {
 		  	Scene currentScene = clickedButton.getScene();
 		  	Stage currentStage = (Stage) currentScene.getWindow();
 	        try {
-	            Main.SignUp(currentStage); // Gọi phương thức SignUp từ Main class
+	            toSignUp.SignUp(currentStage); // Gọi phương thức SignUp từ Main class
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }
 	    }
-	
-	private static int checkSignIn(String username, String password) {
-		return 1;
-		// String query = "SELECT user_id FROM users WHERE phone = ? AND password_hash = ?"; 
-
-		// Connection con = Main.getConnection();
-		// try {
-		// 	PreparedStatement stmt = con.prepareStatement(query);
-		// 	stmt.setString(1, username);
-		// 	stmt.setString(2, password);
-		// 	ResultSet rs = stmt.executeQuery();
-
-		// 	if (rs.next()) {
-		// 		return rs.getInt("user_id"); // Lấy user_id từ DB
-		// 	}
-		// 	return -1;
-		// } catch (Exception e) {
-		// 	e.printStackTrace();
-		// 	alert.setHeaderText("Database Error");
-		// 	alert.setContentText("Cannot connect to database!");
-		// 	alert.show();
-		// 	return -1;
-		// }
-	}
 	
 }

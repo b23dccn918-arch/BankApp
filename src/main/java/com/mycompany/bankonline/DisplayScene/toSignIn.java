@@ -1,4 +1,4 @@
-package com.mycompany.bankonline.Scene;
+package com.mycompany.bankonline.DisplayScene;
 
 import java.io.IOException;
 

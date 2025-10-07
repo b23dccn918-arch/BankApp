@@ -11,7 +11,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 
-<BorderPane id="AnchorPane" prefHeight="600" prefWidth="800" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.bankonline.Controller.DashBoard.DashBoardController">
+<BorderPane id="AnchorPane" prefHeight="600" prefWidth="800" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.bankonline.Controller.DashBoard.DashBoardController">
 
     <!-- Nội dung chính -->
     <center>
