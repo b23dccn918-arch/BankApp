@@ -42,7 +42,9 @@
 
 .sidebar-button:hover {
     -fx-background-color: #2E86C1;
+    background-color: #2E86C1;
 }
 .sidebar-button:pressed {
     -fx-background-color: #1B4F72;
+    background-color: #1B4F72;
 }

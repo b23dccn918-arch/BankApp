@@ -96,6 +96,15 @@ public class Main extends Application {
         stage.show();
     }
 
+    public static void WithDraw(Stage stage) throws IOException {
+        Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/Withdraw/Withdraw.fxml"));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/Withdraw/Withdraw.css").toExternalForm());
+        stage.setTitle("SignUp Scene");
+        stage.setScene(scene);
+        stage.show();
+    }
+
     public static void main(String[] args) {
         launch(args);
     }

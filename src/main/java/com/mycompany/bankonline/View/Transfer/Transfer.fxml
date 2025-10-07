@@ -119,18 +119,13 @@
             <VBox spacing="15">
 
                 <VBox spacing="5">
-                    <Label style="-fx-font-weight: bold;" text="Tài khoản người nhận:" />
-                    <TextField fx:id="recipientAccountField" promptText="Nhập số tài khoản" />
+                    <Label style="-fx-font-weight: bold;" text="Số điện thoại:" />
+                    <TextField fx:id="recipientAccountField" promptText="Nhập Số điện thoại" />
                 </VBox>
 
                 <VBox spacing="5">
-                    <Label style="-fx-font-weight: bold;" text="Số tiền:" />
-                    <TextField fx:id="amountField" promptText="Nhập số tiền" />
-                </VBox>
-
-                <VBox spacing="5">
-                    <Label style="-fx-font-weight: bold;" text="Nội dung chuyển tiền:" />
-                    <TextField fx:id="noteField" promptText="Ví dụ: Thanh toán hóa đơn" />
+                    <Label style="-fx-font-weight: bold;" text="Số tiền cần rút:" />
+                    <TextField fx:id="amountField" promptText="Nhập số tiền cần rút" />
                 </VBox>
 
                 <Button fx:id="transferButtonSubmit" prefWidth="200" style="-fx-background-color: #2E86C1; -fx-text-fill: white; -fx-font-weight: bold;" text="Chuyển tiền" />

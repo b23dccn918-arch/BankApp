@@ -11,12 +11,14 @@ module com.mycompany.bankonline {
     opens com.mycompany.bankonline.Controller.Transfer to javafx.fxml;
     opens com.mycompany.bankonline.Controller.History to javafx.fxml;
     opens com.mycompany.bankonline.Controller.SignUp to javafx.fxml;
+    opens com.mycompany.bankonline.Controller.Withdraw to javafx.fxml;
     exports com.mycompany.bankonline.Controller.DashBoard;
     exports com.mycompany.bankonline.Controller.UserInfo;
     exports com.mycompany.bankonline.Controller.Transfer;
     exports com.mycompany.bankonline.Controller.History;
     exports com.mycompany.bankonline.Controller.SignIn;
     exports com.mycompany.bankonline.Controller.SignUp;
+    exports com.mycompany.bankonline.Controller.Withdraw;
     exports com.mycompany.bankonline.MainApp;
     exports com.mycompany.bankonline.Model;
     opens com.mycompany.bankonline.Model to javafx.base;

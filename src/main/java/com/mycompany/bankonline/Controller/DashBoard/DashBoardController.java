@@ -27,6 +27,9 @@ public class DashBoardController implements Initializable {
     private Button accountButton;
 
     @FXML
+    private Button withdrawButton;
+
+    @FXML
     private Button transferButton;
 
     @FXML
@@ -69,6 +72,14 @@ public class DashBoardController implements Initializable {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
                 Main.History(stage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        withdrawButton.setOnAction(event -> {
+            try {
+                Stage stage = (Stage) transferButton.getScene().getWindow();
+                Main.WithDraw(stage);
             } catch (IOException e) {
                 e.printStackTrace();
             }
