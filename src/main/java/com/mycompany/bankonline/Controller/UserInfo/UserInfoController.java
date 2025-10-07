@@ -1,17 +1,19 @@
-package com.mycompany.bankonline.Card;
-
-import java.io.IOException;
-
-import com.mycompany.bankonline.MainApp.Main;
+package com.mycompany.bankonline.Controller.UserInfo;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public class CardController implements Initializable {
+import java.io.IOException;
+import java.math.BigDecimal;
+
+import com.mycompany.bankonline.MainApp.Main;
+
+public class UserInfoController {
+
     @FXML
     private Button homeButton;
 
@@ -30,8 +32,17 @@ public class CardController implements Initializable {
     @FXML
     private Button logoutButton;
 
-    @Override
-    public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
+    @FXML private Label fullNameLabel;
+    @FXML private Label phoneLabel;
+    @FXML private Label citizenIdLabel;
+    @FXML private Label jobLabel;
+    @FXML private Label addressLabel;
+    @FXML private Label accountTypeLabel;
+    @FXML private Label balanceLabel;
+    @FXML private Label statusLabel;
+
+    @FXML
+    public void initialize() {
         // Gán sự kiện cho các nút
         homeButton.setOnAction(event -> {
             try {
@@ -44,7 +55,7 @@ public class CardController implements Initializable {
         accountButton.setOnAction(event -> {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
-                Main.Account(stage);
+                Main.UserInfo(stage);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -68,21 +79,13 @@ public class CardController implements Initializable {
         cardButton.setOnAction(event -> {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
-                Main.Card(stage);
+                Main.UserInfo(stage);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         });
         logoutButton.setOnAction(e -> handleLogout());
     }
-    private void showMessage(String title, String content) {
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(content);
-        alert.showAndWait();
-    }
-
     private void handleLogout() {
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Đăng xuất");
@@ -90,4 +93,25 @@ public class CardController implements Initializable {
         alert.setContentText("Bạn có chắc muốn đăng xuất?");
         alert.showAndWait();
     } 
+
+    public void setUserData(int userId) {
+        // TODO: load dữ liệu thật từ DB
+        String fullName = "Nguyen Van A";
+        String phone = "0123456789";
+        String citizenId = "123456789";
+        String job = "Engineer";
+        String address = "123 Nguyen Trai, Hanoi";
+        String accountType = "checking";
+        BigDecimal balance = new BigDecimal("15000000");
+        String status = "active";
+
+        fullNameLabel.setText("Full Name: " + fullName);
+        phoneLabel.setText("Phone: " + phone);
+        citizenIdLabel.setText("Citizen ID: " + citizenId);
+        jobLabel.setText("Job: " + job);
+        addressLabel.setText("Address: " + address);
+        accountTypeLabel.setText("Account Type: " + accountType);
+        balanceLabel.setText("Balance: " + balance + " VND");
+        statusLabel.setText("Status: " + status);
+    }
 }

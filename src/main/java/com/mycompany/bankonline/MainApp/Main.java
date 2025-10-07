@@ -13,8 +13,8 @@ import java.sql.SQLException;
 public class Main extends Application {
 
     private static final String DB_URL = "jdbc:mysql://localhost:3306/bank";
-    private static final String DB_USER = "bankuser"; // đổi cho phù hợp
-    private static final String DB_PASS = "1234"; // đổi cho phù hợp
+    private static final String DB_USER = "bankuser"; 
+    private static final String DB_PASS = "1234"; 
 
     public static Connection getConnection() {
         try {
@@ -33,72 +33,64 @@ public class Main extends Application {
 
     // ⚡ Để ngoài start()
     public static void SignIn(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/SignIn/SignInInterface.fxml"));
+        Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/SignIn/SignInInterface.fxml"));
         Scene scene = new Scene(root);
-        scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/SignIn/StyleSignIn.css").toExternalForm());
+        scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/SignIn/StyleSignIn.css").toExternalForm());
         stage.setTitle("SignIn Scene");
         stage.setScene(scene);
         stage.show();
     }
 
     public static void SignUp(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/SignUp/SignUpInterface.fxml"));
+        Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/SignUp/SignUpInterface.fxml"));
         Scene scene = new Scene(root);
-        scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/SignUp/StyleSignUp.css").toExternalForm());
+        scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/SignUp/StyleSignUp.css").toExternalForm());
         stage.setTitle("SignUp Scene");
         stage.setScene(scene);
         stage.show();
     }
 
-    public static void Card(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/Card/Card.fxml"));
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/Card/Card.css").toExternalForm());
-        stage.setTitle("Card Scene");
-        stage.setScene(scene);
-        stage.show();
-    }
 
-    public static void Account(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/Account/Account.fxml"));
+    public static void UserInfo(Stage stage) throws IOException {
+        Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/UserInfo/UserInfo.fxml"));
         Scene scene = new Scene(root);
-        scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/Account/Account.css").toExternalForm());
+        scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/UserInfo/UserInfo.css").toExternalForm());
         stage.setTitle("Account Scene");
         stage.setScene(scene);
         stage.show();
     }
 
     public static void DashBoard(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/DashBoard/DashBoard2.fxml"));
+        Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/DashBoard/DashBoard2.fxml"));
         Scene scene = new Scene(root);
-        scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/DashBoard/dashboard.css").toExternalForm());
+        scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/DashBoard/dashboard.css").toExternalForm());
         stage.setTitle("DashBoard Scene");
         stage.setScene(scene);
         stage.show();
     }
 
     public static void Transfer(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/Transfer/Transfer.fxml"));
+        Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/Transfer/Transfer.fxml"));
         Scene scene = new Scene(root);
-        scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/Transfer/transfer.css").toExternalForm());
+        scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/Transfer/transfer.css").toExternalForm());
         stage.setTitle("DashBoard Scene");
         stage.setScene(scene);
         stage.show();
     }
 
     public static void History(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/History/History.fxml"));
+        Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/History/History.fxml"));
         Scene scene = new Scene(root);
-        scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/History/History.css").toExternalForm());
+        scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/History/History.css").toExternalForm());
         stage.setTitle("DashBoard Scene");
         stage.setScene(scene);
         stage.show();
     }
     
     public static void SignUp2(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/SignUpInterface_2.fxml"));
+        Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/SignUp/SignUpInterface_2.fxml"));
         Scene scene = new Scene(root);
-        scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/StyleSignUp.css").toExternalForm());
+        scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/SignUp/StyleSignUp.css").toExternalForm());
         stage.setTitle("SignUp Scene");
         stage.setScene(scene);
         stage.show();

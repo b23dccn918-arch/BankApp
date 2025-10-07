@@ -19,7 +19,6 @@ public class User {
     private String status; // "active" | "blocked"
 
     // Có thể có quan hệ với Card, Transaction
-    private List<Card> cards;
     private List<Transaction> sentTransactions;
     private List<Transaction> receivedTransactions;
 
@@ -138,13 +137,6 @@ public class User {
         this.status = status;
     }
 
-    public List<Card> getCards() {
-        return cards;
-    }
-
-    public void setCards(List<Card> cards) {
-        this.cards = cards;
-    }
 
     public List<Transaction> getSentTransactions() {
         return sentTransactions;

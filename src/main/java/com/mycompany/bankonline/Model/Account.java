@@ -1,4 +1,4 @@
-package com.mycompany.bankonline.MainApp;
+package com.mycompany.bankonline.Model;
 
 
 public class Account {

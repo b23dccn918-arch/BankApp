@@ -1,0 +1,20 @@
+.left-signup-container {
+	-fx-background-color: #356FCC;
+}
+
+.NameBank {
+	-fx-text-fill: #FFFFFF;
+	-fx-text-align: center;
+	-fx-font-weight: bold;
+}
+
+.right-signup-container {
+	-fx-background-color: #8FCAF6;
+}
+
+
+.forgot-password {
+    -fx-text-fill: red;       /* màu chữ */
+    -fx-underline: true;      /* gạch dưới như link */
+    -fx-cursor: hand;         /* khi rê chuột thành bàn tay */
+}

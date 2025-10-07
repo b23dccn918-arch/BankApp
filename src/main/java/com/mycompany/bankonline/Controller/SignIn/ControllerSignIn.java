@@ -1,4 +1,4 @@
-package com.mycompany.bankonline.SignIn;
+package com.mycompany.bankonline.Controller.SignIn;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -101,6 +101,6 @@ public class ControllerSignIn {
 		// 	alert.show();
 		// 	return -1;
 		// }
-		}
+	}
 	
 }
