@@ -13,7 +13,7 @@
     <top>
         <AnchorPane prefHeight="60" style="-fx-background-color: #2E86C1; -fx-padding: 15;">
             <children>
-                <Label layoutX="39.0" layoutY="23.0" text="Account Infomation" textFill="WHITE">
+                <Label layoutX="39.0" layoutY="23.0" text="Bank" textFill="WHITE">
                     <font><Font name="System Bold" size="24" /></font>
                 </Label>
                 <Button fx:id="logoutButton" layoutX="684.0" layoutY="25.0" style="-fx-background-color: #E74C3C; -fx-text-fill: white;" text="logout">
