@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="468.0" prefWidth="638.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.bankonline.Controller.SignUp.ControllerSignUp" >
+<AnchorPane prefHeight="468.0" prefWidth="638.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.bankonline.Controller.SignUp.ControllerSignUp2" >
    <children>
 
       <Pane layoutX="-2.0" prefHeight="468.0" prefWidth="223.0" styleClass="left-signup-container">

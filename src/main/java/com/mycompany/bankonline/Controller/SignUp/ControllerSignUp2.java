@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.util.Arrays;
 
 import com.mycompany.bankonline.Database.Connect;
+import com.mycompany.bankonline.DisplayScene.toSignUp;
 import com.mycompany.bankonline.MainApp.Main;
 
 import javafx.event.ActionEvent;
@@ -33,17 +34,11 @@ public class ControllerSignUp2 {
 
 
 	public void BackToSignUp_1(ActionEvent event) throws IOException {
-		Parent root = FXMLLoader.load(Main.class.getResource("/SignUp/SignUpInterface.fxml"));
-
-		Scene scene = new Scene(root);
-		scene.getStylesheets().add(Main.class.getResource("/SignUp/StyleSignUp.css").toExternalForm());
-
+	
 		Button clickedButton = (Button) event.getSource();
 		Scene currentScene = clickedButton.getScene();
 		Stage currentStage = (Stage) currentScene.getWindow();
-
-		currentStage.setScene(scene);
-		currentStage.show();
+		toSignUp.SignUp(currentStage);
 	}
 
 	public void setUserData(String phoneNumber, String Identification, String FullName, String Job, String Gender, String Birth, String Email, String Address) {
@@ -60,79 +55,79 @@ public class ControllerSignUp2 {
 	
 
 	public void getFinishButton(ActionEvent event) throws Exception {
-		String username = Username.getText();
-		String password = Password.getText();
-		String confirmPass = ConfirmPass.getText();
-		String pin = PinCode.getText();
-		String paymentAccountNum = PaymentAccount.getText();
-		boolean allFilled = Arrays.asList(password, confirmPass, pin, paymentAccountNum)
-                .stream()
-                .allMatch(s -> !s.isEmpty());
-
-		if (allFilled) {
-			if (password.equals(confirmPass) && username.equals(PhoneNumber)) {
-				Connection con = Connect.getConnection();
-				con.setAutoCommit(false);
-				try {
-	                // INSERT INTO ACCOUNTS - DÙNG BIẾN stmtAccount
-	                PreparedStatement stmtAccount = con.prepareStatement("INSERT INTO accounts VALUES(?, ?, ?, ?, ?)");
-	                stmtAccount.setString(1, username);
-	                stmtAccount.setString(2, password);
-	                stmtAccount.setString(3, paymentAccountNum);
-	                stmtAccount.setLong(4, 0);
-	                stmtAccount.setString(5, pin);
-	                stmtAccount.executeUpdate();
-	                stmtAccount.close(); // ĐÓNG STATEMENT
-
-	                // INSERT INTO CUSTOMERS - DÙNG BIẾN stmtCustomer
-	                PreparedStatement stmtCustomer = con.prepareStatement("INSERT INTO customers VALUES(?, ?, ?, ?, ?, ?, ?)");
-	                stmtCustomer.setString(1, FullName);
-	                stmtCustomer.setString(2, convertDateFormat(Birth));
-	                stmtCustomer.setString(3, Identification);
-	                stmtCustomer.setString(4, Gender);
-	                stmtCustomer.setString(5, Job);
-	                stmtCustomer.setString(6, Address);
-	                stmtCustomer.setString(7, PhoneNumber);
-	                stmtCustomer.executeUpdate();
-	                stmtCustomer.close(); // ĐÓNG STATEMENT
-
-	                con.commit();
-	                System.out.println("Đăng ký thành công");
-
-	                // Chuyển scene sau khi thành công
-	                FXMLLoader loader = new FXMLLoader(getClass().getResource("/SignIn/SignInInterface.fxml"));
-	                Parent root = loader.load();
-	                Scene scene = new Scene(root);
-	                scene.getStylesheets().add(getClass().getResource("/SignIn/StyleSignIn.css").toExternalForm());
-	                Button clickedButton = (Button) event.getSource();
-	                Scene currentScene = clickedButton.getScene();
-	                Stage currentStage = (Stage) currentScene.getWindow();
-	                currentStage.setTitle("SignIn Scene");
-	                currentStage.setScene(scene);
-	                System.out.println("Đăng ký thành công");
-	            } catch (Exception e) {
-	                con.rollback();
-	                e.printStackTrace(); // IN LỖI ĐỂ DEBUG
-	                
-	            } finally {
-	                if (con != null) con.close(); // LUÔN ĐÓNG KẾT NỐI
-	            }
-				
-
-			} else {
-				Alert notSamePass = new Alert(Alert.AlertType.ERROR);
-				notSamePass.setHeaderText("Failed");
-				notSamePass.setContentText("The phone number and the username must be the same!");
-				notSamePass.show();
-
-			}
-		}
-		else {
-			Alert empty = new Alert(Alert.AlertType.ERROR);
-			empty.setHeaderText("Failed");
-			empty.setContentText("Please fill in all the information");
-			empty.show();
-		}	
+//		String username = Username.getText();
+//		String password = Password.getText();
+//		String confirmPass = ConfirmPass.getText();
+//		String pin = PinCode.getText();
+//		String paymentAccountNum = PaymentAccount.getText();
+//		boolean allFilled = Arrays.asList(password, confirmPass, pin, paymentAccountNum)
+//                .stream()
+//                .allMatch(s -> !s.isEmpty());
+//
+//		if (allFilled) {
+//			if (password.equals(confirmPass) && username.equals(PhoneNumber)) {
+//				Connection con = Connect.getConnection();
+//				con.setAutoCommit(false);
+//				try {
+//	                // INSERT INTO ACCOUNTS - DÙNG BIẾN stmtAccount
+//	                PreparedStatement stmtAccount = con.prepareStatement("INSERT INTO accounts VALUES(?, ?, ?, ?, ?)");
+//	                stmtAccount.setString(1, username);
+//	                stmtAccount.setString(2, password);
+//	                stmtAccount.setString(3, paymentAccountNum);
+//	                stmtAccount.setLong(4, 0);
+//	                stmtAccount.setString(5, pin);
+//	                stmtAccount.executeUpdate();
+//	                stmtAccount.close(); // ĐÓNG STATEMENT
+//
+//	                // INSERT INTO CUSTOMERS - DÙNG BIẾN stmtCustomer
+//	                PreparedStatement stmtCustomer = con.prepareStatement("INSERT INTO customers VALUES(?, ?, ?, ?, ?, ?, ?)");
+//	                stmtCustomer.setString(1, FullName);
+//	                stmtCustomer.setString(2, convertDateFormat(Birth));
+//	                stmtCustomer.setString(3, Identification);
+//	                stmtCustomer.setString(4, Gender);
+//	                stmtCustomer.setString(5, Job);
+//	                stmtCustomer.setString(6, Address);
+//	                stmtCustomer.setString(7, PhoneNumber);
+//	                stmtCustomer.executeUpdate();
+//	                stmtCustomer.close(); // ĐÓNG STATEMENT
+//
+//	                con.commit();
+//	                System.out.println("Đăng ký thành công");
+//
+//	                // Chuyển scene sau khi thành công
+//	                FXMLLoader loader = new FXMLLoader(getClass().getResource("/SignIn/SignInInterface.fxml"));
+//	                Parent root = loader.load();
+//	                Scene scene = new Scene(root);
+//	                scene.getStylesheets().add(getClass().getResource("/SignIn/StyleSignIn.css").toExternalForm());
+//	                Button clickedButton = (Button) event.getSource();
+//	                Scene currentScene = clickedButton.getScene();
+//	                Stage currentStage = (Stage) currentScene.getWindow();
+//	                currentStage.setTitle("SignIn Scene");
+//	                currentStage.setScene(scene);
+//	                System.out.println("Đăng ký thành công");
+//	            } catch (Exception e) {
+//	                con.rollback();
+//	                e.printStackTrace(); // IN LỖI ĐỂ DEBUG
+//	                
+//	            } finally {
+//	                if (con != null) con.close(); // LUÔN ĐÓNG KẾT NỐI
+//	            }
+//				
+//
+//			} else {
+//				Alert notSamePass = new Alert(Alert.AlertType.ERROR);
+//				notSamePass.setHeaderText("Failed");
+//				notSamePass.setContentText("The phone number and the username must be the same!");
+//				notSamePass.show();
+//
+//			}
+//		}
+//		else {
+//			Alert empty = new Alert(Alert.AlertType.ERROR);
+//			empty.setHeaderText("Failed");
+//			empty.setContentText("Please fill in all the information");
+//			empty.show();
+//		}	
 		
 		
 

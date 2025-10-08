@@ -10,34 +10,18 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import com.mycompany.bankonline.DisplayScene.toSignIn;
+
 public class Main extends Application {
 
 
     @Override
     public void start(Stage primaryStage) throws IOException {
         // Mặc định khi chạy app thì mở SignIn
-        SignIn(primaryStage);
+        toSignIn.SignIn(primaryStage);
     }
 
     // ⚡ Để ngoài start()
-    public static void SignIn(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/SignIn/SignInInterface.fxml"));
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/SignIn/StyleSignIn.css").toExternalForm());
-        stage.setTitle("SignIn Scene");
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public static void SignUp(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/SignUp/SignUpInterface.fxml"));
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/SignUp/StyleSignUp.css").toExternalForm());
-        stage.setTitle("SignUp Scene");
-        stage.setScene(scene);
-        stage.show();
-    }
-
 
     public static void UserInfo(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/UserInfo/UserInfo.fxml"));
@@ -75,14 +59,6 @@ public class Main extends Application {
         stage.show();
     }
     
-    public static void SignUp2(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/SignUp/SignUpInterface_2.fxml"));
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/SignUp/StyleSignUp.css").toExternalForm());
-        stage.setTitle("SignUp Scene");
-        stage.setScene(scene);
-        stage.show();
-    }
 
     public static void WithDraw(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/Withdraw/Withdraw.fxml"));

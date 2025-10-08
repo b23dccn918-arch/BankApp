@@ -8,6 +8,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.mycompany.bankonline.Database.Connect;
+import com.mycompany.bankonline.DisplayScene.toSignIn;
+import com.mycompany.bankonline.DisplayScene.toSignUp;
 import com.mycompany.bankonline.MainApp.Main;
 import com.mycompany.bankonline.Model.Account;
 import com.mycompany.bankonline.Model.User;
@@ -42,7 +44,7 @@ public class ControllerSignUp {
 		Scene currentScene = clickedButton.getScene();
 		Stage currentStage = (Stage) currentScene.getWindow();
 		try {
-			Main.SignIn(currentStage); 
+			toSignIn.SignIn(currentStage); 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -58,8 +60,9 @@ public class ControllerSignUp {
 	    String mail = Email.getText().trim();
 	    String address = Address.getText().trim();
 
-	    if(checkPhoneNumber(phonenumber) && checkIdentification(number)) {
-	       if(phonenumber.isEmpty() || number.isEmpty() || job.isEmpty() || mail.isEmpty() || address.isEmpty() || fullName.isEmpty() || gender.isEmpty() || birth.isEmpty()) {
+	    if(true) {
+//	       if(phonenumber.isEmpty() || number.isEmpty() || job.isEmpty() || mail.isEmpty() || address.isEmpty() || fullName.isEmpty() || gender.isEmpty() || birth.isEmpty()) {
+	    	   if(false) {
 	    	   Alert empty = new Alert(Alert.AlertType.ERROR);
 	    	   empty.setHeaderText("Failed");
 	    	   empty.setContentText("Please fill in all the information");
@@ -69,22 +72,30 @@ public class ControllerSignUp {
 	       else {
 	    	   System.out.println("Qua buoc 1");
 
-		        FXMLLoader loader = new FXMLLoader(getClass().getResource("SignUpInterface_2.fxml"));
-		        Parent root = loader.load();
-
-
-		        ControllerSignUp2 controller2 = loader.getController();
-		        controller2.setUserData(phonenumber, number, fullName, job, gender, birth, mail, address);
-
-
-		        Scene scene = new Scene(root);
-		        scene.getStylesheets().add(getClass().getResource("/SignUp/StyleSignUp.css").toExternalForm());
-
-
-		        Button clickedButton = (Button) event.getSource();
-		        Scene currentScene = clickedButton.getScene();
-		        Stage currentStage = (Stage) currentScene.getWindow();
-		        currentStage.setScene(scene);
+//		        FXMLLoader loader = new FXMLLoader(getClass().getResource("SignUpInterface_2.fxml"));
+//		        Parent root = loader.load();
+//
+//
+//		        ControllerSignUp2 controller2 = loader.getController();
+//		        controller2.setUserData(phonenumber, number, fullName, job, gender, birth, mail, address);
+//
+//
+//		        Scene scene = new Scene(root);
+//		        scene.getStylesheets().add(getClass().getResource("/SignUp/StyleSignUp.css").toExternalForm());
+//
+//
+//		        Button clickedButton = (Button) event.getSource();
+//		        Scene currentScene = clickedButton.getScene();
+//		        Stage currentStage = (Stage) currentScene.getWindow();
+//		        currentStage.setScene(scene);
+	    	    Button clickedButton = (Button) event.getSource();
+	    	    Scene currentScene = clickedButton.getScene();	
+	    	    Stage currentStage = (Stage) currentScene.getWindow();
+	    	    try {
+	    	    	toSignUp.SignUp2(currentStage); 
+	    	    } catch (Exception e) {
+	    	    	e.printStackTrace();
+	    	    }
 	       }
 
 	    } else {
