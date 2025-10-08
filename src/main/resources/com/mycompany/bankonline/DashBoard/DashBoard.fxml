@@ -52,8 +52,8 @@
                 </VBox>
                 
                 <VBox prefWidth="200" style="-fx-background-color: #FADBD8; -fx-padding: 15; -fx-background-radius: 10;">
-                    <Label style="-fx-font-weight: bold;" text="Thẻ tín dụng" />
-                    <Label style="-fx-font-size: 18px; -fx-text-fill: #C0392B;" text="5,000,000 VND" />
+                    <Label style="-fx-font-weight: bold;" text="Số tài khoản" />
+                    <Label style="-fx-font-size: 18px; -fx-text-fill: #C0392B;" text="8888.9999.8888 stk trong dtb" />
                 </VBox>
             </HBox>
 
