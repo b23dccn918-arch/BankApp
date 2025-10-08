@@ -5,21 +5,32 @@ package com.mycompany.bankonline.Session;
 public class Session {
     private static Session instance;
     private int userId;
-    private String fullName;
+    private int accountId;
 
     private Session() {}
+
+    public void clear() {
+        userId = 0;
+        accountId = 0;
+        System.out.println("Session cleared");
+    }
 
     public static Session getInstance() {
         if (instance == null) instance = new Session();
         return instance;
     }
 
-    public void setUser(int id, String name) {
-        this.userId = id;
-        this.fullName = name;
+    public void setSession(int userId, int accountId) {
+        this.userId = userId;
+        this.accountId = accountId;
     }
 
     public int getUserId() { return userId; }
-    public String getFullName() { return fullName; }
+    public int getAccountId() {return accountId;}
+
+    @Override
+    public String toString(){
+        return userId + " " + accountId;
+    }
 }
 

@@ -1,40 +1,102 @@
-.button {
-    -fx-background-color: transparent;
-    -fx-text-fill: black;
-    -fx-font-weight: bold;
-    -fx-font-size: 16px;
-    -fx-cursor: hand;
-}
-
-/* Khi di chuột vào button */
-.button:hover {
-    -fx-background-color: #2E86C1; /* xanh dương */
-    -fx-text-fill: rgb(3, 179, 248);         /* đổi chữ thành trắng */
-    -fx-background-radius: 8;     /* bo góc */
-}
-
-/* Khi nhấn giữ chuột */
-.button:pressed {
-    -fx-background-color: #1B4F72; /* xanh đậm hơn */
-}
-
-/* Style mặc định cho các nút sidebar */
+/* --- Base style --- */
 .sidebar-button {
-    -fx-background-color: transparent;
-    -fx-text-fill: black;
+    -fx-background-color: linear-gradient(to right, #2C3E50, #34495E); /* nền đậm sang nhạt */
+    -fx-text-fill: #ECF0F1;
     -fx-font-weight: bold;
     -fx-font-size: 16px;
     -fx-cursor: hand;
+    -fx-background-radius: 12;
+    -fx-padding: 8 16 8 16;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0, 0, 3);
+    -fx-transition: all 0.25s ease-in-out;
+    -fx-border-color: transparent;
+    -fx-border-radius: 12;
 }
 
-/* Hover */
+/* --- Hover: nổi lên, phát sáng, gradient chuyển màu --- */
 .sidebar-button:hover {
-    -fx-background-color: #EAF2F8;  /* xanh dương nhạt */
-    -fx-text-fill: #2E86C1;         /* chữ xanh */
-    -fx-background-radius: 8;
+    -fx-background-color: linear-gradient(to right, #2980B9, #6DD5FA); /* xanh dương nhạt chuyển sáng */
+    -fx-text-fill: white;
+    -fx-background-radius: 14;
+    -fx-effect: dropshadow(gaussian, rgba(0,191,255,0.6), 15, 0, 0, 4); /* ánh sáng xanh */
+    -fx-scale-x: 1.07;
+    -fx-scale-y: 1.07;
+    -fx-translate-y: -2; /* hơi nổi lên */
 }
 
-/* Khi nhấn */
+/* --- Pressed: cảm giác bấm xuống thật --- */
 .sidebar-button:pressed {
-    -fx-background-color: #D6EAF8; /* xanh hơi đậm hơn */
+    -fx-background-color: linear-gradient(to right, #1B4F72, #2980B9);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 6, 0, 0, 2);
+    -fx-scale-x: 0.97;
+    -fx-scale-y: 0.97;
+    -fx-translate-y: 1;
+}
+
+/* --- Active (nút đang được chọn) --- */
+.sidebar-button:focused {
+    -fx-background-color: linear-gradient(to right, #3498DB, #85C1E9);
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(52,152,219,0.7), 12, 0, 0, 0);
+    -fx-border-color: #AED6F1;
+    -fx-border-width: 2;
+}
+
+/* --- Optional: animation khi rê chuột qua --- */
+@keyframes glowPulse {
+    0%   { -fx-effect: dropshadow(gaussian, rgba(0,191,255,0.3), 10, 0, 0, 3); }
+    50%  { -fx-effect: dropshadow(gaussian, rgba(0,191,255,0.7), 18, 0, 0, 5); }
+    100% { -fx-effect: dropshadow(gaussian, rgba(0,191,255,0.3), 10, 0, 0, 3); }
+}
+
+/* Khung chứa từng dòng thông tin */
+.info-box {
+    -fx-background-radius: 10;
+    -fx-padding: 15 20 15 20;
+    -fx-border-radius: 10;
+    -fx-border-color: #D6DBDF;
+    -fx-border-width: 1.2;
+    -fx-background-color: linear-gradient(to bottom right, #FBFCFC, #F2F3F4);
+    -fx-effect: dropshadow(two-pass-box, rgba(0,0,0,0.08), 4, 0, 0, 2);
+    -fx-transition: 0.3s;
+}
+
+/* Hiệu ứng khi hover vào ô thông tin */
+.info-box:hover {
+    -fx-background-color: linear-gradient(to bottom right, #EBF5FB, #EAF2F8);
+    -fx-border-color: #5DADE2;
+    -fx-cursor: hand;
+}
+
+/* Label tiêu đề (ví dụ: "Họ và tên:") */
+.info-box > Label:first-child {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 14px;
+    -fx-text-fill: #566573;
+    -fx-letter-spacing: 0.5px;
+}
+
+/* Label nội dung (ví dụ: "Nguyễn Văn A") */
+.info-box > Label:last-child {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 16px;
+    -fx-text-fill: #2C3E50;
+    -fx-font-weight: bold;
+}
+
+/* Nếu muốn hiển thị trạng thái tài khoản (active/inactive) */
+.status-active {
+    -fx-text-fill: #27AE60;
+    -fx-font-weight: bold;
+}
+
+.status-inactive {
+    -fx-text-fill: #E74C3C;
+    -fx-font-weight: bold;
+}
+
+/* Tổng thể: tạo cảm giác nhẹ, tinh tế */
+.root, .mainFxmlClass {
+    -fx-background-color: #FAFAFA;
+    -fx-font-smoothing-type: gray;
 }

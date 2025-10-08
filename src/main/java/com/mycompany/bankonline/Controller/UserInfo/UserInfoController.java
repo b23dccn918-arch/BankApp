@@ -1,6 +1,7 @@
 package com.mycompany.bankonline.Controller.UserInfo;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -9,10 +10,15 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.fxml.Initializable;
 
+import com.mycompany.bankonline.DisplayScene.toSignIn;
 import com.mycompany.bankonline.MainApp.Main;
+import com.mycompany.bankonline.Session.Session;
 
-public class UserInfoController {
+public class UserInfoController implements Initializable {
 
     @FXML
     private Button homeButton;
@@ -27,22 +33,30 @@ public class UserInfoController {
     private Button historyButton;
 
     @FXML
-    private Button cardButton;
+    private Button withdrawButton;
+
 
     @FXML
     private Button logoutButton;
 
+    @FXML
+    private Button paymentButton;
+
+    @FXML
+    private Button depositButton;
+
     @FXML private Label fullNameLabel;
-    @FXML private Label phoneLabel;
+    @FXML private Label genderLabel;
+    @FXML private Label dateBirthLabel;
     @FXML private Label citizenIdLabel;
     @FXML private Label jobLabel;
     @FXML private Label addressLabel;
-    @FXML private Label accountTypeLabel;
-    @FXML private Label balanceLabel;
+    @FXML private Label emailLabel;
+    @FXML private Label createdAtLabel;
     @FXML private Label statusLabel;
 
-    @FXML
-    public void initialize() {
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
         // Gán sự kiện cho các nút
         homeButton.setOnAction(event -> {
             try {
@@ -76,23 +90,54 @@ public class UserInfoController {
                 e.printStackTrace();
             }
         });
-        cardButton.setOnAction(event -> {
+        withdrawButton.setOnAction(event -> {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
-                Main.UserInfo(stage);
+                Main.WithDraw(stage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        paymentButton.setOnAction(event -> {
+            try {
+                Stage stage = (Stage) transferButton.getScene().getWindow();
+                Main.Payment(stage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        depositButton.setOnAction(event -> {
+            try {
+                Stage stage = (Stage) transferButton.getScene().getWindow();
+                Main.Deposit(stage);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         });
         logoutButton.setOnAction(e -> handleLogout());
+
     }
     private void handleLogout() {
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Đăng xuất");
         alert.setHeaderText(null);
         alert.setContentText("Bạn có chắc muốn đăng xuất?");
-        alert.showAndWait();
-    } 
+        alert.showAndWait().ifPresent(response -> {
+        if (response == javafx.scene.control.ButtonType.OK) {
+            try {
+
+                //them tinh nang xoa sessions hien tai thong tin user (authentication)
+                Session.getInstance().clear();
+                // Lấy stage hiện tại
+                Stage stage = (Stage) logoutButton.getScene().getWindow();
+                // Chuyển về trang đăng nhập
+                toSignIn.SignIn(stage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    });
+    }
 
     public void setUserData(int userId) {
         // TODO: load dữ liệu thật từ DB
@@ -105,13 +150,12 @@ public class UserInfoController {
         BigDecimal balance = new BigDecimal("15000000");
         String status = "active";
 
-        fullNameLabel.setText("Full Name: " + fullName);
-        phoneLabel.setText("Phone: " + phone);
-        citizenIdLabel.setText("Citizen ID: " + citizenId);
-        jobLabel.setText("Job: " + job);
-        addressLabel.setText("Address: " + address);
-        accountTypeLabel.setText("Account Type: " + accountType);
-        balanceLabel.setText("Balance: " + balance + " VND");
-        statusLabel.setText("Status: " + status);
+        // fullNameLabel.setText("Full Name: " + fullName);
+        // citizenIdLabel.setText("Citizen ID: " + citizenId);
+        // jobLabel.setText("Job: " + job);
+        // addressLabel.setText("Address: " + address);
+        // accountTypeLabel.setText("Account Type: " + accountType);
+        // balanceLabel.setText("Balance: " + balance + " VND");
+        // statusLabel.setText("Status: " + status);
     }
 }

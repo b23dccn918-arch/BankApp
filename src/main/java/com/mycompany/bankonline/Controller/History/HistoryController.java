@@ -1,6 +1,7 @@
 package com.mycompany.bankonline.Controller.History;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
@@ -8,11 +9,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
+import java.util.ResourceBundle;
 
+import com.mycompany.bankonline.DisplayScene.toSignIn;
 import com.mycompany.bankonline.MainApp.Main;
+import com.mycompany.bankonline.Session.Session;
 
-public class HistoryController {
+
+
+public class HistoryController implements Initializable{
 
     @FXML
     private Button homeButton;
@@ -27,10 +34,16 @@ public class HistoryController {
     private Button historyButton;
 
     @FXML
-    private Button cardButton;
+    private Button withdrawButton;
 
     @FXML
     private Button logoutButton;
+
+    @FXML
+    private Button paymentButton;
+
+    @FXML
+    private Button depositButton;
 
     @FXML private DatePicker fromDate;
     @FXML private DatePicker toDate;
@@ -48,8 +61,8 @@ public class HistoryController {
 
     private ObservableList<TransactionView> transactions = FXCollections.observableArrayList();
 
-    @FXML
-    public void initialize() {
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
         // Gán sự kiện cho các nút
         homeButton.setOnAction(event -> {
             try {
@@ -83,10 +96,26 @@ public class HistoryController {
                 e.printStackTrace();
             }
         });
-        cardButton.setOnAction(event -> {
+        withdrawButton.setOnAction(event -> {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
-                Main.UserInfo(stage);
+                Main.WithDraw(stage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        paymentButton.setOnAction(event -> {
+            try {
+                Stage stage = (Stage) transferButton.getScene().getWindow();
+                Main.Payment(stage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        depositButton.setOnAction(event -> {
+            try {
+                Stage stage = (Stage) transferButton.getScene().getWindow();
+                Main.Deposit(stage);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -124,6 +153,20 @@ public class HistoryController {
         alert.setTitle("Đăng xuất");
         alert.setHeaderText(null);
         alert.setContentText("Bạn có chắc muốn đăng xuất?");
-        alert.showAndWait();
-    } 
+        alert.showAndWait().ifPresent(response -> {
+        if (response == javafx.scene.control.ButtonType.OK) {
+            try {
+
+                //them tinh nang xoa sessions hien tai thong tin user (authentication)
+                Session.getInstance().clear();
+                // Lấy stage hiện tại
+                Stage stage = (Stage) logoutButton.getScene().getWindow();
+                // Chuyển về trang đăng nhập
+                toSignIn.SignIn(stage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    });
+    }
 }

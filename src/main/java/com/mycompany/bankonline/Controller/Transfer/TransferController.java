@@ -8,7 +8,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.mycompany.bankonline.DisplayScene.toSignIn;
 import com.mycompany.bankonline.MainApp.Main;
+import com.mycompany.bankonline.Session.Session;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -30,6 +32,12 @@ public class TransferController implements Initializable {
     private Button accountButton;
 
     @FXML
+    private Button paymentButton;
+
+    @FXML
+    private Button depositButton;
+
+    @FXML
     private Button transferButton;
 
     @FXML
@@ -37,6 +45,9 @@ public class TransferController implements Initializable {
 
     @FXML
     private Button cardButton;
+
+    @FXML
+    private Button withdrawButton;
 
     @FXML
     private Button logoutButton;
@@ -78,16 +89,33 @@ public class TransferController implements Initializable {
                 e.printStackTrace();
             }
         });
-        cardButton.setOnAction(event -> {
+        withdrawButton.setOnAction(event -> {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
-                Main.UserInfo(stage);
+                Main.WithDraw(stage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        paymentButton.setOnAction(event -> {
+            try {
+                Stage stage = (Stage) transferButton.getScene().getWindow();
+                Main.Payment(stage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        depositButton.setOnAction(event -> {
+            try {
+                Stage stage = (Stage) transferButton.getScene().getWindow();
+                Main.Deposit(stage);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         });
         logoutButton.setOnAction(e -> handleLogout());
-    }    
+
+    }
 
     private void showMessage(String title, String content) {
         Alert alert = new Alert(AlertType.INFORMATION);
@@ -102,7 +130,21 @@ public class TransferController implements Initializable {
         alert.setTitle("Đăng xuất");
         alert.setHeaderText(null);
         alert.setContentText("Bạn có chắc muốn đăng xuất?");
-        alert.showAndWait();
-    } 
+        alert.showAndWait().ifPresent(response -> {
+        if (response == javafx.scene.control.ButtonType.OK) {
+            try {
+
+                //them tinh nang xoa sessions hien tai thong tin user (authentication)
+                Session.getInstance().clear();
+                // Lấy stage hiện tại
+                Stage stage = (Stage) logoutButton.getScene().getWindow();
+                // Chuyển về trang đăng nhập
+                toSignIn.SignIn(stage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    });
+    }
     
 }

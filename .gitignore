@@ -56,3 +56,4 @@ ehthumbs.db
 # =========================
 *.fxml~
 *.css~
+.vscode

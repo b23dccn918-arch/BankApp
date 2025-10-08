@@ -60,6 +60,15 @@ public class Main extends Application {
     }
     
 
+    public static void Payment(Stage stage) throws IOException {
+        Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/Payment/Payment.fxml"));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/Payment/Payment.css").toExternalForm());
+        stage.setTitle("SignUp Scene");
+        stage.setScene(scene);
+        stage.show();
+    }
+
     public static void WithDraw(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/Withdraw/Withdraw.fxml"));
         Scene scene = new Scene(root);
@@ -68,6 +77,15 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.show();
     }
+
+    public static void Deposit(Stage stage) throws IOException {
+        Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/Deposit/Deposit.fxml"));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/Deposit/Deposit.css").toExternalForm());
+        stage.setTitle("SignUp Scene");
+        stage.setScene(scene);
+        stage.show();
+    } 
 
     public static void main(String[] args) {
         launch(args);
