@@ -43,7 +43,7 @@
    <top>
       <AnchorPane prefHeight="26.0" prefWidth="1021.0" style="-fx-background-color: #2E86C1; -fx-padding: 15;" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="36.0" layoutY="29.0" text="Bank DashBoard" textFill="WHITE">
+            <Label layoutX="36.0" layoutY="29.0" text="Bank" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="26.0" />
                </font>

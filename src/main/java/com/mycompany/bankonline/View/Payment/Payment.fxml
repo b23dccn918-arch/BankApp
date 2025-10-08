@@ -20,9 +20,8 @@
         <AnchorPane prefHeight="600" prefWidth="800" style="-fx-padding: 20;">
             <children>
                 <VBox layoutX="10" layoutY="10" spacing="20">
-
+                    <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2E86C1;" text="Thanh toán hoá đơn" />
                     <!-- Tiêu đề -->
-                    <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Thanh toán hoá đơn" />
 
                     <!-- Form nhập thông tin -->
                     <HBox spacing="15">
@@ -60,7 +59,7 @@
    <top>
       <AnchorPane prefHeight="26.0" prefWidth="1021.0" style="-fx-background-color: #2E86C1; -fx-padding: 15;" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="36.0" layoutY="29.0" text="Bank DashBoard" textFill="WHITE">
+            <Label layoutX="36.0" layoutY="29.0" text="Bank" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="26.0" />
                </font>
