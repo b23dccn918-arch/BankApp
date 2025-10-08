@@ -49,7 +49,7 @@
                   <Font size="14.0" />
                </font>
             </PasswordField>
-            <Button fx:id="SignInButton" layoutX="195.0" layoutY="312.0" mnemonicParsing="false" onAction="#getLoginInformaton" prefHeight="30.0" prefWidth="97.0" style="-fx-cursor: hand;" text="Sign In" textFill="#030303">
+            <Button fx:id="SignInButton" layoutX="195.0" layoutY="312.0" mnemonicParsing="false" onAction="#handleSignInButton" prefHeight="30.0" prefWidth="97.0" style="-fx-cursor: hand;" text="Sign In" textFill="#030303">
                <font>
                   <Font size="14.0" />
                </font>

@@ -1,4 +1,4 @@
-package com.mycompany.bankonline.Scene;
+package com.mycompany.bankonline.DisplayScene;
 
 import java.io.IOException;
 
@@ -11,9 +11,9 @@ import javafx.stage.Stage;
 
 public class toSignIn {
     public static void SignIn(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/SignIn/SignInInterface.fxml"));
+        Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/SignIn/SignInInterface.fxml"));
         Scene scene = new Scene(root);
-        scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/SignIn/StyleSignIn.css").toExternalForm());
+        scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/SignIn/StyleSignIn.css").toExternalForm());
         stage.setTitle("SignIn Scene");
         stage.setScene(scene);
         stage.show();

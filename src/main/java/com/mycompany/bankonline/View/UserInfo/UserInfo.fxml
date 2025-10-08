@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600" prefWidth="800" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.bankonline.Controller.UserInfo.UserInfoController">
+<BorderPane prefHeight="600" prefWidth="800" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.bankonline.Controller.UserInfo.UserInfoController">
 
     <!-- Top bar -->
     <top>
@@ -25,138 +25,132 @@
 
     <!-- Left sidebar -->
     <left>
-    <AnchorPane prefHeight="600.0" prefWidth="200.0" style="-fx-background-color: #34495E;" BorderPane.alignment="CENTER">
-        <!-- Home -->
-        <Button fx:id="homeButton" layoutX="0.0" layoutY="20.0"
-                prefHeight="45.0" prefWidth="200.0"
-                style="-fx-background-color: transparent; -fx-text-fill: white;"
-                styleClass="sidebar-button" text="🏠   Home">
-            <font>
-                <Font name="System Bold" size="16.0" />
-            </font>
-        </Button>
+    <AnchorPane prefHeight="600.0" prefWidth="200.0"
+                style="-fx-background-color: #34495E;"
+                BorderPane.alignment="CENTER">
 
-        <!-- Account -->
-        <Button fx:id="accountButton" layoutX="0.0" layoutY="75.0"
-                prefHeight="45.0" prefWidth="200.0"
-                style="-fx-background-color: transparent; -fx-text-fill: white;"
-                styleClass="sidebar-button" text="👤   Account">
-            <font>
-                <Font name="System Bold" size="16.0" />
-            </font>
-        </Button>
+        <VBox spacing="15" alignment="TOP_CENTER"
+              AnchorPane.topAnchor="20"
+              AnchorPane.leftAnchor="0"
+              AnchorPane.rightAnchor="0">
 
-        <!-- Card -->
-        <Button fx:id="cardButton" layoutX="0.0" layoutY="130.0"
-                prefHeight="45.0" prefWidth="200.0"
-                style="-fx-background-color: transparent; -fx-text-fill: white;"
-                styleClass="sidebar-button" text="💳   Card">
-            <font>
-                <Font name="System Bold" size="16.0" />
-            </font>
-        </Button>
+            <!-- Home -->
+            <Button fx:id="homeButton" prefHeight="45.0" prefWidth="180.0"
+                    style="-fx-background-color: transparent; -fx-text-fill: white;"
+                    styleClass="sidebar-button" text="🏠   Home">
+                <font>
+                    <Font name="System Bold" size="16.0" />
+                </font>
+            </Button>
 
-        <!-- Transfer -->
-        <Button fx:id="transferButton" layoutX="0.0" layoutY="185.0"
-                prefHeight="45.0" prefWidth="200.0"
-                style="-fx-background-color: transparent; -fx-text-fill: white;"
-                styleClass="sidebar-button" text="💸   Transfer">
-            <font>
-                <Font name="System Bold" size="16.0" />
-            </font>
-        </Button>
+            <!-- Account -->
+            <Button fx:id="accountButton" prefHeight="45.0" prefWidth="180.0"
+                    style="-fx-background-color: transparent; -fx-text-fill: white;"
+                    styleClass="sidebar-button" text="👤   Account">
+                <font>
+                    <Font name="System Bold" size="16.0" />
+                </font>
+            </Button>
 
-        <!-- Withdraw -->
-        <Button fx:id="withdrawButton" layoutX="0.0" layoutY="240.0"
-                prefHeight="45.0" prefWidth="200.0"
-                style="-fx-background-color: transparent; -fx-text-fill: white;"
-                styleClass="sidebar-button" text="💰   Withdraw">
-            <font>
-                <Font name="System Bold" size="16.0" />
-            </font>
-        </Button>
+            <!-- Transfer -->
+            <Button fx:id="transferButton" prefHeight="45.0" prefWidth="180.0"
+                    style="-fx-background-color: transparent; -fx-text-fill: white;"
+                    styleClass="sidebar-button" text="💸   Transfer">
+                <font>
+                    <Font name="System Bold" size="16.0" />
+                </font>
+            </Button>
 
-        <!-- Deposit -->
-        <Button fx:id="depositButton" layoutX="0.0" layoutY="295.0"
-                prefHeight="45.0" prefWidth="200.0"
-                style="-fx-background-color: transparent; -fx-text-fill: white;"
-                styleClass="sidebar-button" text="💵   Deposit">
-            <font>
-                <Font name="System Bold" size="16.0" />
-            </font>
-        </Button>
+            <!-- Withdraw -->
+            <Button fx:id="withdrawButton" prefHeight="45.0" prefWidth="180.0"
+                    style="-fx-background-color: transparent; -fx-text-fill: white;"
+                    styleClass="sidebar-button" text="💰   Withdraw">
+                <font>
+                    <Font name="System Bold" size="16.0" />
+                </font>
+            </Button>
 
-        <!-- Payment -->
-        <Button fx:id="paymentButton" layoutX="0.0" layoutY="350.0"
-                prefHeight="45.0" prefWidth="200.0"
-                style="-fx-background-color: transparent; -fx-text-fill: white;"
-                styleClass="sidebar-button" text="🧾   Payment">
-            <font>
-                <Font name="System Bold" size="16.0" />
-            </font>
-        </Button>
+            <!-- Deposit -->
+            <Button fx:id="depositButton" prefHeight="45.0" prefWidth="180.0"
+                    style="-fx-background-color: transparent; -fx-text-fill: white;"
+                    styleClass="sidebar-button" text="💵   Deposit">
+                <font>
+                    <Font name="System Bold" size="16.0" />
+                </font>
+            </Button>
 
-        <!-- History -->
-        <Button fx:id="historyButton" layoutX="0.0" layoutY="405.0"
-                prefHeight="45.0" prefWidth="200.0"
-                style="-fx-background-color: transparent; -fx-text-fill: white;"
-                styleClass="sidebar-button" text="📜   History">
-            <font>
-                <Font name="System Bold" size="16.0" />
-            </font>
-        </Button>
+            <!-- Payment -->
+            <Button fx:id="paymentButton" prefHeight="45.0" prefWidth="180.0"
+                    style="-fx-background-color: transparent; -fx-text-fill: white;"
+                    styleClass="sidebar-button" text="🧾   Payment">
+                <font>
+                    <Font name="System Bold" size="16.0" />
+                </font>
+            </Button>
+
+            <!-- History -->
+            <Button fx:id="historyButton" prefHeight="45.0" prefWidth="180.0"
+                    style="-fx-background-color: transparent; -fx-text-fill: white;"
+                    styleClass="sidebar-button" text="📜   History">
+                <font>
+                    <Font name="System Bold" size="16.0" />
+                </font>
+            </Button>
+
+        </VBox>
     </AnchorPane>
 </left>
 
 
     <!-- Main content -->
     <center>
-        <VBox spacing="20" style="-fx-padding: 20;">
-            
-            <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2E86C1;" text="Thông tin tài khoản" />
-            
-            <VBox spacing="15">
-                <VBox style="-fx-background-color: #F2F3F4; -fx-padding: 15; -fx-background-radius: 10; -fx-effect: dropshadow(two-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2);">
-                    <Label style="-fx-font-weight: bold;" text="Họ và tên:" />
-                    <Label fx:id="fullNameLabel" text="Nguyen Van A" />
-                </VBox>
-                
-                <VBox style="-fx-background-color: #FDFEFE; -fx-padding: 15; -fx-background-radius: 10; -fx-effect: dropshadow(two-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2);">
-                    <Label style="-fx-font-weight: bold;" text="Số điện thoại:" />
-                    <Label fx:id="phoneLabel" text="0123456789" />
-                </VBox>
-                
-                <VBox style="-fx-background-color: #F2F3F4; -fx-padding: 15; -fx-background-radius: 10; -fx-effect: dropshadow(two-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2);">
-                    <Label style="-fx-font-weight: bold;" text="CMND/CCCD:" />
-                    <Label fx:id="citizenIdLabel" text="123456789" />
-                </VBox>
-                
-                <VBox style="-fx-background-color: #FDFEFE; -fx-padding: 15; -fx-background-radius: 10; -fx-effect: dropshadow(two-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2);">
-                    <Label style="-fx-font-weight: bold;" text="Nghề nghiệp:" />
-                    <Label fx:id="jobLabel" text="Engineer" />
-                </VBox>
-                
-                <VBox style="-fx-background-color: #F2F3F4; -fx-padding: 15; -fx-background-radius: 10; -fx-effect: dropshadow(two-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2);">
-                    <Label style="-fx-font-weight: bold;" text="Địa chỉ:" />
-                    <Label fx:id="addressLabel" text="123 Nguyen Trai, Hanoi" />
-                </VBox>
-                
-                <VBox style="-fx-background-color: #FDFEFE; -fx-padding: 15; -fx-background-radius: 10; -fx-effect: dropshadow(two-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2);">
-                    <Label style="-fx-font-weight: bold;" text="Loại tài khoản:" />
-                    <Label fx:id="accountTypeLabel" text="checking" />
-                </VBox>
-                
-                <VBox style="-fx-background-color: #F2F3F4; -fx-padding: 15; -fx-background-radius: 10; -fx-effect: dropshadow(two-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2);">
-                    <Label style="-fx-font-weight: bold;" text="Số dư:" />
-                    <Label fx:id="balanceLabel" style="-fx-text-fill: #2E86C1; -fx-font-weight: bold;" text="15,000,000 VND" />
-                </VBox>
-                
-                <VBox style="-fx-background-color: #FDFEFE; -fx-padding: 15; -fx-background-radius: 10; -fx-effect: dropshadow(two-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2);">
-                    <Label style="-fx-font-weight: bold;" text="Trạng thái:" />
-                    <Label fx:id="statusLabel" style="-fx-text-fill: green; -fx-font-weight: bold;" text="active" />
-                </VBox>
+    <VBox spacing="20" style="-fx-padding: 20;">
+        <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2E86C1;" text="Thông tin người dùng" />
+
+        <VBox spacing="15">
+            <VBox styleClass="info-box">
+                <Label text="Họ và tên:" />
+                <Label fx:id="fullNameLabel" text="Nguyễn Văn A" />
+            </VBox>
+
+            <VBox styleClass="info-box">
+                <Label text="CMND/CCCD:" />
+                <Label fx:id="citizenIdLabel" text="012345678901" />
+            </VBox>
+
+            <VBox styleClass="info-box">
+                <Label text="Nghề nghiệp:" />
+                <Label fx:id="jobLabel" text="Kỹ sư phần mềm" />
+            </VBox>
+
+            <VBox styleClass="info-box">
+                <Label text="Giới tính:" />
+                <Label fx:id="genderLabel" text="Nam" />
+            </VBox>
+
+            <VBox styleClass="info-box">
+                <Label text="Ngày sinh:" />
+                <Label fx:id="dateBirthLabel" text="01/01/1990" />
+            </VBox>
+
+            <VBox styleClass="info-box">
+                <Label text="Địa chỉ:" />
+                <Label fx:id="addressLabel" text="123 Nguyễn Trãi, Hà Nội" />
+            </VBox>
+
+            <VBox styleClass="info-box">
+                <Label text="Email:" />
+                <Label fx:id="emailLabel" text="nguyenvana@example.com" />
+            </VBox>
+
+            <VBox styleClass="info-box">
+                <Label text="Ngày tạo tài khoản:" />
+                <Label fx:id="createdAtLabel" text="2024-09-15 10:00:00" />
             </VBox>
         </VBox>
-    </center>
+    </VBox>
+</center>
+
+
 
 </BorderPane>

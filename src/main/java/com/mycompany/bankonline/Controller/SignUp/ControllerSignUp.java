@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.mycompany.bankonline.Database.Connect;
 import com.mycompany.bankonline.MainApp.Main;
 import com.mycompany.bankonline.Model.Account;
 import com.mycompany.bankonline.Model.User;
@@ -97,7 +98,7 @@ public class ControllerSignUp {
 	private static boolean checkPhoneNumber(String phonenum) throws Exception {
 		String queryAccounts = "SELECT * FROM Accounts";
 		String queryCustomers = "SELECT * FROM Customers";
-		Connection con = Main.getConnection();
+		Connection con = Connect.getConnection();
 		
 		
 		PreparedStatement stmtAccounts = con.prepareStatement(queryAccounts);
@@ -124,7 +125,7 @@ public class ControllerSignUp {
 	
 	private static boolean checkIdentification(String number) throws Exception {
 		String query = "SELECT * FROM Customers";
-		Connection con = Main.getConnection();
+		Connection con = Connect.getConnection();
 		PreparedStatement stmt = con.prepareStatement(query);
 		List<String> Identifications = new LinkedList<String>();
 		ResultSet rs = stmt.executeQuery();

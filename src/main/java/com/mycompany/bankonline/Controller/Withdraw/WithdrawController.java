@@ -2,107 +2,137 @@ package com.mycompany.bankonline.Controller.Withdraw;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.net.URL;
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.util.ResourceBundle;
 
-public class WithdrawController {
+import com.mycompany.bankonline.DisplayScene.toSignIn;
+import com.mycompany.bankonline.MainApp.Main;
+import com.mycompany.bankonline.Session.Session;
 
-    @FXML
-    private TextField phoneField;
+import javafx.fxml.Initializable;
 
-    @FXML
-    private TextField amountField;
-
-    @FXML
-    private PasswordField pinField;
+public class WithdrawController implements Initializable {
 
     @FXML
-    private Label messageLabel;
-
-    private final String URL = "jdbc:mysql://localhost:3306/bankdb";
-    private final String USER = "root";
-    private final String PASSWORD = "your_password";
+    private Button homeButton;
 
     @FXML
-    public void handleWithdraw() {
-        String phone = phoneField.getText().trim();
-        String pin = pinField.getText().trim();
-        double amount;
+    private Button accountButton;
 
-        try {
-            amount = Double.parseDouble(amountField.getText().trim());
-        } catch (NumberFormatException e) {
-            messageLabel.setText("Số tiền không hợp lệ!");
-            return;
-        }
+    @FXML
+    private Button withdrawButton;
 
-        if (phone.isEmpty() || pin.isEmpty()) {
-            messageLabel.setText("Vui lòng nhập đủ thông tin!");
-            return;
-        }
+    @FXML
+    private Button transferButton;
 
-        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD)) {
+    @FXML
+    private Button historyButton;
 
-            // 1️⃣ Lấy thông tin tài khoản
-            String sql = "SELECT account_id, balance, pin FROM accounts WHERE phone = ?";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, phone);
-            ResultSet rs = ps.executeQuery();
+    @FXML
+    private Button logoutButton;
 
-            if (!rs.next()) {
-                messageLabel.setText("Tài khoản không tồn tại!");
-                return;
-            }
+    @FXML
+    private Button paymentButton;
 
-            int accountId = rs.getInt("account_id");
-            double balance = rs.getDouble("balance");
-            String dbPin = rs.getString("pin");
+    @FXML
+    private Button depositButton;
 
-            // 2️⃣ Kiểm tra mã PIN
-            if (!dbPin.equals(pin)) {
-                messageLabel.setText("Mã PIN không đúng!");
-                return;
-            }
-
-            // 3️⃣ Kiểm tra số dư
-            if (balance < amount) {
-                messageLabel.setText("Số dư không đủ!");
-                return;
-            }
-
-            conn.setAutoCommit(false); // bắt đầu transaction
-
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // Gán sự kiện cho các nút
+        homeButton.setOnAction(event -> {
             try {
-                // 4️⃣ Cập nhật số dư
-                PreparedStatement updateStmt = conn.prepareStatement(
-                    "UPDATE accounts SET balance = balance - ? WHERE account_id = ?");
-                updateStmt.setDouble(1, amount);
-                updateStmt.setInt(2, accountId);
-                updateStmt.executeUpdate();
-
-                // 5️⃣ Ghi vào bảng transactions
-                PreparedStatement insertTxn = conn.prepareStatement(
-                    "INSERT INTO transactions (from_account_id, to_account_id, type, amount, description, created_at) " +
-                    "VALUES (?, NULL, 'withdraw', ?, ?, ?)");
-                insertTxn.setInt(1, accountId);
-                insertTxn.setDouble(2, amount);
-                insertTxn.setString(3, "Withdraw money");
-                insertTxn.setTimestamp(4, Timestamp.valueOf(LocalDateTime.now()));
-                insertTxn.executeUpdate();
-
-                conn.commit(); // xác nhận transaction
-
-                messageLabel.setStyle("-fx-text-fill: green;");
-                messageLabel.setText("Rút tiền thành công!");
-            } catch (Exception e) {
-                conn.rollback();
-                messageLabel.setText("Lỗi khi xử lý giao dịch!");
+                Stage stage = (Stage) transferButton.getScene().getWindow();
+                Main.DashBoard(stage);
+            } catch (IOException e) {
                 e.printStackTrace();
             }
+        });
+        accountButton.setOnAction(event -> {
+            try {
+                Stage stage = (Stage) transferButton.getScene().getWindow();
+                Main.UserInfo(stage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        transferButton.setOnAction(event -> {
+            try {
+                Stage stage = (Stage) transferButton.getScene().getWindow();
+                Main.Transfer(stage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        historyButton.setOnAction(event -> {
+            try {
+                Stage stage = (Stage) transferButton.getScene().getWindow();
+                Main.History(stage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        withdrawButton.setOnAction(event -> {
+            try {
+                Stage stage = (Stage) transferButton.getScene().getWindow();
+                Main.WithDraw(stage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        paymentButton.setOnAction(event -> {
+            try {
+                Stage stage = (Stage) transferButton.getScene().getWindow();
+                Main.Payment(stage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        depositButton.setOnAction(event -> {
+            try {
+                Stage stage = (Stage) transferButton.getScene().getWindow();
+                Main.Deposit(stage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        logoutButton.setOnAction(e -> handleLogout());
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-            messageLabel.setText("Không thể kết nối cơ sở dữ liệu!");
+    }
+
+    private void showMessage(String title, String content) {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+
+    private void handleLogout() {
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Đăng xuất");
+        alert.setHeaderText(null);
+        alert.setContentText("Bạn có chắc muốn đăng xuất?");
+        alert.showAndWait().ifPresent(response -> {
+        if (response == javafx.scene.control.ButtonType.OK) {
+            try {
+
+                //them tinh nang xoa sessions hien tai thong tin user (authentication)
+                Session.getInstance().clear();
+                // Lấy stage hiện tại
+                Stage stage = (Stage) logoutButton.getScene().getWindow();
+                // Chuyển về trang đăng nhập
+                toSignIn.SignIn(stage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+    });
     }
 }

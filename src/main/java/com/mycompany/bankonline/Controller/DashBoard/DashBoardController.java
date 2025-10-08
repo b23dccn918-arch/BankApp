@@ -8,7 +8,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.mycompany.bankonline.DisplayScene.toSignIn;
 import com.mycompany.bankonline.MainApp.Main;
+import com.mycompany.bankonline.Session.Session;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -36,10 +38,13 @@ public class DashBoardController implements Initializable {
     private Button historyButton;
 
     @FXML
-    private Button cardButton;
+    private Button paymentButton;
 
     @FXML
     private Button logoutButton;
+
+    @FXML
+    private Button depositButton;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -84,8 +89,26 @@ public class DashBoardController implements Initializable {
                 e.printStackTrace();
             }
         });
+        paymentButton.setOnAction(event -> {
+            try {
+                Stage stage = (Stage) transferButton.getScene().getWindow();
+                Main.Payment(stage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        depositButton.setOnAction(event -> {
+            try {
+                Stage stage = (Stage) transferButton.getScene().getWindow();
+                Main.Deposit(stage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
         logoutButton.setOnAction(e -> handleLogout());
     }
+
+    
 
     private void showMessage(String title, String content) {
         Alert alert = new Alert(AlertType.INFORMATION);
@@ -100,7 +123,23 @@ public class DashBoardController implements Initializable {
         alert.setTitle("Đăng xuất");
         alert.setHeaderText(null);
         alert.setContentText("Bạn có chắc muốn đăng xuất?");
-        alert.showAndWait();
+        alert.showAndWait().ifPresent(response -> {
+        if (response == javafx.scene.control.ButtonType.OK) {
+            try {
+                
+                //xoa thong tin trong session
+                Session.getInstance().clear();
+                
+
+                // Lấy stage hiện tại
+                Stage stage = (Stage) logoutButton.getScene().getWindow();
+                // Chuyển về trang đăng nhập
+                toSignIn.SignIn(stage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    });
     } 
     
 }
