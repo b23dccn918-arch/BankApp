@@ -61,7 +61,6 @@ public class ControllerSignUp {
 	    String address = Address.getText().trim();
 
 	    if(true) {
-//	       if(phonenumber.isEmpty() || number.isEmpty() || job.isEmpty() || mail.isEmpty() || address.isEmpty() || fullName.isEmpty() || gender.isEmpty() || birth.isEmpty()) {
 	    	   if(false) {
 	    	   Alert empty = new Alert(Alert.AlertType.ERROR);
 	    	   empty.setHeaderText("Failed");
@@ -71,27 +70,10 @@ public class ControllerSignUp {
 	       
 	       else {
 	    	   System.out.println("Qua buoc 1");
-
-//		        FXMLLoader loader = new FXMLLoader(getClass().getResource("SignUpInterface_2.fxml"));
-//		        Parent root = loader.load();
-//
-//
-//		        ControllerSignUp2 controller2 = loader.getController();
-//		        controller2.setUserData(phonenumber, number, fullName, job, gender, birth, mail, address);
-//
-//
-//		        Scene scene = new Scene(root);
-//		        scene.getStylesheets().add(getClass().getResource("/SignUp/StyleSignUp.css").toExternalForm());
-//
-//
-//		        Button clickedButton = (Button) event.getSource();
-//		        Scene currentScene = clickedButton.getScene();
-//		        Stage currentStage = (Stage) currentScene.getWindow();
-//		        currentStage.setScene(scene);
 	    	    Button clickedButton = (Button) event.getSource();
 	    	    Scene currentScene = clickedButton.getScene();	
 	    	    Stage currentStage = (Stage) currentScene.getWindow();
-	    	    try {
+	    	    try {	
 	    	    	toSignUp.SignUp2(currentStage); 
 	    	    } catch (Exception e) {
 	    	    	e.printStackTrace();
