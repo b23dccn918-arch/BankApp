@@ -11,7 +11,7 @@
 
 <AnchorPane prefHeight="468.0" prefWidth="652.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.bankonline.Controller.SignUp.ControllerSignUp">
    <children>
-      <Pane layoutX="-2.0" prefHeight="558.0" prefWidth="223.0" styleClass="left-signup-container">
+      <Pane layoutX="-2.0" prefHeight="600.0" prefWidth="223.0" styleClass="left-signup-container">
          <children>
             <ImageView fitHeight="97.0" fitWidth="85.0" layoutX="70.0" layoutY="149.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -30,56 +30,51 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane layoutX="221.0" prefHeight="558.0" prefWidth="444.0" styleClass="right-signup-container">
+      <Pane layoutX="221.0" prefHeight="600.0" prefWidth="444.0" styleClass="right-signup-container">
          <children>
             <Label layoutX="94.0" layoutY="38.0" />
-            <Button fx:id="NextButton" layoutX="237.0" layoutY="468.0" mnemonicParsing="false" onAction="#getNextButton" text="Next">
+            <Button fx:id="NextButton" layoutX="238.0" layoutY="532.0" mnemonicParsing="false" onAction="#getNextButton" text="Next">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="BackButton" layoutX="137.0" layoutY="468.0" mnemonicParsing="false" onAction="#BackToSignIn" text="Back">
+            <Button fx:id="BackButton" layoutX="137.0" layoutY="532.0" mnemonicParsing="false" onAction="#BackToSignIn" text="Back">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
             <Label layoutX="86.0" layoutY="47.0" prefWidth="75.0" />
-            <TextField fx:id="Identification" layoutX="109.0" layoutY="54.0" prefHeight="30.0" prefWidth="215.0" promptText="Citizen Identification">
+            <TextField fx:id="Identification" layoutX="109.0" layoutY="49.0" prefHeight="30.0" prefWidth="215.0" promptText="Citizen Identification">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <TextField fx:id="PhoneNumber" layoutX="109.0" layoutY="107.0" prefHeight="30.0" prefWidth="215.0" promptText="Phone number">
+            <TextField fx:id="Job" layoutX="107.0" layoutY="192.0" prefHeight="30.0" prefWidth="215.0" promptText="Job">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <TextField fx:id="Job" layoutX="107.0" layoutY="207.0" prefHeight="30.0" prefWidth="215.0" promptText="Job">
+            <TextField fx:id="Gender" layoutX="107.0" layoutY="330.0" prefHeight="30.0" prefWidth="215.0" promptText="Gender">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <TextField fx:id="Gender" layoutX="107.0" layoutY="308.0" prefHeight="30.0" prefWidth="215.0" promptText="Gender">
+            <TextField fx:id="Address" layoutX="107.0" layoutY="466.0" prefHeight="30.0" prefWidth="215.0" promptText="Address">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <TextField fx:id="Address" layoutX="107.0" layoutY="412.0" prefHeight="30.0" prefWidth="215.0" promptText="Address">
+            <TextField fx:id="Birth" layoutX="107.0" layoutY="260.0" prefHeight="30.0" prefWidth="215.0" promptText="Birth ">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <TextField fx:id="Birth" layoutX="107.0" layoutY="257.0" prefHeight="30.0" prefWidth="215.0" promptText="Birth ">
+            <TextField fx:id="Email" layoutX="109.0" layoutY="402.0" prefHeight="30.0" prefWidth="215.0" promptText="Email">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <TextField fx:id="Email" layoutX="107.0" layoutY="360.0" prefHeight="30.0" prefWidth="215.0" promptText="Email">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="FullName" layoutX="109.0" layoutY="157.0" prefHeight="30.0" prefWidth="215.0" promptText="Full Name">
+            <TextField fx:id="FullName" layoutX="109.0" layoutY="127.0" prefHeight="30.0" prefWidth="215.0" promptText="Full Name">
                <font>
                   <Font size="14.0" />
                </font>

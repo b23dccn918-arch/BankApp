@@ -62,7 +62,7 @@ public class ControllerSignIn {
 		  	Scene currentScene = clickedButton.getScene();
 		  	Stage currentStage = (Stage) currentScene.getWindow();
 	        try {
-	            toSignUp.SignUp(currentStage); // Gọi phương thức SignUp từ Main class
+	            toSignUp.SignUp(currentStage); 
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }

@@ -33,9 +33,8 @@ public class ControllerSignUp {
 	@FXML
 	private Button BackButton, NextButton, BackButton2, FinishButton;
 	@FXML
-	private TextField PhoneNumber, Identification, FullName, Job, Email, Address, Birth, Gender;
-	@FXML
-	private static Alert alert = new Alert(Alert.AlertType.ERROR);
+	private TextField Identification, FullName, Job, Email, Address, Birth, Gender;
+
 	
 	private String phoneNumber, citizenIdentification, job, address, referrer;
 
@@ -51,8 +50,7 @@ public class ControllerSignUp {
 	}
 	
 	public void getNextButton(ActionEvent event) throws Exception {
-	    String phonenumber = PhoneNumber.getText().trim();
-	    String number = Identification.getText().trim();
+	    String identification = Identification.getText().trim();
 	    String fullName = FullName.getText().trim();
 	    String job = Job.getText().trim();
 	    String gender = Gender.getText().trim();
@@ -61,7 +59,7 @@ public class ControllerSignUp {
 	    String address = Address.getText().trim();
 
 	    if(true) {
-	    	   if(false) {
+	    	   if(identification == "" || fullName == "" || job == "" || gender == "" || birth == "" || mail == "" || address == "") {
 	    	   Alert empty = new Alert(Alert.AlertType.ERROR);
 	    	   empty.setHeaderText("Failed");
 	    	   empty.setContentText("Please fill in all the information");
@@ -69,7 +67,8 @@ public class ControllerSignUp {
 	       }
 	       
 	       else {
-	    	   System.out.println("Qua buoc 1");
+	    	    System.out.println("Qua buoc 1");
+	    	    System.out.println(identification + " " + fullName + " " + job + " " + gender + " " + birth + " " + mail + " " + address);
 	    	    Button clickedButton = (Button) event.getSource();
 	    	    Scene currentScene = clickedButton.getScene();	
 	    	    Stage currentStage = (Stage) currentScene.getWindow();
@@ -80,53 +79,10 @@ public class ControllerSignUp {
 	    	    }
 	       }
 
-	    } else {
-	        alert.setHeaderText("Failed");
-	        alert.setContentText("Phone number or Citizen identification number already registered!");
-	        alert.show();
-	    }
+	    } 
 	}
 
 
-	private static boolean checkPhoneNumber(String phonenum) throws Exception {
-		String queryAccounts = "SELECT * FROM Accounts";
-		String queryCustomers = "SELECT * FROM Customers";
-		Connection con = Connect.getConnection();
-		
-		
-		PreparedStatement stmtAccounts = con.prepareStatement(queryAccounts);
-		List<String> PhoneNumbersAccounts = new LinkedList<String>();
-		ResultSet rsAccounts = stmtAccounts.executeQuery();
-		while (rsAccounts.next()) {
-			PhoneNumbersAccounts.add(rsAccounts.getString(1));
-		}
-		boolean existsAccounts = PhoneNumbersAccounts.stream().anyMatch(u -> u.equalsIgnoreCase(phonenum)); 
-		
-		PreparedStatement stmtCustomers = con.prepareStatement(queryCustomers);
-		List<String> PhoneNumbersCustomers = new LinkedList<String>();
-		ResultSet rsCustomers = stmtCustomers.executeQuery();
-		while (rsCustomers.next()) {
-			PhoneNumbersCustomers.add(rsCustomers.getString(1));
-		}
-		boolean existsCustomers = PhoneNumbersCustomers.stream().anyMatch(u -> u.equalsIgnoreCase(phonenum)); 
-		
-		
-		return !existsAccounts && !existsCustomers;
-		
-		
-	}
 	
-	private static boolean checkIdentification(String number) throws Exception {
-		String query = "SELECT * FROM Customers";
-		Connection con = Connect.getConnection();
-		PreparedStatement stmt = con.prepareStatement(query);
-		List<String> Identifications = new LinkedList<String>();
-		ResultSet rs = stmt.executeQuery();
-		while (rs.next()) {
-			Identifications.add(rs.getString(3));
-		}
-		boolean exists = Identifications.stream().anyMatch(u -> u.equalsIgnoreCase(number)); 
-		return !exists;
-	}
 
 }

@@ -31,8 +31,8 @@ public class ControllerSignUp2 {
 	private PasswordField Password, PinCode, ConfirmPass;
 
 	@FXML
-	private TextField Username, PaymentAccount;
-	private String PhoneNumber, Identification, FullName, Job, Email, Address, Birth, Gender;
+	private TextField PhoneNumber, PaymentAccount;
+	private String identification, fullName, job, email, address, birth, gender;
 
 
 	public void BackToSignUp_1(ActionEvent event) throws IOException {
@@ -43,15 +43,14 @@ public class ControllerSignUp2 {
 		toSignUp.SignUp(currentStage);
 	}
 
-	public void setUserData(String phoneNumber, String Identification, String FullName, String Job, String Gender, String Birth, String Email, String Address) {
-		this.PhoneNumber = phoneNumber;
-		this.Identification = Identification;
-		this.FullName = FullName;
-		this.Job = Job;
-		this.Gender = Gender;
-		this.Birth = Birth;
-		this.Email = Email;
-		this.Address = Address;
+	public void setUserData(String Identification, String FullName, String Job, String Gender, String Birth, String Email, String Address) {
+		this.identification = Identification;
+		this.fullName = FullName;
+		this.job = Job;
+		this.gender = Gender;
+		this.birth = Birth;
+		this.email = Email;
+		this.address = Address;
 
 	}
 	
@@ -59,6 +58,7 @@ public class ControllerSignUp2 {
 	public void getFinishButton(ActionEvent event) throws Exception {
 			if(true) {
 				if(true) {
+					System.out.println(identification + " " + fullName + " " + job + " " + gender + " " + birth + " " + email + " " + address);
 	                Button clickedButton = (Button) event.getSource();
 	                Scene currentScene = clickedButton.getScene();
 	                Stage currentStage = (Stage) currentScene.getWindow();

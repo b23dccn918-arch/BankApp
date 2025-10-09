@@ -27,5 +27,5 @@ public class toSignUp {
         stage.setScene(scene);
         stage.show();
     }
-}
+} 
 

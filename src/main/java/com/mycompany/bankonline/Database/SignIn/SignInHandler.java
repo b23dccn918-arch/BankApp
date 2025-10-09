@@ -23,14 +23,12 @@ public class SignInHandler {
             
             ResultSet rs = ps.executeQuery();
             
-            // Nếu có ít nhất một dòng kết quả -> tài khoản tồn tại
             if (rs.next()) {
                 // luu thong tin vao session;
                 int userId = rs.getInt("user_id"); 
                 int accountId = rs.getInt("account_id");
                 Session.getInstance().setSession(userId, accountId);
                 System.out.println(Session.getInstance());
-
                 return true;
             }
             
