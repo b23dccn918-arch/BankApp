@@ -11,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import com.mycompany.bankonline.DisplayScene.toSignIn;
+import com.mycompany.bankonline.DisplayScene.toSignUp;
 
 public class Main extends Application {
 
@@ -18,7 +19,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         // Mặc định khi chạy app thì mở SignIn
-        toSignIn.SignIn(primaryStage);
+        toSignUp.SignUp2(primaryStage);
     }
 
     // ⚡ Để ngoài start()
