@@ -16,7 +16,7 @@
                 <Label layoutX="39.0" layoutY="23.0" text="Bank" textFill="WHITE">
                     <font><Font name="System Bold" size="24" /></font>
                 </Label>
-                <Button fx:id="logoutButton" layoutX="684.0" layoutY="25.0" style="-fx-background-color: #E74C3C; -fx-text-fill: white;" text="logout">
+                <Button fx:id="logoutButton" layoutX="684.0" layoutY="25.0" style="-fx-background-color: #E74C3C; -fx-text-fill: white;" text="Logout">
                     <font><Font name="System Bold" size="16" /></font>
                 </Button>
             </children>
@@ -110,42 +110,42 @@
         <VBox spacing="15">
             <VBox styleClass="info-box">
                 <Label text="Họ và tên:" />
-                <Label fx:id="fullNameLabel" text="Nguyễn Văn A" />
+                <Label fx:id="fullNameLabel" text="------------" />
             </VBox>
 
             <VBox styleClass="info-box">
                 <Label text="CMND/CCCD:" />
-                <Label fx:id="citizenIdLabel" text="012345678901" />
+                <Label fx:id="citizenIdLabel" text="----------" />
             </VBox>
 
             <VBox styleClass="info-box">
                 <Label text="Nghề nghiệp:" />
-                <Label fx:id="jobLabel" text="Kỹ sư phần mềm" />
+                <Label fx:id="jobLabel" text="-----------" />
             </VBox>
 
             <VBox styleClass="info-box">
                 <Label text="Giới tính:" />
-                <Label fx:id="genderLabel" text="Nam" />
+                <Label fx:id="genderLabel" text="-----------" />
             </VBox>
 
             <VBox styleClass="info-box">
                 <Label text="Ngày sinh:" />
-                <Label fx:id="dateBirthLabel" text="01/01/1990" />
+                <Label fx:id="dateBirthLabel" text="------------" />
             </VBox>
 
             <VBox styleClass="info-box">
                 <Label text="Địa chỉ:" />
-                <Label fx:id="addressLabel" text="123 Nguyễn Trãi, Hà Nội" />
+                <Label fx:id="addressLabel" text="-------------" />
             </VBox>
 
             <VBox styleClass="info-box">
                 <Label text="Email:" />
-                <Label fx:id="emailLabel" text="nguyenvana@example.com" />
+                <Label fx:id="emailLabel" text="----------@example.com" />
             </VBox>
 
             <VBox styleClass="info-box">
                 <Label text="Ngày tạo tài khoản:" />
-                <Label fx:id="createdAtLabel" text="2024-09-15 10:00:00" />
+                <Label fx:id="createdAtLabel" text="YYYY-MM-DD 10:00:00" />
             </VBox>
         </VBox>
     </VBox>

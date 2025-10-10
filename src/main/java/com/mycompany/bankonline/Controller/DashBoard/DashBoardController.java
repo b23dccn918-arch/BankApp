@@ -5,9 +5,11 @@
 package com.mycompany.bankonline.Controller.DashBoard;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.mycompany.bankonline.Database.Account.AccountHandler;
 import com.mycompany.bankonline.DisplayScene.toSignIn;
 import com.mycompany.bankonline.MainApp.Main;
 import com.mycompany.bankonline.Session.Session;
@@ -17,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 
@@ -44,10 +47,21 @@ public class DashBoardController implements Initializable {
     private Button logoutButton;
 
     @FXML
+    private Label accountNumberField;
+
+    @FXML
+    private Label balanceField;
+
+    @FXML
     private Button depositButton;
+
+    private final AccountHandler accountHandler = new AccountHandler();
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        accountNumberField.setText(formatAccountNumber(accountHandler.getAccountNumberByAccountId(Session.getInstance().getAccountId())));
+        balanceField.setText(String.format("%,.0f VND", accountHandler.getBalanceByAccountId(Session.getInstance().getAccountId())));
         // Gán sự kiện cho các nút
         homeButton.setOnAction(event -> {
             try {
@@ -140,6 +154,22 @@ public class DashBoardController implements Initializable {
             }
         }
     });
-    } 
+    }
+    
+    public String formatAccountNumber(String accountNumber) {
+        if (accountNumber == null || accountNumber.isEmpty()) {
+            return "";
+        }
+        StringBuilder formatted = new StringBuilder();
+        int length = accountNumber.length();
+
+        for (int i = 0; i < length; i++) {
+            formatted.append(accountNumber.charAt(i));
+            if ((i + 1) % 4 == 0 && (i + 1) != length) {
+                formatted.append(".");
+            }
+        }   
+        return formatted.toString();
+    }   
     
 }

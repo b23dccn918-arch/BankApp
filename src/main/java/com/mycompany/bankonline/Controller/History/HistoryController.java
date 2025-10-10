@@ -7,14 +7,17 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
+import java.sql.*;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import com.mycompany.bankonline.Database.Transaction.TransactionHandler;
 import com.mycompany.bankonline.DisplayScene.toSignIn;
 import com.mycompany.bankonline.MainApp.Main;
+import com.mycompany.bankonline.Model.Transaction;
 import com.mycompany.bankonline.Session.Session;
 
 
@@ -48,18 +51,28 @@ public class HistoryController implements Initializable{
     @FXML private DatePicker fromDate;
     @FXML private DatePicker toDate;
     @FXML private Button filterButton;
-    @FXML private TableView<TransactionView> transactionTable;
+    @FXML
+    private TableView<Transaction> transactionTable;
+    @FXML
+    private TableColumn<Transaction, Long> colId;
+    @FXML
+    private TableColumn<Transaction, String> colFrom;
+    @FXML
+    private TableColumn<Transaction, String> colTo;
+    @FXML
+    private TableColumn<Transaction, String> colType;
+    @FXML
+    private TableColumn<Transaction, Double> colAmount;
+    @FXML
+    private TableColumn<Transaction, String> colDescription;
+    @FXML
+    private TableColumn<Transaction, Timestamp> colDate;
+    @FXML
+    private TableColumn<Transaction, String> colStatus;
 
-    @FXML private TableColumn<TransactionView, Long> colId;
-    @FXML private TableColumn<TransactionView, String> colFrom;
-    @FXML private TableColumn<TransactionView, String> colTo;
-    @FXML private TableColumn<TransactionView, String> colType;
-    @FXML private TableColumn<TransactionView, Double> colAmount;
-    @FXML private TableColumn<TransactionView, String> colDescription;
-    @FXML private TableColumn<TransactionView, String> colDate;
-    @FXML private TableColumn<TransactionView, String> colStatus;
+    // private ObservableList<TransactionView> transactions = FXCollections.observableArrayList();
 
-    private ObservableList<TransactionView> transactions = FXCollections.observableArrayList();
+    private static final TransactionHandler transactionHandler = new TransactionHandler();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -123,29 +136,33 @@ public class HistoryController implements Initializable{
         logoutButton.setOnAction(e -> handleLogout());
 
         // mapping cột -> thuộc tính trong model
-        colId.setCellValueFactory(data -> data.getValue().transactionIdProperty().asObject());
-        colFrom.setCellValueFactory(data -> data.getValue().fromUserProperty());
-        colTo.setCellValueFactory(data -> data.getValue().toUserProperty());
-        colType.setCellValueFactory(data -> data.getValue().typeProperty());
-        colAmount.setCellValueFactory(data -> data.getValue().amountProperty().asObject());
-        colDescription.setCellValueFactory(data -> data.getValue().descriptionProperty());
-        colDate.setCellValueFactory(data -> data.getValue().createdAtProperty());
-        colStatus.setCellValueFactory(data -> data.getValue().statusProperty());
+        colId.setCellValueFactory(cell -> cell.getValue().transactionIdProperty().asObject());
+        colFrom.setCellValueFactory(cell -> cell.getValue().fromAccountProperty());
+        colTo.setCellValueFactory(cell -> cell.getValue().toAccountProperty());
+        colType.setCellValueFactory(cell -> cell.getValue().typeProperty());
+        colAmount.setCellValueFactory(cell -> cell.getValue().amountProperty().asObject());
+        colDescription.setCellValueFactory(cell -> cell.getValue().descriptionProperty());
+        colDate.setCellValueFactory(cell -> cell.getValue().createdAtProperty());
+        colStatus.setCellValueFactory(cell -> cell.getValue().statusProperty());
 
-        // load mẫu
-        transactions.add(new TransactionView(1L,"User A","User B","transfer",1000.0,"Chuyển tiền","2025-09-28","success"));
-        transactions.add(new TransactionView(2L,"User A",null,"deposit",5000.0,"Nạp tiền","2025-09-25","success"));
-
-        transactionTable.setItems(transactions);
-
+        loadAllTransactions();
         // xử lý lọc theo ngày
         filterButton.setOnAction(e -> filterTransactions());
+    }
+
+    private void loadAllTransactions() {
+        int accountId = Session.getInstance().getAccountId();
+        List<Transaction> transactions = transactionHandler.getTransactionsByAccountId(accountId);
+        ObservableList<Transaction> data = FXCollections.observableArrayList(transactions);
+        transactionTable.setItems(data);
     }
 
     private void filterTransactions() {
         LocalDate from = fromDate.getValue();
         LocalDate to = toDate.getValue();
-
+        int accountId = Session.getInstance().getAccountId();
+        List<Transaction> filtered = transactionHandler.filterTransactionsByAccountId(from, to,accountId);
+        transactionTable.setItems(FXCollections.observableArrayList(filtered));
     }
 
     private void handleLogout() {

@@ -11,6 +11,7 @@ import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
+import com.mycompany.bankonline.Database.Account.AccountHandler;
 import com.mycompany.bankonline.DisplayScene.toSignIn;
 import com.mycompany.bankonline.MainApp.Main;
 import com.mycompany.bankonline.Session.Session;
@@ -43,8 +44,15 @@ public class WithdrawController implements Initializable {
     @FXML
     private Button depositButton;
 
+    @FXML
+    private Label balanceField;
+
+    private final AccountHandler accountHandler = new AccountHandler();
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        balanceField.setText(String.format("%,.0f VND", accountHandler.getBalanceByAccountId(Session.getInstance().getAccountId())));
+
         // Gán sự kiện cho các nút
         homeButton.setOnAction(event -> {
             try {

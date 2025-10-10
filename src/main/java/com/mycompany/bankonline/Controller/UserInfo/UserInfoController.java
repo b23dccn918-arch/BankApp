@@ -11,11 +11,14 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 
+import com.mycompany.bankonline.Database.UserInfo.UserInfoHandler;
 import com.mycompany.bankonline.DisplayScene.toSignIn;
 import com.mycompany.bankonline.MainApp.Main;
+import com.mycompany.bankonline.Model.User;
 import com.mycompany.bankonline.Session.Session;
 
 public class UserInfoController implements Initializable {
@@ -45,19 +48,29 @@ public class UserInfoController implements Initializable {
     @FXML
     private Button depositButton;
 
-    @FXML private Label fullNameLabel;
-    @FXML private Label genderLabel;
-    @FXML private Label dateBirthLabel;
-    @FXML private Label citizenIdLabel;
-    @FXML private Label jobLabel;
-    @FXML private Label addressLabel;
-    @FXML private Label emailLabel;
-    @FXML private Label createdAtLabel;
-    @FXML private Label statusLabel;
+    @FXML
+    private Label fullNameLabel;
+    @FXML
+    private Label citizenIdLabel;
+    @FXML
+    private Label jobLabel;
+    @FXML
+    private Label genderLabel;
+    @FXML
+    private Label dateBirthLabel;
+    @FXML
+    private Label addressLabel;
+    @FXML
+    private Label emailLabel;
+    @FXML
+    private Label createdAtLabel;
+
+    private final UserInfoHandler userHandler = new UserInfoHandler();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Gán sự kiện cho các nút
+        loadUserInfo(Session.getInstance().getUserId());
         homeButton.setOnAction(event -> {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
@@ -117,6 +130,28 @@ public class UserInfoController implements Initializable {
         logoutButton.setOnAction(e -> handleLogout());
 
     }
+
+    private void loadUserInfo(int userId) {
+        User user = userHandler.getUserById(userId);
+        if (user != null) {
+            fullNameLabel.setText(user.getFullName());
+            citizenIdLabel.setText(user.getCitizenIdentifier());
+            jobLabel.setText(user.getJob());
+            genderLabel.setText(user.getGender());
+            dateBirthLabel.setText(formatDate(user.getDateBirth()));
+            addressLabel.setText(user.getAddress());
+            emailLabel.setText(user.getEmail());
+            createdAtLabel.setText(formatDate(user.getCreatedAt()));
+        }
+    }
+
+    private String formatDate(java.sql.Timestamp timestamp) {
+        if (timestamp == null) return "";
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        return sdf.format(timestamp);
+    }
+
+
     private void handleLogout() {
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Đăng xuất");
@@ -139,23 +174,4 @@ public class UserInfoController implements Initializable {
     });
     }
 
-    public void setUserData(int userId) {
-        // TODO: load dữ liệu thật từ DB
-        String fullName = "Nguyen Van A";
-        String phone = "0123456789";
-        String citizenId = "123456789";
-        String job = "Engineer";
-        String address = "123 Nguyen Trai, Hanoi";
-        String accountType = "checking";
-        BigDecimal balance = new BigDecimal("15000000");
-        String status = "active";
-
-        // fullNameLabel.setText("Full Name: " + fullName);
-        // citizenIdLabel.setText("Citizen ID: " + citizenId);
-        // jobLabel.setText("Job: " + job);
-        // addressLabel.setText("Address: " + address);
-        // accountTypeLabel.setText("Account Type: " + accountType);
-        // balanceLabel.setText("Balance: " + balance + " VND");
-        // statusLabel.setText("Status: " + status);
-    }
 }

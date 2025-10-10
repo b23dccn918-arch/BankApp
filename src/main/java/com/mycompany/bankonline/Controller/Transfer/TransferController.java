@@ -8,15 +8,20 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.mycompany.bankonline.Database.Account.AccountHandler;
+import com.mycompany.bankonline.Database.Transfer.TransferHandler;
 import com.mycompany.bankonline.DisplayScene.toSignIn;
 import com.mycompany.bankonline.MainApp.Main;
 import com.mycompany.bankonline.Session.Session;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /**
@@ -25,6 +30,27 @@ import javafx.stage.Stage;
  * @author vietnh
  */
 public class TransferController implements Initializable {
+
+    @FXML
+    private TextField recipientAccountField;
+    @FXML
+    private TextField amountField;
+    @FXML
+    private TextField messageField;
+
+    @FXML
+    private Label statusFailedLabel;
+    
+    @FXML
+    private Label statusSuccessLabel;
+
+    @FXML
+    private Label balanceField;
+
+    @FXML
+    private Button transferButtonSubmit;
+
+
     @FXML
     private Button homeButton;
 
@@ -51,12 +77,22 @@ public class TransferController implements Initializable {
 
     @FXML
     private Button logoutButton;
+
+    private final TransferHandler transferHandler = new TransferHandler();
+
+    private final AccountHandler accountHandler = new AccountHandler();
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        transferButtonSubmit.setOnAction(this::handleTransfer);
+        
         // Gán sự kiện cho các nút
+        balanceField.setText(String.format("%,.0f VND", accountHandler.getBalanceByAccountId(Session.getInstance().getAccountId())));
+        statusFailedLabel.setVisible(false);
+        statusSuccessLabel.setVisible(false);
         homeButton.setOnAction(event -> {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
@@ -117,11 +153,61 @@ public class TransferController implements Initializable {
 
     }
 
+    private void handleTransfer(ActionEvent event) {
+        String recipient = recipientAccountField.getText().trim();
+        String amountText = amountField.getText().trim();
+        String message = messageField.getText().trim();
+
+        // Reset label mỗi lần nhấn
+        statusFailedLabel.setVisible(false);
+        statusSuccessLabel.setVisible(false);
+
+        if (recipient.isEmpty() || amountText.isEmpty()) {
+            showErrorAlert("Vui lòng nhập đầy đủ thông tin.");
+            return;
+        }
+
+        try {
+            double amount = Double.parseDouble(amountText);
+            if (amount <= 0) {
+                showErrorAlert("Số tiền phải lớn hơn 0.");
+                return;
+            }
+            int senderAccountId = Session.getInstance().getAccountId();
+            String result = transferHandler.transferMoney(senderAccountId, recipient, amount, message);
+
+            if (result.equals("Success")) {
+                showSuccessAlert("Chuyển tiền thành công!");
+            } else {
+                showErrorAlert(result);
+            }
+
+        } catch (NumberFormatException e) {
+            showErrorAlert("Số tiền không hợp lệ.");
+        }
+    }
+
     private void showMessage(String title, String content) {
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(content);
+        alert.showAndWait();
+    }
+
+    private void showSuccessAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Thành công");
+        alert.setHeaderText("Giao dịch thành công");
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    private void showErrorAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Lỗi giao dịch");
+        alert.setHeaderText("Không thể thực hiện giao dịch");
+        alert.setContentText(message);
         alert.showAndWait();
     }
 
@@ -146,5 +232,6 @@ public class TransferController implements Initializable {
         }
     });
     }
-    
+
 }
+    

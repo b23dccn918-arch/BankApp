@@ -21,12 +21,12 @@
             <HBox spacing="20">
                 <VBox prefWidth="200" style="-fx-background-color: #D6EAF8; -fx-padding: 15; -fx-background-radius: 10;">
                     <Label style="-fx-font-weight: bold;" text="Số dư hiện tại" />
-                    <Label style="-fx-font-size: 18px; -fx-text-fill: #2E86C1;" text="15,000,000 VND" />
+                    <Label fx:id="balanceField" style="-fx-font-size: 18px; -fx-text-fill: #2E86C1;" text="15,000,000 VND" />
                 </VBox>
                 
                 <VBox prefWidth="200" style="-fx-background-color: #FADBD8; -fx-padding: 15; -fx-background-radius: 10;">
                     <Label style="-fx-font-weight: bold;" text="Số tài khoản" />
-                    <Label style="-fx-font-size: 18px; -fx-text-fill: #2bb6c0ff;" text="8888.3636.8888 stk trong dtb" />
+                    <Label fx:id="accountNumberField" style="-fx-font-size: 18px; -fx-text-fill: #2bb6c0ff;" text="8888.3636.8888 stk trong dtb" />
                 </VBox>
             </HBox>
 

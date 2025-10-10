@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.*?>
 
 <BorderPane id="AnchorPane" prefHeight="600" prefWidth="800" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.bankonline.Controller.Payment.PaymentController">
 
@@ -20,8 +16,17 @@
         <AnchorPane prefHeight="600" prefWidth="800" style="-fx-padding: 20;">
             <children>
                 <VBox layoutX="10" layoutY="10" spacing="20">
+                    
                     <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2E86C1;" text="Thanh toán hoá đơn" />
                     <!-- Tiêu đề -->
+                    
+                    <HBox spacing="20">
+                        <VBox prefWidth="200" style="-fx-background-color: #D6EAF8; -fx-padding: 15; -fx-background-radius: 10;">
+                            <Label style="-fx-font-weight: bold;" text="Số dư hiện tại" />
+                            <Label fx:id="balanceField" style="-fx-font-size: 18px; -fx-text-fill: #2E86C1;" text="15,000,000 VND" />
+                        </VBox>
+
+                    </HBox>
 
                     <!-- Form nhập thông tin -->
                     <HBox spacing="15">
@@ -32,6 +37,16 @@
                         <ComboBox fx:id="billIdCombo" prefWidth="200" promptText="Chọn mã hoá đơn" />
                     </VBox>
                 </HBox>
+
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <VBox spacing="10">
+                        <Label text="Lọc theo trạng thái:" />
+                    </VBox>
+                    <VBox spacing="10">
+                        <ComboBox fx:id="statusFilterCombo" prefWidth="200" promptText="Tất cả" />
+                    </VBox>
+                </HBox>
+
 
                 <HBox spacing="15">
                     <Button fx:id="payBillButton" text="Thanh toán hoá đơn"
