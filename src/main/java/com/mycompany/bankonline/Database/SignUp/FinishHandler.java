@@ -6,9 +6,9 @@ import java.sql.ResultSet;
 
 import com.mycompany.bankonline.Database.Connect;
 
-public class NextHandler {
-	public static boolean isIdentificationExist(String identification) {
-	    String query = "SELECT 1 FROM users WHERE citizen_identifier = ?";
+public class FinishHandler {
+	public static boolean isPhoneExist(String identification) {
+	    String query = "SELECT 1 FROM accounts WHERE phone = ?";
 	    try (Connection conn = Connect.getConnection();
 	         PreparedStatement stmt = conn.prepareStatement(query)) {
 	        

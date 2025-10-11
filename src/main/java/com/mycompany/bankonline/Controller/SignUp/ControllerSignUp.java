@@ -10,6 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.mycompany.bankonline.Database.Connect;
+import com.mycompany.bankonline.Database.SignUp.NextHandler;
 import com.mycompany.bankonline.Database.SignUp.SignUpHandler;
 import com.mycompany.bankonline.DisplayScene.toSignIn;
 import com.mycompany.bankonline.DisplayScene.toSignUp;
@@ -92,7 +93,7 @@ public class ControllerSignUp  {
 		}
 
 		// Kiểm tra số căn cước
-		if (!SignUpHandler.isIdentificationExist(identification)) {
+		if (!NextHandler.isIdentificationExist(identification)) {
 			System.out.println("Qua buoc 1");
 			System.out.println(identification + " " + fullName + " " + job + " " + gender + " " + birth + " " + mail
 					+ " " + address);

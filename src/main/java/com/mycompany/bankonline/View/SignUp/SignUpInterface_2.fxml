@@ -46,7 +46,7 @@
                </font>
             </Button>
             <Label layoutX="86.0" layoutY="47.0" prefWidth="75.0" />
-            <TextField fx:id="Username" layoutX="109.0" layoutY="61.0" prefHeight="30.0" prefWidth="215.0" promptText="Phone Number ">
+            <TextField fx:id="PhoneNumber" layoutX="109.0" layoutY="61.0" prefHeight="30.0" prefWidth="215.0" promptText="Phone Number ">
                <font>
                   <Font size="14.0" />
                </font>
