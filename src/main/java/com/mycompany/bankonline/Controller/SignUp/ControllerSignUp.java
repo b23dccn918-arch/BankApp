@@ -18,8 +18,10 @@ import com.mycompany.bankonline.MainApp.Main;
 import com.mycompany.bankonline.Model.Account;
 import com.mycompany.bankonline.Model.User;
 
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -27,6 +29,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.scene.Parent;
+
 
 public class ControllerSignUp  {
 
@@ -39,7 +43,7 @@ public class ControllerSignUp  {
 	private TextField Identification, FullName, Job, Email, Address;
 	
 	@FXML
-    private DatePicker Birth; // ✅ đổi từ TextField sang DatePicker
+    private DatePicker Birth;
 	
 	@FXML
     private ComboBox<String> Gender;
@@ -73,38 +77,48 @@ public class ControllerSignUp  {
 		String address = Address.getText().trim();
 
 		// Kiểm tra trống
-		if (identification.isEmpty() || fullName.isEmpty() || job.isEmpty()
-		        || gender == null || birth == null || mail.isEmpty() || address.isEmpty()) {
-		    Alert empty = new Alert(Alert.AlertType.ERROR);
-		    empty.setHeaderText("Failed");
-		    empty.setContentText("Please fill in all the information");
-		    empty.show();
-		    return;
-		}
+//		if (identification.isEmpty() || fullName.isEmpty() || job.isEmpty()
+//		        || gender == null || birth == null || mail.isEmpty() || address.isEmpty()) {
+//		    Alert empty = new Alert(Alert.AlertType.ERROR);
+//		    empty.setHeaderText("Failed");
+//		    empty.setContentText("Please fill in all the information");
+//		    empty.show();
+//		    return;
+//		}
 
 
 		// Kiểm tra email đúng định dạng chưa
-		if (!isValidEmail(mail)) {
-			Alert invalidEmail = new Alert(Alert.AlertType.ERROR);
-			invalidEmail.setHeaderText("Invalid Email");
-			invalidEmail.setContentText("Please enter a valid email address");
-			invalidEmail.show();
-			return;
-		}
+//		if (!isValidEmail(mail)) {
+//			Alert invalidEmail = new Alert(Alert.AlertType.ERROR);
+//			invalidEmail.setHeaderText("Invalid Email");
+//			invalidEmail.setContentText("Please enter a valid email address");
+//			invalidEmail.show();
+//			return;
+//		}
 
 		// Kiểm tra số căn cước
 		if (!NextHandler.isIdentificationExist(identification)) {
 			System.out.println("Qua buoc 1");
+			
 			System.out.println(identification + " " + fullName + " " + job + " " + gender + " " + birth + " " + mail
 					+ " " + address);
+			
+			// Tạo FXMLLoader để load màn SignUp2
+		    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/mycompany/bankonline/View/SignUp/SignUpInterface_2.fxml"));    
+		    Parent root = loader.load();
+		    Scene scene = new Scene(root);
+		    scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/SignUp/StyleSignUp.css").toExternalForm());
+
+		    // Lấy controller của màn SignUp2
+		    ControllerSignUp2 controller2 = loader.getController();
+		    
+		    controller2.setUserData(identification, fullName, job, gender, birth, mail, address);
+		    
 			Button clickedButton = (Button) event.getSource();
 			Scene currentScene = clickedButton.getScene();
 			Stage currentStage = (Stage) currentScene.getWindow();
-			try {
-				toSignUp.SignUp2(currentStage);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			currentStage.setScene(scene);
+	        currentStage.show();
 		} else {
 			Alert existed = new Alert(Alert.AlertType.ERROR);
 			existed.setTitle("Failed");

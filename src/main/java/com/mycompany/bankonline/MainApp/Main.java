@@ -19,7 +19,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         // Mặc định khi chạy app thì mở SignIn
-        toSignUp.SignUp2(primaryStage);
+        toSignUp.SignUp(primaryStage);
     }
 
     // ⚡ Để ngoài start()
