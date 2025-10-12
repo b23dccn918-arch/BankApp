@@ -77,24 +77,24 @@ public class ControllerSignUp  {
 		String address = Address.getText().trim();
 
 		// Kiểm tra trống
-//		if (identification.isEmpty() || fullName.isEmpty() || job.isEmpty()
-//		        || gender == null || birth == null || mail.isEmpty() || address.isEmpty()) {
-//		    Alert empty = new Alert(Alert.AlertType.ERROR);
-//		    empty.setHeaderText("Failed");
-//		    empty.setContentText("Please fill in all the information");
-//		    empty.show();
-//		    return;
-//		}
+		if (identification.isEmpty() || fullName.isEmpty() || job.isEmpty()
+		        || gender == null || birth == null || mail.isEmpty() || address.isEmpty()) {
+		    Alert empty = new Alert(Alert.AlertType.ERROR);
+		    empty.setHeaderText("Failed");
+		    empty.setContentText("Please fill in all the information");
+		    empty.show();
+		    return;
+		}
 
 
 		// Kiểm tra email đúng định dạng chưa
-//		if (!isValidEmail(mail)) {
-//			Alert invalidEmail = new Alert(Alert.AlertType.ERROR);
-//			invalidEmail.setHeaderText("Invalid Email");
-//			invalidEmail.setContentText("Please enter a valid email address");
-//			invalidEmail.show();
-//			return;
-//		}
+		if (!isValidEmail(mail)) {
+			Alert invalidEmail = new Alert(Alert.AlertType.ERROR);
+			invalidEmail.setHeaderText("Invalid Email");
+			invalidEmail.setContentText("Please enter a valid email address");
+			invalidEmail.show();
+			return;
+		}
 
 		// Kiểm tra số căn cước
 		if (!NextHandler.isIdentificationExist(identification)) {

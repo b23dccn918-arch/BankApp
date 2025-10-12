@@ -109,55 +109,55 @@ public class ControllerSignUp2 {
 		String password = Password.getText();
 		String pin = PinCode.getText();
 		String paymentAccount = PaymentAccount.getText();
-		// Ktra mat khau
-//		if (!password.equals(ConfirmPass.getText())) {
-//			Alert notSame = new Alert(Alert.AlertType.ERROR);
-//			notSame.setTitle("Failed");
-//			notSame.setContentText("The confirmation password does not match !");
-//			notSame.show();
-//			return;
-//		}
-//
-//		// Ktra mat khau du manh chua
-//		if (!isStrongPassword(password)) {
-//			Alert weakPass = new Alert(Alert.AlertType.ERROR);
-//			weakPass.setTitle("Failed");
-//			weakPass.setHeaderText(null);
-//			weakPass.setContentText("Your password is too weak !");
-//			weakPass.show();
-//			return;
-//		}
-//
-//		if (pin.length() < 6) {
-//			Alert pinError = new Alert(Alert.AlertType.ERROR);
-//			pinError.setTitle("Failed");
-//			pinError.setContentText("PIN code must be exactly 6 digits !");
-//			pinError.show();
-//			return;
-//		}
-//
-//		if (phoneNum.length() < 10 || phoneNum.charAt(0) != '0') {
-//			Alert phoneError = new Alert(Alert.AlertType.ERROR);
-//			phoneError.setTitle("Failed");
-//			phoneError.setContentText("Invalid phone number !");
-//			phoneError.show();
-//			return;
-//		}
-//
-//		if (paymentAccount.length() < 8) {
-//			Alert paymentAcccountError = new Alert(Alert.AlertType.ERROR);
-//			paymentAcccountError.setTitle("Failed");
-//			paymentAcccountError.setContentText("Payment account number must have at least 8 digits !");
-//			paymentAcccountError.show();
-//			return;
-//		}
+//		 Ktra xac nhan mat khau
+		if (!password.equals(ConfirmPass.getText())) {
+			Alert notSame = new Alert(Alert.AlertType.ERROR);
+			notSame.setTitle("Failed");
+			notSame.setContentText("The confirmation password does not match !");
+			notSame.show();
+			return;
+		}
+
+		// Ktra mat khau du manh chua
+		if (!isStrongPassword(password)) {
+			Alert weakPass = new Alert(Alert.AlertType.ERROR);
+			weakPass.setTitle("Failed");
+			weakPass.setHeaderText(null);
+			weakPass.setContentText("Your password is too weak !");
+			weakPass.show();
+			return;
+		}
+
+		if (pin.length() < 6) {
+			Alert pinError = new Alert(Alert.AlertType.ERROR);
+			pinError.setTitle("Failed");
+			pinError.setContentText("PIN code must be exactly 6 digits !");
+			pinError.show();
+			return;
+		}
+
+		if (phoneNum.length() < 10 || phoneNum.charAt(0) != '0') {
+			Alert phoneError = new Alert(Alert.AlertType.ERROR);
+			phoneError.setTitle("Failed");
+			phoneError.setContentText("Invalid phone number !");
+			phoneError.show();
+			return;
+		}
+
+		if (paymentAccount.length() < 8) {
+			Alert paymentAcccountError = new Alert(Alert.AlertType.ERROR);
+			paymentAcccountError.setTitle("Failed");
+			paymentAcccountError.setContentText("Payment account number must have at least 8 digits !");
+			paymentAcccountError.show();
+			return;
+		}
 
 		if (!FinishHandler.isPhoneExist(phoneNum)) {
 			System.out.println("Qua buoc 2");
 			System.out.println(identification + " " + fullName + " " + job + " " + gender + " " + birth + " " + email
 					+ " " + address);
-//			FinishHandler.insertUser(fullName, identification, job, gender, birth, address, email);
-//			FinishHandler.insertAccount(paymentAccount, FinishHandler.getUserIdByCitizenId(identification), phoneNum, password, 0, pin);
+			FinishHandler.insertUser(fullName, identification, job, gender, birth, address, email);
+			FinishHandler.insertAccount(paymentAccount, FinishHandler.getUserIdByCitizenId(identification), phoneNum, password, 0, pin);
 			
 			Button clickedButton = (Button) event.getSource();
 			Scene currentScene = clickedButton.getScene();
