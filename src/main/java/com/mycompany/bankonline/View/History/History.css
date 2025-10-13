@@ -48,3 +48,29 @@
     50%  { -fx-effect: dropshadow(gaussian, rgba(0,191,255,0.7), 18, 0, 0, 5); }
     100% { -fx-effect: dropshadow(gaussian, rgba(0,191,255,0.3), 10, 0, 0, 3); }
 }
+
+
+
+#logoutButton:hover {
+    -fx-background-color: linear-gradient(to right, #5DADE2, #3498DB);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+#logoutButton:pressed {
+    -fx-background-color: #1B4F72;
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
+}
+
+#filterButton:hover {
+    -fx-background-color: linear-gradient(to right, #5DADE2, #3498DB);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+#filterButton:pressed {
+    -fx-background-color: #1B4F72;
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
+}

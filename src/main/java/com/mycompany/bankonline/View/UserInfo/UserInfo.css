@@ -100,3 +100,18 @@
     -fx-background-color: #FAFAFA;
     -fx-font-smoothing-type: gray;
 }
+
+
+
+
+#logoutButton:hover {
+    -fx-background-color: linear-gradient(to right, #5DADE2, #3498DB);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+#logoutButton:pressed {
+    -fx-background-color: #1B4F72;
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
+}

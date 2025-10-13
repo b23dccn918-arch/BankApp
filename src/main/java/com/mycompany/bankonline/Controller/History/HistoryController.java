@@ -160,9 +160,20 @@ public class HistoryController implements Initializable{
     private void filterTransactions() {
         LocalDate from = fromDate.getValue();
         LocalDate to = toDate.getValue();
+        if(from == null || to == null){
+            showMessage("Thông báo", "Cần chọn ngày bắt đầu và kết thúc");
+        }
         int accountId = Session.getInstance().getAccountId();
         List<Transaction> filtered = transactionHandler.filterTransactionsByAccountId(from, to,accountId);
         transactionTable.setItems(FXCollections.observableArrayList(filtered));
+    }
+
+    private void showMessage(String title, String content) {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 
     private void handleLogout() {

@@ -48,3 +48,54 @@
     50%  { -fx-effect: dropshadow(gaussian, rgba(0,191,255,0.7), 18, 0, 0, 5); }
     100% { -fx-effect: dropshadow(gaussian, rgba(0,191,255,0.3), 10, 0, 0, 3); }
 }
+
+#payBillButton {
+    -fx-background-color: linear-gradient(to right, #01e41f, #0fec22);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 2);
+    -fx-transition: all 0.3s ease-in-out;
+}
+
+#payBillButton:hover {
+    -fx-background-color: linear-gradient(to right, #5DADE2, #3498DB);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+#payBillButton:pressed {
+    -fx-background-color: #1B4F72;
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
+}
+
+
+
+#logoutButton:hover {
+    -fx-background-color: linear-gradient(to right, #5DADE2, #3498DB);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+#logoutButton:pressed {
+    -fx-background-color: #1B4F72;
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
+}
+
+#filterButton:hover {
+    -fx-background-color: linear-gradient(to right, #5DADE2, #3498DB);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+#filterButton:pressed {
+    -fx-background-color: #1B4F72;
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
+}
+
+
+

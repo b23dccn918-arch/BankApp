@@ -125,7 +125,7 @@ public class TransactionHandler {
                 double amount = rs.getDouble("amount");
                 int fromId = rs.getInt("from_account_id");
                 int toId = rs.getInt("to_account_id");
-                int billId = rs.getInt("bill_id");
+                int billId = rs.getInt("bill_id");  
                 Timestamp time = rs.getTimestamp("created_at");
                 String formatted = time.toLocalDateTime().format(
                     DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")
@@ -153,7 +153,6 @@ public class TransactionHandler {
                 }
                 else
                     message = String.format("Giao dịch %.0f VND (%s).", amount, type);
-
                 transactions.add(message);
             }
         } catch (SQLException e) {
