@@ -7,13 +7,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.mycompany.bankonline.Database.Connect;
+import com.mycompany.bankonline.Database.Account.AccountHandler;
 
 public class TransferHandler {
-
+    private final AccountHandler accountHandler = new AccountHandler();
     public String transferMoney(int senderAccountId, String recipientAccountNumber, double amount, String description) {
+        String senderAccountNumber = accountHandler.getAccountNumberByAccountId(senderAccountId);
+        if(senderAccountNumber.equals(recipientAccountNumber)){
+            return "Tài khoản nhận phải khác tài khoản hiện tại";
+        }
+
         try (Connection conn = Connect.getConnection()) {
             conn.setAutoCommit(false); // Bắt đầu transaction
-
+            
             // 🔹 Lấy thông tin người gửi
             String sqlSender = "SELECT account_id, balance FROM accounts WHERE account_id = ?";
             PreparedStatement psSender = conn.prepareStatement(sqlSender);

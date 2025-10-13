@@ -7,11 +7,15 @@ package com.mycompany.bankonline.Controller.DashBoard;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import com.mycompany.bankonline.Database.Account.AccountHandler;
+import com.mycompany.bankonline.Database.Transaction.TransactionHandler;
+import com.mycompany.bankonline.Database.UserInfo.UserInfoHandler;
 import com.mycompany.bankonline.DisplayScene.toSignIn;
 import com.mycompany.bankonline.MainApp.Main;
+import com.mycompany.bankonline.Model.User;
 import com.mycompany.bankonline.Session.Session;
 
 import javafx.fxml.FXML;
@@ -20,10 +24,18 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
 public class DashBoardController implements Initializable {
+
+    @FXML
+    private VBox notificationBox;
+
+
+    @FXML
+    private Label helloField;
 
     @FXML
     private Button homeButton;
@@ -56,10 +68,12 @@ public class DashBoardController implements Initializable {
     private Button depositButton;
 
     private final AccountHandler accountHandler = new AccountHandler();
-
-
+    private final UserInfoHandler userInfoHandler = new UserInfoHandler();
+    private final TransactionHandler transactionHandler = new TransactionHandler();
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        loadNotifications(Session.getInstance().getAccountId());
+        loadUserInfo(Session.getInstance().getUserId());
         accountNumberField.setText(formatAccountNumber(accountHandler.getAccountNumberByAccountId(Session.getInstance().getAccountId())));
         balanceField.setText(String.format("%,.0f VND", accountHandler.getBalanceByAccountId(Session.getInstance().getAccountId())));
         // Gán sự kiện cho các nút
@@ -120,6 +134,31 @@ public class DashBoardController implements Initializable {
             }
         });
         logoutButton.setOnAction(e -> handleLogout());
+    }
+
+
+    private void loadUserInfo(int userId) {
+        User user = userInfoHandler.getUserById(userId);
+        if (user != null) {
+            helloField.setText("Xin chào, " + user.getFullName()+"!");
+        }
+    }
+
+    private void loadNotifications(int accountId) {
+        notificationBox.getChildren().clear();
+
+        List<String> messages = transactionHandler.getRecentTransactions(accountId, 5);
+
+        if (messages.isEmpty()) {
+            notificationBox.getChildren().add(new Label("• Không có thông báo mới."));
+            return;
+        }
+
+        for (String msg : messages) {
+            Label label = new Label(msg);
+            label.setStyle("-fx-font-size: 14px; -fx-text-fill: #2E4053;");
+            notificationBox.getChildren().add(label);
+        }
     }
 
     

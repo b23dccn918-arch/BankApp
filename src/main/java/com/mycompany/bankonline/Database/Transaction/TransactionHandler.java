@@ -1,14 +1,20 @@
 package com.mycompany.bankonline.Database.Transaction;
 
 import com.mycompany.bankonline.Database.Connect;
+import com.mycompany.bankonline.Database.Account.AccountHandler;
+import com.mycompany.bankonline.Database.Payment.PaymentHandler;
+import com.mycompany.bankonline.Model.Bill;
 import com.mycompany.bankonline.Model.Transaction;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TransactionHandler {
+
+    private final AccountHandler accountHandler = new AccountHandler();
 
     public List<Transaction> getTransactionsByAccountId(int accountId) {
         List<Transaction> list = new ArrayList<>();
@@ -94,5 +100,65 @@ public class TransactionHandler {
         }
 
         return list;
+    }
+
+    public List<String> getRecentTransactions(int accountId, int limit) {
+        List<String> transactions = new ArrayList<>();
+
+        String sql = "SELECT " +
+                "type, amount, from_account_id, to_account_id,bill_id, created_at " +
+                "FROM transactions " +
+                "WHERE from_account_id = ? OR to_account_id = ? " +
+                "ORDER BY created_at DESC " +
+                "LIMIT ?";
+
+        try (Connection conn = Connect.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, accountId);
+            ps.setInt(2, accountId);
+            ps.setInt(3, limit);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String type = rs.getString("type");
+                double amount = rs.getDouble("amount");
+                int fromId = rs.getInt("from_account_id");
+                int toId = rs.getInt("to_account_id");
+                int billId = rs.getInt("bill_id");
+                Timestamp time = rs.getTimestamp("created_at");
+                String formatted = time.toLocalDateTime().format(
+                    DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")
+                );
+
+
+                String message;
+
+                if (type.equalsIgnoreCase("transfer") && fromId == accountId){
+                    String toAccountNumber = accountHandler.getAccountNumberByAccountId(toId);
+                    message = String.format("Bạn đã chuyển %.0f VND đến tài khoản %s -- %s", amount, toAccountNumber,formatted.toString());
+                }
+                    
+                else if (type.equalsIgnoreCase("transfer") && toId == accountId){
+                    String fromAccountNumber = accountHandler.getAccountNumberByAccountId(toId);
+                    message = String.format("Bạn vừa nhận được %.0f VND từ tài khoản #%s -- %s", amount, fromAccountNumber,formatted.toString());
+                }
+                else if (type.equalsIgnoreCase("deposit"))
+                    message = String.format("Nạp %.0f VND thành công -- %s.", amount,formatted.toString());
+                else if (type.equalsIgnoreCase("withdraw"))
+                    message = String.format("Rút %.0f VND thành công -- %s.", amount,formatted.toString());
+                else if (type.equalsIgnoreCase("payment")){
+                    Bill bill = PaymentHandler.getBillByBillId(billId);
+                    message = String.format("Thanh toán %.0f VND cho hoá đơn #%d loại hóa đơn: %s -- %s",amount,billId,bill.getBillType().get(),formatted.toString());
+                }
+                else
+                    message = String.format("Giao dịch %.0f VND (%s).", amount, type);
+
+                transactions.add(message);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return transactions;
     }
 }

@@ -16,7 +16,7 @@ import com.mycompany.bankonline.Model.Bill;
 public class PaymentHandler {
 
 
-    public static ObservableList<Bill> getBillsByAccountId(int accountId) {
+    public ObservableList<Bill> getBillsByAccountId(int accountId) {
         ObservableList<Bill> bills = FXCollections.observableArrayList();
 
         String sql = "SELECT * FROM payment_bills WHERE account_id = ?";
@@ -46,30 +46,8 @@ public class PaymentHandler {
         return bills;
     }
 
-    // Lấy danh sách bill_id đang chờ thanh toán
+    // Lấy danh sách bill_id chua thanh toán
     public static ObservableList<String> getUnpaidBillIds(int accountId) {
-        ObservableList<String> pendingIds = FXCollections.observableArrayList();
-
-        String sql = "SELECT bill_id FROM payment_bills WHERE account_id = ? AND status = 'unpaid'";
-
-        try (Connection conn = Connect.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, accountId);
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                pendingIds.add(String.valueOf(rs.getLong("bill_id")));
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return pendingIds;
-    }
-
-    public static ObservableList<String> getPaidBillIds(int accountId) {
         ObservableList<String> pendingIds = FXCollections.observableArrayList();
 
         String sql = "SELECT bill_id FROM payment_bills WHERE account_id = ? AND status = 'unpaid'";
@@ -145,11 +123,12 @@ public class PaymentHandler {
             billUpdateStmt.executeUpdate();
 
             //Ghi vào transactions
-            String insertTrans = "INSERT INTO transactions (from_account_id, type, amount, description, created_at) VALUES (?, 'payment', ?, ?, NOW())";
+            String insertTrans = "INSERT INTO transactions (from_account_id, bill_id, type, amount, description, created_at) VALUES (?, ?, 'payment', ?, ?, NOW())";
             PreparedStatement transStmt = conn.prepareStatement(insertTrans);
             transStmt.setInt(1, accountId);
-            transStmt.setDouble(2, amount);
-            transStmt.setString(3, "Thanh toán hoá đơn #" + billId);
+            transStmt.setLong(2, billId);
+            transStmt.setDouble(3, amount);
+            transStmt.setString(4, "Thanh toán hoá đơn #" + billId);
             transStmt.executeUpdate();
 
             conn.commit();
@@ -164,4 +143,63 @@ public class PaymentHandler {
         }
     }
 
+    public static Bill getBillByBillId(int billId){
+        String query = "SELECT * FROM payment_bills WHERE bill_id = ?";
+        try(Connection conn = Connect.getConnection()){
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, billId);
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                Bill bill = new Bill.Builder()
+                        .billId(rs.getLong("bill_id"))
+                        .billType(rs.getString("bill_type"))
+                        .amount(rs.getDouble("amount"))
+                        .status(rs.getString("status"))
+                        .dueDate(formatDate(rs.getTimestamp("due_date")))
+                        .createdAt(formatDate(rs.getTimestamp("created_at")))
+                        .build();
+                return bill;
+            }
+            
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static List<Bill> getBillsByStatus(int accountId, String status) {
+        List<Bill> bills = new ArrayList<>();
+        String query = "SELECT * FROM payment_bills WHERE account_id = ? AND status = ? ORDER BY created_at DESC";
+
+        try (Connection conn = Connect.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, accountId);
+            stmt.setString(2, status);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                Bill bill = new Bill.Builder()
+                        .billId(rs.getLong("bill_id"))
+                        .billType(rs.getString("bill_type"))
+                        .amount(rs.getDouble("amount"))
+                        .status(rs.getString("status"))
+                        .dueDate(formatDate(rs.getTimestamp("due_date")))
+                        .createdAt(formatDate(rs.getTimestamp("created_at")))
+                        .build();
+                bills.add(bill);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return bills;
+    }
+
+    private static String formatDate(Timestamp timestamp) {
+        if (timestamp == null) return "";
+        return timestamp.toLocalDateTime().toLocalDate().toString();
+    }
 }

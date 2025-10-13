@@ -19,6 +19,30 @@ public class Bill {
         this.createdAt = new SimpleStringProperty(createdAt);
     }
 
+    public StringProperty getBillId() {
+        return billId;
+    }
+
+    public StringProperty getBillType() {
+        return billType;
+    }
+
+    public DoubleProperty getAmount() {
+        return amount;
+    }
+
+    public StringProperty getStatus() {
+        return status;
+    }
+
+    public StringProperty getDueDate() {
+        return dueDate;
+    }
+
+    public StringProperty getCreatedAt() {
+        return createdAt;
+    }
+
     private Bill(Builder builder) {
         this.billId = new SimpleStringProperty(String.valueOf(builder.billId));
         this.billType = new SimpleStringProperty(builder.billType);
@@ -41,6 +65,10 @@ public class Bill {
         private String status;
         private String dueDate;
         private String createdAt;
+
+        public Builder(){
+            
+        }
 
         public Builder billId(long billId) {
             this.billId = billId;

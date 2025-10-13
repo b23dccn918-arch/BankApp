@@ -25,6 +25,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TableCell;
 import javafx.stage.Stage;
 
 public class PaymentController implements Initializable {
@@ -89,7 +90,7 @@ public class PaymentController implements Initializable {
 
         setupColumns();
         loadData();
-        // statusFilterCombo.setOnAction(event -> filterBillsByStatus());
+        statusFilterCombo.setOnAction(event -> filterBillsByStatus());
         payBillButton.setOnAction(e -> handlePayBill());
         refreshButton.setOnAction(e -> loadData());
 
@@ -160,34 +161,51 @@ public class PaymentController implements Initializable {
         billTypeCol.setCellValueFactory(data -> data.getValue().billTypeProperty());
         billAmountCol.setCellValueFactory(data -> data.getValue().amountProperty().asObject());
         billStatusCol.setCellValueFactory(data -> data.getValue().statusProperty());
+        billStatusCol.setCellFactory(column -> new TableCell<Bill, String>() {
+            @Override
+            protected void updateItem(String status, boolean empty) {
+                super.updateItem(status, empty);
+
+                if (empty || status == null) {
+                    setText(null);
+                    setStyle("");
+                    return;
+                }
+
+                String normalized = status.trim().toLowerCase();
+                boolean isPaid = normalized.equals("paid");
+
+                setText(isPaid ? "Đã thanh toán" : "Chưa thanh toán");
+                setStyle("-fx-text-fill: " + (isPaid ? "green;" : "orange;") + "-fx-font-weight: bold;");
+            }
+        });
         billDueCol.setCellValueFactory(data -> data.getValue().dueDateProperty());
         billCreatedCol.setCellValueFactory(data -> data.getValue().createdAtProperty());
     }
-
-
-    // private void filterBillsByStatus() {
-    //     String selected = statusFilterCombo.getValue();
-
-    //     List<Bill> filteredList;
-        
-    //     int accountId = Session.getInstance().getAccountId();
-
-    //     if (selected == null || selected.equals("Tất cả")) {
-    //         filteredList = paymentHandler.getBillsByAccountId(accountId);
-    //     } else if (selected.equals("Đã thanh toán")) {
-    //         filteredList = paymentHandler.getBillsByStatus(accountId, "paid");
-    //     } else {
-    //         filteredList = paymentHandler.getBillsByStatus(accountId, "pending");
-    //     }
-
-    //     billTable.setItems(FXCollections.observableArrayList(filteredList));
-    // }
 
     private void loadData() {
         int accountId = Session.getInstance().getAccountId();
         balanceField.setText(String.format("%,.0f VND", accountHandler.getBalanceByAccountId(accountId)));
         billTable.setItems(paymentHandler.getBillsByAccountId(accountId));
         billIdCombo.setItems(paymentHandler.getUnpaidBillIds(accountId));
+    }
+
+    private void filterBillsByStatus() {
+        String selected = statusFilterCombo.getValue();
+
+        List<Bill> filteredList;
+
+        int accountId = Session.getInstance().getAccountId();
+
+        if (selected == null || selected.equals("Tất cả")) {
+            filteredList = paymentHandler.getBillsByAccountId(accountId);
+        } else if (selected.equals("Đã thanh toán")) {
+            filteredList = paymentHandler.getBillsByStatus(accountId, "paid");
+        } else {
+            filteredList = paymentHandler.getBillsByStatus(accountId, "unpaid");
+        }
+
+        billTable.setItems(FXCollections.observableArrayList(filteredList));
     }
 
 

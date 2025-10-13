@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 
@@ -138,11 +140,16 @@ public class UserInfoController implements Initializable {
             citizenIdLabel.setText(user.getCitizenIdentifier());
             jobLabel.setText(user.getJob());
             genderLabel.setText(user.getGender());
-            dateBirthLabel.setText(formatDate(user.getDateBirth()));
+            dateBirthLabel.setText(formatLocalDate(user.getDateBirth().toLocalDate()));
             addressLabel.setText(user.getAddress());
             emailLabel.setText(user.getEmail());
             createdAtLabel.setText(formatDate(user.getCreatedAt()));
         }
+    }
+
+    private String formatLocalDate(LocalDate date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return date.format(formatter);
     }
 
     private String formatDate(java.sql.Timestamp timestamp) {

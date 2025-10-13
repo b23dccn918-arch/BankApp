@@ -16,7 +16,7 @@
     <!-- Nội dung chính -->
     <center>
         <VBox spacing="20" style="-fx-padding: 20;">
-            <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Hello, UserName!" />
+            <Label fx:id="helloField" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Xin chào, -------!" />
             
             <HBox spacing="20">
                 <VBox prefWidth="200" style="-fx-background-color: #D6EAF8; -fx-padding: 15; -fx-background-radius: 10;">
@@ -30,12 +30,9 @@
                 </VBox>
             </HBox>
 
-            <TitledPane expanded="true" text="Thông báo mới">
+            <TitledPane fx:id="notificationPane" expanded="true" text="Thông báo mới">
                 <content>
-                    <VBox spacing="5" style="-fx-padding: 10;">
-                        <Label text="• Bạn vừa nhận được 2,000,000 VND từ A." />
-                        <Label text="• Thanh toán hoá đơn điện thành công." />
-                    </VBox>
+                    <VBox fx:id="notificationBox" spacing="5" style="-fx-padding: 10;"/>
                 </content>
             </TitledPane>
         </VBox>

@@ -29,7 +29,7 @@ public class UserInfoHandler {
                     rs.getString("citizen_identifier"),
                     rs.getString("job"),
                     rs.getString("gender"),
-                    rs.getTimestamp("dateBirth"),
+                    rs.getDate("dateBirth"),
                     rs.getString("address"),
                     rs.getString("email"),
                     rs.getTimestamp("created_at")
