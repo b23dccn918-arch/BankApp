@@ -2,6 +2,7 @@ module com.mycompany.bankonline {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
+	requires javafx.base;
 
     
     opens com.mycompany.bankonline.Controller.SignIn to javafx.fxml;
