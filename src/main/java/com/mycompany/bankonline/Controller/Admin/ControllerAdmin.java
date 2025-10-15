@@ -9,8 +9,10 @@ import com.mycompany.bankonline.Model.Account;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -39,8 +41,13 @@ public class ControllerAdmin {
 //    private TableColumn<Account, String> colCreatedAt;
 
     
+    @FXML
+    private Button BanButton;
     
-    
+    @FXML
+    private void BanAccount(ActionEvent event) {
+        // code xử lý khi nhấn nút
+    }
 
     private void showAccountTable() {
         ObservableList<Account> list = AccountEntity.getAllAccounts();
