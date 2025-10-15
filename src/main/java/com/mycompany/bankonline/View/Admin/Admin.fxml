@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="763.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutY="110.0" prefHeight="502.0" prefWidth="177.0" />
+      <AnchorPane prefHeight="112.0" prefWidth="763.0" />
+      <AnchorPane layoutX="178.0" layoutY="110.0" prefHeight="502.0" prefWidth="586.0" />
+   </children>
+</AnchorPane>
