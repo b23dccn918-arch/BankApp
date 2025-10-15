@@ -14,6 +14,7 @@ module com.mycompany.bankonline {
     opens com.mycompany.bankonline.Controller.Withdraw to javafx.fxml;
     opens com.mycompany.bankonline.Controller.Payment to javafx.fxml;
     opens com.mycompany.bankonline.Controller.Deposit to javafx.fxml;
+    opens com.mycompany.bankonline.Controller.ForgotPassword to javafx.fxml;
     exports com.mycompany.bankonline.Controller.DashBoard;
     exports com.mycompany.bankonline.Controller.UserInfo;
     exports com.mycompany.bankonline.Controller.Transfer;
@@ -23,10 +24,10 @@ module com.mycompany.bankonline {
     exports com.mycompany.bankonline.Controller.Withdraw;
     exports com.mycompany.bankonline.Controller.Payment;
     exports com.mycompany.bankonline.Controller.Deposit;
+    exports com.mycompany.bankonline.Controller.ForgotPassword;
     exports com.mycompany.bankonline.MainApp;
     exports com.mycompany.bankonline.Model;
     opens com.mycompany.bankonline.Model to javafx.base;
-    
 
 
 }
