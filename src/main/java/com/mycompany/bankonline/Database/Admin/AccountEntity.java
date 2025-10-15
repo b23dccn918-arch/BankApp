@@ -5,15 +5,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 import com.mycompany.bankonline.Database.Connect;
 import com.mycompany.bankonline.Model.Account;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 public class AccountEntity {
-	public List<Account> getAccount(){
+	public static ObservableList<Account> getAllAccounts(){
 		Connection con = Connect.getConnection();
 		String sql = "select * from accounts";
-		List<Account> accounts = new ArrayList<Account>();
+		ObservableList<Account> accounts = FXCollections.observableArrayList();
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
@@ -26,12 +30,16 @@ public class AccountEntity {
 				long balance = (long)(rs.getInt("balance"));
 				String pinID = rs.getString("pin");
 				int status = rs.getInt("status");
-				
+				Account account = new Account(accountId, username, password, userId, 
+                        accountNumber, balance, pinID, status);
+				accounts.add(account);
 			}
+			ps.close();
+	        rs.close();
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-		return accounts;
+		return  accounts;
 		
 	}
 }

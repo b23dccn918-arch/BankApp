@@ -27,6 +27,7 @@ module com.mycompany.bankonline {
     exports com.mycompany.bankonline.MainApp;
     exports com.mycompany.bankonline.Model;
     opens com.mycompany.bankonline.Model to javafx.base;
+    opens com.mycompany.bankonline.Controller.Admin to javafx.fxml;
     
 
 
