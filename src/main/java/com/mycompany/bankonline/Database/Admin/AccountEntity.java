@@ -21,6 +21,12 @@ public class AccountEntity {
 				int accountId = rs.getInt("account_id");
 				String username = rs.getString("phone");
 				String password = rs.getString("password");
+				int userId = rs.getInt("user_id");
+				String accountNumber = rs.getString("account_number");
+				long balance = (long)(rs.getInt("balance"));
+				String pinID = rs.getString("pin");
+				int status = rs.getInt("status");
+				
 			}
 		}catch (Exception e){
 			e.printStackTrace();
