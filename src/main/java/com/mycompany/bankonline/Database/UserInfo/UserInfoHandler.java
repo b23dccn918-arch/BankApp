@@ -17,7 +17,7 @@ public class UserInfoHandler {
     public User getUserById(int userId) {
         String query = "SELECT * FROM users WHERE user_id = ?";
         try (Connection conn = Connect.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(query)) {
+            PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setInt(1, userId);
             ResultSet rs = stmt.executeQuery();
@@ -40,5 +40,21 @@ public class UserInfoHandler {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public boolean isEmailExists(String email) {
+        String query = "SELECT COUNT(*) FROM users WHERE email = ?";
+        try (Connection conn = Connect.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, email);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

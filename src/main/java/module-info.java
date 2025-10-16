@@ -3,9 +3,12 @@ module com.mycompany.bankonline {
     requires javafx.fxml;
     requires java.sql;
 	requires javafx.base;
+
 	requires javafx.graphics;
 
-    
+    requires jakarta.mail;
+
+    opens com.mycompany.bankonline to javafx.fxml;
     opens com.mycompany.bankonline.Controller.SignIn to javafx.fxml;
     opens com.mycompany.bankonline.MainApp to javafx.fxml;
     opens com.mycompany.bankonline.Controller.DashBoard to javafx.fxml;
@@ -16,6 +19,11 @@ module com.mycompany.bankonline {
     opens com.mycompany.bankonline.Controller.Withdraw to javafx.fxml;
     opens com.mycompany.bankonline.Controller.Payment to javafx.fxml;
     opens com.mycompany.bankonline.Controller.Deposit to javafx.fxml;
+    opens com.mycompany.bankonline.Controller.ForgotPassword to javafx.fxml;
+    opens com.mycompany.bankonline.Controller.ConfirmToken to javafx.fxml;
+    opens com.mycompany.bankonline.Controller.ResetPassword to javafx.fxml;
+    exports com.mycompany.bankonline.Controller.ConfirmToken;
+    exports com.mycompany.bankonline.Controller.ResetPassword;
     exports com.mycompany.bankonline.Controller.DashBoard;
     exports com.mycompany.bankonline.Controller.UserInfo;
     exports com.mycompany.bankonline.Controller.Transfer;
@@ -25,11 +33,12 @@ module com.mycompany.bankonline {
     exports com.mycompany.bankonline.Controller.Withdraw;
     exports com.mycompany.bankonline.Controller.Payment;
     exports com.mycompany.bankonline.Controller.Deposit;
+    exports com.mycompany.bankonline.Controller.ForgotPassword;
     exports com.mycompany.bankonline.MainApp;
     exports com.mycompany.bankonline.Model;
     opens com.mycompany.bankonline.Model to javafx.base;
+
     opens com.mycompany.bankonline.Controller.Admin to javafx.fxml;
     
-
 
 }
