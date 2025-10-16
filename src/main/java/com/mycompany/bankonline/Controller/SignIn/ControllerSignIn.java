@@ -36,6 +36,9 @@ public class ControllerSignIn {
 	private Hyperlink forgotPassword;
 
 	@FXML
+	private Hyperlink changePassword;
+
+	@FXML
 	private static Alert alert = new Alert(Alert.AlertType.INFORMATION);
 	
 	@FXML
@@ -47,6 +50,14 @@ public class ControllerSignIn {
 			Stage stage = (Stage) forgotPassword.getScene().getWindow();
 			try {
 				toForgotPassword.ForgotPassword(stage);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+		changePassword.setOnAction(event->{
+			Stage stage = (Stage) changePassword.getScene().getWindow();
+			try {
+				toChangePassword.ChangePassword(stage);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

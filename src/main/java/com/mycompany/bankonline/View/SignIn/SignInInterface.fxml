@@ -40,7 +40,7 @@
                     <PasswordField fx:id="Password" promptText="Enter password" styleClass="input-field"/>
 
                     <Hyperlink fx:id="forgotPassword" layoutX="260.0" layoutY="260.0" styleClass="forgot-password" text="Forgot password" />
-
+                    <Hyperlink fx:id="changePassword" styleClass="change-password" text="Change password" />
                     <Button fx:id="SignInButton" text="Sign In" onAction="#handleSignInButton" styleClass="btn-signin"/>
                     <Button fx:id="SignUpButton" text="Sign Up" onAction="#handleSignUpButton" styleClass="btn-signup"/>
 

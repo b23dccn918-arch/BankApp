@@ -7,6 +7,8 @@ import com.mycompany.bankonline.Database.ForgotPassword.ForgotPasswordHandler;
 import com.mycompany.bankonline.DisplayScene.toSignIn;
 import com.mycompany.bankonline.MainApp.Main;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,22 +19,52 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class ConfirmTokenController {
     @FXML private Label emailLabel;
     @FXML private TextField tokenField;
     @FXML private Label messageLabel;
-
+    @FXML
+    private Button confirmButton;
     @FXML
     private Button BackToLoginButton;
 
+    @FXML
+    private Label timerLabel;
+
     private String email;
-    private Connection conn;
     private ForgotPasswordHandler forgotPasswordHandler = new ForgotPasswordHandler();
 
     public void setEmail(String email) {
         this.email = email;
         emailLabel.setText("Email: " + email);
+    }
+    private int timeSeconds = 300; // 5 phút = 300 giây
+    private Timeline timeline;
+
+    @FXML
+    public void initialize() {
+        startTimer();
+    }
+
+    private void startTimer() {
+        timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
+            timeSeconds--;
+            int minutes = timeSeconds / 60;
+            int seconds = timeSeconds % 60;
+            timerLabel.setText(String.format("%02d:%02d", minutes, seconds));
+
+            // Hết thời gian
+            if (timeSeconds <= 0) {
+                timeline.stop();
+                timerLabel.setText("Mã đã hết hạn!");
+                confirmButton.setDisable(true);
+                tokenField.setDisable(true);
+            }
+        }));
+        timeline.setCycleCount(timeSeconds);
+        timeline.play();
     }
 
     @FXML

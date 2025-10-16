@@ -40,9 +40,11 @@
                <Label fx:id="emailLabel"
                       text="Email: user@example.com"
                       style="-fx-text-fill: #555; -fx-font-style: italic;" />
-
+                      
+                
                <Label text="Nhập mã xác nhận được gửi tới email:"
                       styleClass="label-text" />
+                <Label fx:id="timerLabel" text="05:00" style="-fx-font-size: 14px; -fx-text-fill: #0c0909ff;" />
 
                <TextField fx:id="tokenField" promptText="Nhập mã 6 chữ số"
                           styleClass="input-field" />

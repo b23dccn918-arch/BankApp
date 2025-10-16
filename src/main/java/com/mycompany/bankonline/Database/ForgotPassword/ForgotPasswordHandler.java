@@ -62,7 +62,7 @@ public class ForgotPasswordHandler {
 
             int accountId = rs.getInt("account_id");
             String token = String.format("%06d", new Random().nextInt(999999)); // mã 6 chữ số
-            LocalDateTime expiresAt = LocalDateTime.now().plusMinutes(15);
+            LocalDateTime expiresAt = LocalDateTime.now().plusMinutes(5);
 
             String insert = "INSERT INTO password_resets(account_id, token, expires_at, used) VALUES (?, ?, ?, FALSE)";
             PreparedStatement ins = conn.prepareStatement(insert);
