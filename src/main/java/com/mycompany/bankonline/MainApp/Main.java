@@ -20,7 +20,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         // Mặc định khi chạy app thì mở SignIn
-        toAdminDashBoard.DashBoard(primaryStage);
+        toSignIn.SignIn(primaryStage);
     }
 
     // ⚡ Để ngoài start()
