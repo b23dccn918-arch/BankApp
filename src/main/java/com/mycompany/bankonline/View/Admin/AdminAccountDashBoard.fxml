@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="668.0" prefWidth="867.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.bankonline.Controller.Admin.ControllerAdminAccount">
+
+    <children>
+        <!-- Sidebar bên trái -->
+        <AnchorPane layoutY="110.0" prefHeight="581.0" prefWidth="214.0" style="-fx-background-color: #34495E;">
+         <children>
+            <VBox alignment="TOP_CENTER" layoutX="7.0" layoutY="61.0" spacing="15" />
+            <Button fx:id="AccountButton" layoutX="22.0" layoutY="61.0" prefHeight="45.0" prefWidth="180.0" style="-fx-background-color: transparent; -fx-text-fill: white;" styleClass="sidebar-button" text="👤   Account">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+         </children></AnchorPane>
+
+                    <!-- Header -->
+        <AnchorPane layoutY="-5.0" prefHeight="120.0" prefWidth="941.0" style="-fx-background-color: #2E86C1;">
+         <children>
+            <Button fx:id="LogoutButton" layoutX="776.0" layoutY="42.0" onAction="#backToSignIn" style="-fx-background-color: #E74C3C; -fx-text-fill: white;" text=" Logout">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+            <Label layoutX="56.0" layoutY="38.0" text="Bank" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+
+        <!-- Khu hiển thị bên phải -->
+        <AnchorPane layoutX="210.0" layoutY="110.0" prefHeight="582.0" prefWidth="731.0">
+            <children>
+                <TableView fx:id="tableAccount" layoutX="33.0" layoutY="30.0" prefHeight="550.0" prefWidth="497.0">
+                    <columns>
+                        <TableColumn fx:id="colAccountId" prefWidth="80.0" text="Account ID" />
+                        <TableColumn fx:id="colAccountNumber" prefWidth="120.0" text="Account Number" />
+                        <TableColumn fx:id="colUserId" prefWidth="80.0" text="User ID" />
+                        <TableColumn fx:id="colPhone" prefWidth="100.0" text="Phone" />
+                        <TableColumn fx:id="colPassword" prefWidth="100.0" text="Password" />
+                        <TableColumn fx:id="colBalance" prefWidth="100.0" text="Balance" />
+                        <TableColumn fx:id="colPin" prefWidth="76.800048828125" text="PIN" />
+                        <TableColumn fx:id="colStatus" prefWidth="83.199951171875" text="Status" />
+                        <TableColumn fx:id="colCreatedAt" prefWidth="120.0" text="Created At" />
+                    </columns>
+                </TableView>
+            <Button fx:id="BanButton" layoutX="603.0" layoutY="134.0" mnemonicParsing="false" onAction="#banAccount" prefHeight="26.0" prefWidth="62.0" text="Ban" />
+            <TextField fx:id="AccountID" layoutX="560.0" layoutY="77.0" promptText="Account ID" />
+            <Button fx:id="UnBanButton" layoutX="603.0" layoutY="189.0" mnemonicParsing="false" onAction="#unBanAccount" prefHeight="26.0" prefWidth="62.0" text="Un Ban" />
+            <Button fx:id="DeleteButton" layoutX="604.0" layoutY="242.0" mnemonicParsing="false" onAction="#deleteAccount" prefHeight="26.0" prefWidth="62.0" text="Delete" />
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

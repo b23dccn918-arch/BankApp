@@ -56,7 +56,7 @@ public class ControllerSignUp  {
 	    Gender.getItems().addAll("Male", "Female");
 	}
 
-	public void BackToSignIn(ActionEvent event) {
+	public void backToSignIn(ActionEvent event) {
 		Button clickedButton = (Button) event.getSource();
 		Scene currentScene = clickedButton.getScene();
 		Stage currentStage = (Stage) currentScene.getWindow();

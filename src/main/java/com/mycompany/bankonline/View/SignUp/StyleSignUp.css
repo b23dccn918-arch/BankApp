@@ -1,20 +1,72 @@
+/* ===== BÊN TRÁI ===== */
 .left-signup-container {
-	-fx-background-color: #356FCC;
+    -fx-background-color: linear-gradient(to bottom right, #002f5f, #0052a3);
 }
 
-.NameBank {
-	-fx-text-fill: #FFFFFF;
-	-fx-text-align: center;
-	-fx-font-weight: bold;
+.bank-name {
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Segoe UI Semibold";
 }
 
+/* ===== BÊN PHẢI ===== */
 .right-signup-container {
-	-fx-background-color: #8FCAF6;
+    -fx-background-color: #f8faff;
 }
 
+/* Tiêu đề */
+.title-label {
+    -fx-font-size: 22px;
+    -fx-text-fill: #1e1e1e;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-padding: 0 0 10 0;
+}
 
-.forgot-password {
-    -fx-text-fill: red;       /* màu chữ */
-    -fx-underline: true;      /* gạch dưới như link */
-    -fx-cursor: hand;         /* khi rê chuột thành bàn tay */
+/* Ô nhập */
+.input-field {
+    -fx-pref-width: 220px;
+    -fx-pref-height: 34px;
+    -fx-background-radius: 6px;
+    -fx-border-radius: 6px;
+    -fx-border-color: #cdd3d9;
+    -fx-font-size: 13px;
+    -fx-font-family: "Segoe UI";
+    -fx-padding: 4px 8px;
+}
+
+.input-field:focused {
+    -fx-border-color: #0066cc;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,102,204,0.25), 5, 0, 0, 0);
+}
+
+/* ===== Nút Back ===== */
+.btn-back {
+    -fx-background-color: white;
+    -fx-text-fill: #0078ff;
+    -fx-border-color: #0078ff;
+    -fx-border-radius: 8px;
+    -fx-font-size: 14px;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-pref-width: 100px;
+    -fx-cursor: hand;
+}
+
+.btn-back:hover {
+    -fx-background-color: #e6f0ff;
+}
+
+/* ===== Nút Next ===== */
+.btn-next {
+    -fx-background-color: #0078ff;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-background-radius: 8px;
+    -fx-pref-width: 100px;
+    -fx-cursor: hand;
+}
+
+.btn-next:hover {
+    -fx-background-color: #005fcc;
 }

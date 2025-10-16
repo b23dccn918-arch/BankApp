@@ -11,8 +11,11 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import com.mycompany.bankonline.DisplayScene.toAdminDashBoard;
+
+import com.mycompany.bankonline.DisplayScene.toDashBoard;
 import com.mycompany.bankonline.DisplayScene.toSignIn;
 import com.mycompany.bankonline.DisplayScene.toSignUp;
+import com.mycompany.bankonline.DisplayScene.toAdminDashBoard;
 
 public class Main extends Application {
 
@@ -20,7 +23,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         // Mặc định khi chạy app thì mở SignIn
-        toAdminDashBoard.DashBoard(primaryStage);
+        toSignIn.SignIn(primaryStage);
     }
 
     // ⚡ Để ngoài start()

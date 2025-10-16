@@ -3,6 +3,7 @@ package com.mycompany.bankonline.Database.Admin;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -30,8 +31,9 @@ public class AccountEntity {
 				long balance = (long)(rs.getInt("balance"));
 				String pinID = rs.getString("pin");
 				int status = rs.getInt("status");
+				Timestamp createdAt = rs.getTimestamp("created_at");
 				Account account = new Account(accountId, username, password, userId, 
-                        accountNumber, balance, pinID, status);
+                        accountNumber, balance, pinID, status, createdAt);
 				accounts.add(account);
 			}
 			ps.close();

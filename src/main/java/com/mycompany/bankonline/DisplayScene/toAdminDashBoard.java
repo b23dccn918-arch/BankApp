@@ -10,10 +10,19 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class toAdminDashBoard {
-    public static void DashBoard(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/Admin/Admin.fxml"));
+	public static void DashBoard(Stage stage) throws IOException {
+        Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/Admin/AdminAccountDashBoard.fxml"));
         Scene scene = new Scene(root);
-//        scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/DashBoard/dashboard.css").toExternalForm());
+        scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/Admin/AdminDashBoard.css").toExternalForm());
+        stage.setTitle("DashBoard Scene");
+        stage.setScene(scene);
+        stage.show();
+    }
+	
+	public static void SignIn(Stage stage) throws IOException {
+        Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/Admin/AdminSignIn.fxml"));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/SignIn/StyleSignIn.css").toExternalForm());
         stage.setTitle("DashBoard Scene");
         stage.setScene(scene);
         stage.show();

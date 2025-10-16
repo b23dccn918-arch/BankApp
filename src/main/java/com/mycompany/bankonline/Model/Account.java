@@ -1,5 +1,6 @@
 package com.mycompany.bankonline.Model;
 
+import java.sql.Timestamp;
 
 public class Account {
 	private int accountId;
@@ -10,13 +11,14 @@ public class Account {
     private long balance;
     private String pinID;
     private int status;
+    private Timestamp createdAt;
     
     public Account() {
     	
     }
 
 	public Account(int accountId, String username, String password, int userId, String accountNumber, long balance,
-			String pinID, int status) {
+			String pinID, int status, Timestamp createdAt) {
 		super();
 		this.accountId = accountId;
 		this.username = username;
@@ -26,7 +28,10 @@ public class Account {
 		this.balance = balance;
 		this.pinID = pinID;
 		this.status = status;
+		this.createdAt = createdAt;
 	}
+
+
 
 	public int getAccountId() {
 		return accountId;
@@ -92,7 +97,9 @@ public class Account {
 		this.status = status;
 	}
     
-  
+	public Timestamp getCreatedAt() {
+		return createdAt;
+	}
     
 }
 
