@@ -1,150 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane id="AnchorPane" prefHeight="600" prefWidth="800" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.bankonline.Controller.Payment.PaymentController">
+<BorderPane prefHeight="600" prefWidth="900"
+            xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.mycompany.bankonline.Controller.Payment.PaymentController"
+            styleClass="payment-root">
 
-    <!-- Nội dung chính -->
-    <center>
-        <AnchorPane prefHeight="600" prefWidth="800" style="-fx-padding: 20;">
+    <!-- 🔷 HEADER -->
+    <top>
+        <AnchorPane prefHeight="70" styleClass="header-container">
             <children>
-                <VBox layoutX="10" layoutY="10" spacing="20">
-                    
-                    <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2E86C1;" text="Thanh toán hoá đơn" />
-                    <!-- Tiêu đề -->
-                    
-                    <HBox spacing="20">
-                        <VBox prefWidth="200" style="-fx-background-color: #D6EAF8; -fx-padding: 15; -fx-background-radius: 10;">
-                            <Label style="-fx-font-weight: bold;" text="Số dư hiện tại" />
-                            <Label fx:id="balanceField" style="-fx-font-size: 18px; -fx-text-fill: #2E86C1;" text="15,000,000 VND" />
-                        </VBox>
+                <Label layoutX="30" layoutY="20" text="🏦 BASOUR BANK" styleClass="header-title"/>
+                <Label layoutX="400" layoutY="25" text="Payment" styleClass="header-subtitle"/>
+                <Button fx:id="logoutButton" layoutX="750" layoutY="22" text="Logout" styleClass="btn-logout"/>
+            </children>
+        </AnchorPane>
+    </top>
 
-                    </HBox>
+    <!-- 🧭 SIDEBAR -->
+    <left>
+        <AnchorPane prefHeight="600" prefWidth="200"
+                    styleClass="sidebar-container"
+                    BorderPane.alignment="CENTER">
+            <VBox spacing="15" alignment="TOP_CENTER"
+                  AnchorPane.topAnchor="30"
+                  AnchorPane.leftAnchor="0"
+                  AnchorPane.rightAnchor="0">
 
-                    <!-- Form nhập thông tin -->
-                    <HBox spacing="15">
-                    <VBox spacing="10">
-                        <Label text="Mã hoá đơn:" />
-                    </VBox>
-                    <VBox spacing="10">
-                        <ComboBox fx:id="billIdCombo" prefWidth="200" promptText="Chọn mã hoá đơn" />
-                    </VBox>
+                <Button fx:id="homeButton" text="🏠  Home" prefWidth="180" styleClass="sidebar-button"/>
+                <Button fx:id="accountButton" text="👤  User Info" prefWidth="180" styleClass="sidebar-button"/>
+                <Button fx:id="transferButton" text="💸  Transfer" prefWidth="180" styleClass="sidebar-button"/>
+                <Button fx:id="withdrawButton" text="💰  Withdraw" prefWidth="180" styleClass="sidebar-button"/>
+                <Button fx:id="depositButton" text="💵  Deposit" prefWidth="180" styleClass="sidebar-button"/>
+                <Button fx:id="paymentButton" text="🧾  Payment" prefWidth="180" styleClass="sidebar-button"/>
+                <Button fx:id="historyButton" text="📜  History" prefWidth="180" styleClass="sidebar-button"/>
+            </VBox>
+        </AnchorPane>
+    </left>
+
+    <!-- 💳 MAIN CONTENT -->
+    <center>
+        <VBox spacing="25" styleClass="main-content" alignment="TOP_CENTER">
+
+            <Label text="THANH TOÁN HÓA ĐƠN" styleClass="page-title"/>
+
+            <!-- Số dư -->
+            <HBox spacing="20" alignment="CENTER">
+                <VBox styleClass="info-box">
+                    <Label text="Số dư hiện tại" styleClass="info-title"/>
+                    <Label fx:id="balanceField" text="15,000,000 VND" styleClass="info-value"/>
+                </VBox>
+            </HBox>
+
+            <!-- Form -->
+            <VBox spacing="15" alignment="CENTER">
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Mã hóa đơn:" styleClass="form-label"/>
+                    <ComboBox fx:id="billIdCombo" promptText="Chọn mã hóa đơn"
+                              prefWidth="200" styleClass="form-field"/>
                 </HBox>
 
                 <HBox spacing="10" alignment="CENTER_LEFT">
-                    <VBox spacing="10">
-                        <Label text="Lọc theo trạng thái:" />
-                    </VBox>
-                    <VBox spacing="10">
-                        <ComboBox fx:id="statusFilterCombo" prefWidth="200" promptText="Tất cả" />
-                    </VBox>
+                    <Label text="Lọc theo trạng thái:" styleClass="form-label"/>
+                    <ComboBox fx:id="statusFilterCombo" promptText="Tất cả"
+                              prefWidth="200" styleClass="form-field"/>
                 </HBox>
 
-
-                <HBox spacing="15">
-                    <Button fx:id="payBillButton" text="Thanh toán hoá đơn"
-                            style="-fx-background-color: #27AE60; -fx-text-fill: white; -fx-font-weight: bold;" />
-                    <Button fx:id="refreshButton" text="Làm mới"
-                            style="-fx-background-color: #95A5A6; -fx-text-fill: white; -fx-font-weight: bold;" />
+                <HBox spacing="15" alignment="CENTER">
+                    <Button fx:id="payBillButton" text="Thanh toán hóa đơn" styleClass="confirm-button"/>
+                    <Button fx:id="refreshButton" text="Làm mới" styleClass="refresh-button"/>
                 </HBox>
 
-                <TableView fx:id="billTable" prefHeight="350">
+                <!-- Bảng -->
+                <TableView fx:id="billTable" prefHeight="320" styleClass="bill-table">
                     <columns>
-                        <TableColumn fx:id="billIdCol" text="Mã hoá đơn" prefWidth="100"/>
-                        <TableColumn fx:id="billTypeCol" text="Loại hoá đơn" prefWidth="150"/>
+                        <TableColumn fx:id="billIdCol" text="Mã hóa đơn" prefWidth="100"/>
+                        <TableColumn fx:id="billTypeCol" text="Loại hóa đơn" prefWidth="150"/>
                         <TableColumn fx:id="billAmountCol" text="Số tiền (VND)" prefWidth="120"/>
                         <TableColumn fx:id="billStatusCol" text="Trạng thái" prefWidth="100"/>
                         <TableColumn fx:id="billDueCol" text="Hạn thanh toán" prefWidth="150"/>
                         <TableColumn fx:id="billCreatedCol" text="Ngày tạo" prefWidth="150"/>
                     </columns>
                 </TableView>
-                </VBox>
-            </children>
-        </AnchorPane>
-    </center>
-
-
-   <top>
-      <AnchorPane prefHeight="26.0" prefWidth="1021.0" style="-fx-background-color: #2E86C1; -fx-padding: 15;" BorderPane.alignment="CENTER">
-         <children>
-            <Label layoutX="36.0" layoutY="29.0" text="Bank" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="26.0" />
-               </font>
-            </Label>
-            <Button fx:id="logoutButton" layoutX="894.0" layoutY="33.0" style="-fx-background-color: #E74C3C; -fx-text-fill: white;" text=" Logout">
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font></Button>
-         </children>
-      </AnchorPane>
-   </top>
-   <left>
-    <AnchorPane prefHeight="600.0" prefWidth="200.0" style="-fx-background-color: #34495E;" BorderPane.alignment="CENTER">
-
-        <VBox alignment="TOP_CENTER" spacing="15" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="20">
-
-            <!-- Home -->
-            <Button fx:id="homeButton" prefHeight="45.0" prefWidth="180.0" style="-fx-background-color: transparent; -fx-text-fill: white;" styleClass="sidebar-button" text="🏠   Home">
-                <font>
-                    <Font name="System Bold" size="16.0" />
-                </font>
-            </Button>
-
-            <!-- Account -->
-            <Button fx:id="accountButton" prefHeight="45.0" prefWidth="180.0" style="-fx-background-color: transparent; -fx-text-fill: white;" styleClass="sidebar-button" text="👤   Account">
-                <font>
-                    <Font name="System Bold" size="16.0" />
-                </font>
-            </Button>
-
-            <!-- Transfer -->
-            <Button fx:id="transferButton" prefHeight="45.0" prefWidth="180.0" style="-fx-background-color: transparent; -fx-text-fill: white;" styleClass="sidebar-button" text="💸   Transfer">
-                <font>
-                    <Font name="System Bold" size="16.0" />
-                </font>
-            </Button>
-
-            <!-- Withdraw -->
-            <Button fx:id="withdrawButton" prefHeight="45.0" prefWidth="180.0" style="-fx-background-color: transparent; -fx-text-fill: white;" styleClass="sidebar-button" text="💰   Withdraw">
-                <font>
-                    <Font name="System Bold" size="16.0" />
-                </font>
-            </Button>
-
-            <!-- Deposit -->
-            <Button fx:id="depositButton" prefHeight="45.0" prefWidth="180.0" style="-fx-background-color: transparent; -fx-text-fill: white;" styleClass="sidebar-button" text="💵   Deposit">
-                <font>
-                    <Font name="System Bold" size="16.0" />
-                </font>
-            </Button>
-
-            <!-- Payment -->
-            <Button fx:id="paymentButton" prefHeight="45.0" prefWidth="180.0" style="-fx-background-color: transparent; -fx-text-fill: white;" styleClass="sidebar-button" text="🧾   Payment">
-                <font>
-                    <Font name="System Bold" size="16.0" />
-                </font>
-            </Button>
-
-            <!-- History -->
-            <Button fx:id="historyButton" prefHeight="45.0" prefWidth="180.0" style="-fx-background-color: transparent; -fx-text-fill: white;" styleClass="sidebar-button" text="📜   History">
-                <font>
-                    <Font name="System Bold" size="16.0" />
-                </font>
-            </Button>
-
+            </VBox>
         </VBox>
-    </AnchorPane>
-</left>
-
-    <!-- <stylesheets>
-        <URL value="@DashBoard.css" />
-    </stylesheets> -->
+    </center>
 </BorderPane>
