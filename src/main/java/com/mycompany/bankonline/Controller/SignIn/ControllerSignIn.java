@@ -31,6 +31,13 @@ public class ControllerSignIn {
     private Button SignInButton;
 	@FXML
 	private Button SignUpButton;
+
+	@FXML
+	private Hyperlink forgotPassword;
+
+	@FXML
+	private Hyperlink changePassword;
+
 	@FXML
 	private static Alert alert = new Alert(Alert.AlertType.INFORMATION);
 	
@@ -39,6 +46,23 @@ public class ControllerSignIn {
 	
 	@FXML
     public void initialize() {
+		forgotPassword.setOnAction(event->{
+			Stage stage = (Stage) forgotPassword.getScene().getWindow();
+			try {
+				toForgotPassword.ForgotPassword(stage);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+		changePassword.setOnAction(event->{
+			Stage stage = (Stage) changePassword.getScene().getWindow();
+			try {
+				toChangePassword.ChangePassword(stage);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+
         SignInButton.disableProperty().bind(
                 Username.textProperty().isEmpty()
                         .or(Password.textProperty().isEmpty())

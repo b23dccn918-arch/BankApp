@@ -87,4 +87,53 @@
 
 .admin-link:hover {
     -fx-text-fill: #0078ff;
+
 }
+
+
+/* 🔹 Link "Change password" */
+.change-password {
+    -fx-text-fill: #007bff;          /* Màu xanh dương nhẹ */
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-underline: false;            /* Ẩn gạch chân mặc định */
+    -fx-cursor: hand;
+    -fx-padding: 5 0 0 0;
+}
+
+/* 🔹 Khi hover chuột vào */
+.change-password:hover {
+    -fx-text-fill: #0056b3;          /* Đậm hơn khi hover */
+    -fx-underline: true;             /* Hiện gạch chân khi di chuột */
+}
+
+/* 🔹 Khi nhấn giữ (pressed) */
+.change-password:pressed {
+    -fx-text-fill: #003f7f;          /* Màu tối hơn khi click */
+}
+
+
+
+
+/* 🔹 Link "Change password" */
+.forgot-password {
+    -fx-text-fill: #007bff;          /* Màu xanh dương nhẹ */
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-underline: false;            /* Ẩn gạch chân mặc định */
+    -fx-cursor: hand;
+    -fx-padding: 5 0 0 0;
+}
+
+/* 🔹 Khi hover chuột vào */
+.forgot-password:hover {
+    -fx-text-fill: #0056b3;          /* Đậm hơn khi hover */
+    -fx-underline: true;             /* Hiện gạch chân khi di chuột */
+}
+
+/* 🔹 Khi nhấn giữ (pressed) */
+.forgot-password:pressed {
+    -fx-text-fill: #003f7f;          /* Màu tối hơn khi click */
+}
+
+
