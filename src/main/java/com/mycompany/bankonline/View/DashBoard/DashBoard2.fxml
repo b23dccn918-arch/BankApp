@@ -1,135 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 
-<BorderPane id="AnchorPane" prefHeight="600" prefWidth="800" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.bankonline.Controller.DashBoard.DashBoardController">
+<BorderPane prefWidth="800" prefHeight="600"
+            xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.mycompany.bankonline.Controller.DashBoard.DashBoardController"
+            styleClass="dashboard-root">
+
+    <!-- Sidebar trái -->
+    <left>
+        <VBox spacing="15" styleClass="sidebar-container" prefWidth="200" alignment="TOP_CENTER">
+            <Label text="BASOUR BANK" styleClass="sidebar-logo"/>
+            <Button fx:id="homeButton" text="🏠   Home" styleClass="sidebar-button"/>
+            <Button fx:id="accountButton" text="👤   Account" styleClass="sidebar-button"/>
+            <Button fx:id="transferButton" text="💸   Transfer" styleClass="sidebar-button"/>
+            <Button fx:id="withdrawButton" text="💰   Withdraw" styleClass="sidebar-button"/>
+            <Button fx:id="depositButton" text="💵   Deposit" styleClass="sidebar-button"/>
+            <Button fx:id="paymentButton" text="🧾   Payment" styleClass="sidebar-button"/>
+            <Button fx:id="historyButton" text="📜   History" styleClass="sidebar-button"/>
+        </VBox>
+    </left>
+
+    <!-- Header -->
+    <top>
+        <HBox styleClass="header-container" spacing="10" alignment="CENTER_RIGHT" prefHeight="60">
+            <Label fx:id="helloField" text="Xin chào, -------!" styleClass="header-greeting"/>
+            <Button fx:id="logoutButton" text="Logout" styleClass="btn-logout"/>
+        </HBox>
+    </top>
 
     <!-- Nội dung chính -->
     <center>
-        <VBox spacing="20" style="-fx-padding: 20;">
-            <Label fx:id="helloField" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2E86C1;" text="Xin chào, -------!" />
-            
+        <VBox spacing="20" styleClass="main-content" alignment="TOP_CENTER">
+
             <HBox spacing="20">
-                <VBox prefWidth="200" style="-fx-background-color: #D6EAF8; -fx-padding: 15; -fx-background-radius: 10;">
-                    <Label style="-fx-font-weight: bold;" text="Số dư hiện tại" />
-                    <Label fx:id="balanceField" style="-fx-font-size: 18px; -fx-text-fill: #2E86C1;" text="15,000,000 VND" />
+                <VBox styleClass="info-box">
+                    <Label text="Số dư hiện tại" styleClass="info-title"/>
+                    <Label fx:id="balanceField" text="15,000,000 VND" styleClass="info-value"/>
                 </VBox>
-                
-                <VBox prefWidth="200" style="-fx-background-color: #FADBD8; -fx-padding: 15; -fx-background-radius: 10;">
-                    <Label style="-fx-font-weight: bold;" text="Số tài khoản" />
-                    <Label fx:id="accountNumberField" style="-fx-font-size: 18px; -fx-text-fill: #2bb6c0ff;" text="8888.3636.8888 stk trong dtb" />
+
+                <VBox styleClass="info-box">
+                    <Label text="Số tài khoản" styleClass="info-title"/>
+                    <Label fx:id="accountNumberField" text="8888.3636.8888" styleClass="info-value"/>
                 </VBox>
             </HBox>
 
-            <TitledPane fx:id="notificationPane" expanded="true" text="Thông báo mới">
+            <TitledPane fx:id="notificationPane" expanded="true" text="Thông báo mới" styleClass="notification-pane">
                 <content>
-                    <VBox fx:id="notificationBox" spacing="5" style="-fx-padding: 10;"/>
+                    <VBox fx:id="notificationBox" spacing="5" styleClass="notification-box"/>
                 </content>
             </TitledPane>
+
         </VBox>
     </center>
-   <top>
-      <AnchorPane prefHeight="26.0" prefWidth="1021.0" style="-fx-background-color: #2E86C1; -fx-padding: 15;" BorderPane.alignment="CENTER">
-         <children>
-            <Label layoutX="36.0" layoutY="29.0" text="Bank" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="26.0" />
-               </font>
-            </Label>
-            <Button fx:id="logoutButton" layoutX="682.0" layoutY="35.0" style="-fx-background-color: #E74C3C; -fx-text-fill: white;" text=" Logout">
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font></Button>
-         </children>
-      </AnchorPane>
-   </top>
-   <left>
-    <AnchorPane prefHeight="600.0" prefWidth="200.0"
-                style="-fx-background-color: #34495E;"
-                BorderPane.alignment="CENTER">
 
-        <VBox spacing="15" alignment="TOP_CENTER"
-              AnchorPane.topAnchor="20"
-              AnchorPane.leftAnchor="0"
-              AnchorPane.rightAnchor="0">
-
-            <!-- Home -->
-            <Button fx:id="homeButton" prefHeight="45.0" prefWidth="180.0"
-                    style="-fx-background-color: transparent; -fx-text-fill: white;"
-                    styleClass="sidebar-button" text="🏠   Home">
-                <font>
-                    <Font name="System Bold" size="16.0" />
-                </font>
-            </Button>
-
-            <!-- Account -->
-            <Button fx:id="accountButton" prefHeight="45.0" prefWidth="180.0"
-                    style="-fx-background-color: transparent; -fx-text-fill: white;"
-                    styleClass="sidebar-button" text="👤   Account">
-                <font>
-                    <Font name="System Bold" size="16.0" />
-                </font>
-            </Button>
-
-            <!-- Transfer -->
-            <Button fx:id="transferButton" prefHeight="45.0" prefWidth="180.0"
-                    style="-fx-background-color: transparent; -fx-text-fill: white;"
-                    styleClass="sidebar-button" text="💸   Transfer">
-                <font>
-                    <Font name="System Bold" size="16.0" />
-                </font>
-            </Button>
-
-            <!-- Withdraw -->
-            <Button fx:id="withdrawButton" prefHeight="45.0" prefWidth="180.0"
-                    style="-fx-background-color: transparent; -fx-text-fill: white;"
-                    styleClass="sidebar-button" text="💰   Withdraw">
-                <font>
-                    <Font name="System Bold" size="16.0" />
-                </font>
-            </Button>
-
-            <!-- Deposit -->
-            <Button fx:id="depositButton" prefHeight="45.0" prefWidth="180.0"
-                    style="-fx-background-color: transparent; -fx-text-fill: white;"
-                    styleClass="sidebar-button" text="💵   Deposit">
-                <font>
-                    <Font name="System Bold" size="16.0" />
-                </font>
-            </Button>
-
-            <!-- Payment -->
-            <Button fx:id="paymentButton" prefHeight="45.0" prefWidth="180.0"
-                    style="-fx-background-color: transparent; -fx-text-fill: white;"
-                    styleClass="sidebar-button" text="🧾   Payment">
-                <font>
-                    <Font name="System Bold" size="16.0" />
-                </font>
-            </Button>
-
-            <!-- History -->
-            <Button fx:id="historyButton" prefHeight="45.0" prefWidth="180.0"
-                    style="-fx-background-color: transparent; -fx-text-fill: white;"
-                    styleClass="sidebar-button" text="📜   History">
-                <font>
-                    <Font name="System Bold" size="16.0" />
-                </font>
-            </Button>
-
-        </VBox>
-    </AnchorPane>
-</left>
-
-    <!-- <stylesheets>
-        <URL value="@DashBoard.css" />
-    </stylesheets> -->
 </BorderPane>
