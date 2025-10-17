@@ -1,0 +1,116 @@
+/* Sidebar trái */
+.sidebar {
+    -fx-background-color: linear-gradient(to bottom right, #1a1a1a, #8B0000);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 8, 0, 0, 3);
+}
+
+/* Sidebar button */
+.sidebar-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #f8f8f8;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-cursor: hand;
+    -fx-padding: 8 16;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-transition: 0.25s;
+}
+
+.sidebar-button:hover {
+    -fx-background-color: linear-gradient(to right, #B22222, #DC143C);
+    -fx-effect: dropshadow(gaussian, rgba(255,50,50,0.6), 10, 0, 0, 4);
+    -fx-scale-x: 1.07;
+    -fx-scale-y: 1.07;
+}
+
+/* Header */
+.header {
+    -fx-background-color: linear-gradient(to right, #8B0000, #1a1a1a);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0, 0, 4);
+}
+
+.header-title {
+    -fx-text-fill: #fff;
+    -fx-font-size: 26px;
+    -fx-font-family: "Segoe UI Semibold";
+}
+
+/* Logout button */
+.logout-btn {
+    -fx-background-color: #c92a2a;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+
+.logout-btn:hover {
+    -fx-background-color: #a91e1e;
+}
+
+/* Main content */
+.main-content {
+    -fx-background-color: #f9f9f9;
+}
+
+/* Bảng dữ liệu */
+.table-style {
+    -fx-border-color: #8B0000;
+    -fx-border-width: 2;
+    -fx-background-color: white;
+    -fx-table-cell-border-color: #ccc;
+}
+
+.table-style .column-header-background {
+    -fx-background-color: linear-gradient(to right, #8B0000, #b52b2b);
+}
+
+.table-style .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+/* Ô nhập ID */
+.input-id {
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-border-color: #8B0000;
+    -fx-font-size: 13px;
+    -fx-padding: 4 8;
+}
+
+/* Nút hành động */
+.action-btn {
+    -fx-pref-width: 80px;
+    -fx-pref-height: 28px;
+    -fx-font-size: 13px;
+    -fx-font-family: "Segoe UI";
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+    -fx-transition: 0.25s;
+}
+
+.red-btn {
+    -fx-background-color: #b22222;
+}
+.red-btn:hover {
+    -fx-background-color: #ff4d4d;
+}
+
+.green-btn {
+    -fx-background-color: #007a3d;
+}
+.green-btn:hover {
+    -fx-background-color: #00b359;
+}
+
+.dark-btn {
+    -fx-background-color: #2b2b2b;
+}
+.dark-btn:hover {
+    -fx-background-color: #555;
+}
