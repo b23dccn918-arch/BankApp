@@ -27,7 +27,7 @@ public class EmailService {
         message.setFrom(new InternetAddress(fromEmail));
         message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
         message.setSubject("Mã đặt lại mật khẩu");
-        message.setText("Mã xác thực của bạn là: " + token + "\nMã có hiệu lực trong 15 phút.");
+        message.setText("Mã xác thực của bạn là: " + token + "\nMã có hiệu lực trong 5 phút.");
 
         Transport.send(message);
     }

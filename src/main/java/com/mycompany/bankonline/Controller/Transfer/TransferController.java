@@ -177,6 +177,7 @@ public class TransferController implements Initializable {
             String result = transferHandler.transferMoney(senderAccountId, recipient, amount, message);
 
             if (result.equals("Success")) {
+                balanceField.setText(String.format("%,.0f VND", accountHandler.getBalanceByAccountId(Session.getInstance().getAccountId())));
                 showSuccessAlert("Chuyển tiền thành công!");
             } else {
                 showErrorAlert(result);
