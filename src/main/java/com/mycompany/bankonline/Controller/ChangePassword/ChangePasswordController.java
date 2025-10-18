@@ -1,9 +1,15 @@
 package com.mycompany.bankonline.Controller.ChangePassword;
 
+import com.mycompany.bankonline.Database.ChangePassword.ChangePasswordHandler;
+import com.mycompany.bankonline.DisplayScene.toSignIn;
+import com.mycompany.bankonline.MainApp.Main;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Stage;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -11,6 +17,9 @@ import javafx.scene.control.TextField;
 public class ChangePasswordController {
     @FXML
     private TextField phoneNumberField;
+
+    @FXML
+    private Button btnChangePassword;
 
     @FXML
     private PasswordField currentPasswordField;
@@ -23,6 +32,9 @@ public class ChangePasswordController {
 
     @FXML
     private Label messageLabel;
+
+    private final ChangePasswordHandler changePasswordHandler = new ChangePasswordHandler();
+
 
     @FXML
     private void handleChangePassword(ActionEvent event) {
@@ -41,21 +53,21 @@ public class ChangePasswordController {
             return;
         }
 
-        // 🔹 TODO: Gọi service kiểm tra và cập nhật mật khẩu trong DB
-        boolean success = changePasswordInDatabase(phoneNumber, current, newPass);
+        boolean check = changePasswordHandler.checkCurrentPassword(phoneNumber, current);
+        if (!check) {
+            showMessage("Thông báo", "Số điện thoại hoặc mật khẩu hiện tại 1.");
+            return;
+        }
+
+        boolean success = changePasswordHandler.changePasswordInDatabase(phoneNumber, current, newPass);
 
         if (success) {
             showMessage("Thông báo","Mật khẩu được thay đổi thành công" );
         } else {
-            showMessage("Thông báo", "Số điện thoại hoặc mật khẩu bị sai");
+            showMessage("Thông báo", "Số điện thoại hoặc mật khẩu hiện tại không đúng.");
         }
     }
 
-    private boolean changePasswordInDatabase(String email, String current, String newPass) {
-        // 🔹 Ví dụ logic kiểm tra (tạm thời)
-        // Sau này bạn có thể dùng UserService để kiểm tra DB
-        return email.equalsIgnoreCase("demo@bank.com") && current.equals("123456");
-    }
 
     private void showMessage(String title, String content) {
         Alert alert = new Alert(AlertType.INFORMATION);
@@ -68,10 +80,8 @@ public class ChangePasswordController {
     @FXML
     private void handleBackToSignIn(ActionEvent event) {
         try {
-            javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("/com/mycompany/bankonline/View/SignIn/SignIn.fxml"));
-            javafx.scene.Parent root = loader.load();
-            javafx.stage.Stage stage = (javafx.stage.Stage) phoneNumberField.getScene().getWindow();
-            stage.setScene(new javafx.scene.Scene(root));
+            Stage stage = (Stage) phoneNumberField.getScene().getWindow();
+            toSignIn.SignIn(stage);
         } catch (Exception e) {
             e.printStackTrace();
         }
