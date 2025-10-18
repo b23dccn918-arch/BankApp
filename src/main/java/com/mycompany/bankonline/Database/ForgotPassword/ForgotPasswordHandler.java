@@ -16,6 +16,8 @@ public class ForgotPasswordHandler {
     private static final EmailService emailService = new EmailService();
     public static boolean verifyToken(String email, String token) {
         try(Connection conn = Connect.getConnection()){
+
+
             String sql = "SELECT pr.expires_at, pr.used FROM password_resets pr "
                        + "JOIN accounts a ON pr.account_id = a.account_id "
                        + "JOIN users u ON a.user_id = u.user_id "
@@ -63,7 +65,7 @@ public class ForgotPasswordHandler {
             int accountId = rs.getInt("account_id");
             String token = String.format("%06d", new Random().nextInt(999999)); // mã 6 chữ số
             LocalDateTime expiresAt = LocalDateTime.now().plusMinutes(5);
-
+    
             String insert = "INSERT INTO password_resets(account_id, token, expires_at, used) VALUES (?, ?, ?, FALSE)";
             PreparedStatement ins = conn.prepareStatement(insert);
             ins.setInt(1, accountId);
@@ -72,7 +74,7 @@ public class ForgotPasswordHandler {
             ins.executeUpdate();
 
             // Gửi email
-            emailService.sendResetToken(email,"Mã xác thực của bạn là: " + token + "\nMã có hiệu lực trong 15 phút.");
+            emailService.sendResetToken(email,token);
             return true;
         }catch (SQLException e) {
             e.printStackTrace();
@@ -96,7 +98,7 @@ public class ForgotPasswordHandler {
             ps.setString(1, email);
             ps.setString(2, token);
             ResultSet rs = ps.executeQuery();
-
+            
             if (!rs.next()) return false;
 
             int accountId = rs.getInt("account_id");

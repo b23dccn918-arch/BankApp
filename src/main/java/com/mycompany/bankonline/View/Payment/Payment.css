@@ -11,7 +11,7 @@
 }
 .header-title {
     -fx-text-fill: white;
-    -fx-font-size: 24px;
+    -fx-font-size: 15px;
     -fx-font-weight: bold;
 }
 .header-subtitle {
@@ -56,7 +56,7 @@
     -fx-padding: 30;
 }
 .page-title {
-    -fx-font-size: 26px;
+    -fx-font-size: 18px;
     -fx-font-weight: bold;
     -fx-text-fill: #002f5f;
 }
@@ -67,7 +67,7 @@
     -fx-background-radius: 10;
     -fx-border-color: #b0d4ff;
     -fx-border-radius: 10;
-    -fx-padding: 15;
+    /* -fx-padding: 15; */
     -fx-pref-width: 220;
     -fx-alignment: CENTER;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 0);
@@ -93,7 +93,7 @@
     -fx-background-color: white;
     -fx-border-color: #b3cde0;
     -fx-border-radius: 8;
-    -fx-padding: 8;
+    /* -fx-padding: 8; */
 }
 .form-field:focused {
     -fx-border-color: #3498db;
@@ -107,7 +107,7 @@
     -fx-font-weight: bold;
     -fx-font-size: 16px;
     -fx-background-radius: 8;
-    -fx-padding: 10 20;
+    /* -fx-padding: 10 20; */
     -fx-cursor: hand;
 }
 .confirm-button:hover {
@@ -127,7 +127,7 @@
     -fx-font-weight: bold;
     -fx-font-size: 15px;
     -fx-background-radius: 8;
-    -fx-padding: 10 20;
+    /* -fx-padding: 10 20; */
     -fx-cursor: hand;
 }
 .refresh-button:hover {
