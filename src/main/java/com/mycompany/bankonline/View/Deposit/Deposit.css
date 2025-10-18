@@ -1,63 +1,121 @@
-/* --- Base style --- */
+.deposit-root {
+    -fx-font-family: "Segoe UI";
+    -fx-background-color: #FAFAFA;
+}
+
+/* ----- Header ----- */
+.header-container {
+    -fx-background-color: linear-gradient(to right, #002f5f, #0052a3);
+    -fx-padding: 15 30;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0, 0, 4);
+}
+.header-title {
+    -fx-text-fill: white;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+.header-subtitle {
+    -fx-text-fill: #AED6F1;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+.btn-logout {
+    -fx-background-color: #0078ff;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-padding: 6 14;
+}
+.btn-logout:hover {
+    -fx-background-color: #005fcc;
+}
+
+/* ----- Sidebar ----- */
+.sidebar-container {
+    -fx-background-color: linear-gradient(to bottom right, #002f5f, #0052a3);
+    -fx-padding: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 8, 0, 0, 3);
+}
 .sidebar-button {
-    -fx-background-color: linear-gradient(to right, #2C3E50, #34495E); /* nền đậm sang nhạt */
-    -fx-text-fill: #ECF0F1;
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
     -fx-font-weight: bold;
     -fx-font-size: 16px;
+    -fx-padding: 10 20;
+    -fx-background-radius: 8;
     -fx-cursor: hand;
-    -fx-background-radius: 12;
-    -fx-padding: 8 16 8 16;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0, 0, 3);
-    -fx-transition: all 0.25s ease-in-out;
-    -fx-border-color: transparent;
-    -fx-border-radius: 12;
 }
-
-/* --- Hover: nổi lên, phát sáng, gradient chuyển màu --- */
 .sidebar-button:hover {
-    -fx-background-color: linear-gradient(to right, #2980B9, #6DD5FA); /* xanh dương nhạt chuyển sáng */
+    -fx-background-color: rgba(255,255,255,0.2);
+}
+
+/* ----- Main content ----- */
+.main-content {
+    -fx-background-color: #e6f0ff;
+    -fx-padding: 30;
+}
+.page-title {
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #002f5f;
+}
+
+/* Info box */
+.info-box {
+    -fx-background-color: #f0f8ff;
+    -fx-background-radius: 10;
+    -fx-border-color: #b0d4ff;
+    -fx-border-radius: 10;
+    -fx-padding: 15;
+    -fx-pref-width: 220;
+    -fx-alignment: CENTER;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 0);
+}
+.info-title {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #002f5f;
+}
+.info-value {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #0078ff;
+}
+
+/* Form */
+.form-label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #002f5f;
+}
+.form-field {
+    -fx-background-radius: 8;
+    -fx-background-color: white;
+    -fx-border-color: #b3cde0;
+    -fx-border-radius: 8;
+    -fx-padding: 8;
+}
+.form-field:focused {
+    -fx-border-color: #3498db;
+    -fx-effect: dropshadow(gaussian, rgba(52,152,219,0.3), 10, 0, 0, 2);
+}
+
+/* Button */
+.confirm-button {
+    -fx-background-color: linear-gradient(to right, #2E86C1, #5DADE2);
     -fx-text-fill: white;
-    -fx-background-radius: 14;
-    -fx-effect: dropshadow(gaussian, rgba(0,191,255,0.6), 15, 0, 0, 4); /* ánh sáng xanh */
-    -fx-scale-x: 1.07;
-    -fx-scale-y: 1.07;
-    -fx-translate-y: -2; /* hơi nổi lên */
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-background-radius: 8;
+    -fx-padding: 10 20;
+    -fx-cursor: hand;
 }
-
-/* --- Pressed: cảm giác bấm xuống thật --- */
-.sidebar-button:pressed {
-    -fx-background-color: linear-gradient(to right, #1B4F72, #2980B9);
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 6, 0, 0, 2);
-    -fx-scale-x: 0.97;
-    -fx-scale-y: 0.97;
-    -fx-translate-y: 1;
-}
-
-/* --- Active (nút đang được chọn) --- */
-.sidebar-button:focused {
-    -fx-background-color: linear-gradient(to right, #3498DB, #85C1E9);
-    -fx-text-fill: white;
-    -fx-effect: dropshadow(gaussian, rgba(52,152,219,0.7), 12, 0, 0, 0);
-    -fx-border-color: #AED6F1;
-    -fx-border-width: 2;
-}
-
-/* --- Optional: animation khi rê chuột qua --- */
-@keyframes glowPulse {
-    0%   { -fx-effect: dropshadow(gaussian, rgba(0,191,255,0.3), 10, 0, 0, 3); }
-    50%  { -fx-effect: dropshadow(gaussian, rgba(0,191,255,0.7), 18, 0, 0, 5); }
-    100% { -fx-effect: dropshadow(gaussian, rgba(0,191,255,0.3), 10, 0, 0, 3); }
-}
-
-
-
-#logoutButton:hover {
+.confirm-button:hover {
     -fx-background-color: linear-gradient(to right, #5DADE2, #3498DB);
     -fx-scale-x: 1.05;
     -fx-scale-y: 1.05;
 }
-
-#logoutButton:pressed {
+.confirm-button:pressed {
     -fx-background-color: #1B4F72;
     -fx-scale-x: 0.95;
     -fx-scale-y: 0.95;

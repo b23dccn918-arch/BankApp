@@ -126,12 +126,12 @@ public class ControllerAdminAccount {
             Account account = AdminAccountFunction.getAccountById(accountId); // lấy account theo ID
 
             if (account == null) {
-                showAlert(AlertType.ERROR, "Not Found", "No account found with ID " + accountId + ".");
+                showAlert(AlertType.ERROR, "Not Found", "No account found with ID " + accountId + "!");
                 return;
             }
 
             if (account.getStatus() == 0) {
-                showAlert(AlertType.WARNING, "Already Banned", "This account is already banned.");
+                showAlert(AlertType.WARNING, "Already Banned", "This account is already banned !");
                 return;
             }
 
@@ -210,7 +210,7 @@ public class ControllerAdminAccount {
                 return;
             }
 
-            // ✅ Hiển thị hộp thoại xác nhận
+            // Hiển thị hộp thoại xác nhận
             Alert confirm = new Alert(AlertType.CONFIRMATION);
             confirm.setTitle("Confirm Delete");
             confirm.setHeaderText(null);

@@ -4,39 +4,54 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefWidth="800" prefHeight="600"
+<BorderPane prefWidth="900" prefHeight="600"
             xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.mycompany.bankonline.Controller.DashBoard.DashBoardController"
             styleClass="dashboard-root">
 
-    <!-- Sidebar trái -->
-    <left>
-        <VBox spacing="15" styleClass="sidebar-container" prefWidth="200" alignment="TOP_CENTER">
-            <Label text="BASOUR BANK" styleClass="sidebar-logo"/>
-            <Button fx:id="homeButton" text="🏠   Home" styleClass="sidebar-button"/>
-            <Button fx:id="accountButton" text="👤   Account" styleClass="sidebar-button"/>
-            <Button fx:id="transferButton" text="💸   Transfer" styleClass="sidebar-button"/>
-            <Button fx:id="withdrawButton" text="💰   Withdraw" styleClass="sidebar-button"/>
-            <Button fx:id="depositButton" text="💵   Deposit" styleClass="sidebar-button"/>
-            <Button fx:id="paymentButton" text="🧾   Payment" styleClass="sidebar-button"/>
-            <Button fx:id="historyButton" text="📜   History" styleClass="sidebar-button"/>
-        </VBox>
-    </left>
-
-    <!-- Header -->
+    <!-- 🔷 HEADER -->
     <top>
-        <HBox styleClass="header-container" spacing="10" alignment="CENTER_RIGHT" prefHeight="60">
-            <Label fx:id="helloField" text="Xin chào, -------!" styleClass="header-greeting"/>
-            <Button fx:id="logoutButton" text="Logout" styleClass="btn-logout"/>
-        </HBox>
+        <AnchorPane prefHeight="70" styleClass="header-container">
+            <children>
+                <Label layoutX="30" layoutY="20" text="🏦 BASOUR BANK" styleClass="header-title"/>
+                <Label layoutX="400" layoutY="25" text="Home" styleClass="header-subtitle"/>
+                <Button fx:id="logoutButton" layoutX="750" layoutY="22" text="Logout" styleClass="btn-logout"/>
+            </children>
+        </AnchorPane>
     </top>
 
-    <!-- Nội dung chính -->
-    <center>
-        <VBox spacing="20" styleClass="main-content" alignment="TOP_CENTER">
+    <!-- 🧭 SIDEBAR -->
+    <left>
+        <AnchorPane prefHeight="600" prefWidth="200"
+                    styleClass="sidebar-container"
+                    BorderPane.alignment="CENTER">
+            <VBox spacing="15" alignment="TOP_CENTER"
+                  AnchorPane.topAnchor="30"
+                  AnchorPane.leftAnchor="0"
+                  AnchorPane.rightAnchor="0">
 
-            <HBox spacing="20">
+                <Button fx:id="homeButton" text="🏠  Home" prefWidth="180" styleClass="sidebar-button"/>
+                <Button fx:id="accountButton" text="👤  User Info" prefWidth="180" styleClass="sidebar-button"/>
+                <Button fx:id="transferButton" text="💸  Transfer" prefWidth="180" styleClass="sidebar-button"/>
+                <Button fx:id="withdrawButton" text="💰  Withdraw" prefWidth="180" styleClass="sidebar-button"/>
+                <Button fx:id="depositButton" text="💵  Deposit" prefWidth="180" styleClass="sidebar-button"/>
+                <Button fx:id="paymentButton" text="🧾  Payment" prefWidth="180" styleClass="sidebar-button"/>
+                <Button fx:id="historyButton" text="📜  History" prefWidth="180" styleClass="sidebar-button"/>
+
+            </VBox>
+        </AnchorPane>
+    </left>
+
+    <!-- 🏦 MAIN CONTENT -->
+    <center>
+        <VBox spacing="25" styleClass="main-content" alignment="TOP_CENTER">
+            
+            <!-- Chào người dùng -->
+            <Label fx:id="helloField" text="Xin chào, -------!" styleClass="greeting-label"/>
+
+            <!-- Thông tin chính -->
+            <HBox spacing="20" alignment="CENTER">
                 <VBox styleClass="info-box">
                     <Label text="Số dư hiện tại" styleClass="info-title"/>
                     <Label fx:id="balanceField" text="15,000,000 VND" styleClass="info-value"/>
@@ -48,13 +63,12 @@
                 </VBox>
             </HBox>
 
-            <TitledPane fx:id="notificationPane" expanded="true" text="Thông báo mới" styleClass="notification-pane">
+            <!-- Thông báo -->
+            <TitledPane fx:id="notificationPane" expanded="true" text="🔔 Thông báo mới" styleClass="notification-pane">
                 <content>
-                    <VBox fx:id="notificationBox" spacing="5" styleClass="notification-box"/>
+                    <VBox fx:id="notificationBox" spacing="10" styleClass="notification-box"/>
                 </content>
             </TitledPane>
-
         </VBox>
     </center>
-
 </BorderPane>
