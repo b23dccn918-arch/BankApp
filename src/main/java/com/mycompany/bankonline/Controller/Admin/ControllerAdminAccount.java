@@ -57,7 +57,7 @@ public class ControllerAdminAccount {
     private Button AccountButton;
     
     @FXML
-    private Button BanButton, UnBanButton, DeleteButton, LogoutButton;
+    private Button BanButton, UnBanButton, DeleteButton, LogoutButton, UserButton;
     
     @FXML 
     private TextField AccountID;
@@ -111,6 +111,19 @@ public class ControllerAdminAccount {
         }
     });
     }
+    
+    
+    @FXML
+	public void toUser(ActionEvent event) {
+		Button clickedButton = (Button) event.getSource();
+	  	Scene currentScene = clickedButton.getScene();
+	  	Stage currentStage = (Stage) currentScene.getWindow();
+        try {
+            toAdminDashBoard.User(currentStage); 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+	}
     
     @FXML
     private void banAccount(ActionEvent event) {

@@ -10,19 +10,27 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class toAdminDashBoard {
-	public static void DashBoard(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/Admin/AdminAccountDashBoard.fxml"));
+	public static void Account(Stage stage) throws IOException {
+        Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/Admin/Account/AdminAccount.fxml"));
         Scene scene = new Scene(root);
-        scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/Admin/StyleAdminDashBoard.css").toExternalForm());
+        scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/Admin/Account/StyleAdminAccount.css").toExternalForm());
         stage.setTitle("DashBoard Scene");
         stage.setScene(scene);
         stage.show();
     }
 	
 	public static void SignIn(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/Admin/AdminSignIn.fxml"));
+        Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/Admin/SignIn/AdminSignIn.fxml"));
         Scene scene = new Scene(root);
-        scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/Admin/StyleAdminSignIn.css").toExternalForm());
+        scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/Admin/SignIn/StyleAdminSignIn.css").toExternalForm());
+        stage.setTitle("DashBoard Scene");
+        stage.setScene(scene);
+        stage.show();
+    }
+	public static void User(Stage stage) throws IOException {
+        Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/Admin/User/AdminUser.fxml"));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/Admin/User/StyleAdminUser.css").toExternalForm());
         stage.setTitle("DashBoard Scene");
         stage.setScene(scene);
         stage.show();

@@ -34,7 +34,7 @@ public class ControllerAdminSignIn {
 		Scene currentScene = clickedButton.getScene();
 		Stage currentStage = (Stage) currentScene.getWindow();	
 		if(AdminSignIn.checkSignIn(username, password) == true) {
-			toAdminDashBoard.DashBoard(currentStage);
+			toAdminDashBoard.Account(currentStage);
 		}
 		else {
 			Alert signInFailed = new Alert(Alert.AlertType.ERROR);
