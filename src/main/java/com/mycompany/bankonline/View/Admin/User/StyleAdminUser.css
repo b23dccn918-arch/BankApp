@@ -1,4 +1,4 @@
-/* Sidebar trái */
+/* ================= Sidebar trái ================= */
 .sidebar {
     -fx-background-color: linear-gradient(to bottom right, #1a1a1a, #8B0000);
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 8, 0, 0, 3);
@@ -24,7 +24,7 @@
     -fx-scale-y: 1.07;
 }
 
-/* Header */
+/* ================= Header ================= */
 .header {
     -fx-background-color: linear-gradient(to right, #8B0000, #1a1a1a);
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0, 0, 4);
@@ -36,26 +36,33 @@
     -fx-font-family: "Segoe UI Semibold";
 }
 
-/* Logout button */
+/* ================= Logout button ================= */
 .logout-btn {
-    -fx-background-color: #c92a2a;
+    -fx-background-color: linear-gradient(to right, #b22222, #dc143c);
     -fx-text-fill: white;
     -fx-font-size: 14px;
     -fx-font-family: "Segoe UI Semibold";
-    -fx-background-radius: 8;
+    -fx-background-radius: 10;
     -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0, 0, 2);
+    -fx-padding: 6 18;
+    -fx-border-color: transparent;
+    -fx-transition: 0.25s;
 }
 
 .logout-btn:hover {
-    -fx-background-color: #a91e1e;
+    -fx-background-color: linear-gradient(to right, #dc143c, #ff4d4d);
+    -fx-effect: dropshadow(gaussian, rgba(255,80,80,0.6), 12, 0, 0, 0);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
 }
 
-/* Main content */
+/* ================= Main content ================= */
 .main-content {
     -fx-background-color: #f9f9f9;
 }
 
-/* Bảng dữ liệu */
+/* ================= Bảng dữ liệu ================= */
 .table-style {
     -fx-border-color: #8B0000;
     -fx-border-width: 2;
@@ -63,54 +70,85 @@
     -fx-table-cell-border-color: #ccc;
 }
 
+/* Nền tiêu đề cột */
 .table-style .column-header-background {
-    -fx-background-color: linear-gradient(to right, #8B0000, #b52b2b);
+    -fx-background-color: #f2f2f2; /* màu xám nhạt để dễ nhìn hơn */
+    -fx-border-color: #ccc;
+    -fx-border-width: 0 0 1 0;
 }
 
+/* Chữ tiêu đề cột */
+.table-style .column-header,
 .table-style .label {
-    -fx-text-fill: white;
+    -fx-text-fill: black;      /* 👈 chữ màu đen */
     -fx-font-weight: bold;
+    -fx-font-size: 13px;
 }
 
-/* Ô nhập ID */
+/* Hàng dữ liệu */
+.table-style .table-row-cell {
+    -fx-cell-size: 35px;
+    -fx-font-size: 13px;
+}
+
+/* Khi rê chuột vào hàng */
+.table-style .table-row-cell:hover {
+    -fx-background-color: #ffeaea; /* hồng nhạt nhẹ */
+}
+
+/* Khi chọn hàng */
+.table-style .table-row-cell:selected {
+    -fx-background-color: #dc143c;
+    -fx-text-fill: white;
+}
+
+/* ================= Ô nhập ID ================= */
 .input-id {
     -fx-background-radius: 6;
     -fx-border-radius: 6;
     -fx-border-color: #8B0000;
     -fx-font-size: 13px;
-    -fx-padding: 4 8;
+    -fx-padding: 6 10;
 }
 
-/* Nút hành động */
-.action-btn {
-    -fx-pref-width: 80px;
-    -fx-pref-height: 28px;
-    -fx-font-size: 13px;
-    -fx-font-family: "Segoe UI";
-    -fx-font-weight: bold;
-    -fx-background-radius: 6;
+/* ================= Nút hành động (Ban / Unban) ================= */
+.action-button {
+    -fx-background-color: linear-gradient(to right, #B22222, #DC143C);
     -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-background-radius: 14;
     -fx-cursor: hand;
+    -fx-padding: 8 20;
+    -fx-border-color: transparent;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 6, 0, 0, 3);
     -fx-transition: 0.25s;
 }
 
-.red-btn {
-    -fx-background-color: #b22222;
-}
-.red-btn:hover {
-    -fx-background-color: #ff4d4d;
-}
-
-.green-btn {
-    -fx-background-color: #007a3d;
-}
-.green-btn:hover {
-    -fx-background-color: #00b359;
+.action-button:hover {
+    -fx-background-color: linear-gradient(to right, #DC143C, #FF4040);
+    -fx-effect: dropshadow(gaussian, rgba(255,70,70,0.7), 10, 0, 0, 0);
+    -fx-scale-x: 1.08;
+    -fx-scale-y: 1.08;
 }
 
-.dark-btn {
-    -fx-background-color: #2b2b2b;
+/* ================= Nút Delete riêng (màu đỏ cảnh báo) ================= */
+.delete-button {
+    -fx-background-color: linear-gradient(to right, #8B0000, #B22222);
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-background-radius: 14;
+    -fx-cursor: hand;
+    -fx-padding: 8 20;
+    -fx-border-color: transparent;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 7, 0, 0, 2);
+    -fx-transition: 0.25s;
 }
-.dark-btn:hover {
-    -fx-background-color: #555;
+
+.delete-button:hover {
+    -fx-background-color: linear-gradient(to right, #B22222, #FF0000);
+    -fx-effect: dropshadow(gaussian, rgba(255,0,0,0.7), 12, 0, 0, 0);
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
 }

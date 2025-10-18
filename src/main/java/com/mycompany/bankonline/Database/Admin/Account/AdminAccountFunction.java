@@ -1,4 +1,4 @@
-package com.mycompany.bankonline.Database.Admin;
+package com.mycompany.bankonline.Database.Admin.Account;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -67,21 +67,26 @@ public class AdminAccountFunction {
 	}
 
 	public static boolean deleteAccountById(int accountId) {
-	    String deleteTransactions =
-	        "DELETE FROM transactions WHERE from_account_id = ? OR to_account_id = ?";
-	    String deleteBills =
-	        "DELETE FROM payment_bills WHERE account_id = ?";
-	    String deletePasswordResets =
-	        "DELETE FROM password_resets WHERE account_id = ?";
-	    String deleteAccount =
-	        "DELETE FROM accounts WHERE account_id = ?";
-	    String deleteUser =
-	        "DELETE FROM users WHERE user_id = (" +
-	        "SELECT user_id FROM accounts WHERE account_id = ?" +
-	        ")";
+	    String selectUserId = "SELECT user_id FROM accounts WHERE account_id = ?";
+	    String deleteTransactions = "DELETE FROM transactions WHERE from_account_id = ? OR to_account_id = ?";
+	    String deleteBills = "DELETE FROM payment_bills WHERE account_id = ?";
+	    String deletePasswordResets = "DELETE FROM password_resets WHERE account_id = ?";
+	    String deleteAccount = "DELETE FROM accounts WHERE account_id = ?";
+	    String deleteUser = "DELETE FROM users WHERE user_id = ?";
 
 	    try (Connection conn = Connect.getConnection()) {
 	        conn.setAutoCommit(false);
+
+	        int userId;
+	        try (PreparedStatement psSelect = conn.prepareStatement(selectUserId)) {
+	            psSelect.setInt(1, accountId);
+	            ResultSet rs = psSelect.executeQuery();
+	            if (rs.next()) {
+	                userId = rs.getInt("user_id");
+	            } else {
+	                return false; // account không tồn tại
+	            }
+	        }
 
 	        try (
 	            PreparedStatement ps1 = conn.prepareStatement(deleteTransactions);
@@ -108,7 +113,7 @@ public class AdminAccountFunction {
 	            ps4.executeUpdate();
 
 	            // Xóa user
-	            ps5.setInt(1, accountId);
+	            ps5.setInt(1, userId);
 	            ps5.executeUpdate();
 
 	            conn.commit();
@@ -123,6 +128,7 @@ public class AdminAccountFunction {
 	        return false;
 	    }
 	}
+
 
 
 

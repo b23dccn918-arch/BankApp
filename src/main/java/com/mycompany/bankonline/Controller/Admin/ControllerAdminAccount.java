@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import com.mycompany.bankonline.Database.Admin.AccountEntity;
-import com.mycompany.bankonline.Database.Admin.AdminAccountFunction;
+import com.mycompany.bankonline.Database.Admin.Account.AccountEntity;
+import com.mycompany.bankonline.Database.Admin.Account.AdminAccountFunction;
 import com.mycompany.bankonline.DisplayScene.toAdminDashBoard;
 import com.mycompany.bankonline.DisplayScene.toSignIn;
 import com.mycompany.bankonline.Model.Account;
@@ -62,35 +62,6 @@ public class ControllerAdminAccount {
     @FXML 
     private TextField AccountID;
     
-    
-    private void showAccountTable() {
-        ObservableList<Account> list = AccountEntity.getAllAccounts();
-
-        colAccountId.setCellValueFactory(new PropertyValueFactory<>("accountId"));
-        colAccountNumber.setCellValueFactory(new PropertyValueFactory<>("accountNumber"));
-        colUserId.setCellValueFactory(new PropertyValueFactory<>("userId"));
-        colPhone.setCellValueFactory(new PropertyValueFactory<>("username"));
-        colPassword.setCellValueFactory(new PropertyValueFactory<>("password"));
-        colBalance.setCellValueFactory(new PropertyValueFactory<>("balance"));
-        colPin.setCellValueFactory(new PropertyValueFactory<>("pinID"));
-        colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
-        colCreatedAt.setCellValueFactory(new PropertyValueFactory<>("createdAt"));
-
-        tableAccount.setItems(list);
-    }
-    
-    @FXML
-    public void initialize() {
-        showAccountTable();
-    }
-    
-    private void showAlert(AlertType type, String title, String message) {
-        Alert alert = new Alert(type);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
     @FXML
     private void backToSignIn(ActionEvent event) {
         Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -125,6 +96,37 @@ public class ControllerAdminAccount {
         }
 	}
     
+    
+    private void showAccountTable() {
+        ObservableList<Account> list = AccountEntity.getAllAccounts();
+
+        colAccountId.setCellValueFactory(new PropertyValueFactory<>("accountId"));
+        colAccountNumber.setCellValueFactory(new PropertyValueFactory<>("accountNumber"));
+        colUserId.setCellValueFactory(new PropertyValueFactory<>("userId"));
+        colPhone.setCellValueFactory(new PropertyValueFactory<>("username"));
+        colPassword.setCellValueFactory(new PropertyValueFactory<>("password"));
+        colBalance.setCellValueFactory(new PropertyValueFactory<>("balance"));
+        colPin.setCellValueFactory(new PropertyValueFactory<>("pinID"));
+        colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+        colCreatedAt.setCellValueFactory(new PropertyValueFactory<>("createdAt"));
+
+        tableAccount.setItems(list);
+    }
+    
+    @FXML
+    public void initialize() {
+        showAccountTable();
+    }
+    
+    private void showAlert(AlertType type, String title, String message) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+    
+    
     @FXML
     private void banAccount(ActionEvent event) {
         String idText = AccountID.getText().trim();
@@ -154,11 +156,11 @@ public class ControllerAdminAccount {
                 showAlert(AlertType.INFORMATION, "Success", "Account ID " + accountId + " has been banned successfully.");
                 showAccountTable();
             } else {
-                showAlert(AlertType.ERROR, "Error", "Failed to ban this account.");
+                showAlert(AlertType.ERROR, "Error", "Failed to ban this account !");
             }
 
         } catch (NumberFormatException e) {
-            showAlert(AlertType.WARNING, "Invalid Input", "Account ID must be a valid integer.");
+            showAlert(AlertType.WARNING, "Invalid Input", "Account ID must be a valid integer !");
         } catch (Exception e) {
             showAlert(AlertType.ERROR, "Error", "An unexpected error occurred: " + e.getMessage());
             e.printStackTrace();
@@ -170,7 +172,7 @@ public class ControllerAdminAccount {
         String idText = AccountID.getText().trim();
 
         if (idText.isEmpty()) {
-            showAlert(AlertType.WARNING, "Missing Input", "Please enter an Account ID to unban.");
+            showAlert(AlertType.WARNING, "Missing Input", "Please enter an Account ID to unban !");
             return;
         }
 
@@ -179,12 +181,12 @@ public class ControllerAdminAccount {
             Account account = AdminAccountFunction.getAccountById(accountId);
 
             if (account == null) {
-                showAlert(AlertType.ERROR, "Not Found", "No account found with ID " + accountId + ".");
+                showAlert(AlertType.ERROR, "Not Found", "No account found with ID " + accountId + " !");
                 return;
             }
 
             if (account.getStatus() == 1) {
-                showAlert(AlertType.WARNING, "Already Active", "This account is already active.");
+                showAlert(AlertType.WARNING, "Already Active", "This account is already active !");
                 return;
             }
 
@@ -194,11 +196,11 @@ public class ControllerAdminAccount {
                 showAlert(AlertType.INFORMATION, "Success", "Account ID " + accountId + " has been unbanned successfully.");
                 showAccountTable();
             } else {
-                showAlert(AlertType.ERROR, "Error", "Failed to unban this account.");
+                showAlert(AlertType.ERROR, "Error", "Failed to unban this account !");
             }
 
         } catch (NumberFormatException e) {
-            showAlert(AlertType.WARNING, "Invalid Input", "Account ID must be a valid integer.");
+            showAlert(AlertType.WARNING, "Invalid Input", "Account ID must be a valid integer !");
         } catch (Exception e) {
             showAlert(AlertType.ERROR, "Error", "An unexpected error occurred: " + e.getMessage());
             e.printStackTrace();
@@ -210,7 +212,7 @@ public class ControllerAdminAccount {
         String idText = AccountID.getText().trim();
 
         if (idText.isEmpty()) {
-            showAlert(AlertType.WARNING, "Missing Input", "Please enter an Account ID to delete.");
+            showAlert(AlertType.WARNING, "Missing Input", "Please enter an Account ID to delete !");
             return;
         }
 
@@ -219,7 +221,7 @@ public class ControllerAdminAccount {
             Account account = AdminAccountFunction.getAccountById(accountId);
 
             if (account == null) {
-                showAlert(AlertType.ERROR, "Not Found", "No account found with ID " + accountId + ".");
+                showAlert(AlertType.ERROR, "Not Found", "No account found with ID " + accountId + " !");
                 return;
             }
 
@@ -239,14 +241,14 @@ public class ControllerAdminAccount {
                     showAlert(AlertType.INFORMATION, "Deleted", "Account ID " + accountId + " has been deleted successfully.");
                     showAccountTable();
                 } else {
-                    showAlert(AlertType.ERROR, "Error", "Failed to delete this account.");
+                    showAlert(AlertType.ERROR, "Error", "Failed to delete this account !");
                 }
             } else {
-                showAlert(AlertType.INFORMATION, "Cancelled", "Account deletion has been cancelled.");
+                showAlert(AlertType.INFORMATION, "Cancelled", "Account deletion has been cancelled !");
             }
 
         } catch (NumberFormatException e) {
-            showAlert(AlertType.WARNING, "Invalid Input", "Account ID must be a valid integer.");
+            showAlert(AlertType.WARNING, "Invalid Input", "Account ID must be a valid integer !");
         } catch (Exception e) {
             showAlert(AlertType.ERROR, "Error", "An unexpected error occurred: " + e.getMessage());
             e.printStackTrace();

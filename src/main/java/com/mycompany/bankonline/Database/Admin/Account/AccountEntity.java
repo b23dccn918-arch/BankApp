@@ -1,4 +1,4 @@
-package com.mycompany.bankonline.Database.Admin;
+package com.mycompany.bankonline.Database.Admin.Account;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
