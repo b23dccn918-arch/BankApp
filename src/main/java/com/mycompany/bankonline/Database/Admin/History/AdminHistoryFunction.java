@@ -19,7 +19,7 @@ public class AdminHistoryFunction {
 
 	        if (rs.next()) {
 	            Account acc = new Account();
-	            acc.setAccountId(rs.getInt("account_id"));
+	            acc.setAccountNumber(rs.getString("account_number"));
 	            return acc;
 	        }
 

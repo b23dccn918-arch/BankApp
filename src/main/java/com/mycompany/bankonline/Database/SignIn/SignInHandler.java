@@ -24,7 +24,7 @@ public class SignInHandler {
             ResultSet rs = ps.executeQuery();
             
             if (rs.next()) {
-                // luu thong tin vao session;
+                // luu thong tin vao session;            
                 int userId = rs.getInt("user_id"); 
                 int accountId = rs.getInt("account_id");
                 Session.getInstance().setSession(userId, accountId);
@@ -37,6 +37,31 @@ public class SignInHandler {
         }
         
         return false; // Không tìm thấy tài khoản
+    }
+    
+    public static boolean checkStatus(String username, String password) {
+        Connection con = Connect.getConnection();
+        String sql = "SELECT * FROM accounts WHERE phone = ? AND password = ?";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, username);
+            ps.setString(2, password);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) {            
+                int status = rs.getInt("status");
+                if(status == 1) {
+                	return true;
+                }          
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return false;
     }
 }
 

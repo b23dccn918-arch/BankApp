@@ -28,6 +28,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 
@@ -66,6 +67,13 @@ public class ControllerSignUp  {
 			e.printStackTrace();
 		}
 	}
+	
+	private void showAlert(AlertType type, String header, String message) {
+        Alert alert = new Alert(type);
+        alert.setHeaderText(header);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 
 	public void getNextButton(ActionEvent event) throws Exception {
 		String identification = Identification.getText().trim();
@@ -79,20 +87,14 @@ public class ControllerSignUp  {
 		// Kiểm tra trống
 		if (identification.isEmpty() || fullName.isEmpty() || job.isEmpty()
 		        || gender == null || birth == null || mail.isEmpty() || address.isEmpty()) {
-		    Alert empty = new Alert(Alert.AlertType.ERROR);
-		    empty.setHeaderText("Failed");
-		    empty.setContentText("Please fill in all the information");
-		    empty.show();
+		    showAlert(AlertType.ERROR, "Failed", "Please fill in all the information");
 		    return;
 		}
 
 
 		// Kiểm tra email đúng định dạng chưa
 		if (!isValidEmail(mail)) {
-			Alert invalidEmail = new Alert(Alert.AlertType.ERROR);
-			invalidEmail.setHeaderText("Invalid Email");
-			invalidEmail.setContentText("Please enter a valid email address");
-			invalidEmail.show();
+			showAlert(AlertType.ERROR, "Invalid Email", "Please enter a valid email address");
 			return;
 		}
 
@@ -120,10 +122,7 @@ public class ControllerSignUp  {
 			currentStage.setScene(scene);
 	        currentStage.show();
 		} else {
-			Alert existed = new Alert(Alert.AlertType.ERROR);
-			existed.setTitle("Failed");
-			existed.setContentText("The citizen identification number has already been used !");
-			existed.show();
+			showAlert(AlertType.ERROR, "Failed", "The citizen identification number has already been used !");
 		}
 	}
 

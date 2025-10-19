@@ -4,10 +4,9 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-import com.mycompany.bankonline.Database.Admin.Account.AccountEntity;
+
 import com.mycompany.bankonline.Database.Admin.History.TransactionEntity;
 import com.mycompany.bankonline.DisplayScene.toAdminDashBoard;
-import com.mycompany.bankonline.Model.Account;
 import com.mycompany.bankonline.Model.TransactionAdmin;
 
 import javafx.collections.ObservableList;
@@ -18,7 +17,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
@@ -48,9 +46,9 @@ public class ControllerAdminHistory {
 	@FXML
     private void backToSignIn(ActionEvent event) {
         Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle("Đăng xuất");
+        alert.setTitle("Log Out");
         alert.setHeaderText(null);
-        alert.setContentText("Bạn có chắc muốn đăng xuất?");
+        alert.setContentText("Are you sure you want to log out ?");
         alert.showAndWait().ifPresent(response -> {
         if (response == javafx.scene.control.ButtonType.OK) {
             try {

@@ -1,19 +1,16 @@
 package com.mycompany.bankonline.Controller.Admin;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.Optional;
-import java.util.ResourceBundle;
+
 
 import com.mycompany.bankonline.Database.Admin.Account.AdminAccountFunction;
 import com.mycompany.bankonline.Database.Admin.User.AdminUserFunction;
 import com.mycompany.bankonline.Database.Admin.User.UserEntity;
 import com.mycompany.bankonline.DisplayScene.toAdminDashBoard;
-import com.mycompany.bankonline.DisplayScene.toSignUp;
 import com.mycompany.bankonline.Model.Account;
 import com.mycompany.bankonline.Model.User;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -67,9 +64,9 @@ public class ControllerAdminUser {
 	@FXML
 	private void backToSignIn(ActionEvent event) {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setTitle("Đăng xuất");
+		alert.setTitle("Log Out");
 		alert.setHeaderText(null);
-		alert.setContentText("Bạn có chắc muốn đăng xuất?");
+		alert.setContentText("Are you sure you want to log out ?");
 		alert.showAndWait().ifPresent(response -> {
 			if (response == javafx.scene.control.ButtonType.OK) {
 				try {

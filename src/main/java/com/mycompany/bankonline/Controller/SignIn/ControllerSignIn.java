@@ -75,6 +75,16 @@ public class ControllerSignIn {
 		Button clickedButton = (Button) event.getSource();
 		Scene currentScene = clickedButton.getScene();
 		Stage currentStage = (Stage) currentScene.getWindow();	
+		
+		if(!SignInHandler.checkStatus(username, password)) {
+			Alert signInFailed = new Alert(Alert.AlertType.ERROR);
+			signInFailed.setTitle("Sign In Failed");
+			signInFailed.setContentText("Your account is currently locked. Please contact support for assistance !");
+			signInFailed.show();
+			return;
+		}
+		
+		
 		if(SignInHandler.checkSignIn(username, password) == true) {
 			toDashBoard.DashBoard(currentStage);
 		}
