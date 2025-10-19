@@ -29,7 +29,16 @@ import javafx.stage.Stage;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
-public class ControllerAdminAccount {
+public class ControllerAdminAccount {	
+	
+	@FXML 
+    private Button AccountButton, UserButton, HistoryButton;
+    
+    @FXML
+    private Button BanButton, UnBanButton, DeleteButton, LogoutButton;
+    
+    @FXML 
+    private TextField AccountID;
 
 	@FXML
     private TableView<Account> tableAccount;
@@ -53,14 +62,7 @@ public class ControllerAdminAccount {
     private TableColumn<Account, String> colCreatedAt;
 
     
-    @FXML 
-    private Button AccountButton;
     
-    @FXML
-    private Button BanButton, UnBanButton, DeleteButton, LogoutButton, UserButton;
-    
-    @FXML 
-    private TextField AccountID;
     
     @FXML
     private void backToSignIn(ActionEvent event) {
@@ -95,6 +97,18 @@ public class ControllerAdminAccount {
             e.printStackTrace();
         }
 	}
+    
+    @FXML
+   	public void toHistory(ActionEvent event) {
+   		Button clickedButton = (Button) event.getSource();
+   	  	Scene currentScene = clickedButton.getScene();
+   	  	Stage currentStage = (Stage) currentScene.getWindow();
+           try {
+               toAdminDashBoard.History(currentStage); 
+           } catch (Exception e) {
+               e.printStackTrace();
+           }
+   	}
     
     
     private void showAccountTable() {

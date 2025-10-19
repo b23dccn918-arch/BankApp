@@ -27,10 +27,20 @@ public class toAdminDashBoard {
         stage.setScene(scene);
         stage.show();
     }
+	
 	public static void User(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/Admin/User/AdminUser.fxml"));
         Scene scene = new Scene(root);
         scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/Admin/User/StyleAdminUser.css").toExternalForm());
+        stage.setTitle("DashBoard Scene");
+        stage.setScene(scene);
+        stage.show();
+    }
+	
+	public static void History(Stage stage) throws IOException {
+        Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/Admin/History/AdminHistory.fxml"));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/Admin/History/StyleAdminHistory.css").toExternalForm());
         stage.setTitle("DashBoard Scene");
         stage.setScene(scene);
         stage.show();
