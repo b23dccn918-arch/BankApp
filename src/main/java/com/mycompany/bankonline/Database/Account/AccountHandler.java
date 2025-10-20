@@ -53,5 +53,26 @@ public class AccountHandler {
             return "-1";
         }
     }
+
+    public String getPinByAccountId(int accountId) {
+        String sql = "SELECT pin FROM accounts WHERE account_id = ?";
+
+        try (Connection conn = Connect.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, accountId);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getString("pin");
+            } else {
+                return "-1";
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "-1";
+        }
+    }
     
 }

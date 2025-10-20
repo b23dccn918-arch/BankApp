@@ -16,12 +16,16 @@ import com.mycompany.bankonline.Session.Session;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -154,6 +158,39 @@ public class TransferController implements Initializable {
     }
 
     private void handleTransfer(ActionEvent event) {
+         try {
+             // Mở hộp thoại nhập PIN
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/mycompany/bankonline/View/PinDialog/PinDialog.fxml"));
+        Parent root = loader.load();
+
+        Stage pinStage = new Stage();
+        pinStage.setTitle("Xác nhận mã PIN");
+        pinStage.setScene(new Scene(root));
+        pinStage.setResizable(false);
+        pinStage.initModality(Modality.APPLICATION_MODAL); // Chặn các cửa sổ khác
+        pinStage.showAndWait();
+
+        // Lấy controller để kiểm tra kết quả
+        PinDialogController pinController = loader.getController();
+        if (!pinController.isPinConfirmed()) {
+            showMessage("Thông báo", "Giao dịch bị hủy!");
+            return;
+        }
+
+        String enteredPin = pinController.getEnteredPin();
+
+        // Giả sử bạn có biến currentAccountPin trong session (hoặc lấy từ DB)
+        String currentAccountPin = accountHandler.getPinByAccountId(Session.getInstance().getAccountId());
+        if (!enteredPin.equals(currentAccountPin)) {
+            showMessage("Thông báo", "Mã PIN không chính xác!");
+            return;
+        }
+        } catch (IOException e) {
+            e.printStackTrace();
+            showErrorAlert("Lỗi khi mở hộp thoại nhập PIN.");
+            return;
+        }
+
         String recipient = recipientAccountField.getText().trim();
         String amountText = amountField.getText().trim();
         String message = messageField.getText().trim();

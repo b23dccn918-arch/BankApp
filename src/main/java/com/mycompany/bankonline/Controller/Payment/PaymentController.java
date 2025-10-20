@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import com.mycompany.bankonline.Controller.Transfer.PinDialogController;
 import com.mycompany.bankonline.Database.Account.AccountHandler;
 import com.mycompany.bankonline.Database.Payment.PaymentHandler;
 import com.mycompany.bankonline.DisplayScene.toSignIn;
@@ -17,7 +18,10 @@ import com.mycompany.bankonline.Session.Session;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -26,6 +30,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableCell;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class PaymentController implements Initializable {
@@ -210,6 +215,40 @@ public class PaymentController implements Initializable {
 
 
     private void handlePayBill() {
+         try {
+             // Mở hộp thoại nhập PIN
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/mycompany/bankonline/View/PinDialog/PinDialog.fxml"));
+        Parent root = loader.load();
+
+        Stage pinStage = new Stage();
+        pinStage.setTitle("Xác nhận mã PIN");
+        pinStage.setScene(new Scene(root));
+        pinStage.setResizable(false);
+        pinStage.initModality(Modality.APPLICATION_MODAL); // Chặn các cửa sổ khác
+        pinStage.showAndWait();
+
+        // Lấy controller để kiểm tra kết quả
+        PinDialogController pinController = loader.getController();
+        if (!pinController.isPinConfirmed()) {
+            showMessage("Thông báo", "Giao dịch bị hủy!");
+            return;
+        }
+
+        String enteredPin = pinController.getEnteredPin();
+
+        // Giả sử bạn có biến currentAccountPin trong session (hoặc lấy từ DB)
+        String currentAccountPin = accountHandler.getPinByAccountId(Session.getInstance().getAccountId());
+        if (!enteredPin.equals(currentAccountPin)) {
+            showMessage("Thông báo", "Mã PIN không chính xác!");
+            return;
+        }
+        } catch (IOException e) {
+            e.printStackTrace();
+            showErrorAlert("Lỗi khi mở hộp thoại nhập PIN.");
+            return;
+        }
+
+
         String selected = billIdCombo.getValue();
         if (selected == null) {
             showAlert("Thông báo", "Vui lòng chọn hóa đơn cần thanh toán!", Alert.AlertType.WARNING);
@@ -258,6 +297,14 @@ public class PaymentController implements Initializable {
         Alert alert = new Alert(type);
         alert.setTitle(title);
         alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    private void showErrorAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Lỗi giao dịch");
+        alert.setHeaderText("Không thể thực hiện giao dịch");
         alert.setContentText(message);
         alert.showAndWait();
     }
