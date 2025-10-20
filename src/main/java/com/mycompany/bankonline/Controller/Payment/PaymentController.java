@@ -236,7 +236,6 @@ public class PaymentController implements Initializable {
 
         String enteredPin = pinController.getEnteredPin();
 
-        // Giả sử bạn có biến currentAccountPin trong session (hoặc lấy từ DB)
         String currentAccountPin = accountHandler.getPinByAccountId(Session.getInstance().getAccountId());
         if (!enteredPin.equals(currentAccountPin)) {
             showMessage("Thông báo", "Mã PIN không chính xác!");
