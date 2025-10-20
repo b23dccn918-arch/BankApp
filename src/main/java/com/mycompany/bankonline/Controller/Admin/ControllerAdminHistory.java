@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 
-import com.mycompany.bankonline.Database.Admin.History.TransactionEntity;
+import com.mycompany.bankonline.Database.Admin.History.TransactionRepository;
 import com.mycompany.bankonline.DisplayScene.toAdminDashBoard;
 import com.mycompany.bankonline.Model.TransactionAdmin;
 
@@ -89,7 +89,7 @@ public class ControllerAdminHistory {
 	}
 	
 	private void showHistoryTable() {
-        ObservableList<TransactionAdmin> list = TransactionEntity.getAllTransactions();
+        ObservableList<TransactionAdmin> list = TransactionRepository.getAllTransactions();
 
         colTransactionId.setCellValueFactory(new PropertyValueFactory<>("transcationId"));
         colFromAccount.setCellValueFactory(new PropertyValueFactory<>("fromAccount"));

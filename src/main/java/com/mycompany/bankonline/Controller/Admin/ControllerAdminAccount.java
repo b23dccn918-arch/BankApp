@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import com.mycompany.bankonline.Database.Admin.Account.AccountEntity;
+import com.mycompany.bankonline.Database.Admin.Account.AccountRepository;
 import com.mycompany.bankonline.Database.Admin.Account.AdminAccountFunction;
 import com.mycompany.bankonline.DisplayScene.toAdminDashBoard;
 import com.mycompany.bankonline.DisplayScene.toSignIn;
@@ -112,7 +112,7 @@ public class ControllerAdminAccount {
     
     
     private void showAccountTable() {
-        ObservableList<Account> list = AccountEntity.getAllAccounts();
+        ObservableList<Account> list = AccountRepository.getAllAccounts();
 
         colAccountId.setCellValueFactory(new PropertyValueFactory<>("accountId"));
         colAccountNumber.setCellValueFactory(new PropertyValueFactory<>("accountNumber"));

@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
+
 
 import com.mycompany.bankonline.Database.Connect;
 import com.mycompany.bankonline.Model.Account;
@@ -14,7 +14,7 @@ import com.mycompany.bankonline.Model.Account;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class AccountEntity {
+public class AccountRepository {
 	public static ObservableList<Account> getAllAccounts(){
 		Connection con = Connect.getConnection();
 		String sql = "select * from accounts";

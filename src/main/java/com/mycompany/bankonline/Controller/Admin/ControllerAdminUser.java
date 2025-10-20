@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import com.mycompany.bankonline.Database.Admin.Account.AdminAccountFunction;
 import com.mycompany.bankonline.Database.Admin.User.AdminUserFunction;
-import com.mycompany.bankonline.Database.Admin.User.UserEntity;
+import com.mycompany.bankonline.Database.Admin.User.UserRepository;
 import com.mycompany.bankonline.DisplayScene.toAdminDashBoard;
 import com.mycompany.bankonline.Model.Account;
 import com.mycompany.bankonline.Model.User;
@@ -107,7 +107,7 @@ public class ControllerAdminUser {
    	}
 
 	private void showUserTable() {
-		ObservableList<User> list = UserEntity.getAllUsers();
+		ObservableList<User> list = UserRepository.getAllUsers();
 		colUserId.setCellValueFactory(new PropertyValueFactory<>("userId"));
 		colFullName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
 		colCitizienIdentifier.setCellValueFactory(new PropertyValueFactory<>("citizenIdentifier"));

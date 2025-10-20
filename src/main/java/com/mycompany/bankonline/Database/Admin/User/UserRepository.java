@@ -13,7 +13,7 @@ import com.mycompany.bankonline.Model.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class UserEntity {
+public class UserRepository {
 	public static ObservableList<User> getAllUsers(){
 		Connection con = Connect.getConnection();
 		String sql = "select * from users";

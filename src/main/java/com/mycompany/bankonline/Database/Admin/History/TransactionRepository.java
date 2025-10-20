@@ -13,7 +13,7 @@ import com.mycompany.bankonline.Model.TransactionAdmin;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class TransactionEntity {
+public class TransactionRepository {
 	public static ObservableList<TransactionAdmin> getAllTransactions(){
 		Connection con = Connect.getConnection();
 		String sql = "select * from transactions";
