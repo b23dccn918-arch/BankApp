@@ -4,23 +4,23 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 public class TransactionAdmin {
-	private Long transcationId;
+	private Long transactionId;
 	private String fromAccount, toAccount, type, description;
 	private BigDecimal amount;
-	private Timestamp createdAd;
-	public TransactionAdmin(Long transcationId, String fromAccount, String toAccount, String type,BigDecimal amount, String description,
-			 Timestamp createdAd) {
+	private Timestamp createdAt;
+	public TransactionAdmin(Long transactionId, String fromAccount, String toAccount, String type,BigDecimal amount, String description,
+			 Timestamp createdAt) {
 		super();
-		this.transcationId = transcationId;
+		this.transactionId = transactionId;
 		this.fromAccount = fromAccount;
 		this.toAccount = toAccount;
 		this.type = type;
 		this.amount = amount;
 		this.description = description;
-		this.createdAd = createdAd;
+		this.createdAt = createdAt;
 	}
-	public Long getTranscationId() {
-		return transcationId;
+	public Long getTransactionId() {
+		return transactionId;
 	}
 	public String getFromAccount() {
 		return fromAccount;
@@ -37,8 +37,8 @@ public class TransactionAdmin {
 	public BigDecimal getAmount() {
 		return amount;
 	}
-	public Timestamp getCreatedAd() {
-		return createdAd;
+	public Timestamp getCreatedAt() {
+		return createdAt;
 	}
 	
 	

@@ -2,6 +2,7 @@ package com.mycompany.bankonline.Controller.Admin;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -21,18 +22,21 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Tooltip;
 
-public class ControllerAdminAccount {	
+public class AdminAccountController {	
 	
 	@FXML 
-    private Button AccountButton, UserButton, HistoryButton;
+    private Button AccountButton, UserButton, HistoryButton, BillButton;
     
     @FXML
     private Button BanButton, UnBanButton, DeleteButton, LogoutButton;
@@ -59,7 +63,7 @@ public class ControllerAdminAccount {
     @FXML
     private TableColumn<Account, Integer> colStatus;
     @FXML
-    private TableColumn<Account, String> colCreatedAt;
+    private TableColumn<Account, Timestamp> colCreatedAt;
 
     
     
@@ -110,6 +114,18 @@ public class ControllerAdminAccount {
            }
    	}
     
+    @FXML
+	public void toBill(ActionEvent event) {
+		Button clickedButton = (Button) event.getSource();
+	  	Scene currentScene = clickedButton.getScene();
+	  	Stage currentStage = (Stage) currentScene.getWindow();
+        try {
+            toAdminDashBoard.Bill(currentStage); 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+	}
+    
     
     private void showAccountTable() {
         ObservableList<Account> list = AccountRepository.getAllAccounts();
@@ -123,6 +139,23 @@ public class ControllerAdminAccount {
         colPin.setCellValueFactory(new PropertyValueFactory<>("pinID"));
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
         colCreatedAt.setCellValueFactory(new PropertyValueFactory<>("createdAt"));
+        colCreatedAt.setCellFactory(tc -> new TableCell<>() {
+		    private final Tooltip tooltip = new Tooltip();
+
+		    @Override
+		    protected void updateItem(Timestamp item, boolean empty) {
+		        super.updateItem(item, empty);
+		        if (empty || item == null) {
+		            setText(null);
+		            setTooltip(null);
+		        } else {
+		            String text = item.toString();
+		            setText(text.length() > 19 ? text.substring(0, 19) : text); // hiển thị gọn
+		            tooltip.setText(text);
+		            setTooltip(tooltip);
+		        }
+		    }
+		});
 
         tableAccount.setItems(list);
     }

@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="668.0" prefWidth="867.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.bankonline.Controller.Admin.ControllerAdminAccount">
+<AnchorPane prefHeight="668.0" prefWidth="867.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.bankonline.Controller.Admin.AdminAccountController">
 
 	<children>
 		<!-- Sidebar trái -->
-		<AnchorPane layoutY="120.0" prefHeight="548.0" prefWidth="214.0" styleClass="sidebar">
+		<AnchorPane layoutY="120.0" prefHeight="564.0" prefWidth="214.0" styleClass="sidebar">
 			<children>
 				<VBox alignment="TOP_CENTER" layoutX="7.0" layoutY="61.0" spacing="15" />
 				<Button fx:id="AccountButton" layoutX="22.0" layoutY="61.0" prefHeight="45.0" prefWidth="180.0" styleClass="sidebar-button" text="👤   Account">
@@ -27,6 +27,11 @@
 					</font>
 				</Button>
             <Button fx:id="HistoryButton" layoutX="22.0" layoutY="198.0" onAction="#toHistory" prefHeight="45.0" prefWidth="180.0" styleClass="sidebar-button" text="📜  History">
+               <font>
+                  <Font name="Segoe UI Semibold" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="BillButton" layoutX="22.0" layoutY="267.0" onAction="#toBill" prefHeight="45.0" prefWidth="180.0" styleClass="sidebar-button" text="💸  Bill">
                <font>
                   <Font name="Segoe UI Semibold" size="16.0" />
                </font>

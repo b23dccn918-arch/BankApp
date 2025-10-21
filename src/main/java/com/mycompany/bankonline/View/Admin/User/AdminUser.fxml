@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="668.0" prefWidth="867.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.bankonline.Controller.Admin.ControllerAdminUser">
+<AnchorPane prefHeight="668.0" prefWidth="867.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.bankonline.Controller.Admin.AdminUserController">
 
 	<children>
 		<!-- Sidebar trái -->
-		<AnchorPane layoutY="120.0" prefHeight="548.0" prefWidth="214.0" styleClass="sidebar">
+		<AnchorPane layoutY="120.0" prefHeight="564.0" prefWidth="214.0" styleClass="sidebar">
 			<children>
 				<VBox alignment="TOP_CENTER" layoutX="7.0" layoutY="61.0" spacing="15" />
 				<Button fx:id="AccountButton" layoutX="22.0" layoutY="61.0" onAction="#toAccount" prefHeight="45.0" prefWidth="180.0" styleClass="sidebar-button" text="👤   Account">
@@ -26,7 +26,12 @@
 						<Font name="Segoe UI Semibold" size="16.0" />
 					</font>
 				</Button>
-            <Button layoutX="22.0" layoutY="200.0" onAction="#toHistory" prefHeight="45.0" prefWidth="180.0" styleClass="sidebar-button" text="📜  History">
+            <Button layoutX="22.0" layoutY="198.0" onAction="#toHistory" prefHeight="45.0" prefWidth="180.0" styleClass="sidebar-button" text="📜  History">
+               <font>
+                  <Font name="Segoe UI Semibold" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="BillButton" layoutX="23.0" layoutY="267.0" onAction="#toBill" prefHeight="45.0" prefWidth="180.0" styleClass="sidebar-button" text="💸  Bill">
                <font>
                   <Font name="Segoe UI Semibold" size="16.0" />
                </font>
@@ -45,9 +50,7 @@
 		<!-- Khu hiển thị bên phải -->
 		<AnchorPane layoutX="210.0" layoutY="120.0" prefHeight="548.0" prefWidth="731.0" styleClass="main-content">
 			<children>
-			<Label layoutX="37.0" layoutY="18.0"
-                       style="-fx-font-size: 20px; -fx-font-weight: bold;"
-                       text="User Management" />
+			<Label layoutX="37.0" layoutY="18.0" style="-fx-font-size: 20px; -fx-font-weight: bold;" text="User Management" />
 			
 				<TableView fx:id="tableUser" layoutX="37.0" layoutY="64.0" prefHeight="500.0" prefWidth="497.0" styleClass="table-style">
 					<columns>

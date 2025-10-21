@@ -9,7 +9,7 @@
 <AnchorPane prefHeight="480.0" prefWidth="720.0"
             xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.mycompany.bankonline.Controller.Admin.ControllerAdminSignIn">
+            fx:controller="com.mycompany.bankonline.Controller.Admin.AdminSignInController">
 
     <children>
         <!-- Bên trái -->

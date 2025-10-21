@@ -33,7 +33,7 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 
 
-public class ControllerSignUp  {
+public class SignUpController  {
 
 	Account newAcc = new Account();
 	User newCustomer = new User();
@@ -112,7 +112,7 @@ public class ControllerSignUp  {
 		    scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/SignUp/StyleSignUp.css").toExternalForm());
 
 		    // Lấy controller của màn SignUp2
-		    ControllerSignUp2 controller2 = loader.getController();
+		    SignUpController2 controller2 = loader.getController();
 		    
 		    controller2.setUserData(identification, fullName, job, gender, birth, mail, address);
 		    

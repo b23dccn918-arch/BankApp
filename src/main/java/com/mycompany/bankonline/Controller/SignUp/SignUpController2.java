@@ -29,7 +29,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
-public class ControllerSignUp2 {
+public class SignUpController2 {
 
 	@FXML
 	private Button BackButton2, FinishButton;

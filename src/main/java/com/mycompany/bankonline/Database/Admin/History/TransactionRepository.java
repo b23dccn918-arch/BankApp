@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.Timestamp;
 
 import com.mycompany.bankonline.Database.Connect;
+import com.mycompany.bankonline.Model.Account;
 import com.mycompany.bankonline.Model.TransactionAdmin;
 
 import javafx.collections.FXCollections;
@@ -26,7 +27,11 @@ public class TransactionRepository {
 				int fromAccountId = rs.getInt("from_account_id");
 				String fromAccount = AdminHistoryFunction.getAccount(fromAccountId).getAccountNumber();
 				int toAccountId = rs.getInt("to_account_id");
-				String toAccount = AdminHistoryFunction.getAccount(toAccountId).getAccountNumber();
+				Account toAcc = AdminHistoryFunction.getAccount(toAccountId);
+	                String toAccount = "";
+	                if (toAcc != null) {
+	                    toAccount = toAcc.getAccountNumber();
+	                }
 				String type = rs.getString("type");
 				BigDecimal amount = rs.getBigDecimal("amount");
 				String description = rs.getString("description");
@@ -42,4 +47,40 @@ public class TransactionRepository {
 		return transactions;
 		
 	}
+	
+	public static ObservableList<TransactionAdmin> getTransactionsByDate(java.time.LocalDate from, java.time.LocalDate to) {
+	    Connection con = Connect.getConnection();
+	    String sql = "SELECT * FROM transactions WHERE DATE(created_at) BETWEEN ? AND ?";
+	    ObservableList<TransactionAdmin> transactions = FXCollections.observableArrayList();
+
+	    try (PreparedStatement ps = con.prepareStatement(sql)) {
+	        ps.setDate(1, java.sql.Date.valueOf(from));
+	        ps.setDate(2, java.sql.Date.valueOf(to));
+
+	        ResultSet rs = ps.executeQuery();
+	        while (rs.next()) {
+	            long transactionId = rs.getLong("transaction_id");
+	            int fromAccountId = rs.getInt("from_account_id");
+	            String fromAccount = AdminHistoryFunction.getAccount(fromAccountId).getAccountNumber();
+
+	            int toAccountId = rs.getInt("to_account_id");
+	            String toAccount = "";
+	            Account toAcc = AdminHistoryFunction.getAccount(toAccountId);
+	            if (toAcc != null) {
+	                toAccount = toAcc.getAccountNumber();
+	            }
+
+	            String type = rs.getString("type");
+	            BigDecimal amount = rs.getBigDecimal("amount");
+	            String description = rs.getString("description");
+	            Timestamp createdAt = rs.getTimestamp("created_at");
+
+	            transactions.add(new TransactionAdmin(transactionId, fromAccount, toAccount, type, amount, description, createdAt));
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return transactions;
+	}
+
 }

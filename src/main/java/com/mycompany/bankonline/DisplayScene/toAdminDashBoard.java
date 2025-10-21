@@ -45,4 +45,13 @@ public class toAdminDashBoard {
         stage.setScene(scene);
         stage.show();
     }
+	
+	public static void Bill(Stage stage) throws IOException {
+        Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/Admin/Bill/AdminPaymentBill.fxml"));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/Admin/Bill/StyleAdminPaymentBill.css").toExternalForm());
+        stage.setTitle("DashBoard Scene");
+        stage.setScene(scene);
+        stage.show();
+    }
 }

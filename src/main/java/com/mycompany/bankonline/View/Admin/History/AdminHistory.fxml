@@ -1,70 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="668.0" prefWidth="867.0"
-            xmlns="http://javafx.com/javafx/17"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.mycompany.bankonline.Controller.Admin.ControllerAdminHistory">
+<AnchorPane prefHeight="668.0" prefWidth="867.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.bankonline.Controller.Admin.AdminHistoryController">
 
     <children>
         <!-- Sidebar trái -->
-        <AnchorPane layoutY="120.0" prefHeight="548.0" prefWidth="214.0" styleClass="sidebar">
+        <AnchorPane layoutY="120.0" prefHeight="564.0" prefWidth="214.0" styleClass="sidebar">
             <children>
-                <Button fx:id="AccountButton" layoutX="22.0" layoutY="61.0" onAction="#toAccount"
-                        prefHeight="45.0" prefWidth="180.0" styleClass="sidebar-button" text="👤   Account">
+                <Button fx:id="AccountButton" layoutX="22.0" layoutY="61.0" onAction="#toAccount" prefHeight="45.0" prefWidth="180.0" styleClass="sidebar-button" text="👤   Account">
                     <font>
                         <Font name="Segoe UI Semibold" size="16.0" />
                     </font>
                 </Button>
 
-                <Button fx:id="UserButton" layoutX="22.0" layoutY="130.0" onAction="#toUser"
-                        prefHeight="45.0" prefWidth="180.0" styleClass="sidebar-button" text="👥   User">
+                <Button fx:id="UserButton" layoutX="22.0" layoutY="130.0" onAction="#toUser" prefHeight="45.0" prefWidth="180.0" styleClass="sidebar-button" text="👥   User">
                     <font>
                         <Font name="Segoe UI Semibold" size="16.0" />
                     </font>
                 </Button>
 
-                <Button layoutX="22.0" layoutY="199.0"
-                        prefHeight="45.0" prefWidth="180.0"
-                        styleClass="sidebar-button" text="📜  History">
+                <Button layoutX="22.0" layoutY="198.0" prefHeight="45.0" prefWidth="180.0" styleClass="sidebar-button" text="📜  History">
                     <font>
                         <Font name="Segoe UI Semibold" size="16.0" />
                     </font>
                 </Button>
+            <Button fx:id="BillButton" layoutX="22.0" layoutY="267.0" onAction="#toBill" prefHeight="45.0" prefWidth="180.0" styleClass="sidebar-button" text="💸  Bill">
+               <font>
+                  <Font name="Segoe UI Semibold" size="16.0" />
+               </font>
+            </Button>
             </children>
         </AnchorPane>
 
         <!-- Header -->
         <AnchorPane layoutY="0.0" prefHeight="120.0" prefWidth="941.0" styleClass="header">
             <children>
-                <Button fx:id="LogoutButton" layoutX="776.0" layoutY="42.0" onAction="#backToSignIn"
-                        styleClass="logout-btn" text="Logout" />
+                <Button fx:id="LogoutButton" layoutX="776.0" layoutY="42.0" onAction="#backToSignIn" styleClass="logout-btn" text="Logout" />
                 <Label layoutX="56.0" layoutY="38.0" styleClass="header-title" text="Admin Dashboard" />
             </children>
         </AnchorPane>
 
         <!-- Khu hiển thị bên phải -->
-        <AnchorPane layoutX="210.0" layoutY="120.0"
-                    prefHeight="548.0" prefWidth="731.0"
-                    styleClass="main-content">
+        <AnchorPane layoutX="210.0" layoutY="120.0" prefHeight="548.0" prefWidth="731.0" styleClass="main-content">
 
             <children>
                 <!-- Tiêu đề -->
-                <Label layoutX="37.0" layoutY="18.0"
-                       style="-fx-font-size: 20px; -fx-font-weight: bold;"
-                       text="Transaction History" />
+                <Label layoutX="37.0" layoutY="18.0" style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Transaction History" />
 
                 <!-- Bảng lịch sử giao dịch -->
-                <TableView fx:id="tableHistory"
-                           layoutX="37.0" layoutY="64.0"
-                           prefHeight="500.0" prefWidth="497.0"
-                           styleClass="table-style">
+                <TableView fx:id="tableHistory" layoutX="37.0" layoutY="64.0" prefHeight="500.0" prefWidth="497.0" styleClass="table-style">
                     <columns>
                         <TableColumn fx:id="colTransactionId" prefWidth="100.0" text="Transaction ID" />
                         <TableColumn fx:id="colFromAccount" prefWidth="100.0" text="From Account" />
@@ -75,6 +66,16 @@
                         <TableColumn fx:id="colCreatedAt" prefWidth="120.0" text="Created At" />
                     </columns>
                 </TableView>
+
+                <!-- Bộ lọc ngày tháng -->
+                <Label layoutX="560.0" layoutY="80.0" text="From:" />
+                <DatePicker fx:id="dateFrom" layoutX="605.0" layoutY="75.0" prefWidth="110.0" />
+
+                <Label layoutX="560.0" layoutY="125.0" text="To:" />
+                <DatePicker fx:id="dateTo" layoutX="605.0" layoutY="120.0" prefWidth="110.0" />
+
+                <Button fx:id="FilterButton" layoutX="580.0" layoutY="170.0" onAction="#filterByDate" prefHeight="35.0" prefWidth="110.0" styleClass="action-button" text="Filter" />
+                <Button fx:id="ClearFilterButton" layoutX="580.0" layoutY="225.0" onAction="#clearFilter" prefHeight="35.0" prefWidth="110.0" styleClass="action-button" text="Clear Filter" />
             </children>
         </AnchorPane>
     </children>
