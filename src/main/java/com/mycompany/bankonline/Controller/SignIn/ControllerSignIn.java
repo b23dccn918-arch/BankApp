@@ -76,7 +76,20 @@ public class ControllerSignIn {
 		Scene currentScene = clickedButton.getScene();
 		Stage currentStage = (Stage) currentScene.getWindow();	
 		
-		if(!SignInHandler.checkStatus(username, password)) {
+		
+		
+		if(SignInHandler.checkSignIn(username, password) == true) {
+			toDashBoard.DashBoard(currentStage);
+		}
+		else if(SignInHandler.checkSignIn(username, password) == false){
+			Alert signInFailed = new Alert(Alert.AlertType.ERROR);
+			signInFailed.setTitle("Sign In Failed");
+			signInFailed.setContentText("Username or password is incorrect !");
+			signInFailed.show();
+			return;
+		}
+		
+		else if(!SignInHandler.checkStatus(username, password)) {
 			Alert signInFailed = new Alert(Alert.AlertType.ERROR);
 			signInFailed.setTitle("Sign In Failed");
 			signInFailed.setContentText("Your account is currently locked. Please contact support for assistance !");
@@ -84,16 +97,6 @@ public class ControllerSignIn {
 			return;
 		}
 		
-		
-		if(SignInHandler.checkSignIn(username, password) == true) {
-			toDashBoard.DashBoard(currentStage);
-		}
-		else {
-			Alert signInFailed = new Alert(Alert.AlertType.ERROR);
-			signInFailed.setTitle("Sign In Failed");
-			signInFailed.setContentText("Username or password is incorrect !");
-			signInFailed.show();
-		}
 	} 
 
 	
