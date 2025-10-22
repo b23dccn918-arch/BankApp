@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.mycompany.bankonline.Controller.ResetPinDialog.ResetPinDialogController"
+      alignment="CENTER" spacing="15" prefWidth="300" prefHeight="250"
+      style="-fx-padding: 20; -fx-background-color: white; -fx-border-color: #ccc; -fx-border-radius: 10; -fx-background-radius: 10;">
+
+    <Label text="Đặt lại mã PIN mới" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+    <PasswordField fx:id="newPinField" promptText="Nhập mã PIN mới (6 chữ số)"/>
+    <PasswordField fx:id="confirmPinField" promptText="Xác nhận mã PIN"/>
+
+    <HBox spacing="10" alignment="CENTER">
+        <Button fx:id="saveButton" text="Lưu" style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+        <Button fx:id="cancelButton" text="Hủy" style="-fx-background-color: #E53935; -fx-text-fill: white;"/>
+    </HBox>
+
+    <Label fx:id="errorLabel" textFill="red"/>
+</VBox>

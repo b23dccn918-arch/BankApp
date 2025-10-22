@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import com.mycompany.bankonline.Controller.Transfer.PinDialogController;
+import com.mycompany.bankonline.Controller.PinDialog.PinDialogController;
 import com.mycompany.bankonline.Database.Account.AccountHandler;
 import com.mycompany.bankonline.Database.Payment.PaymentHandler;
 import com.mycompany.bankonline.DisplayScene.toSignIn;
@@ -191,6 +191,19 @@ public class PaymentController implements Initializable {
     private void loadData() {
         int accountId = Session.getInstance().getAccountId();
         balanceField.setText(String.format("%,.0f VND", accountHandler.getBalanceByAccountId(accountId)));
+        
+        String selected = statusFilterCombo.getValue();
+
+        List<Bill> filteredList;
+
+        if (selected == null || selected.equals("Tất cả")) {
+            filteredList = paymentHandler.getBillsByAccountId(accountId);
+        } else if (selected.equals("Đã thanh toán")) {
+            filteredList = paymentHandler.getBillsByStatus(accountId, "paid");
+        } else {
+            filteredList = paymentHandler.getBillsByStatus(accountId, "unpaid");
+        }
+
         billTable.setItems(paymentHandler.getBillsByAccountId(accountId));
         billIdCombo.setItems(paymentHandler.getUnpaidBillIds(accountId));
     }

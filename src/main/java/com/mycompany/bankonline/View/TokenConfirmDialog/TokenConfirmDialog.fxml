@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.mycompany.bankonline.Controller.TokenConfirmDialog.TokenConfirmDialogController"
+      alignment="CENTER" spacing="15" prefWidth="320" prefHeight="220"
+      style="-fx-padding: 20; -fx-background-color: white; -fx-border-color: #ccc;
+             -fx-border-radius: 10; -fx-background-radius: 10;">
+
+    <Label text="Xác minh mã xác thực" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+    <Label fx:id="emailLabel" text="Mã xác thực đã được gửi đến email của bạn."
+           wrapText="true" style="-fx-font-size: 12px; -fx-text-fill: #555; -fx-alignment: center;"/>
+        <Label fx:id="timerLabel" text="05:00" style="-fx-font-size: 14px; -fx-text-fill: #0c0909ff;" />
+    <TextField fx:id="tokenField" promptText="Nhập mã 6 chữ số"
+               style="-fx-font-size: 16px; -fx-alignment: center; -fx-pref-width: 200;"/>
+
+    <HBox spacing="10" alignment="CENTER">
+        <Button fx:id="confirmButton" text="Xác nhận"
+                style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+        <Button fx:id="cancelButton" text="Hủy"
+                style="-fx-background-color: #E53935; -fx-text-fill: white;"/>
+    </HBox>
+
+    <Label fx:id="errorLabel" textFill="red" style="-fx-font-size: 12px;"/>
+</VBox>

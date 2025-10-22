@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.mycompany.bankonline.Controller.PinDialog.PinDialogController;
 import com.mycompany.bankonline.Database.Account.AccountHandler;
 import com.mycompany.bankonline.Database.Transfer.TransferHandler;
 import com.mycompany.bankonline.DisplayScene.toSignIn;
@@ -42,11 +43,6 @@ public class TransferController implements Initializable {
     @FXML
     private TextField messageField;
 
-    @FXML
-    private Label statusFailedLabel;
-    
-    @FXML
-    private Label statusSuccessLabel;
 
     @FXML
     private Label balanceField;
@@ -93,10 +89,7 @@ public class TransferController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         transferButtonSubmit.setOnAction(this::handleTransfer);
         
-        // Gán sự kiện cho các nút
         balanceField.setText(String.format("%,.0f VND", accountHandler.getBalanceByAccountId(Session.getInstance().getAccountId())));
-        statusFailedLabel.setVisible(false);
-        statusSuccessLabel.setVisible(false);
         homeButton.setOnAction(event -> {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
@@ -159,7 +152,6 @@ public class TransferController implements Initializable {
 
     private void handleTransfer(ActionEvent event) {
          try {
-             // Mở hộp thoại nhập PIN
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/mycompany/bankonline/View/PinDialog/PinDialog.fxml"));
         Parent root = loader.load();
 
@@ -170,7 +162,6 @@ public class TransferController implements Initializable {
         pinStage.initModality(Modality.APPLICATION_MODAL); // Chặn các cửa sổ khác
         pinStage.showAndWait();
 
-        // Lấy controller để kiểm tra kết quả
         PinDialogController pinController = loader.getController();
         if (!pinController.isPinConfirmed()) {
             showMessage("Thông báo", "Giao dịch bị hủy!");
@@ -179,7 +170,6 @@ public class TransferController implements Initializable {
 
         String enteredPin = pinController.getEnteredPin();
 
-        // Giả sử bạn có biến currentAccountPin trong session (hoặc lấy từ DB)
         String currentAccountPin = accountHandler.getPinByAccountId(Session.getInstance().getAccountId());
         if (!enteredPin.equals(currentAccountPin)) {
             showMessage("Thông báo", "Mã PIN không chính xác!");
@@ -195,9 +185,6 @@ public class TransferController implements Initializable {
         String amountText = amountField.getText().trim();
         String message = messageField.getText().trim();
 
-        // Reset label mỗi lần nhấn
-        statusFailedLabel.setVisible(false);
-        statusSuccessLabel.setVisible(false);
 
         if (recipient.isEmpty() || amountText.isEmpty()) {
             showErrorAlert("Vui lòng nhập đầy đủ thông tin.");

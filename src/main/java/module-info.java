@@ -22,8 +22,14 @@ module com.mycompany.bankonline {
     opens com.mycompany.bankonline.Controller.ForgotPassword to javafx.fxml;
     opens com.mycompany.bankonline.Controller.ConfirmToken to javafx.fxml;
     opens com.mycompany.bankonline.Controller.ResetPassword to javafx.fxml;
+    opens com.mycompany.bankonline.Controller.PinDialog to javafx.fxml;
     opens com.mycompany.bankonline.Controller.ChangePassword to javafx.fxml;
+    opens com.mycompany.bankonline.Controller.TokenConfirmDialog to javafx.fxml;
+    opens com.mycompany.bankonline.Controller.ResetPinDialog to javafx.fxml;
+    exports com.mycompany.bankonline.Controller.ResetPinDialog;
     exports com.mycompany.bankonline.Controller.ConfirmToken;
+    exports com.mycompany.bankonline.Controller.TokenConfirmDialog;
+    exports com.mycompany.bankonline.Controller.PinDialog;
     exports com.mycompany.bankonline.Controller.ResetPassword;
     exports com.mycompany.bankonline.Controller.DashBoard;
     exports com.mycompany.bankonline.Controller.UserInfo;

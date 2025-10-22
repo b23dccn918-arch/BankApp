@@ -40,7 +40,7 @@ public class ConfirmTokenController {
         this.email = email;
         emailLabel.setText("Email: " + email);
     }
-    private int timeSeconds = 300; // 5 phút = 300 giây
+    private int timeSeconds = 300; 
     private Timeline timeline;
 
     @FXML
