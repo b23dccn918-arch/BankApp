@@ -61,16 +61,11 @@
             <!-- Form nhập -->
             <VBox spacing="15" alignment="CENTER">
                 <VBox spacing="5" alignment="CENTER_LEFT">
-                    <Label text="Số điện thoại:" styleClass="form-label"/>
-                    <TextField fx:id="recipientAccountField" promptText="Nhập số điện thoại" styleClass="form-field"/>
-                </VBox>
-
-                <VBox spacing="5" alignment="CENTER_LEFT">
                     <Label text="Số tiền rút:" styleClass="form-label"/>
                     <TextField fx:id="amountField" promptText="Nhập số tiền rút" styleClass="form-field"/>
                 </VBox>
 
-                <Button fx:id="transferButtonSubmit" text="Rút tiền" styleClass="confirm-button"/>
+                <Button fx:id="withdrawButtonSubmit" text="Rút tiền" styleClass="confirm-button"/>
                 <Label fx:id="statusLabel" text="" style="-fx-font-weight: bold;"/>
             </VBox>
         </VBox>

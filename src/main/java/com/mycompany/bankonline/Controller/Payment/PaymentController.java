@@ -40,7 +40,7 @@ public class PaymentController implements Initializable {
     @FXML
     private TableView<Bill> billTable;
     @FXML
-    private TableColumn<Bill, String> billIdCol, billTypeCol, billStatusCol, billDueCol, billCreatedCol;
+    private TableColumn<Bill, String> billIdCol, billTypeCol, billStatusCol, billDueCol, billCreatedCol,billPaidCol;
     @FXML
     private TableColumn<Bill, Double> billAmountCol;
     @FXML
@@ -186,6 +186,7 @@ public class PaymentController implements Initializable {
         });
         billDueCol.setCellValueFactory(data -> data.getValue().dueDateProperty());
         billCreatedCol.setCellValueFactory(data -> data.getValue().createdAtProperty());
+        billPaidCol.setCellValueFactory(data -> data.getValue().paidAtProperty());
     }
 
     private void loadData() {

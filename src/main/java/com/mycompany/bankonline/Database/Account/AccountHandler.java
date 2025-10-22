@@ -1,14 +1,48 @@
 package com.mycompany.bankonline.Database.Account;
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 import com.mycompany.bankonline.Database.Connect;
 
 public class AccountHandler {
+
+    public static boolean withdrawMoney(int accountId, double amount, Timestamp timestamp) {
+        String sqlUpdateBalance = "UPDATE accounts SET balance = balance - ? WHERE account_id = ?";
+        String sqlInsertTransaction = 
+            "INSERT INTO transactions (from_account_id, to_account_id, bill_id, type, amount, description, created_at) " +
+            "VALUES (?, NULL, NULL, 'withdraw', ?, 'Rút tiền từ tài khoản', ?)";
+
+        try (Connection conn = Connect.getConnection();
+            PreparedStatement stmtUpdate = conn.prepareStatement(sqlUpdateBalance);
+            PreparedStatement stmtInsert = conn.prepareStatement(sqlInsertTransaction)) {
+
+            conn.setAutoCommit(false);
+
+            stmtUpdate.setDouble(1, amount);
+            stmtUpdate.setInt(2, accountId);
+            stmtUpdate.executeUpdate();
+
+            stmtInsert.setInt(1, accountId);
+            stmtInsert.setDouble(2, amount);
+            stmtInsert.setTimestamp(3, timestamp);
+            stmtInsert.executeUpdate();
+
+            conn.commit();
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
     public double getBalanceByAccountId(int accountId) {
         String sql = "SELECT balance FROM accounts WHERE account_id = ?";
 
@@ -30,6 +64,37 @@ public class AccountHandler {
             return -1;
         }
     }
+
+    public boolean depositMoney(int accountId, double amount, Timestamp timestamp) {
+        String sqlUpdateBalance = "UPDATE accounts SET balance = balance + ? WHERE account_id = ?";
+        String sqlInsertTransaction = 
+            "INSERT INTO transactions (from_account_id, to_account_id, bill_id, type, amount, description, created_at) " +
+            "VALUES (?, NULL, NULL, 'deposit', ?, 'Nạp tiền vào tài khoản', ?)";
+
+        try (Connection conn = Connect.getConnection();
+            PreparedStatement stmtUpdate = conn.prepareStatement(sqlUpdateBalance);
+            PreparedStatement stmtInsert = conn.prepareStatement(sqlInsertTransaction)) {
+
+            conn.setAutoCommit(false);
+
+            stmtUpdate.setDouble(1, amount);
+            stmtUpdate.setInt(2, accountId);
+            stmtUpdate.executeUpdate();
+
+            stmtInsert.setInt(1, accountId);
+            stmtInsert.setDouble(2, amount);
+            stmtInsert.setTimestamp(3, timestamp);
+            stmtInsert.executeUpdate();
+
+            conn.commit();
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 
     public String getEmailByAccountId(int accountId) {
         String sql = "SELECT u.email FROM users u "

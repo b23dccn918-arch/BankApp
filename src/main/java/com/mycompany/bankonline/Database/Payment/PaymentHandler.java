@@ -33,10 +33,12 @@ public class PaymentHandler {
                 String billType = rs.getString("bill_type");
                 double amount = rs.getDouble("amount");
                 String status = rs.getString("status");
+                String payAt = rs.getTimestamp("paid_at") != null ?
+                        rs.getTimestamp("paid_at").toLocalDateTime().format(fmt) : "--/--";
                 String due = rs.getTimestamp("due_date").toLocalDateTime().format(fmt);
                 String created = rs.getTimestamp("created_at").toLocalDateTime().format(fmt);
 
-                bills.add(new Bill(billId, billType, amount, status, due, created));
+                bills.add(new Bill(billId, billType, amount, status, due,payAt, created));
             }
 
         } catch (SQLException e) {
@@ -94,7 +96,6 @@ public class PaymentHandler {
                 return 2; // Hóa đơn đã thanh toán
             }
 
-            // Kiểm tra số dư tài khoản
             String balanceQuery = "SELECT balance FROM accounts WHERE account_id = ?";
             PreparedStatement accStmt = conn.prepareStatement(balanceQuery);
             accStmt.setInt(1, accountId);
@@ -110,7 +111,6 @@ public class PaymentHandler {
                 return 1; // Không đủ số dư
             }
 
-            // Trừ tiền và cập nhật hóa đơn
             String updateBalance = "UPDATE accounts SET balance = balance - ? WHERE account_id = ?";
             PreparedStatement updateStmt = conn.prepareStatement(updateBalance);
             updateStmt.setDouble(1, amount);

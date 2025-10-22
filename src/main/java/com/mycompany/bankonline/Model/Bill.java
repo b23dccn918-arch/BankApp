@@ -8,14 +8,16 @@ public class Bill {
     private final DoubleProperty amount;
     private final StringProperty status;
     private final StringProperty dueDate;
+    private final StringProperty paidAt;
     private final StringProperty createdAt;
 
-    public Bill(long billId, String billType, double amount, String status, String dueDate, String createdAt) {
+    public Bill(long billId, String billType, double amount, String status, String dueDate,String paidAt ,String createdAt) {
         this.billId = new SimpleStringProperty(String.valueOf(billId));
         this.billType = new SimpleStringProperty(billType);
         this.amount = new SimpleDoubleProperty(amount);
         this.status = new SimpleStringProperty(status);
         this.dueDate = new SimpleStringProperty(dueDate);
+        this.paidAt = new SimpleStringProperty(paidAt);
         this.createdAt = new SimpleStringProperty(createdAt);
     }
 
@@ -49,6 +51,7 @@ public class Bill {
         this.amount = new SimpleDoubleProperty(builder.amount);
         this.status = new SimpleStringProperty(builder.status);
         this.dueDate = new SimpleStringProperty(builder.dueDate);
+        this.paidAt = new SimpleStringProperty(builder.payAt);
         this.createdAt = new SimpleStringProperty(builder.createdAt);
     }
 
@@ -58,6 +61,7 @@ public class Bill {
     public StringProperty statusProperty() { return status; }
     public StringProperty dueDateProperty() { return dueDate; }
     public StringProperty createdAtProperty() { return createdAt; }
+    public StringProperty paidAtProperty() { return paidAt; }
     public static class Builder {
         private long billId;
         private String billType;
@@ -65,7 +69,7 @@ public class Bill {
         private String status;
         private String dueDate;
         private String createdAt;
-
+        private String payAt;
         public Builder(){
             
         }
@@ -92,6 +96,11 @@ public class Bill {
 
         public Builder dueDate(String dueDate) {
             this.dueDate = dueDate;
+            return this;
+        }
+
+        public Builder payAt(String payAt) {
+            this.payAt = payAt;
             return this;
         }
 

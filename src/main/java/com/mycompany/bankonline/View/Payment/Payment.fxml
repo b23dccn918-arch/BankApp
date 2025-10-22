@@ -83,6 +83,7 @@
                         <TableColumn fx:id="billAmountCol" text="Số tiền (VND)" prefWidth="120"/>
                         <TableColumn fx:id="billStatusCol" text="Trạng thái" prefWidth="100"/>
                         <TableColumn fx:id="billDueCol" text="Hạn thanh toán" prefWidth="150"/>
+                        <TableColumn fx:id="billPaidCol" text="Ngày thanh toán" prefWidth="150" />
                         <TableColumn fx:id="billCreatedCol" text="Ngày tạo" prefWidth="150"/>
                     </columns>
                 </TableView>
