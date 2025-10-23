@@ -179,7 +179,7 @@ public class AdminAccountController {
         String idText = AccountID.getText().trim();
 
         if (idText.isEmpty()) {
-            showAlert(AlertType.WARNING, "Missing Input", "Please enter an Account ID to ban.");
+            showAlert(AlertType.WARNING, "Missing Input", "Please enter an Account ID to ban !");
             return;
         }
 

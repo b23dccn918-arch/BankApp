@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
+import com.mycompany.bankonline.Database.Admin.Account.AdminAccountFunction;
+import com.mycompany.bankonline.Database.Admin.PaymentBill.AdminPaymentBillFunction;
 import com.mycompany.bankonline.Database.Admin.PaymentBill.PaymentBillRepository;
 import com.mycompany.bankonline.DisplayScene.toAdminDashBoard;
 import com.mycompany.bankonline.Model.Account;
@@ -18,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
@@ -29,6 +32,9 @@ public class AdminPaymentBillController {
 	
 	@FXML
     private Button UpdateButton, LogoutButton;
+	
+	@FXML
+	private TextField BillID;
 	
 	@FXML
     private TableView<BillAdmin> tableBill;
@@ -143,8 +149,46 @@ public class AdminPaymentBillController {
         showBillTable();
     }
     
+    private void showAlert(AlertType type, String title, String message) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+    
     @FXML
 	public void updateBill(ActionEvent event) {
-		
+		String idText = BillID.getText().trim();
+		if (idText.isEmpty()) {
+            showAlert(AlertType.WARNING, "Missing Input", "Please enter an Bill ID to update !");
+            return;
+        }
+		try {
+			int billId = Integer.parseInt(idText);
+			BillAdmin bill = AdminPaymentBillFunction.getBillById(billId);
+			if(bill == null) {
+				showAlert(AlertType.ERROR, "Not Found", "No bill found with ID " + billId + "!");
+                return;
+			}
+			
+			if(bill.getStatus().equals("unpaid")) {
+				showAlert(AlertType.ERROR, "Failed", "Invoice pending payment !");
+			}
+			
+			boolean success = AdminPaymentBillFunction.updateBill(billId);
+			
+			if (success) {
+                showAlert(AlertType.INFORMATION, "Success", "Bill ID " + billId + " has been updated successfully.");
+                showBillTable();
+            } else {
+                showAlert(AlertType.ERROR, "Error", "Failed to update this bill !");
+            }
+		}catch (NumberFormatException e) {
+            showAlert(AlertType.WARNING, "Invalid Input", "Bill ID must be a valid integer !");
+        } catch (Exception e) {
+            showAlert(AlertType.ERROR, "Error", "An unexpected error occurred: " + e.getMessage());
+            e.printStackTrace();
+        }
 	}
 }
