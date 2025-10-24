@@ -68,7 +68,7 @@
 
 				<TextField fx:id="UserID" layoutX="560.0" layoutY="77.0" promptText="User ID" styleClass="input-id" />
 
-				<Button fx:id="BanButton" layoutX="603.0" layoutY="134.0" onAction="#banUser" styleClass="action-button" text="Ban" />
+				<Button fx:id="BanButton" layoutX="603.0" layoutY="137.0" onAction="#banUser" prefHeight="26.0" prefWidth="82.0" styleClass="action-button" text="Ban" />
 				<Button fx:id="UnBanButton" layoutX="603.0" layoutY="189.0" onAction="#unBanUser" styleClass="action-button" text="Unban" />
 				<Button fx:id="DeleteButton" layoutX="603.0" layoutY="242.0" onAction="#deleteUser" styleClass="delete-button" text="Delete" />
         

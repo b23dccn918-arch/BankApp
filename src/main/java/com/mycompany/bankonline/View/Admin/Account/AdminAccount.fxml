@@ -66,7 +66,7 @@
 
 				<TextField fx:id="AccountID" layoutX="560.0" layoutY="77.0" promptText="Account ID" styleClass="input-id" />
 
-				<Button fx:id="BanButton" layoutX="603.0" layoutY="134.0" onAction="#banAccount" styleClass="action-button" text="Ban" />
+				<Button fx:id="BanButton" layoutX="603.0" layoutY="137.0" onAction="#banAccount" prefHeight="26.0" prefWidth="81.0" styleClass="action-button" text="Ban" />
 				<Button fx:id="UnBanButton" layoutX="603.0" layoutY="189.0" onAction="#unBanAccount" styleClass="action-button" text="Unban" />
 				<Button fx:id="DeleteButton" layoutX="603.0" layoutY="242.0" onAction="#deleteAccount" styleClass="delete-button" text="Delete" />
             <Label layoutX="37.0" layoutY="18.0" style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Account Management" />

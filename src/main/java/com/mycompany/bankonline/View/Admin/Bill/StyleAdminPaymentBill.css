@@ -119,7 +119,7 @@
     -fx-font-family: "Segoe UI Semibold";
     -fx-background-radius: 14;
     -fx-cursor: hand;
-    -fx-padding: 8 20;
+    -fx-padding: 8 16;
     -fx-border-color: transparent;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 6, 0, 0, 3);
     -fx-transition: 0.25s;
@@ -132,26 +132,7 @@
     -fx-scale-y: 1.08;
 }
 
-/* ================= Nút Delete riêng (màu đỏ cảnh báo) ================= */
-.delete-button {
-    -fx-background-color: linear-gradient(to right, #8B0000, #B22222);
-    -fx-text-fill: white;
-    -fx-font-size: 14px;
-    -fx-font-family: "Segoe UI Semibold";
-    -fx-background-radius: 14;
-    -fx-cursor: hand;
-    -fx-padding: 8 20;
-    -fx-border-color: transparent;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 7, 0, 0, 2);
-    -fx-transition: 0.25s;
-}
 
-.delete-button:hover {
-    -fx-background-color: linear-gradient(to right, #B22222, #FF0000);
-    -fx-effect: dropshadow(gaussian, rgba(255,0,0,0.7), 12, 0, 0, 0);
-    -fx-scale-x: 1.1;
-    -fx-scale-y: 1.1;
-}
 
 
 
