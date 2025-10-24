@@ -35,7 +35,7 @@
                   AnchorPane.rightAnchor="0">
 
                 <Button fx:id="homeButton" text="🏠  Home" prefWidth="180" styleClass="sidebar-button"/>
-                <Button fx:id="accountButton" text="👤  Account" prefWidth="180" styleClass="sidebar-button"/>
+                <Button fx:id="accountButton" text="👤  User Info" prefWidth="180" styleClass="sidebar-button"/>
                 <Button fx:id="transferButton" text="💸  Transfer" prefWidth="180" styleClass="sidebar-button"/>
                 <Button fx:id="withdrawButton" text="💰  Withdraw" prefWidth="180" styleClass="sidebar-button"/>
                 <Button fx:id="depositButton" text="💵  Deposit" prefWidth="180" styleClass="sidebar-button"/>
@@ -60,9 +60,11 @@
 
             <!-- Form -->
             <VBox spacing="15">
+            
                 <VBox spacing="5" alignment="CENTER_LEFT">
                     <Label text="Số tài khoản người nhận:" styleClass="form-label"/>
                     <TextField fx:id="recipientAccountField" promptText="Nhập số tài khoản người nhận" styleClass="form-field"/>
+                    <Label fx:id="recipientNameLabel" text="" style="-fx-text-fill: #2a72de; -fx-font-weight: bold;"/>
                 </VBox>
 
                 <VBox spacing="5" alignment="CENTER_LEFT">

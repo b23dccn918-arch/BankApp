@@ -67,15 +67,32 @@ public class DashBoardController implements Initializable {
     @FXML
     private Button depositButton;
 
+    @FXML
+    private Button toggleBalanceButton;
+    private boolean isBalanceVisible = false;
+    private double currentBalance = 0;
+
     private final AccountHandler accountHandler = new AccountHandler();
     private final UserInfoHandler userInfoHandler = new UserInfoHandler();
     private final TransactionHandler transactionHandler = new TransactionHandler();
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        currentBalance = accountHandler.getBalanceByAccountId(Session.getInstance().getAccountId());
+        toggleBalanceButton.setOnAction(e -> {
+            isBalanceVisible = !isBalanceVisible;
+            if (isBalanceVisible) {
+                balanceField.setText(String.format("%,.0f VND", currentBalance));
+                toggleBalanceButton.setText("Ẩn");
+            } else {
+                balanceField.setText("•••••••• VND");
+                toggleBalanceButton.setText("Hiện");
+            }
+        });
+
         loadNotifications(Session.getInstance().getAccountId());
         loadUserInfo(Session.getInstance().getUserId());
         accountNumberField.setText(formatAccountNumber(accountHandler.getAccountNumberByAccountId(Session.getInstance().getAccountId())));
-        balanceField.setText(String.format("%,.0f VND", accountHandler.getBalanceByAccountId(Session.getInstance().getAccountId())));
+        
         // Gán sự kiện cho các nút
         homeButton.setOnAction(event -> {
             try {

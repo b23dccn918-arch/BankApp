@@ -125,7 +125,45 @@
     -fx-scale-y: 0.95;
 }
 
-/* Tổng thể */
+
 .root, .mainFxmlClass {
     -fx-background-color: #FAFAFA;
 }
+
+
+.form-field {
+    -fx-background-color: #f7f9fc;
+    -fx-border-color: #d0d7de;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 8 10;
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+    -fx-prompt-text-fill: #999;
+}
+
+.form-field:focused {
+    -fx-border-color: #2a72de;
+    -fx-background-color: #ffffff;
+    -fx-effect: dropshadow(three-pass-box, rgba(42,114,222,0.2), 5, 0, 0, 2);
+}
+
+.form-label {
+    -fx-font-size: 13px;
+    -fx-text-fill: #555;
+    -fx-font-weight: bold;
+}
+
+#recipientNameLabel {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2a72de; 
+    -fx-opacity: 0; 
+    -fx-transition: opacity 0.5s ease-in-out;
+}
+
+/* ⚠️ Khi lỗi */
+#recipientNameLabel.error {
+    -fx-text-fill: #d93025;
+}
+

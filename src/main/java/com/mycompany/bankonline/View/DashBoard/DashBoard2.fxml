@@ -10,7 +10,6 @@
             fx:controller="com.mycompany.bankonline.Controller.DashBoard.DashBoardController"
             styleClass="dashboard-root">
 
-    <!-- 🔷 HEADER -->
     <top>
         <AnchorPane prefHeight="70" styleClass="header-container">
             <children>
@@ -21,7 +20,6 @@
         </AnchorPane>
     </top>
 
-    <!-- 🧭 SIDEBAR -->
     <left>
         <AnchorPane prefHeight="600" prefWidth="200"
                     styleClass="sidebar-container"
@@ -52,10 +50,20 @@
 
             <!-- Thông tin chính -->
             <HBox spacing="20" alignment="CENTER">
-                <VBox styleClass="info-box">
-                    <Label text="Số dư hiện tại" styleClass="info-title"/>
-                    <Label fx:id="balanceField" text="15,000,000 VND" styleClass="info-value"/>
-                </VBox>
+                <VBox prefWidth="250" styleClass="info-box" alignment="CENTER">
+    <!-- Dòng tiêu đề + icon 👁 -->
+    <HBox spacing="5" alignment="CENTER">
+        <Label text="Số dư hiện tại" styleClass="info-title"/>
+        <Button fx:id="toggleBalanceButton"
+                text="Hiện"
+                styleClass="toggle-button"
+                style="-fx-background-color: transparent; -fx-font-size: 14px; -fx-cursor: hand; -fx-padding: 0;" />
+    </HBox>
+
+    <!-- Số dư -->
+    <Label fx:id="balanceField" text="•••••••• VND" styleClass="info-value"/>
+</VBox>
+
 
                 <VBox styleClass="info-box">
                     <Label text="Số tài khoản" styleClass="info-title"/>

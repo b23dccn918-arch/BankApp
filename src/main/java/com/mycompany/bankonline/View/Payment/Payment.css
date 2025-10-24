@@ -148,6 +148,6 @@
 .bill-table .column-header-background {
     -fx-background-color: #D6EAF8;
 }
-.bill-table .table-row-cell:hover {
+/* .bill-table .table-row-cell:hover {
     -fx-background-color: #EBF5FB;
-}
+} */

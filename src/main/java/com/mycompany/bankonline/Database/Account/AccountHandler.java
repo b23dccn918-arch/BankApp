@@ -137,6 +137,29 @@ public class AccountHandler {
         }
     }
 
+    public String getUserNameByAccountNumber(String accountNumber){
+        String sql = "SELECT u.full_name FROM users u "
+                     + "JOIN accounts a ON u.user_id = a.user_id "
+                     + "WHERE a.account_number = ?";
+    
+          try (Connection conn = Connect.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+    
+                stmt.setString(1, accountNumber);
+                ResultSet rs = stmt.executeQuery();
+    
+                if (rs.next()) {
+                    return rs.getString("full_name");
+                } else {
+                    return null;
+                }
+    
+          } catch (SQLException e) {
+                e.printStackTrace();
+                return null;
+          }
+    }
+
     public String getAccountNumberByAccountId(int accountId) {
         String sql = "SELECT account_number FROM accounts WHERE account_id = ?";
 

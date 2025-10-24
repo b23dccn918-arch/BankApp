@@ -15,6 +15,7 @@ import com.mycompany.bankonline.DisplayScene.toSignIn;
 import com.mycompany.bankonline.MainApp.Main;
 import com.mycompany.bankonline.Session.Session;
 
+import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,6 +29,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  * FXML Controller class
@@ -38,6 +40,11 @@ public class TransferController implements Initializable {
 
     @FXML
     private TextField recipientAccountField;
+
+
+    @FXML
+    private Label recipientNameLabel;
+
     @FXML
     private TextField amountField;
     @FXML
@@ -87,6 +94,17 @@ public class TransferController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        recipientAccountField.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
+            if (!isNowFocused) { 
+                String accountNumber = recipientAccountField.getText().trim();
+                if (!accountNumber.isEmpty()) {
+                    loadRecipientName(accountNumber);
+                } else {
+                    recipientNameLabel.setText("");
+                }
+            }
+        });
+
         transferButtonSubmit.setOnAction(this::handleTransfer);
         
         balanceField.setText(String.format("%,.0f VND", accountHandler.getBalanceByAccountId(Session.getInstance().getAccountId())));
@@ -211,6 +229,31 @@ public class TransferController implements Initializable {
             showErrorAlert("Số tiền không hợp lệ.");
         }
     }
+
+    private void loadRecipientName(String accountNumber) {
+        try {
+            String recipientName = accountHandler.getUserNameByAccountNumber(accountNumber);
+            String currentAccountNumber = accountHandler.getAccountNumberByAccountId(Session.getInstance().getAccountId());
+            if (accountNumber.equals(currentAccountNumber)) {
+                recipientNameLabel.setText("Không thể chuyển cho chính tài khoản của bạn!");
+                return;
+            }
+            if (recipientName != null) {
+                recipientNameLabel.setText("Người nhận: " + recipientName);
+            } else {
+                recipientNameLabel.setText("Tài khoản không tồn tại!");
+            }
+            FadeTransition fade = new FadeTransition(Duration.millis(400), recipientNameLabel);
+            fade.setFromValue(0);
+            fade.setToValue(1);
+            fade.play();
+
+        } catch (Exception e) {
+            recipientNameLabel.setText("Lỗi khi truy vấn!");
+            e.printStackTrace();
+        }
+    }
+
 
     private void showMessage(String title, String content) {
         Alert alert = new Alert(AlertType.INFORMATION);
