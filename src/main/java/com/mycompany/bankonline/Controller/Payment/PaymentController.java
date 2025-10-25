@@ -2,8 +2,6 @@ package com.mycompany.bankonline.Controller.Payment;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -40,7 +38,7 @@ public class PaymentController implements Initializable {
     @FXML
     private TableView<Bill> billTable;
     @FXML
-    private TableColumn<Bill, String> billIdCol, billTypeCol, billStatusCol, billDueCol, billCreatedCol,billPaidCol;
+    private TableColumn<Bill, String> billIdCol, billTypeCol, billStatusCol, billDueCol, billCreatedCol, billPaidCol;
     @FXML
     private TableColumn<Bill, Double> billAmountCol;
     @FXML
@@ -71,7 +69,6 @@ public class PaymentController implements Initializable {
     @FXML
     private Button logoutButton;
 
-
     @FXML
     private Button depositButton;
 
@@ -88,9 +85,9 @@ public class PaymentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         statusFilterCombo.getItems().addAll(
-            "Tất cả",
-            "Đã thanh toán",
-            "Chưa thanh toán"
+            "All",
+            "Paid",
+            "Unpaid"
         );
 
         setupColumns();
@@ -158,7 +155,6 @@ public class PaymentController implements Initializable {
             }
         });
         logoutButton.setOnAction(e -> handleLogout());
-
     }
 
     private void setupColumns() {
@@ -180,7 +176,7 @@ public class PaymentController implements Initializable {
                 String normalized = status.trim().toLowerCase();
                 boolean isPaid = normalized.equals("paid");
 
-                setText(isPaid ? "Đã thanh toán" : "Chưa thanh toán");
+                setText(isPaid ? "Paid" : "Unpaid");
                 setStyle("-fx-text-fill: " + (isPaid ? "green;" : "orange;") + "-fx-font-weight: bold;");
             }
         });
@@ -192,14 +188,14 @@ public class PaymentController implements Initializable {
     private void loadData() {
         int accountId = Session.getInstance().getAccountId();
         balanceField.setText(String.format("%,.0f VND", accountHandler.getBalanceByAccountId(accountId)));
-        
+
         String selected = statusFilterCombo.getValue();
 
         List<Bill> filteredList;
 
-        if (selected == null || selected.equals("Tất cả")) {
+        if (selected == null || selected.equals("All")) {
             filteredList = paymentHandler.getBillsByAccountId(accountId);
-        } else if (selected.equals("Đã thanh toán")) {
+        } else if (selected.equals("Paid")) {
             filteredList = paymentHandler.getBillsByStatus(accountId, "paid");
         } else {
             filteredList = paymentHandler.getBillsByStatus(accountId, "unpaid");
@@ -216,9 +212,9 @@ public class PaymentController implements Initializable {
 
         int accountId = Session.getInstance().getAccountId();
 
-        if (selected == null || selected.equals("Tất cả")) {
+        if (selected == null || selected.equals("All")) {
             filteredList = paymentHandler.getBillsByAccountId(accountId);
-        } else if (selected.equals("Đã thanh toán")) {
+        } else if (selected.equals("Paid")) {
             filteredList = paymentHandler.getBillsByStatus(accountId, "paid");
         } else {
             filteredList = paymentHandler.getBillsByStatus(accountId, "unpaid");
@@ -227,75 +223,70 @@ public class PaymentController implements Initializable {
         billTable.setItems(FXCollections.observableArrayList(filteredList));
     }
 
-
     private void handlePayBill() {
-         try {
-             // Mở hộp thoại nhập PIN
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/mycompany/bankonline/View/PinDialog/PinDialog.fxml"));
-        Parent root = loader.load();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/mycompany/bankonline/View/PinDialog/PinDialog.fxml"));
+            Parent root = loader.load();
 
-        Stage pinStage = new Stage();
-        pinStage.setTitle("Xác nhận mã PIN");
-        pinStage.setScene(new Scene(root));
-        pinStage.setResizable(false);
-        pinStage.initModality(Modality.APPLICATION_MODAL); // Chặn các cửa sổ khác
-        pinStage.showAndWait();
+            Stage pinStage = new Stage();
+            pinStage.setTitle("Enter PIN Code");
+            pinStage.setScene(new Scene(root));
+            pinStage.setResizable(false);
+            pinStage.initModality(Modality.APPLICATION_MODAL);
+            pinStage.showAndWait();
 
-        // Lấy controller để kiểm tra kết quả
-        PinDialogController pinController = loader.getController();
-        if (!pinController.isPinConfirmed()) {
-            showMessage("Thông báo", "Giao dịch bị hủy!");
-            return;
-        }
+            PinDialogController pinController = loader.getController();
+            if (!pinController.isPinConfirmed()) {
+                showMessage("Notification", "Transaction cancelled!");
+                return;
+            }
 
-        String enteredPin = pinController.getEnteredPin();
+            String enteredPin = pinController.getEnteredPin();
+            String currentAccountPin = accountHandler.getPinByAccountId(Session.getInstance().getAccountId());
 
-        String currentAccountPin = accountHandler.getPinByAccountId(Session.getInstance().getAccountId());
-        if (!enteredPin.equals(currentAccountPin)) {
-            showMessage("Thông báo", "Mã PIN không chính xác!");
-            return;
-        }
+            if (!enteredPin.equals(currentAccountPin)) {
+                showMessage("Notification", "Incorrect PIN!");
+                return;
+            }
         } catch (IOException e) {
             e.printStackTrace();
-            showErrorAlert("Lỗi khi mở hộp thoại nhập PIN.");
+            showErrorAlert("Error opening PIN dialog.");
             return;
         }
-
 
         String selected = billIdCombo.getValue();
         if (selected == null) {
-            showAlert("Thông báo", "Vui lòng chọn hóa đơn cần thanh toán!", Alert.AlertType.WARNING);
+            showAlert("Notification", "Please select a bill to pay!", Alert.AlertType.WARNING);
             return;
         }
 
         long billId = Long.parseLong(selected);
         int accountId = Session.getInstance().getAccountId();
 
-
         int resultCode = paymentHandler.payBill(accountId, billId);
 
         switch (resultCode) {
             case 0:
-                showAlert("Thành công", "Thanh toán hoá đơn #" + billId + " thành công!", Alert.AlertType.INFORMATION);
+                showAlert("Success", "Bill #" + billId + " has been paid successfully!", Alert.AlertType.INFORMATION);
                 break;
             case 1:
-                showAlert("Không đủ số dư", "Số dư của bạn không đủ để thanh toán hoá đơn này.", Alert.AlertType.WARNING);
+                showAlert("Insufficient Balance", "Your account balance is not enough to pay this bill.", Alert.AlertType.WARNING);
                 break;
             case 2:
-                showAlert("Đã thanh toán", "Hóa đơn #" + billId + " đã được thanh toán trước đó.", Alert.AlertType.INFORMATION);
+                showAlert("Already Paid", "Bill #" + billId + " has already been paid.", Alert.AlertType.INFORMATION);
                 break;
             case 3:
-                showAlert("Không tìm thấy", "Không tìm thấy thông tin hóa đơn hoặc tài khoản!", Alert.AlertType.ERROR);
+                showAlert("Not Found", "Bill or account not found!", Alert.AlertType.ERROR);
                 break;
             case 99:
-                showAlert("Lỗi hệ thống", "Đã xảy ra lỗi trong quá trình thanh toán. Vui lòng thử lại!", Alert.AlertType.ERROR);
+                showAlert("System Error", "An error occurred during payment. Please try again!", Alert.AlertType.ERROR);
                 break;
             default:
-                showAlert("Không xác định", "Kết quả không xác định. Mã lỗi: " + resultCode, Alert.AlertType.ERROR);
+                showAlert("Unknown", "Unexpected result. Error code: " + resultCode, Alert.AlertType.ERROR);
                 break;
         }
 
-        loadData(); // reload lại danh sách hóa đơn
+        loadData();
     }
 
     private void showMessage(String title, String content) {
@@ -316,32 +307,27 @@ public class PaymentController implements Initializable {
 
     private void showErrorAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Lỗi giao dịch");
-        alert.setHeaderText("Không thể thực hiện giao dịch");
+        alert.setTitle("Transaction Error");
+        alert.setHeaderText("Transaction failed");
         alert.setContentText(message);
         alert.showAndWait();
     }
 
     private void handleLogout() {
         Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle("Đăng xuất");
+        alert.setTitle("Log Out");
         alert.setHeaderText(null);
-        alert.setContentText("Bạn có chắc muốn đăng xuất?");
+        alert.setContentText("Are you sure you want to log out?");
         alert.showAndWait().ifPresent(response -> {
-        if (response == javafx.scene.control.ButtonType.OK) {
-            try {
-
-                //them tinh nang xoa sessions hien tai thong tin user (authentication)
-                Session.getInstance().clear();
-                // Lấy stage hiện tại
-                Stage stage = (Stage) logoutButton.getScene().getWindow();
-                // Chuyển về trang đăng nhập
-                toSignIn.SignIn(stage);
-            } catch (IOException e) {
-                e.printStackTrace();
+            if (response == javafx.scene.control.ButtonType.OK) {
+                try {
+                    Session.getInstance().clear();
+                    Stage stage = (Stage) logoutButton.getScene().getWindow();
+                    toSignIn.SignIn(stage);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
-        }
-    });
+        });
     }
-
 }

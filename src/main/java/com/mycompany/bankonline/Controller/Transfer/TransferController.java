@@ -174,7 +174,7 @@ public class TransferController implements Initializable {
         Parent root = loader.load();
 
         Stage pinStage = new Stage();
-        pinStage.setTitle("Xác nhận mã PIN");
+        pinStage.setTitle("PIN Verification");
         pinStage.setScene(new Scene(root));
         pinStage.setResizable(false);
         pinStage.initModality(Modality.APPLICATION_MODAL); // Chặn các cửa sổ khác
@@ -182,7 +182,7 @@ public class TransferController implements Initializable {
 
         PinDialogController pinController = loader.getController();
         if (!pinController.isPinConfirmed()) {
-            showMessage("Thông báo", "Giao dịch bị hủy!");
+            showMessage("Notification", "Transaction canceled!");
             return;
         }
 
@@ -190,12 +190,12 @@ public class TransferController implements Initializable {
 
         String currentAccountPin = accountHandler.getPinByAccountId(Session.getInstance().getAccountId());
         if (!enteredPin.equals(currentAccountPin)) {
-            showMessage("Thông báo", "Mã PIN không chính xác!");
+            showMessage("Notification", "Incorrect PIN!");
             return;
         }
         } catch (IOException e) {
             e.printStackTrace();
-            showErrorAlert("Lỗi khi mở hộp thoại nhập PIN.");
+            showErrorAlert("Error opening PIN verification dialog.");
             return;
         }
 
@@ -205,14 +205,14 @@ public class TransferController implements Initializable {
 
 
         if (recipient.isEmpty() || amountText.isEmpty()) {
-            showErrorAlert("Vui lòng nhập đầy đủ thông tin.");
+            showErrorAlert("Please fill in all required fields.");
             return;
         }
 
         try {
             double amount = Double.parseDouble(amountText);
             if (amount <= 0) {
-                showErrorAlert("Số tiền phải lớn hơn 0.");
+                showErrorAlert("Amount must be greater than 0.");
                 return;
             }
             int senderAccountId = Session.getInstance().getAccountId();
@@ -220,13 +220,13 @@ public class TransferController implements Initializable {
 
             if (result.equals("Success")) {
                 balanceField.setText(String.format("%,.0f VND", accountHandler.getBalanceByAccountId(Session.getInstance().getAccountId())));
-                showSuccessAlert("Chuyển tiền thành công!");
+                showSuccessAlert("Money transferred successfully!");
             } else {
                 showErrorAlert(result);
             }
 
         } catch (NumberFormatException e) {
-            showErrorAlert("Số tiền không hợp lệ.");
+            showErrorAlert("Invalid amount format.");
         }
     }
 
@@ -235,13 +235,13 @@ public class TransferController implements Initializable {
             String recipientName = accountHandler.getUserNameByAccountNumber(accountNumber);
             String currentAccountNumber = accountHandler.getAccountNumberByAccountId(Session.getInstance().getAccountId());
             if (accountNumber.equals(currentAccountNumber)) {
-                recipientNameLabel.setText("Không thể chuyển cho chính tài khoản của bạn!");
+                recipientNameLabel.setText("You cannot transfer to your own account!");
                 return;
             }
             if (recipientName != null) {
-                recipientNameLabel.setText("Người nhận: " + recipientName);
+                recipientNameLabel.setText("Recipient: " + recipientName);
             } else {
-                recipientNameLabel.setText("Tài khoản không tồn tại!");
+                recipientNameLabel.setText("Account not found!");
             }
             FadeTransition fade = new FadeTransition(Duration.millis(400), recipientNameLabel);
             fade.setFromValue(0);
@@ -249,7 +249,7 @@ public class TransferController implements Initializable {
             fade.play();
 
         } catch (Exception e) {
-            recipientNameLabel.setText("Lỗi khi truy vấn!");
+            recipientNameLabel.setText("Error while fetching recipient info!");
             e.printStackTrace();
         }
     }
@@ -265,25 +265,25 @@ public class TransferController implements Initializable {
 
     private void showSuccessAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Thành công");
-        alert.setHeaderText("Giao dịch thành công");
+        alert.setTitle("Success");
+        alert.setHeaderText("Transaction Successful");
         alert.setContentText(message);
         alert.showAndWait();
     }
 
     private void showErrorAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Lỗi giao dịch");
-        alert.setHeaderText("Không thể thực hiện giao dịch");
+        alert.setTitle("Transaction Error");
+        alert.setHeaderText("Unable to complete the transaction");
         alert.setContentText(message);
         alert.showAndWait();
     }
 
     private void handleLogout() {
         Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle("Đăng xuất");
+        alert.setTitle("Logout");
         alert.setHeaderText(null);
-        alert.setContentText("Bạn có chắc muốn đăng xuất?");
+        alert.setContentText("Are you sure you want to log out?");
         alert.showAndWait().ifPresent(response -> {
         if (response == javafx.scene.control.ButtonType.OK) {
             try {

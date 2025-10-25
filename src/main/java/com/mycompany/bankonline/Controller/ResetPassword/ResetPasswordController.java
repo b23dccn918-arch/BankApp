@@ -27,7 +27,6 @@ public class ResetPasswordController {
     private String token;
     private ForgotPasswordHandler forgotPasswordHandler = new ForgotPasswordHandler();
 
-
     public void setEmailAndToken(String email, String token) {
         this.email = email;
         this.token = token;
@@ -40,17 +39,17 @@ public class ResetPasswordController {
         String confirm = confirmPasswordField.getText();
 
         if (newPass.isEmpty() || confirm.isEmpty()) {
-            showMessage("Thông báo", "Vui lòng nhập đầy đủ thông tin.");
+            showMessage("Notification", "Please fill in all required fields.");
             return;
         }
         if (!newPass.equals(confirm)) {
-            showMessage("Thông báo", "Mật khẩu xác nhận không khớp.");
+            showMessage("Notification", "The confirmation password does not match.");
             return;
         }
 
         boolean success = forgotPasswordHandler.resetPassword(email, token, newPass);
         if (success) {
-            showMessage("Notification", "Cập nhật mật khẩu thành công!");
+            showMessage("Success", "Password has been successfully updated!");
             try {
                 Stage stage = (Stage) BackToLoginButton.getScene().getWindow();
                 toSignIn.SignIn(stage);
@@ -58,7 +57,7 @@ public class ResetPasswordController {
                 e.printStackTrace();
             }
         } else {
-            showMessage("Error", "Lỗi khi cập nhật mật khẩu.");
+            showMessage("Error", "An error occurred while updating the password.");
         }
     }
 

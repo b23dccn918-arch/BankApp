@@ -10,20 +10,28 @@
       style="-fx-padding: 20; -fx-background-color: white; -fx-border-color: #ccc;
              -fx-border-radius: 10; -fx-background-radius: 10;">
 
-    <Label text="Xác minh mã xác thực" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+    <!-- Title -->
+    <Label text="Verify Authentication Code" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
 
-    <Label fx:id="emailLabel" text="Mã xác thực đã được gửi đến email của bạn."
+    <!-- Instruction -->
+    <Label fx:id="emailLabel" text="A verification code has been sent to your email."
            wrapText="true" style="-fx-font-size: 12px; -fx-text-fill: #555; -fx-alignment: center;"/>
-        <Label fx:id="timerLabel" text="05:00" style="-fx-font-size: 14px; -fx-text-fill: #0c0909ff;" />
-    <TextField fx:id="tokenField" promptText="Nhập mã 6 chữ số"
+
+    <!-- Timer -->
+    <Label fx:id="timerLabel" text="05:00" style="-fx-font-size: 14px; -fx-text-fill: #0c0909ff;" />
+
+    <!-- Token Input -->
+    <TextField fx:id="tokenField" promptText="Enter 6-digit code"
                style="-fx-font-size: 16px; -fx-alignment: center; -fx-pref-width: 200;"/>
 
+    <!-- Buttons -->
     <HBox spacing="10" alignment="CENTER">
-        <Button fx:id="confirmButton" text="Xác nhận"
+        <Button fx:id="confirmButton" text="Confirm"
                 style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
-        <Button fx:id="cancelButton" text="Hủy"
+        <Button fx:id="cancelButton" text="Cancel"
                 style="-fx-background-color: #E53935; -fx-text-fill: white;"/>
     </HBox>
 
+    <!-- Error Message -->
     <Label fx:id="errorLabel" textFill="red" style="-fx-font-size: 12px;"/>
 </VBox>

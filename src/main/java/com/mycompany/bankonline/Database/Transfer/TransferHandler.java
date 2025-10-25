@@ -14,50 +14,50 @@ public class TransferHandler {
     public String transferMoney(int senderAccountId, String recipientAccountNumber, double amount, String description) {
         String senderAccountNumber = accountHandler.getAccountNumberByAccountId(senderAccountId);
         if(senderAccountNumber.equals(recipientAccountNumber)){
-            return "Tài khoản nhận phải khác tài khoản hiện tại";
+            return "-1";
         }
 
         try (Connection conn = Connect.getConnection()) {
-            conn.setAutoCommit(false); // Bắt đầu transaction
+            conn.setAutoCommit(false);
             
-            // 🔹 Lấy thông tin người gửi
+
             String sqlSender = "SELECT account_id, balance FROM accounts WHERE account_id = ?";
             PreparedStatement psSender = conn.prepareStatement(sqlSender);
             psSender.setInt(1, senderAccountId);
             ResultSet rsSender = psSender.executeQuery();
 
             if (!rsSender.next()) {
-                return "Không tìm thấy tài khoản người gửi.";
+                return "-1";
             }
 
             double senderBalance = rsSender.getDouble("balance");
 
-            // Lấy thông tin người nhận
+
             String sqlRecipient = "SELECT account_id, balance FROM accounts WHERE account_number = ?";
             PreparedStatement psRecipient = conn.prepareStatement(sqlRecipient);
             psRecipient.setString(1, recipientAccountNumber);
             ResultSet rsRecipient = psRecipient.executeQuery();
 
             if (!rsRecipient.next()) {
-                return "Tài khoản người nhận không tồn tại.";
+                return "-1";
             }
 
             int recipientAccountId = rsRecipient.getInt("account_id");
             double recipientBalance = rsRecipient.getDouble("balance");
 
-            //  Kiểm tra số dư
+
             if (senderBalance < amount) {
-                return "Số dư không đủ để chuyển tiền.";
+                return "-1";
             }
 
-            // Cập nhật số dư người gửi
+
             PreparedStatement psUpdateSender = conn.prepareStatement(
                 "UPDATE accounts SET balance = ? WHERE account_id = ?");
             psUpdateSender.setDouble(1, senderBalance - amount);
             psUpdateSender.setInt(2, senderAccountId);
             psUpdateSender.executeUpdate();
 
-            // Cập nhật số dư người nhận
+
             PreparedStatement psUpdateRecipient = conn.prepareStatement(
                 "UPDATE accounts SET balance = ? WHERE account_id = ?");
             psUpdateRecipient.setDouble(1, recipientBalance + amount);
@@ -74,7 +74,7 @@ public class TransferHandler {
             psLog.setString(4, description);
             psLog.executeUpdate();
 
-            conn.commit(); //Hoàn tất giao dịch
+            conn.commit();
 
             return "Success";
 

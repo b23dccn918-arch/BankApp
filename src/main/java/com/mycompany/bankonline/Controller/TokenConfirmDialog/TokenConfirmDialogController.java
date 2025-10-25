@@ -1,13 +1,10 @@
 package com.mycompany.bankonline.Controller.TokenConfirmDialog;
 
-
 import java.io.IOException;
 
-import com.mycompany.bankonline.Controller.ResetPassword.ResetPasswordController;
 import com.mycompany.bankonline.Controller.ResetPinDialog.ResetPinDialogController;
 import com.mycompany.bankonline.Database.ForgotPin.ForgotPinHandler;
 import com.mycompany.bankonline.Database.UserInfo.UserInfoHandler;
-import com.mycompany.bankonline.Model.User;
 import com.mycompany.bankonline.Session.Session;
 
 import javafx.animation.KeyFrame;
@@ -33,12 +30,10 @@ public class TokenConfirmDialogController {
     private Button cancelButton;
     @FXML
     private Label errorLabel;
-
     @FXML
     private Label timerLabel;
 
-
-    private int timeSeconds = 300; 
+    private int timeSeconds = 300; // 5 minutes countdown
     private Timeline timeline;
     private final ForgotPinHandler forgotPinHandler = new ForgotPinHandler();
     private final UserInfoHandler userInfoHandler = new UserInfoHandler();
@@ -47,7 +42,6 @@ public class TokenConfirmDialogController {
 
     @FXML
     public void initialize() {
-        
         startTimer();
         confirmButton.setOnAction(e -> handleConfirm());
         cancelButton.setOnAction(e -> handleCancel());
@@ -60,10 +54,10 @@ public class TokenConfirmDialogController {
             int seconds = timeSeconds % 60;
             timerLabel.setText(String.format("%02d:%02d", minutes, seconds));
 
-            // Hết thời gian
+            // Time expired
             if (timeSeconds <= 0) {
                 timeline.stop();
-                timerLabel.setText("Mã đã hết hạn!");
+                timerLabel.setText("Token has expired!");
                 confirmButton.setDisable(true);
                 tokenField.setDisable(true);
             }
@@ -76,28 +70,30 @@ public class TokenConfirmDialogController {
         String token = tokenField.getText().trim();
 
         if (token.isEmpty() || !token.matches("\\d{6}")) {
-            showMessage("Thông báo", "Mã xác thực phải gồm 6 chữ số!");
+            showMessage("Notice", "Verification code must be 6 digits!");
             return;
         }
+
         String email = userInfoHandler.getEmailByUserId(Session.getInstance().getUserId());
-        boolean isValid = forgotPinHandler.verifyToken(email,token);
+        boolean isValid = forgotPinHandler.verifyToken(email, token);
+
         if (!isValid) {
-            showMessage("Thông báo", "Mã xác thực không hợp lệ hoặc đã hết hạn.");
+            showMessage("Notice", "Invalid or expired verification code.");
             return;
         }
 
         Stage currentStage = (Stage) confirmButton.getScene().getWindow();
         currentStage.close();
 
-        openResetPinDialog(email,token);
+        openResetPinDialog(email, token);
     }
 
-    private void openResetPinDialog(String email,String token) {
+    private void openResetPinDialog(String email, String token) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/mycompany/bankonline/View/ResetPinDialog/ResetPinDialog.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
-            stage.setTitle("Đặt lại mã PIN");
+            stage.setTitle("Reset PIN");
             ResetPinDialogController controller = loader.getController();
             controller.setToken(token);
             stage.setScene(new Scene(root));
@@ -130,6 +126,6 @@ public class TokenConfirmDialogController {
     }
 
     public void setEmail(String email) {
-        emailLabel.setText("Mã xác thực đã được gửi đến: " + email);
+        emailLabel.setText("A verification code has been sent to: " + email);
     }
 }

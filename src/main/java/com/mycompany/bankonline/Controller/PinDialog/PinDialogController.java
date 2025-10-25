@@ -31,17 +31,8 @@ public class PinDialogController {
     private String enteredPin;
     private final ForgotPinHandler forgotPinHandler = new ForgotPinHandler();
 
-
     @FXML
     private void initialize() {
-        // forgotPinLink.setOnAction(event->{
-		// 	Stage stage = (Stage) forgotPassword.getScene().getWindow();
-		// 	try {
-		// 		toForgotPassword.ForgotPassword(stage);
-		// 	} catch (IOException e) {
-		// 		e.printStackTrace();
-		// 	}
-		// });
         forgotPinLink.setOnAction(event -> handleForgotPin());
         confirmButton.setOnAction(e -> handleConfirm());
         cancelButton.setOnAction(e -> handleCancel());
@@ -49,16 +40,16 @@ public class PinDialogController {
 
     private void handleForgotPin() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Quên mã PIN");
+        alert.setTitle("Forgot PIN");
         alert.setHeaderText(null);
-        alert.setContentText("Mã xác thực gồm 6 chữ số sẽ được gửi về email của bạn.");
+        alert.setContentText("A 6-digit verification code will be sent to your registered email.");
 
-        // Hiển thị và chờ người dùng ấn OK
+        // Wait for user to press OK
         alert.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
                 int accountId = Session.getInstance().getAccountId();
                 boolean sent = forgotPinHandler.sendResetToken(accountId);
-                if(sent){
+                if (sent) {
                     openTokenConfirmDialog();
                 }
             }
@@ -71,8 +62,7 @@ public class PinDialogController {
             Parent root = loader.load();
 
             Stage dialogStage = new Stage();
-            dialogStage.setTitle("Xác nhận mã xác thực");
-            // dialogStage.initModality(Modality.APPLICATION_MODAL);
+            dialogStage.setTitle("Verify Your Code");
             dialogStage.setScene(new Scene(root));
             dialogStage.show();
 
@@ -85,7 +75,7 @@ public class PinDialogController {
         String pin = pinField.getText().trim();
 
         if (!pin.matches("\\d{6}")) {
-            errorLabel.setText("PIN phải gồm 6 chữ số!");
+            errorLabel.setText("PIN must be exactly 6 digits!");
             return;
         }
 

@@ -134,26 +134,32 @@ public class TransactionHandler {
 
                 String message;
 
-                if (type.equalsIgnoreCase("transfer") && fromId == accountId){
+                if (type.equalsIgnoreCase("transfer") && fromId == accountId) {
                     String toAccountNumber = accountHandler.getAccountNumberByAccountId(toId);
-                    message = String.format("Bạn đã chuyển %.0f VND đến tài khoản %s -- %s", amount, toAccountNumber,formatted.toString());
+                    message = String.format("You have transferred %.0f VND to account %s -- %s", amount, toAccountNumber, formatted.toString());
                 }
-                    
-                else if (type.equalsIgnoreCase("transfer") && toId == accountId){
+
+                else if (type.equalsIgnoreCase("transfer") && toId == accountId) {
                     String fromAccountNumber = accountHandler.getAccountNumberByAccountId(toId);
-                    message = String.format("Bạn vừa nhận được %.0f VND từ tài khoản #%s -- %s", amount, fromAccountNumber,formatted.toString());
+                    message = String.format("You have received %.0f VND from account #%s -- %s", amount, fromAccountNumber, formatted.toString());
                 }
+
                 else if (type.equalsIgnoreCase("deposit"))
-                    message = String.format("Nạp %.0f VND thành công -- %s.", amount,formatted.toString());
+                    message = String.format("Deposit of %.0f VND successful -- %s.", amount, formatted.toString());
+
                 else if (type.equalsIgnoreCase("withdraw"))
-                    message = String.format("Rút %.0f VND thành công -- %s.", amount,formatted.toString());
-                else if (type.equalsIgnoreCase("payment")){
+                    message = String.format("Withdrawal of %.0f VND successful -- %s.", amount, formatted.toString());
+
+                else if (type.equalsIgnoreCase("payment")) {
                     Bill bill = PaymentHandler.getBillByBillId(billId);
-                    message = String.format("Thanh toán %.0f VND cho hoá đơn #%d loại hóa đơn: %s -- %s",amount,billId,bill.getBillType().get(),formatted.toString());
+                    message = String.format("Payment of %.0f VND for bill #%d (Type: %s) -- %s",
+                            amount, billId, bill.getBillType().get(), formatted.toString());
                 }
                 else
-                    message = String.format("Giao dịch %.0f VND (%s).", amount, type);
+                    message = String.format("Transaction of %.0f VND (%s).", amount, type);
+
                 transactions.add(message);
+
             }
         } catch (SQLException e) {
             e.printStackTrace();

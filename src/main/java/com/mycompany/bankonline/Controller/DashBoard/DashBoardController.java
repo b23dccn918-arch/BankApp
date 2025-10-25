@@ -1,11 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package com.mycompany.bankonline.Controller.DashBoard;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -23,16 +18,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
 
 public class DashBoardController implements Initializable {
 
     @FXML
     private VBox notificationBox;
-
 
     @FXML
     private Label helloField;
@@ -75,6 +69,7 @@ public class DashBoardController implements Initializable {
     private final AccountHandler accountHandler = new AccountHandler();
     private final UserInfoHandler userInfoHandler = new UserInfoHandler();
     private final TransactionHandler transactionHandler = new TransactionHandler();
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         currentBalance = accountHandler.getBalanceByAccountId(Session.getInstance().getAccountId());
@@ -82,10 +77,10 @@ public class DashBoardController implements Initializable {
             isBalanceVisible = !isBalanceVisible;
             if (isBalanceVisible) {
                 balanceField.setText(String.format("%,.0f VND", currentBalance));
-                toggleBalanceButton.setText("Ẩn");
+                toggleBalanceButton.setText("Hide");
             } else {
                 balanceField.setText("•••••••• VND");
-                toggleBalanceButton.setText("Hiện");
+                toggleBalanceButton.setText("Show");
             }
         });
 
@@ -153,32 +148,29 @@ public class DashBoardController implements Initializable {
         logoutButton.setOnAction(e -> handleLogout());
     }
 
-
     private void loadUserInfo(int userId) {
         User user = userInfoHandler.getUserById(userId);
         if (user != null) {
-            helloField.setText("Xin chào, " + user.getFullName()+"!");
+            helloField.setText("Hello, " + user.getFullName() + "!");
         }
     }
 
     private void loadNotifications(int accountId) {
         notificationBox.getChildren().clear();
-
-        List<String> messages = transactionHandler.getRecentTransactions(accountId, 5);
+        int limitMessages = 5;
+        List<String> messages = transactionHandler.getRecentTransactions(accountId, limitMessages);
 
         if (messages.isEmpty()) {
-            notificationBox.getChildren().add(new Label("• Không có thông báo mới."));
+            notificationBox.getChildren().add(new Label("• No recent notifications."));
             return;
         }
 
         for (String msg : messages) {
-            Label label = new Label(msg);
+            Label label = new Label("• " + msg);
             label.setStyle("-fx-font-size: 14px; -fx-text-fill: #2E4053;");
             notificationBox.getChildren().add(label);
         }
     }
-
-    
 
     private void showMessage(String title, String content) {
         Alert alert = new Alert(AlertType.INFORMATION);
@@ -190,28 +182,25 @@ public class DashBoardController implements Initializable {
 
     private void handleLogout() {
         Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle("Đăng xuất");
+        alert.setTitle("Logout Confirmation");
         alert.setHeaderText(null);
-        alert.setContentText("Bạn có chắc muốn đăng xuất?");
+        alert.setContentText("Are you sure you want to log out of this account?");
         alert.showAndWait().ifPresent(response -> {
-        if (response == javafx.scene.control.ButtonType.OK) {
-            try {
-                
-                //xoa thong tin trong session
-                Session.getInstance().clear();
-                
+            if (response == ButtonType.OK) {
+                try {
+                    // Clear current user session
+                    Session.getInstance().clear();
 
-                // Lấy stage hiện tại
-                Stage stage = (Stage) logoutButton.getScene().getWindow();
-                // Chuyển về trang đăng nhập
-                toSignIn.SignIn(stage);
-            } catch (IOException e) {
-                e.printStackTrace();
+                    // Return to sign-in page
+                    Stage stage = (Stage) logoutButton.getScene().getWindow();
+                    toSignIn.SignIn(stage);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
-        }
-    });
+        });
     }
-    
+
     public String formatAccountNumber(String accountNumber) {
         if (accountNumber == null || accountNumber.isEmpty()) {
             return "";
@@ -224,8 +213,7 @@ public class DashBoardController implements Initializable {
             if ((i + 1) % 4 == 0 && (i + 1) != length) {
                 formatted.append(".");
             }
-        }   
+        }
         return formatted.toString();
-    }   
-    
+    }
 }

@@ -161,9 +161,9 @@ public class UserInfoController implements Initializable {
 
     private void handleLogout() {
         Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle("Đăng xuất");
+        alert.setTitle("Logout");
         alert.setHeaderText(null);
-        alert.setContentText("Bạn có chắc muốn đăng xuất?");
+        alert.setContentText("Are you sure you want to log out?");
         alert.showAndWait().ifPresent(response -> {
         if (response == javafx.scene.control.ButtonType.OK) {
             try {

@@ -45,27 +45,27 @@
     <!-- 💵 MAIN CONTENT -->
     <center>
         <VBox spacing="25" styleClass="main-content" alignment="TOP_CENTER">
-            <Label text="GỬI TIỀN" styleClass="page-title"/>
+            <Label text="DEPOSIT MONEY" styleClass="page-title"/>
 
-            <!-- Số dư -->
+            <!-- Current Balance -->
             <HBox spacing="20" alignment="CENTER">
                 <VBox styleClass="info-box">
-                    <Label text="Số dư hiện tại" styleClass="info-title"/>
+                    <Label text="Current Balance" styleClass="info-title"/>
                     <Label fx:id="balanceField" text="15,000,000 VND" styleClass="info-value"/>
                 </VBox>
             </HBox>
 
-            <!-- Nhập số tiền -->
+            <!-- Enter Deposit Amount -->
             <VBox spacing="15" alignment="CENTER">
                 <VBox spacing="5" alignment="CENTER_LEFT">
-                    <Label text="Nhập số tiền cần gửi:" styleClass="form-label"/>
-                    <TextField fx:id="amountField" promptText="Nhập số tiền cần gửi" styleClass="form-field"/>
+                    <Label text="Enter deposit amount:" styleClass="form-label"/>
+                    <TextField fx:id="amountField" promptText="Enter amount to deposit" styleClass="form-field"/>
                 </VBox>
 
-                <Button fx:id="depositButtonSubmit" text="Xác nhận gửi tiền" styleClass="confirm-button"/>
+                <Button fx:id="depositButtonSubmit" text="Confirm Deposit" styleClass="confirm-button"/>
             </VBox>
 
-            <!-- Trạng thái -->
+            <!-- Status Labels -->
             <Label fx:id="statusFailedLabel" text="" style="-fx-text-fill: red; -fx-font-weight: bold;"/>
             <Label fx:id="statusSuccessLabel" text="" style="-fx-text-fill: green; -fx-font-weight: bold;"/>
         </VBox>

@@ -48,39 +48,40 @@
     <!-- 💸 MAIN CONTENT -->
     <center>
         <VBox spacing="25" styleClass="main-content">
-            <Label text="Chuyển tiền" styleClass="page-title"/>
+            <!-- Page Title -->
+            <Label text="TRANSFER MONEY" styleClass="page-title"/>
 
-            <!-- Thông tin số dư -->
+            <!-- Balance Information -->
             <HBox spacing="20">
                 <VBox prefWidth="250" styleClass="info-box">
-                    <Label text="Số dư hiện tại" styleClass="info-title"/>
+                    <Label text="Current Balance" styleClass="info-title"/>
                     <Label fx:id="balanceField" text="15,000,000 VND" styleClass="info-value"/>
                 </VBox>
             </HBox>
 
-            <!-- Form -->
+            <!-- Transfer Form -->
             <VBox spacing="15">
             
                 <VBox spacing="5" alignment="CENTER_LEFT">
-                    <Label text="Số tài khoản người nhận:" styleClass="form-label"/>
-                    <TextField fx:id="recipientAccountField" promptText="Nhập số tài khoản người nhận" styleClass="form-field"/>
+                    <Label text="Recipient Account Number:" styleClass="form-label"/>
+                    <TextField fx:id="recipientAccountField" promptText="Enter recipient account number" styleClass="form-field"/>
                     <Label fx:id="recipientNameLabel" text="" style="-fx-text-fill: #2a72de; -fx-font-weight: bold;"/>
                 </VBox>
 
                 <VBox spacing="5" alignment="CENTER_LEFT">
-                    <Label text="Số tiền cần chuyển:" styleClass="form-label"/>
-                    <TextField fx:id="amountField" promptText="Nhập số tiền cần chuyển" styleClass="form-field"/>
+                    <Label text="Transfer Amount:" styleClass="form-label"/>
+                    <TextField fx:id="amountField" promptText="Enter amount to transfer" styleClass="form-field"/>
                 </VBox>
 
                 <VBox spacing="5" alignment="CENTER_LEFT">
-                    <Label text="Nội dung chuyển khoản:" styleClass="form-label"/>
-                    <TextField fx:id="messageField" promptText="Nhập nội dung (tùy chọn)" styleClass="form-field"/>
+                    <Label text="Transfer Message:" styleClass="form-label"/>
+                    <TextField fx:id="messageField" promptText="Enter message (optional)" styleClass="form-field"/>
                 </VBox>
 
-                <Button fx:id="transferButtonSubmit" text="Chuyển tiền" prefWidth="200" styleClass="confirm-button"/>
+                <Button fx:id="transferButtonSubmit" text="Transfer" prefWidth="200" styleClass="confirm-button"/>
             </VBox>
 
-            <!-- Trạng thái -->
+            <!-- Transaction Status -->
             <Label fx:id="statusFailedLabel" text="" style="-fx-text-fill: red; -fx-font-weight: bold;"/>
             <Label fx:id="statusSuccessLabel" text="" style="-fx-text-fill: green; -fx-font-weight: bold;"/>
         </VBox>

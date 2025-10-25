@@ -25,13 +25,9 @@ public class ConfirmTokenController {
     @FXML private Label emailLabel;
     @FXML private TextField tokenField;
     @FXML private Label messageLabel;
-    @FXML
-    private Button confirmButton;
-    @FXML
-    private Button BackToLoginButton;
-
-    @FXML
-    private Label timerLabel;
+    @FXML private Button confirmButton;
+    @FXML private Button BackToLoginButton;
+    @FXML private Label timerLabel;
 
     private String email;
     private ForgotPasswordHandler forgotPasswordHandler = new ForgotPasswordHandler();
@@ -40,6 +36,7 @@ public class ConfirmTokenController {
         this.email = email;
         emailLabel.setText("Email: " + email);
     }
+
     private int timeSeconds = 300; 
     private Timeline timeline;
 
@@ -55,10 +52,10 @@ public class ConfirmTokenController {
             int seconds = timeSeconds % 60;
             timerLabel.setText(String.format("%02d:%02d", minutes, seconds));
 
-            // Hết thời gian
+            // When time expires
             if (timeSeconds <= 0) {
                 timeline.stop();
-                timerLabel.setText("Mã đã hết hạn!");
+                timerLabel.setText("Token has expired!");
                 confirmButton.setDisable(true);
                 tokenField.setDisable(true);
             }
@@ -71,7 +68,7 @@ public class ConfirmTokenController {
     private void handleVerify() {
         String token = tokenField.getText().trim();
         if (token.isEmpty()) {
-            messageLabel.setText("Vui lòng nhập mã xác thực.");
+            messageLabel.setText("Please enter the verification code.");
             return;
         }
 
@@ -89,7 +86,7 @@ public class ConfirmTokenController {
                 e.printStackTrace();
             }
         } else {
-            showMessage("Notification", "Mã xác thực không hợp lệ hoặc đã hết hạn.");
+            showMessage("Notification", "Verification code is invalid or has expired.");
         }
     }
 

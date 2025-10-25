@@ -59,12 +59,13 @@ public class WithdrawController implements Initializable {
     private Label balanceField;
 
     private final AccountHandler accountHandler = new AccountHandler();
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         balanceField.setText(String.format("%,.0f VND", accountHandler.getBalanceByAccountId(Session.getInstance().getAccountId())));
-        withdrawButtonSubmit.setOnAction(e-> handleWithdraw());
-        // Gán sự kiện cho các nút
+        withdrawButtonSubmit.setOnAction(e -> handleWithdraw());
+
+        // Set navigation button events
         homeButton.setOnAction(event -> {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
@@ -73,6 +74,7 @@ public class WithdrawController implements Initializable {
                 e.printStackTrace();
             }
         });
+
         accountButton.setOnAction(event -> {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
@@ -81,6 +83,7 @@ public class WithdrawController implements Initializable {
                 e.printStackTrace();
             }
         });
+
         transferButton.setOnAction(event -> {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
@@ -89,6 +92,7 @@ public class WithdrawController implements Initializable {
                 e.printStackTrace();
             }
         });
+
         historyButton.setOnAction(event -> {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
@@ -97,6 +101,7 @@ public class WithdrawController implements Initializable {
                 e.printStackTrace();
             }
         });
+
         withdrawButton.setOnAction(event -> {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
@@ -105,6 +110,7 @@ public class WithdrawController implements Initializable {
                 e.printStackTrace();
             }
         });
+
         paymentButton.setOnAction(event -> {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
@@ -113,6 +119,7 @@ public class WithdrawController implements Initializable {
                 e.printStackTrace();
             }
         });
+
         depositButton.setOnAction(event -> {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
@@ -121,51 +128,49 @@ public class WithdrawController implements Initializable {
                 e.printStackTrace();
             }
         });
-        logoutButton.setOnAction(e -> handleLogout());
 
+        logoutButton.setOnAction(e -> handleLogout());
     }
 
     private void handleWithdraw() {
-
         try {
-             // Mở hộp thoại nhập PIN
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/mycompany/bankonline/View/PinDialog/PinDialog.fxml"));
-        Parent root = loader.load();
+            // Open PIN confirmation dialog
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/mycompany/bankonline/View/PinDialog/PinDialog.fxml"));
+            Parent root = loader.load();
 
-        Stage pinStage = new Stage();
-        pinStage.setTitle("Xác nhận mã PIN");
-        pinStage.setScene(new Scene(root));
-        pinStage.setResizable(false);
-        pinStage.initModality(Modality.APPLICATION_MODAL); // Chặn các cửa sổ khác
-        pinStage.showAndWait();
+            Stage pinStage = new Stage();
+            pinStage.setTitle("PIN Confirmation");
+            pinStage.setScene(new Scene(root));
+            pinStage.setResizable(false);
+            pinStage.initModality(Modality.APPLICATION_MODAL); // Block other windows
+            pinStage.showAndWait();
 
-        // Lấy controller để kiểm tra kết quả
-        PinDialogController pinController = loader.getController();
-        if (!pinController.isPinConfirmed()) {
-            showMessage("Thông báo", "Giao dịch bị hủy!");
-            return;
-        }
+            // Get controller to check PIN result
+            PinDialogController pinController = loader.getController();
+            if (!pinController.isPinConfirmed()) {
+                showMessage("Notice", "Transaction cancelled!");
+                return;
+            }
 
-        String enteredPin = pinController.getEnteredPin();
+            String enteredPin = pinController.getEnteredPin();
+            String currentAccountPin = accountHandler.getPinByAccountId(Session.getInstance().getAccountId());
 
-        String currentAccountPin = accountHandler.getPinByAccountId(Session.getInstance().getAccountId());
-        if (!enteredPin.equals(currentAccountPin)) {
-            showMessage("Thông báo", "Mã PIN không chính xác!");
-            return;
-        }
+            if (!enteredPin.equals(currentAccountPin)) {
+                showMessage("Notice", "Incorrect PIN!");
+                return;
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
-            showErrorAlert("Lỗi khi mở hộp thoại nhập PIN.");
+            showErrorAlert("Error opening PIN confirmation dialog.");
             return;
         }
 
-
-
         String amountText = amountField.getText().trim();
-        
-        // Kiểm tra nhập đúng số
+
+        // Validate input amount
         if (amountText.isEmpty()) {
-            showMessage("Thông báo", "Vui lòng nhập số tiền!");
+            showMessage("Notice", "Please enter an amount!");
             return;
         }
 
@@ -173,33 +178,32 @@ public class WithdrawController implements Initializable {
         try {
             amount = Double.parseDouble(amountText);
             if (amount <= 0) {
-                showMessage("Thông báo", "Số tiền phải lớn hơn 0!");
+                showMessage("Notice", "Amount must be greater than 0!");
                 return;
             }
         } catch (NumberFormatException e) {
-            showMessage("Thông báo", "Số tiền không hợp lệ!");
+            showMessage("Notice", "Invalid amount!");
             return;
         }
 
         int accountId = Session.getInstance().getAccountId();
 
-        // Thực hiện cập nhật vào database
+        // Perform withdrawal in the database
         boolean success = accountHandler.withdrawMoney(accountId, amount, Timestamp.valueOf(LocalDateTime.now()));
 
         if (success) {
-            showMessage("Thông báo", "Rut tiền thành công!");
+            showMessage("Notice", "Withdrawal successful!");
             updateBalanceUI();
             amountField.clear();
         } else {
-            showMessage("Thông báo", "Rut tiền thất bại! Vui lòng thử lại.");
+            showMessage("Notice", "Withdrawal failed! Please try again.");
         }
     }
 
-
     private void showErrorAlert(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Lỗi giao dịch");
-        alert.setHeaderText("Không thể thực hiện giao dịch");
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Transaction Error");
+        alert.setHeaderText("Unable to complete transaction");
         alert.setContentText(message);
         alert.showAndWait();
     }
@@ -219,23 +223,22 @@ public class WithdrawController implements Initializable {
 
     private void handleLogout() {
         Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle("Đăng xuất");
+        alert.setTitle("Logout");
         alert.setHeaderText(null);
-        alert.setContentText("Bạn có chắc muốn đăng xuất?");
+        alert.setContentText("Are you sure you want to log out?");
         alert.showAndWait().ifPresent(response -> {
-        if (response == javafx.scene.control.ButtonType.OK) {
-            try {
+            if (response == ButtonType.OK) {
+                try {
+                    // Clear current session (authentication info)
+                    Session.getInstance().clear();
 
-                //them tinh nang xoa sessions hien tai thong tin user (authentication)
-                Session.getInstance().clear();
-                // Lấy stage hiện tại
-                Stage stage = (Stage) logoutButton.getScene().getWindow();
-                // Chuyển về trang đăng nhập
-                toSignIn.SignIn(stage);
-            } catch (IOException e) {
-                e.printStackTrace();
+                    // Get current stage and navigate back to Sign In
+                    Stage stage = (Stage) logoutButton.getScene().getWindow();
+                    toSignIn.SignIn(stage);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
-        }
-    });
+        });
     }
 }

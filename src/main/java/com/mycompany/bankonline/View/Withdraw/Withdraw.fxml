@@ -47,25 +47,25 @@
     <center>
         <VBox spacing="25" styleClass="main-content" alignment="TOP_CENTER">
 
-            <!-- Tiêu đề -->
-            <Label text="RÚT TIỀN" styleClass="page-title"/>
+            <!-- Page Title -->
+            <Label text="WITHDRAW MONEY" styleClass="page-title"/>
 
-            <!-- Thông tin số dư -->
+            <!-- Balance Information -->
             <HBox spacing="20" alignment="CENTER">
                 <VBox styleClass="info-box">
-                    <Label text="Số dư hiện tại" styleClass="info-title"/>
+                    <Label text="Current Balance" styleClass="info-title"/>
                     <Label fx:id="balanceField" text="15,000,000 VND" styleClass="info-value"/>
                 </VBox>
             </HBox>
 
-            <!-- Form nhập -->
+            <!-- Input Form -->
             <VBox spacing="15" alignment="CENTER">
                 <VBox spacing="5" alignment="CENTER_LEFT">
-                    <Label text="Số tiền rút:" styleClass="form-label"/>
-                    <TextField fx:id="amountField" promptText="Nhập số tiền rút" styleClass="form-field"/>
+                    <Label text="Withdrawal Amount:" styleClass="form-label"/>
+                    <TextField fx:id="amountField" promptText="Enter withdrawal amount" styleClass="form-field"/>
                 </VBox>
 
-                <Button fx:id="withdrawButtonSubmit" text="Rút tiền" styleClass="confirm-button"/>
+                <Button fx:id="withdrawButtonSubmit" text="Withdraw" styleClass="confirm-button"/>
                 <Label fx:id="statusLabel" text="" style="-fx-font-weight: bold;"/>
             </VBox>
         </VBox>

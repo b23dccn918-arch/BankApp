@@ -35,7 +35,6 @@ public class ChangePasswordController {
 
     private final ChangePasswordHandler changePasswordHandler = new ChangePasswordHandler();
 
-
     @FXML
     private void handleChangePassword(ActionEvent event) {
         String phoneNumber = phoneNumberField.getText();
@@ -44,30 +43,29 @@ public class ChangePasswordController {
         String confirm = confirmPasswordField.getText();
 
         if (phoneNumber.isEmpty() || current.isEmpty() || newPass.isEmpty() || confirm.isEmpty()) {
-            showMessage("Thông báo", "Vui lòng nhập đầy đủ thông tin.");
+            showMessage("Notification", "Please fill in all required fields.");
             return;
         }
 
         if (!newPass.equals(confirm)) {
-            showMessage("Thông báo", "Mật khẩu xác nhận không khớp.");
+            showMessage("Notification", "Confirmation password does not match.");
             return;
         }
 
         boolean check = changePasswordHandler.checkCurrentPassword(phoneNumber, current);
         if (!check) {
-            showMessage("Thông báo", "Số điện thoại hoặc mật khẩu hiện tại 1.");
+            showMessage("Notification", "Phone number or current password is incorrect.");
             return;
         }
 
         boolean success = changePasswordHandler.changePasswordInDatabase(phoneNumber, current, newPass);
 
         if (success) {
-            showMessage("Thông báo","Mật khẩu được thay đổi thành công" );
+            showMessage("Notification", "Password changed successfully.");
         } else {
-            showMessage("Thông báo", "Số điện thoại hoặc mật khẩu hiện tại không đúng.");
+            showMessage("Notification", "Phone number or current password is incorrect.");
         }
     }
-
 
     private void showMessage(String title, String content) {
         Alert alert = new Alert(AlertType.INFORMATION);

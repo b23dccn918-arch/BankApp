@@ -20,9 +20,7 @@ import com.mycompany.bankonline.MainApp.Main;
 import com.mycompany.bankonline.Model.Transaction;
 import com.mycompany.bankonline.Session.Session;
 
-
-
-public class HistoryController implements Initializable{
+public class HistoryController implements Initializable {
 
     @FXML
     private Button homeButton;
@@ -48,9 +46,12 @@ public class HistoryController implements Initializable{
     @FXML
     private Button depositButton;
 
-    @FXML private DatePicker fromDate;
-    @FXML private DatePicker toDate;
-    @FXML private Button filterButton;
+    @FXML
+    private DatePicker fromDate;
+    @FXML
+    private DatePicker toDate;
+    @FXML
+    private Button filterButton;
     @FXML
     private TableView<Transaction> transactionTable;
     @FXML
@@ -70,13 +71,11 @@ public class HistoryController implements Initializable{
     @FXML
     private TableColumn<Transaction, String> colStatus;
 
-    // private ObservableList<TransactionView> transactions = FXCollections.observableArrayList();
-
     private static final TransactionHandler transactionHandler = new TransactionHandler();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Gán sự kiện cho các nút
+        // Navigation button events
         homeButton.setOnAction(event -> {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
@@ -135,7 +134,7 @@ public class HistoryController implements Initializable{
         });
         logoutButton.setOnAction(e -> handleLogout());
 
-        // mapping cột -> thuộc tính trong model
+        // Table mapping
         colId.setCellValueFactory(cell -> cell.getValue().transactionIdProperty().asObject());
         colFrom.setCellValueFactory(cell -> cell.getValue().fromAccountProperty());
         colTo.setCellValueFactory(cell -> cell.getValue().toAccountProperty());
@@ -146,7 +145,8 @@ public class HistoryController implements Initializable{
         colStatus.setCellValueFactory(cell -> cell.getValue().statusProperty());
 
         loadAllTransactions();
-        // xử lý lọc theo ngày
+
+        // Filter by date
         filterButton.setOnAction(e -> filterTransactions());
     }
 
@@ -160,11 +160,12 @@ public class HistoryController implements Initializable{
     private void filterTransactions() {
         LocalDate from = fromDate.getValue();
         LocalDate to = toDate.getValue();
-        if(from == null || to == null){
-            showMessage("Thông báo", "Cần chọn ngày bắt đầu và kết thúc");
+        if (from == null || to == null) {
+            showMessage("Notice", "Please select both start and end dates.");
+            return;
         }
         int accountId = Session.getInstance().getAccountId();
-        List<Transaction> filtered = transactionHandler.filterTransactionsByAccountId(from, to,accountId);
+        List<Transaction> filtered = transactionHandler.filterTransactionsByAccountId(from, to, accountId);
         transactionTable.setItems(FXCollections.observableArrayList(filtered));
     }
 
@@ -178,23 +179,20 @@ public class HistoryController implements Initializable{
 
     private void handleLogout() {
         Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle("Đăng xuất");
+        alert.setTitle("Logout");
         alert.setHeaderText(null);
-        alert.setContentText("Bạn có chắc muốn đăng xuất?");
+        alert.setContentText("Are you sure you want to log out?");
         alert.showAndWait().ifPresent(response -> {
-        if (response == javafx.scene.control.ButtonType.OK) {
-            try {
-
-                //them tinh nang xoa sessions hien tai thong tin user (authentication)
-                Session.getInstance().clear();
-                // Lấy stage hiện tại
-                Stage stage = (Stage) logoutButton.getScene().getWindow();
-                // Chuyển về trang đăng nhập
-                toSignIn.SignIn(stage);
-            } catch (IOException e) {
-                e.printStackTrace();
+            if (response == javafx.scene.control.ButtonType.OK) {
+                try {
+                    // Clear current user session
+                    Session.getInstance().clear();
+                    Stage stage = (Stage) logoutButton.getScene().getWindow();
+                    toSignIn.SignIn(stage);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
-        }
-    });
+        });
     }
 }

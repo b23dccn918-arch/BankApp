@@ -6,8 +6,6 @@ import com.mycompany.bankonline.Database.UserInfo.UserInfoHandler;
 import com.mycompany.bankonline.DisplayScene.toConfirmToken;
 import com.mycompany.bankonline.DisplayScene.toSignIn;
 import com.mycompany.bankonline.MainApp.Main;
-import com.mycompany.bankonline.Model.User;
-import com.mycompany.bankonline.Service.EmailService;
 import com.mycompany.bankonline.Service.GenerateToken;
 
 import javafx.event.ActionEvent;
@@ -17,12 +15,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
-
-import java.sql.*;
-import java.time.LocalDateTime;
-import java.util.UUID;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 public class ForgotPasswordController {
     @FXML
@@ -45,19 +37,18 @@ public class ForgotPasswordController {
     private void handleSendRecoveryCode(ActionEvent event) {
         String email = emailField.getText().trim();
         if (email.isEmpty()) {
-            showMessage("Thông báo", "Vui lòng nhập email!");
+            showMessage("Notice", "Please enter your email address!");
             return;
         }
         
-        if(userInfoHandler.isEmailExists(email) == false) {
-            showMessage("Thông báo", "Email không tồn tại!");
+        if (!userInfoHandler.isEmailExists(email)) {
+            showMessage("Notice", "This email address does not exist in our system!");
             return;
         }
 
-
         boolean sent = forgotPasswordHandler.sendResetToken(email);
         if (sent) {
-            showMessage("Notification", "Mã xác thực đã được gửi đến email của bạn.");
+            showMessage("Notification", "A verification code has been sent to your email.");
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/mycompany/bankonline/View/ConfirmToken/ConfirmToken.fxml"));
                 Stage stage = (Stage) emailField.getScene().getWindow();
@@ -70,10 +61,9 @@ public class ForgotPasswordController {
                 e.printStackTrace();
             }
         } else {
-            showMessage("Notification", "Lỗi khi gửi mã xác thực. Vui lòng thử lại.");
+            showMessage("Notification", "Failed to send verification code. Please try again later.");
         }      
     }
-
 
     private void showMessage(String title, String content) {
         Alert alert = new Alert(AlertType.INFORMATION);
@@ -92,5 +82,4 @@ public class ForgotPasswordController {
             e.printStackTrace();
         }
     }
-
 }

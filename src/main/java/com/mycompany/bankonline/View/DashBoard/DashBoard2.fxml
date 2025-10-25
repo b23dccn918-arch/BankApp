@@ -14,7 +14,7 @@
         <AnchorPane prefHeight="70" styleClass="header-container">
             <children>
                 <Label layoutX="30" layoutY="20" text="🏦 BASOUR BANK" styleClass="header-title"/>
-                <Label layoutX="400" layoutY="25" text="Home" styleClass="header-subtitle"/>
+                <Label layoutX="400" layoutY="25" text="Dashboard" styleClass="header-subtitle"/>
                 <Button fx:id="logoutButton" layoutX="750" layoutY="22" text="Logout" styleClass="btn-logout"/>
             </children>
         </AnchorPane>
@@ -45,34 +45,33 @@
     <center>
         <VBox spacing="25" styleClass="main-content" alignment="TOP_CENTER">
             
-            <!-- Chào người dùng -->
-            <Label fx:id="helloField" text="Xin chào, -------!" styleClass="greeting-label"/>
+            <!-- Greeting the user -->
+            <Label fx:id="helloField" text="Hello, -------!" styleClass="greeting-label"/>
 
-            <!-- Thông tin chính -->
+            <!-- Main Information -->
             <HBox spacing="20" alignment="CENTER">
                 <VBox prefWidth="250" styleClass="info-box" alignment="CENTER">
-    <!-- Dòng tiêu đề + icon 👁 -->
-    <HBox spacing="5" alignment="CENTER">
-        <Label text="Số dư hiện tại" styleClass="info-title"/>
-        <Button fx:id="toggleBalanceButton"
-                text="Hiện"
-                styleClass="toggle-button"
-                style="-fx-background-color: transparent; -fx-font-size: 14px; -fx-cursor: hand; -fx-padding: 0;" />
-    </HBox>
+                    <!-- Title line + eye icon 👁 -->
+                    <HBox spacing="5" alignment="CENTER">
+                        <Label text="Current Balance" styleClass="info-title"/>
+                        <Button fx:id="toggleBalanceButton"
+                                text="Show"
+                                styleClass="toggle-button"
+                                style="-fx-background-color: transparent; -fx-font-size: 14px; -fx-cursor: hand; -fx-padding: 0;" />
+                    </HBox>
 
-    <!-- Số dư -->
-    <Label fx:id="balanceField" text="•••••••• VND" styleClass="info-value"/>
-</VBox>
-
+                    <!-- Balance amount -->
+                    <Label fx:id="balanceField" text="•••••••• VND" styleClass="info-value"/>
+                </VBox>
 
                 <VBox styleClass="info-box">
-                    <Label text="Số tài khoản" styleClass="info-title"/>
+                    <Label text="Account Number" styleClass="info-title"/>
                     <Label fx:id="accountNumberField" text="8888.3636.8888" styleClass="info-value"/>
                 </VBox>
             </HBox>
 
-            <!-- Thông báo -->
-            <TitledPane fx:id="notificationPane" expanded="true" text="🔔 Thông báo mới" styleClass="notification-pane">
+            <!-- Notifications -->
+            <TitledPane fx:id="notificationPane" expanded="true" text="🔔 New Notifications" styleClass="notification-pane">
                 <content>
                     <VBox fx:id="notificationBox" spacing="10" styleClass="notification-box"/>
                 </content>

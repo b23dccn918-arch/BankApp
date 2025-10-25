@@ -15,7 +15,7 @@
         <AnchorPane prefHeight="70" styleClass="header-container">
             <children>
                 <Label layoutX="30" layoutY="20" text="🏦 BASOUR BANK" styleClass="header-title"/>
-                <Label layoutX="420" layoutY="25" text="History" styleClass="header-subtitle"/>
+                <Label layoutX="420" layoutY="25" text="Transaction History" styleClass="header-subtitle"/>
                 <Button fx:id="logoutButton" layoutX="850" layoutY="22" text="Logout" styleClass="btn-logout"/>
             </children>
         </AnchorPane>
@@ -46,28 +46,28 @@
     <center>
         <VBox spacing="20" styleClass="main-content">
 
-            <Label text="LỊCH SỬ GIAO DỊCH" styleClass="page-title"/>
+            <Label text="TRANSACTION HISTORY" styleClass="page-title"/>
 
-            <!-- Bộ lọc ngày -->
+            <!-- Date Filter -->
             <HBox spacing="15" alignment="CENTER_LEFT">
-                <Label text="Từ ngày:" styleClass="form-label"/>
+                <Label text="From date:" styleClass="form-label"/>
                 <DatePicker fx:id="fromDate" styleClass="date-picker"/>
-                <Label text="Đến ngày:" styleClass="form-label"/>
+                <Label text="To date:" styleClass="form-label"/>
                 <DatePicker fx:id="toDate" styleClass="date-picker"/>
-                <Button fx:id="filterButton" text="Lọc" styleClass="filter-button"/>
+                <Button fx:id="filterButton" text="Filter" styleClass="filter-button"/>
             </HBox>
 
-            <!-- Bảng giao dịch -->
+            <!-- Transaction Table -->
             <TableView fx:id="transactionTable" prefHeight="400" styleClass="table-view">
                 <columns>
-                    <TableColumn fx:id="colId" prefWidth="80" text="Mã GD"/>
-                    <TableColumn fx:id="colFrom" prefWidth="120" text="Người gửi"/>
-                    <TableColumn fx:id="colTo" prefWidth="120" text="Người nhận"/>
-                    <TableColumn fx:id="colType" prefWidth="100" text="Loại"/>
-                    <TableColumn fx:id="colAmount" prefWidth="120" text="Số tiền"/>
-                    <TableColumn fx:id="colDescription" prefWidth="180" text="Mô tả"/>
-                    <TableColumn fx:id="colDate" prefWidth="150" text="Ngày tạo"/>
-                    <TableColumn fx:id="colStatus" prefWidth="100" text="Trạng thái"/>
+                    <TableColumn fx:id="colId" prefWidth="80" text="Transaction ID"/>
+                    <TableColumn fx:id="colFrom" prefWidth="120" text="Sender"/>
+                    <TableColumn fx:id="colTo" prefWidth="120" text="Receiver"/>
+                    <TableColumn fx:id="colType" prefWidth="100" text="Type"/>
+                    <TableColumn fx:id="colAmount" prefWidth="120" text="Amount"/>
+                    <TableColumn fx:id="colDescription" prefWidth="180" text="Description"/>
+                    <TableColumn fx:id="colDate" prefWidth="150" text="Created At"/>
+                    <TableColumn fx:id="colStatus" prefWidth="100" text="Status"/>
                 </columns>
             </TableView>
 

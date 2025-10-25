@@ -9,15 +9,19 @@
       alignment="CENTER" spacing="15" prefWidth="300" prefHeight="250"
       style="-fx-padding: 20; -fx-background-color: white; -fx-border-color: #ccc; -fx-border-radius: 10; -fx-background-radius: 10;">
 
-    <Label text="Đặt lại mã PIN mới" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+    <!-- Title -->
+    <Label text="Reset New PIN" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
 
-    <PasswordField fx:id="newPinField" promptText="Nhập mã PIN mới (6 chữ số)"/>
-    <PasswordField fx:id="confirmPinField" promptText="Xác nhận mã PIN"/>
+    <!-- Input Fields -->
+    <PasswordField fx:id="newPinField" promptText="Enter new PIN (6 digits)"/>
+    <PasswordField fx:id="confirmPinField" promptText="Confirm new PIN"/>
 
+    <!-- Buttons -->
     <HBox spacing="10" alignment="CENTER">
-        <Button fx:id="saveButton" text="Lưu" style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
-        <Button fx:id="cancelButton" text="Hủy" style="-fx-background-color: #E53935; -fx-text-fill: white;"/>
+        <Button fx:id="saveButton" text="Save" style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+        <Button fx:id="cancelButton" text="Cancel" style="-fx-background-color: #E53935; -fx-text-fill: white;"/>
     </HBox>
 
+    <!-- Error Label -->
     <Label fx:id="errorLabel" textFill="red"/>
 </VBox>

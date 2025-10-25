@@ -46,12 +46,12 @@
     <center>
         <VBox spacing="25" styleClass="main-content" alignment="TOP_CENTER">
 
-            <Label text="THANH TOÁN HÓA ĐƠN" styleClass="page-title"/>
+            <Label text="BILL PAYMENT" styleClass="page-title"/>
 
-            <!-- Số dư -->
+            <!-- Current Balance -->
             <HBox spacing="20" alignment="CENTER">
                 <VBox styleClass="info-box">
-                    <Label text="Số dư hiện tại" styleClass="info-title"/>
+                    <Label text="Current Balance" styleClass="info-title"/>
                     <Label fx:id="balanceField" text="15,000,000 VND" styleClass="info-value"/>
                 </VBox>
             </HBox>
@@ -59,32 +59,32 @@
             <!-- Form -->
             <VBox spacing="15" alignment="CENTER">
                 <HBox spacing="10" alignment="CENTER_LEFT">
-                    <Label text="Mã hóa đơn:" styleClass="form-label"/>
-                    <ComboBox fx:id="billIdCombo" promptText="Chọn mã hóa đơn"
+                    <Label text="Bill ID:" styleClass="form-label"/>
+                    <ComboBox fx:id="billIdCombo" promptText="Select bill ID"
                               prefWidth="200" styleClass="form-field"/>
                 </HBox>
 
                 <HBox spacing="10" alignment="CENTER_LEFT">
-                    <Label text="Lọc theo trạng thái:" styleClass="form-label"/>
-                    <ComboBox fx:id="statusFilterCombo" promptText="Tất cả"
+                    <Label text="Filter by status:" styleClass="form-label"/>
+                    <ComboBox fx:id="statusFilterCombo" promptText="All"
                               prefWidth="200" styleClass="form-field"/>
                 </HBox>
 
                 <HBox spacing="15" alignment="CENTER">
-                    <Button fx:id="payBillButton" text="Thanh toán hóa đơn" styleClass="confirm-button"/>
-                    <Button fx:id="refreshButton" text="Làm mới" styleClass="refresh-button"/>
+                    <Button fx:id="payBillButton" text="Pay Bill" styleClass="confirm-button"/>
+                    <Button fx:id="refreshButton" text="Refresh" styleClass="refresh-button"/>
                 </HBox>
 
-                <!-- Bảng -->
+                <!-- Table -->
                 <TableView fx:id="billTable" prefHeight="320" styleClass="bill-table">
                     <columns>
-                        <TableColumn fx:id="billIdCol" text="Mã hóa đơn" prefWidth="100"/>
-                        <TableColumn fx:id="billTypeCol" text="Loại hóa đơn" prefWidth="150"/>
-                        <TableColumn fx:id="billAmountCol" text="Số tiền (VND)" prefWidth="120"/>
-                        <TableColumn fx:id="billStatusCol" text="Trạng thái" prefWidth="100"/>
-                        <TableColumn fx:id="billDueCol" text="Hạn thanh toán" prefWidth="150"/>
-                        <TableColumn fx:id="billPaidCol" text="Ngày thanh toán" prefWidth="150" />
-                        <TableColumn fx:id="billCreatedCol" text="Ngày tạo" prefWidth="150"/>
+                        <TableColumn fx:id="billIdCol" text="Bill ID" prefWidth="100"/>
+                        <TableColumn fx:id="billTypeCol" text="Bill Type" prefWidth="150"/>
+                        <TableColumn fx:id="billAmountCol" text="Amount (VND)" prefWidth="120"/>
+                        <TableColumn fx:id="billStatusCol" text="Status" prefWidth="100"/>
+                        <TableColumn fx:id="billDueCol" text="Due Date" prefWidth="150"/>
+                        <TableColumn fx:id="billPaidCol" text="Paid At" prefWidth="150" />
+                        <TableColumn fx:id="billCreatedCol" text="Created At" prefWidth="150"/>
                     </columns>
                 </TableView>
             </VBox>

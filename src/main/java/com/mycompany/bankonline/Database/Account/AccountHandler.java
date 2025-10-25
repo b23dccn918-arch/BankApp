@@ -172,7 +172,6 @@ public class AccountHandler {
             if (rs.next()) {
                 return rs.getString("account_number");
             } else {
-                System.err.println("Không tìm thấy tài khoản");
                 return "-1";
             }
 
