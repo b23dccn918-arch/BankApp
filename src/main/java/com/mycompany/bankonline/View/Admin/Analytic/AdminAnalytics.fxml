@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="668.0" prefWidth="867.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.bankonline.Controller.Admin.AdminAnalyticController">
+
+	<children>
+		<!-- Sidebar trái -->
+		<AnchorPane layoutY="120.0" prefHeight="590.0" prefWidth="214.0" styleClass="sidebar">
+			<children>
+				<VBox alignment="TOP_CENTER" layoutX="7.0" layoutY="61.0" spacing="15" />
+
+				<Button fx:id="AccountButton" layoutX="22.0" layoutY="61.0" onAction="#toAccount" prefHeight="45.0" prefWidth="180.0" styleClass="sidebar-button" text="👤   Account">
+					<font>
+						<Font name="Segoe UI Semibold" size="16.0" />
+					</font>
+				</Button>
+
+				<Button fx:id="UserButton" layoutX="22.0" layoutY="130.0" onAction="#toUser" prefHeight="45.0" prefWidth="180.0" styleClass="sidebar-button" text="👥   User">
+					<font>
+						<Font name="Segoe UI Semibold" size="16.0" />
+					</font>
+				</Button>
+
+				<Button fx:id="HistoryButton" layoutX="22.0" layoutY="198.0" onAction="#toHistory" prefHeight="45.0" prefWidth="180.0" styleClass="sidebar-button" text="📜  History">
+					<font>
+						<Font name="Segoe UI Semibold" size="16.0" />
+					</font>
+				</Button>
+
+				<Button fx:id="BillButton" layoutX="22.0" layoutY="267.0" onAction="#toBill" prefHeight="45.0" prefWidth="180.0" styleClass="sidebar-button" text="💸  Bill">
+					<font>
+						<Font name="Segoe UI Semibold" size="16.0" />
+					</font>
+				</Button>
+			</children>
+		</AnchorPane>
+
+		<!-- Header -->
+		<AnchorPane prefHeight="120.0" prefWidth="941.0" styleClass="header">
+			<children>
+				<Button fx:id="LogoutButton" layoutX="776.0" layoutY="42.0" onAction="#backToSignIn" styleClass="logout-btn" text="Logout" />
+				<Label layoutX="56.0" layoutY="38.0" styleClass="header-title" text="Admin Dashboard" />
+			</children>
+		</AnchorPane>
+
+		<!-- Khu hiển thị bên phải -->
+		<AnchorPane layoutX="210.0" layoutY="120.0" prefHeight="564.0" prefWidth="731.0" styleClass="main-content">
+			<children>
+				<VBox layoutX="20.0" layoutY="20.0" spacing="20.0">
+
+					<!-- HBox chứa 2 PieChart -->
+					<HBox spacing="20.0">
+						<PieChart fx:id="accountStatusChart" prefHeight="250.0" prefWidth="350.0" title="Tài khoản (Active/Inactive)" />
+						<PieChart fx:id="billStatusChart" prefHeight="250.0" prefWidth="350.0" title="Hóa đơn (Paid/Unpaid)" />
+					</HBox>
+
+					<!-- BarChart tổng giao dịch theo tháng -->
+					<BarChart fx:id="transactionChart" prefHeight="300.0" prefWidth="730.0" title="Tổng giao dịch theo tháng">
+						<xAxis>
+							<CategoryAxis label="Tháng" fx:id="xAxis" />
+						</xAxis>
+						<yAxis>
+							<NumberAxis fx:id="yAxis" label="Tổng tiền (VND)" />
+						</yAxis>
+					</BarChart>
+
+				</VBox>
+			</children>
+		</AnchorPane>
+	</children>
+</AnchorPane>

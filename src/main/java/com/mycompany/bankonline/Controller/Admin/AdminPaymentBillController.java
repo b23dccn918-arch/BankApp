@@ -171,6 +171,7 @@ public class AdminPaymentBillController {
 
 			if (bill.getStatus().equals("unpaid")) {
 				showAlert(AlertType.ERROR, "Failed", "Invoice pending payment !");
+				return;
 			}
 
 			boolean success = AdminPaymentBillFunction.updateBill(billId);
@@ -180,6 +181,7 @@ public class AdminPaymentBillController {
 				showBillTable();
 			} else {
 				showAlert(AlertType.ERROR, "Error", "Failed to update this bill !");
+				return;
 			}
 		} catch (NumberFormatException e) {
 			showAlert(AlertType.WARNING, "Invalid Input", "Bill ID must be a valid integer !");

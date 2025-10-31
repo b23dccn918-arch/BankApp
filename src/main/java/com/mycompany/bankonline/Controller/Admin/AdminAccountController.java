@@ -36,7 +36,7 @@ import javafx.scene.control.Tooltip;
 public class AdminAccountController {	
 	
 	@FXML 
-    private Button AccountButton, UserButton, HistoryButton, BillButton;
+    private Button AccountButton, UserButton, HistoryButton, BillButton, AnalyticButton;
     
     @FXML
     private Button BanButton, UnBanButton, DeleteButton, LogoutButton;
@@ -125,6 +125,18 @@ public class AdminAccountController {
             e.printStackTrace();
         }
 	}
+    
+    @FXML
+   	public void toAnalytic(ActionEvent event) {
+   		Button clickedButton = (Button) event.getSource();
+   	  	Scene currentScene = clickedButton.getScene();
+   	  	Stage currentStage = (Stage) currentScene.getWindow();
+           try {
+               toAdminDashBoard.Analytic(currentStage); 
+           } catch (Exception e) {
+               e.printStackTrace();
+           }
+   	}
     
     
     private void showAccountTable() {

@@ -54,4 +54,13 @@ public class toAdminDashBoard {
         stage.setScene(scene);
         stage.show();
     }
+	
+	public static void Analytic(Stage stage) throws IOException {
+        Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/Admin/Analytic/AdminAnalytics.fxml"));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/Admin/Analytic/StyleAdminAnalytics.css").toExternalForm());
+        stage.setTitle("DashBoard Scene");
+        stage.setScene(scene);
+        stage.show();
+    }
 }
