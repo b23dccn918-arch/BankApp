@@ -14,7 +14,7 @@ public class toTransfer {
         Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/Transfer/Transfer.fxml"));
         Scene scene = new Scene(root);
         scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/Transfer/transfer.css").toExternalForm());
-        stage.setTitle("DashBoard Scene");
+        stage.setTitle("Transfer Scene");
         stage.setScene(scene);
         stage.show();
     }

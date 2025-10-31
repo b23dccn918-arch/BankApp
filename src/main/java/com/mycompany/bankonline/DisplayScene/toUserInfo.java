@@ -14,7 +14,7 @@ public class toUserInfo {
         Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/UserInfo/UserInfo.fxml"));
         Scene scene = new Scene(root);
         scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/UserInfo/UserInfo.css").toExternalForm());
-        stage.setTitle("Account Scene");
+        stage.setTitle("UserInfo Scene");
         stage.setScene(scene);
         stage.show();
     }

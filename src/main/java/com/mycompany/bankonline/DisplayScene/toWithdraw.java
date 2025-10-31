@@ -14,7 +14,7 @@ public class toWithdraw {
         Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/Withdraw/Withdraw.fxml"));
         Scene scene = new Scene(root);
         scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/Withdraw/Withdraw.css").toExternalForm());
-        stage.setTitle("SignUp Scene");
+        stage.setTitle("Withdraw Scene");
         stage.setScene(scene);
         stage.show();
     }

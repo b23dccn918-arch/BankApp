@@ -14,7 +14,7 @@ public class toPayment {
         Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/Payment/Payment.fxml"));
         Scene scene = new Scene(root);
         scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/Payment/Payment.css").toExternalForm());
-        stage.setTitle("SignUp Scene");
+        stage.setTitle("Payment Scene");
         stage.setScene(scene);
         stage.show();
     }

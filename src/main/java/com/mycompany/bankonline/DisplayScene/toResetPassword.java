@@ -14,7 +14,7 @@ public class toResetPassword {
         Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/ResetPassword/ResetPassword.fxml"));
         Scene scene = new Scene(root);
         scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/ResetPassword/ResetPassword.css").toExternalForm());
-        stage.setTitle("ConfirmToken Scene");
+        stage.setTitle("ResetPassword Scene");
         stage.setScene(scene);
         stage.show();
     }
