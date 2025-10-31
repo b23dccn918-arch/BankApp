@@ -62,3 +62,70 @@
     -fx-background-color: #f9f9f9;
 }
 
+/* ================= BIỂU ĐỒ ================= */
+
+/* Khung chứa biểu đồ */
+.chart-card {
+    -fx-background-color: linear-gradient(to bottom right, #ffffff, #f7f7f7);
+    -fx-background-radius: 14;
+    -fx-padding: 15;
+    -fx-border-color: #e5e5e5;
+    -fx-border-radius: 14;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 8, 0, 0, 3);
+}
+
+/* Tiêu đề biểu đồ */
+.chart-card .chart-title {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 16px;
+    -fx-text-fill: #8B0000;
+    -fx-padding: 0 0 12 0;
+}
+
+/* PieChart */
+.default-color0.chart-pie { -fx-pie-color: #c92a2a; }
+.default-color1.chart-pie { -fx-pie-color: #ff6b6b; }
+.default-color2.chart-pie { -fx-pie-color: #ffa8a8; }
+.default-color3.chart-pie { -fx-pie-color: #b22222; }
+
+.chart-pie-label {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+    -fx-fill: #333;
+    -fx-font-weight: 600;
+}
+
+.default-color0.chart-bar { -fx-bar-fill: #c92a2a; }   /* đỏ tươi */
+.default-color1.chart-bar { -fx-bar-fill: #8B0000; }   /* đỏ đậm */
+
+.chart-plot-background {
+    -fx-background-color: linear-gradient(to bottom, #fffdfd, #f4f4f4);
+    -fx-background-radius: 10;
+}
+
+/* Trục và nhãn */
+.axis-label {
+    -fx-text-fill: #333333;
+    -fx-font-size: 13px;
+    -fx-font-family: "Segoe UI Semibold";
+}
+
+.axis {
+    -fx-tick-label-fill: #555555;
+    -fx-font-size: 12px;
+}
+
+/* Chú thích biểu đồ */
+.chart-legend {
+    -fx-background-color: transparent;
+    -fx-font-size: 13px;
+    -fx-font-family: "Segoe UI";
+    -fx-text-fill: #444;
+}
+
+/* Hiệu ứng hover trên cột BarChart */
+.chart-bar:hover {
+    -fx-opacity: 0.8;
+    -fx-effect: dropshadow(gaussian, rgba(220, 20, 60, 0.5), 10, 0, 0, 4);
+}
+

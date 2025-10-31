@@ -148,7 +148,7 @@ public class AdminAccountController {
         colPhone.setCellValueFactory(new PropertyValueFactory<>("username"));
         colPassword.setCellValueFactory(new PropertyValueFactory<>("password"));
         colBalance.setCellValueFactory(new PropertyValueFactory<>("balance"));
-        colPin.setCellValueFactory(new PropertyValueFactory<>("pinID"));
+        colPin.setCellValueFactory(new PropertyValueFactory<>("pin"));
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
         colCreatedAt.setCellValueFactory(new PropertyValueFactory<>("createdAt"));
         colCreatedAt.setCellFactory(tc -> new TableCell<>() {

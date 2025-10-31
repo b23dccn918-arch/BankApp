@@ -26,7 +26,7 @@ import javafx.scene.control.Tooltip;
 
 public class AdminHistoryController {
 	@FXML
-	private Button AccountButton, UserButton, BillButton;
+	private Button AccountButton, UserButton, BillButton, AnalyticButton;
 	
 	@FXML
 	private Button LogoutButton, FilterButton, ClearFilterButton;
@@ -110,6 +110,18 @@ public class AdminHistoryController {
 			e.printStackTrace();
 		}
 	}
+	
+	@FXML
+   	public void toAnalytic(ActionEvent event) {
+   		Button clickedButton = (Button) event.getSource();
+   	  	Scene currentScene = clickedButton.getScene();
+   	  	Stage currentStage = (Stage) currentScene.getWindow();
+           try {
+               toAdminDashBoard.Analytic(currentStage); 
+           } catch (Exception e) {
+               e.printStackTrace();
+           }
+   	}
 
 	private void showHistoryTable() {
 		ObservableList<TransactionAdmin> list = TransactionRepository.getAllTransactions();

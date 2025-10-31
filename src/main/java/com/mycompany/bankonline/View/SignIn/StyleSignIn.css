@@ -11,9 +11,10 @@
     -fx-font-family: "Segoe UI Semibold";
 }
 
-/* Nền bên phải */
 .right-login-container {
-    -fx-background-color: #f8faff;
+    -fx-background-color: linear-gradient(to bottom right, #c2e0ff, #dcecff, #f0f6ff);
+    -fx-background-radius: 0 10 10 0;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 3);
 }
 
 /* Label */

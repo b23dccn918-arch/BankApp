@@ -20,7 +20,9 @@
 
 /* ==== PHẢI ==== */
 .right-admin-container {
-    -fx-background-color: #fafafa;
+    -fx-background-color: linear-gradient(to bottom right, #ffd6d6, #ffe5e5, #fff5f5);
+    -fx-background-radius: 0 10 10 0;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 10, 0, 0, 4);
 }
 
 /* Tiêu đề */
