@@ -3,65 +3,78 @@ package com.mycompany.bankonline.Model;
 import javafx.beans.property.*;
 
 public class Bill {
-    private final StringProperty billId;
-    private final StringProperty billType;
-    private final DoubleProperty amount;
-    private final StringProperty status;
-    private final StringProperty dueDate;
-    private final StringProperty paidAt;
-    private final StringProperty createdAt;
+    private final long billId;
+    private final String billType;
+    private final Double amount;
+    private final String status;
+    private final String dueDate;
+    private final String paidAt;
+    private final String createdAt;
 
     public Bill(long billId, String billType, double amount, String status, String dueDate,String paidAt ,String createdAt) {
-        this.billId = new SimpleStringProperty(String.valueOf(billId));
-        this.billType = new SimpleStringProperty(billType);
-        this.amount = new SimpleDoubleProperty(amount);
-        this.status = new SimpleStringProperty(status);
-        this.dueDate = new SimpleStringProperty(dueDate);
-        this.paidAt = new SimpleStringProperty(paidAt);
-        this.createdAt = new SimpleStringProperty(createdAt);
+        this.billId = billId;
+        this.billType = billType;
+        this.amount = amount;
+        this.status = status;
+        this.dueDate = dueDate;
+        this.paidAt = paidAt;
+        this.createdAt = createdAt;
     }
 
-    public StringProperty getBillId() {
+    
+
+    private Bill(Builder builder) {
+        this.billId = builder.billId;
+        this.billType = builder.billType;
+        this.amount = builder.amount;
+        this.status = builder.status;
+        this.dueDate = builder.dueDate;
+        this.paidAt = builder.payAt;
+        this.createdAt = builder.createdAt;
+    }
+
+    
+    public long getBillId() {
         return billId;
     }
 
-    public StringProperty getBillType() {
+
+
+    public String getBillType() {
         return billType;
     }
 
-    public DoubleProperty getAmount() {
+
+
+    public Double getAmount() {
         return amount;
     }
 
-    public StringProperty getStatus() {
+
+
+    public String getStatus() {
         return status;
     }
 
-    public StringProperty getDueDate() {
+
+
+    public String getDueDate() {
         return dueDate;
     }
 
-    public StringProperty getCreatedAt() {
+
+
+    public String getPaidAt() {
+        return paidAt;
+    }
+
+
+
+    public String getCreatedAt() {
         return createdAt;
     }
 
-    private Bill(Builder builder) {
-        this.billId = new SimpleStringProperty(String.valueOf(builder.billId));
-        this.billType = new SimpleStringProperty(builder.billType);
-        this.amount = new SimpleDoubleProperty(builder.amount);
-        this.status = new SimpleStringProperty(builder.status);
-        this.dueDate = new SimpleStringProperty(builder.dueDate);
-        this.paidAt = new SimpleStringProperty(builder.payAt);
-        this.createdAt = new SimpleStringProperty(builder.createdAt);
-    }
 
-    public StringProperty billIdProperty() { return billId; }
-    public StringProperty billTypeProperty() { return billType; }
-    public DoubleProperty amountProperty() { return amount; }
-    public StringProperty statusProperty() { return status; }
-    public StringProperty dueDateProperty() { return dueDate; }
-    public StringProperty createdAtProperty() { return createdAt; }
-    public StringProperty paidAtProperty() { return paidAt; }
     public static class Builder {
         private long billId;
         private String billType;

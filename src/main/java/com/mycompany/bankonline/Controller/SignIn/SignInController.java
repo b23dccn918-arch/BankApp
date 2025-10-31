@@ -27,6 +27,12 @@ public class SignInController {
 	private TextField Username;
 	@FXML
 	private PasswordField Password;
+
+	@FXML
+	private TextField PasswordVisible;
+	@FXML
+	private Button togglePasswordVisibility;
+
 	@FXML
     private Button SignInButton;
 	@FXML
@@ -44,8 +50,13 @@ public class SignInController {
 	@FXML
 	private Hyperlink AdminSignIn;
 	
+	private boolean isPasswordVisible = false;
+
 	@FXML
     public void initialize() {
+
+		PasswordVisible.textProperty().bindBidirectional(Password.textProperty());
+
 		forgotPassword.setOnAction(event->{
 			Stage stage = (Stage) forgotPassword.getScene().getWindow();
 			try {
@@ -98,6 +109,24 @@ public class SignInController {
 		}
 		
 	} 
+
+	@FXML
+	private void handleTogglePasswordVisibility() {
+		isPasswordVisible = !isPasswordVisible;
+		if (isPasswordVisible) {
+			PasswordVisible.setVisible(true);
+			PasswordVisible.setManaged(true);
+			Password.setVisible(false);
+			Password.setManaged(false);
+			togglePasswordVisibility.setText("Hide"); // đổi icon nếu muốn
+		} else {
+			PasswordVisible.setVisible(false);
+			PasswordVisible.setManaged(false);
+			Password.setVisible(true);
+			Password.setManaged(true);
+			togglePasswordVisibility.setText("Show");
+		}
+	}
 
 	
 	  public void handleSignUpButton(ActionEvent event) {

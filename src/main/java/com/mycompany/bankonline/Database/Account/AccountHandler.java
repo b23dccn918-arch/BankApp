@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 
 import com.mycompany.bankonline.Database.Connect;
+import com.mycompany.bankonline.Model.Account;
 
 public class AccountHandler {
 
@@ -42,28 +43,6 @@ public class AccountHandler {
         }
     }
 
-
-    public double getBalanceByAccountId(int accountId) {
-        String sql = "SELECT balance FROM accounts WHERE account_id = ?";
-
-        try (Connection conn = Connect.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, accountId);
-            ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                return rs.getDouble("balance");
-            } else {
-                System.err.println("Không tìm thấy tài khoản");
-                return -1;
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return -1;
-        }
-    }
 
     public boolean depositMoney(int accountId, double amount, Timestamp timestamp) {
         String sqlUpdateBalance = "UPDATE accounts SET balance = balance + ? WHERE account_id = ?";
@@ -137,31 +116,32 @@ public class AccountHandler {
         }
     }
 
-    public String getUserNameByAccountNumber(String accountNumber){
-        String sql = "SELECT u.full_name FROM users u "
-                     + "JOIN accounts a ON u.user_id = a.user_id "
-                     + "WHERE a.account_number = ?";
-    
-          try (Connection conn = Connect.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
-    
-                stmt.setString(1, accountNumber);
-                ResultSet rs = stmt.executeQuery();
-    
-                if (rs.next()) {
-                    return rs.getString("full_name");
-                } else {
-                    return null;
-                }
-    
-          } catch (SQLException e) {
-                e.printStackTrace();
+
+    public Account findAccountByAccountNumber(String accountNumber) {
+        String sql = "SELECT * FROM accounts WHERE account_number = ?";
+
+        try (Connection conn = Connect.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, accountNumber);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return mapResultSetToAccount(rs);
+            }
+            else{
                 return null;
-          }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    public String getAccountNumberByAccountId(int accountId) {
-        String sql = "SELECT account_number FROM accounts WHERE account_id = ?";
+
+    public Account findAccountByAccountId(int accountId) {
+        String sql = "SELECT * FROM accounts WHERE account_id = ?";
 
         try (Connection conn = Connect.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -170,36 +150,32 @@ public class AccountHandler {
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                return rs.getString("account_number");
-            } else {
-                return "-1";
+                return mapResultSetToAccount(rs);
+            }
+            else{
+                return null;
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
-            return "-1";
         }
+
+        return null;
     }
 
-    public String getPinByAccountId(int accountId) {
-        String sql = "SELECT pin FROM accounts WHERE account_id = ?";
-
-        try (Connection conn = Connect.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, accountId);
-            ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                return rs.getString("pin");
-            } else {
-                return "-1";
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return "-1";
-        }
+    private Account mapResultSetToAccount(ResultSet rs) throws SQLException {
+        return new Account.Builder()
+                .setAccountId(rs.getInt("account_id"))
+                .setUsername(rs.getString("phone"))
+                .setPassword(rs.getString("password"))
+                .setUserId(rs.getInt("user_id"))
+                .setAccountNumber(rs.getString("account_number"))
+                .setBalance(rs.getLong("balance"))
+                .setPin(rs.getString("pin"))
+                .setStatus(rs.getInt("status"))
+                .setCreatedAt(rs.getTimestamp("created_at"))
+                .build();
     }
+
     
 }

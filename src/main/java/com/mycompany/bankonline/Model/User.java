@@ -27,6 +27,79 @@ public class User {
         this.createdAt = createdAt;
     }
 
+    private User(Builder builder) {
+        this.userId = builder.userId;
+        this.fullName = builder.fullName;
+        this.citizenIdentifier = builder.citizenIdentifier;
+        this.job = builder.job;
+        this.gender = builder.gender;
+        this.dateBirth = builder.dateBirth;
+        this.address = builder.address;
+        this.email = builder.email;
+        this.createdAt = builder.createdAt;
+    }
+
+    public static class Builder {
+        private int userId;
+        private String fullName;
+        private String citizenIdentifier;
+        private String job;
+        private String gender;
+        private Date dateBirth;
+        private String address;
+        private String email;
+        private Timestamp createdAt;
+
+        public Builder userId(int userId) {
+            this.userId = userId;
+            return this;
+        }
+
+        public Builder fullName(String fullName) {
+            this.fullName = fullName;
+            return this;
+        }
+
+        public Builder citizenIdentifier(String citizenIdentifier) {
+            this.citizenIdentifier = citizenIdentifier;
+            return this;
+        }
+
+        public Builder job(String job) {
+            this.job = job;
+            return this;
+        }
+
+        public Builder gender(String gender) {
+            this.gender = gender;
+            return this;
+        }
+
+        public Builder dateBirth(Date dateBirth) {
+            this.dateBirth = dateBirth;
+            return this;
+        }
+
+        public Builder address(String address) {
+            this.address = address;
+            return this;
+        }
+
+        public Builder email(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public Builder createdAt(Timestamp createdAt) {
+            this.createdAt = createdAt;
+            return this;
+        }
+
+        public User build() {
+            return new User(this);
+        }
+    }
+
     public int getUserId() { return userId; }
     public String getFullName() { return fullName; }
     public String getCitizenIdentifier() { return citizenIdentifier; }

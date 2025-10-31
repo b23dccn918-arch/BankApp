@@ -19,6 +19,7 @@ import com.mycompany.bankonline.Controller.PinDialog.PinDialogController;
 import com.mycompany.bankonline.Database.Account.AccountHandler;
 import com.mycompany.bankonline.DisplayScene.toSignIn;
 import com.mycompany.bankonline.MainApp.Main;
+import com.mycompany.bankonline.Model.Account;
 import com.mycompany.bankonline.Session.Session;
 
 import javafx.fxml.Initializable;
@@ -60,9 +61,14 @@ public class WithdrawController implements Initializable {
 
     private final AccountHandler accountHandler = new AccountHandler();
 
+    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        balanceField.setText(String.format("%,.0f VND", accountHandler.getBalanceByAccountId(Session.getInstance().getAccountId())));
+
+        Account currentAccount = accountHandler.findAccountByAccountId(Session.getInstance().getAccountId());
+
+        balanceField.setText(String.format("%,d VND", currentAccount.getBalance()));
         withdrawButtonSubmit.setOnAction(e -> handleWithdraw());
 
         // Set navigation button events
@@ -151,9 +157,10 @@ public class WithdrawController implements Initializable {
                 showMessage("Notice", "Transaction cancelled!");
                 return;
             }
+            Account currentAccount = accountHandler.findAccountByAccountId(Session.getInstance().getAccountId());
 
             String enteredPin = pinController.getEnteredPin();
-            String currentAccountPin = accountHandler.getPinByAccountId(Session.getInstance().getAccountId());
+            String currentAccountPin = currentAccount.getPin();
 
             if (!enteredPin.equals(currentAccountPin)) {
                 showMessage("Notice", "Incorrect PIN!");
@@ -209,8 +216,10 @@ public class WithdrawController implements Initializable {
     }
 
     private void updateBalanceUI() {
-        double updatedBalance = accountHandler.getBalanceByAccountId(Session.getInstance().getAccountId());
-        balanceField.setText(String.format("%,.0f VND", updatedBalance));
+        Account currentAccount = accountHandler.findAccountByAccountId(Session.getInstance().getAccountId());
+
+        double updatedBalance = currentAccount.getBalance();
+        balanceField.setText(String.format("%,d VND", updatedBalance));
     }
 
     private void showMessage(String title, String content) {

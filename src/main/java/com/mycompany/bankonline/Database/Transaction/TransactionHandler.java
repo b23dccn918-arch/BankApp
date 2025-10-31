@@ -3,6 +3,7 @@ package com.mycompany.bankonline.Database.Transaction;
 import com.mycompany.bankonline.Database.Connect;
 import com.mycompany.bankonline.Database.Account.AccountHandler;
 import com.mycompany.bankonline.Database.Payment.PaymentHandler;
+import com.mycompany.bankonline.Model.Account;
 import com.mycompany.bankonline.Model.Bill;
 import com.mycompany.bankonline.Model.Transaction;
 
@@ -135,31 +136,27 @@ public class TransactionHandler {
                 String message;
 
                 if (type.equalsIgnoreCase("transfer") && fromId == accountId) {
-                    String toAccountNumber = accountHandler.getAccountNumberByAccountId(toId);
+                    Account toAccount = accountHandler.findAccountByAccountId(toId);
+                    String toAccountNumber = toAccount != null ? toAccount.getAccountNumber() : "Unknown";
                     message = String.format("You have transferred %.0f VND to account %s -- %s", amount, toAccountNumber, formatted.toString());
                 }
-
                 else if (type.equalsIgnoreCase("transfer") && toId == accountId) {
-                    String fromAccountNumber = accountHandler.getAccountNumberByAccountId(toId);
+                    Account fromAccount = accountHandler.findAccountByAccountId(fromId);
+                    String fromAccountNumber = fromAccount != null ? fromAccount.getAccountNumber() : "Unknown";
                     message = String.format("You have received %.0f VND from account #%s -- %s", amount, fromAccountNumber, formatted.toString());
                 }
-
                 else if (type.equalsIgnoreCase("deposit"))
                     message = String.format("Deposit of %.0f VND successful -- %s.", amount, formatted.toString());
-
                 else if (type.equalsIgnoreCase("withdraw"))
                     message = String.format("Withdrawal of %.0f VND successful -- %s.", amount, formatted.toString());
-
                 else if (type.equalsIgnoreCase("payment")) {
                     Bill bill = PaymentHandler.getBillByBillId(billId);
                     message = String.format("Payment of %.0f VND for bill #%d (Type: %s) -- %s",
-                            amount, billId, bill.getBillType().get(), formatted.toString());
+                            amount, billId, bill.getBillType(), formatted.toString());
                 }
                 else
                     message = String.format("Transaction of %.0f VND (%s).", amount, type);
-
                 transactions.add(message);
-
             }
         } catch (SQLException e) {
             e.printStackTrace();

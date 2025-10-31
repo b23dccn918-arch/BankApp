@@ -19,6 +19,7 @@ import com.mycompany.bankonline.Controller.PinDialog.PinDialogController;
 import com.mycompany.bankonline.Database.Account.AccountHandler;
 import com.mycompany.bankonline.DisplayScene.toSignIn;
 import com.mycompany.bankonline.MainApp.Main;
+import com.mycompany.bankonline.Model.Account;
 import com.mycompany.bankonline.Session.Session;
 
 import javafx.fxml.Initializable;
@@ -63,7 +64,9 @@ public class DepositController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         depositButtonSubmit.setOnAction(e -> handleDeposit());
-        balanceField.setText(String.format("%,.0f VND", accountHandler.getBalanceByAccountId(Session.getInstance().getAccountId())));
+        int accountId = Session.getInstance().getAccountId();
+        Account currentAccount = accountHandler.findAccountByAccountId(accountId);
+        balanceField.setText(String.format("%,d VND", currentAccount.getBalance()));
 
         // Gán sự kiện cho các nút điều hướng
         homeButton.setOnAction(event -> {
@@ -145,8 +148,11 @@ public class DepositController implements Initializable {
                 return;
             }
 
+            int accountId = Session.getInstance().getAccountId();
+            Account currentAccount = accountHandler.findAccountByAccountId(accountId);
+
             String enteredPin = pinController.getEnteredPin();
-            String currentAccountPin = accountHandler.getPinByAccountId(Session.getInstance().getAccountId());
+            String currentAccountPin = currentAccount.getPin();
 
             if (!enteredPin.equals(currentAccountPin)) {
                 showMessage("Thông báo", "Mã PIN không chính xác. Vui lòng thử lại!");
@@ -194,8 +200,10 @@ public class DepositController implements Initializable {
     }
 
     private void updateBalanceUI() {
-        double updatedBalance = accountHandler.getBalanceByAccountId(Session.getInstance().getAccountId());
-        balanceField.setText(String.format("%,.0f VND", updatedBalance));
+        int accountId = Session.getInstance().getAccountId();
+        Account currentAccount = accountHandler.findAccountByAccountId(accountId);
+        double updatedBalance = currentAccount.getBalance();
+        balanceField.setText(String.format("%,d VND", updatedBalance));
     }
 
     private void showErrorAlert(String message) {

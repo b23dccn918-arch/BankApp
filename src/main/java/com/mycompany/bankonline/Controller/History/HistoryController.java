@@ -5,6 +5,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.sql.*;
@@ -134,19 +136,17 @@ public class HistoryController implements Initializable {
         });
         logoutButton.setOnAction(e -> handleLogout());
 
-        // Table mapping
-        colId.setCellValueFactory(cell -> cell.getValue().transactionIdProperty().asObject());
-        colFrom.setCellValueFactory(cell -> cell.getValue().fromAccountProperty());
-        colTo.setCellValueFactory(cell -> cell.getValue().toAccountProperty());
-        colType.setCellValueFactory(cell -> cell.getValue().typeProperty());
-        colAmount.setCellValueFactory(cell -> cell.getValue().amountProperty().asObject());
-        colDescription.setCellValueFactory(cell -> cell.getValue().descriptionProperty());
-        colDate.setCellValueFactory(cell -> cell.getValue().createdAtProperty());
-        colStatus.setCellValueFactory(cell -> cell.getValue().statusProperty());
+        colId.setCellValueFactory(cell -> new SimpleObjectProperty<>(cell.getValue().getTransactionId()));
+        colFrom.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getFromAccount()));
+        colTo.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getToAccount()));
+        colType.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getType()));
+        colAmount.setCellValueFactory(cell -> new SimpleObjectProperty<>(cell.getValue().getAmount()));
+        colDescription.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getDescription()));
+        colDate.setCellValueFactory(cell -> new SimpleObjectProperty<>(cell.getValue().getCreatedAt()));
+        colStatus.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getStatus()));
 
         loadAllTransactions();
 
-        // Filter by date
         filterButton.setOnAction(e -> filterTransactions());
     }
 
