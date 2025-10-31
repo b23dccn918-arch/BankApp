@@ -2,6 +2,7 @@ package com.mycompany.bankonline.Controller.Payment;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -10,6 +11,7 @@ import com.mycompany.bankonline.Database.Account.AccountHandler;
 import com.mycompany.bankonline.Database.Payment.PaymentHandler;
 import com.mycompany.bankonline.DisplayScene.toSignIn;
 import com.mycompany.bankonline.MainApp.Main;
+import com.mycompany.bankonline.Model.Account;
 import com.mycompany.bankonline.Model.Bill;
 import com.mycompany.bankonline.Session.Session;
 
@@ -27,6 +29,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TableCell;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -83,7 +86,7 @@ public class PaymentController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        Account currentAccount = accountHandler.findAccountByAccountId(Session.getInstance().getAccountId());
         statusFilterCombo.getItems().addAll(
             "All",
             "Paid",
@@ -96,7 +99,7 @@ public class PaymentController implements Initializable {
         payBillButton.setOnAction(e -> handlePayBill());
         refreshButton.setOnAction(e -> loadData());
 
-        balanceField.setText(String.format("%,.0f VND", accountHandler.getBalanceByAccountId(Session.getInstance().getAccountId())));
+        balanceField.setText(String.format("%,d VND", currentAccount.getBalance()));
 
         homeButton.setOnAction(event -> {
             try {
@@ -158,10 +161,14 @@ public class PaymentController implements Initializable {
     }
 
     private void setupColumns() {
-        billIdCol.setCellValueFactory(data -> data.getValue().billIdProperty());
-        billTypeCol.setCellValueFactory(data -> data.getValue().billTypeProperty());
-        billAmountCol.setCellValueFactory(data -> data.getValue().amountProperty().asObject());
-        billStatusCol.setCellValueFactory(data -> data.getValue().statusProperty());
+        billIdCol.setCellValueFactory(new PropertyValueFactory<>("billId"));
+        billTypeCol.setCellValueFactory(new PropertyValueFactory<>("billType"));
+        billAmountCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        billStatusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
+        billDueCol.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
+        billCreatedCol.setCellValueFactory(new PropertyValueFactory<>("createdAt"));
+        billPaidCol.setCellValueFactory(new PropertyValueFactory<>("paidAt"));
+
         billStatusCol.setCellFactory(column -> new TableCell<Bill, String>() {
             @Override
             protected void updateItem(String status, boolean empty) {
@@ -180,18 +187,16 @@ public class PaymentController implements Initializable {
                 setStyle("-fx-text-fill: " + (isPaid ? "green;" : "orange;") + "-fx-font-weight: bold;");
             }
         });
-        billDueCol.setCellValueFactory(data -> data.getValue().dueDateProperty());
-        billCreatedCol.setCellValueFactory(data -> data.getValue().createdAtProperty());
-        billPaidCol.setCellValueFactory(data -> data.getValue().paidAtProperty());
     }
 
     private void loadData() {
         int accountId = Session.getInstance().getAccountId();
-        balanceField.setText(String.format("%,.0f VND", accountHandler.getBalanceByAccountId(accountId)));
+        Account currentAccount = accountHandler.findAccountByAccountId(accountId);
+        balanceField.setText(String.format("%,d VND", currentAccount.getBalance()));
 
         String selected = statusFilterCombo.getValue();
 
-        List<Bill> filteredList;
+        List<Bill> filteredList = new ArrayList<>();
 
         if (selected == null || selected.equals("All")) {
             filteredList = paymentHandler.getBillsByAccountId(accountId);
@@ -242,7 +247,11 @@ public class PaymentController implements Initializable {
             }
 
             String enteredPin = pinController.getEnteredPin();
-            String currentAccountPin = accountHandler.getPinByAccountId(Session.getInstance().getAccountId());
+
+            int accountId = Session.getInstance().getAccountId();
+            Account currentAccount = accountHandler.findAccountByAccountId(accountId);
+
+            String currentAccountPin = currentAccount.getPin();
 
             if (!enteredPin.equals(currentAccountPin)) {
                 showMessage("Notification", "Incorrect PIN!");

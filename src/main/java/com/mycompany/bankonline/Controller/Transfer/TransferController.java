@@ -11,8 +11,11 @@ import java.util.ResourceBundle;
 import com.mycompany.bankonline.Controller.PinDialog.PinDialogController;
 import com.mycompany.bankonline.Database.Account.AccountHandler;
 import com.mycompany.bankonline.Database.Transfer.TransferHandler;
+import com.mycompany.bankonline.Database.UserInfo.UserInfoHandler;
 import com.mycompany.bankonline.DisplayScene.toSignIn;
 import com.mycompany.bankonline.MainApp.Main;
+import com.mycompany.bankonline.Model.Account;
+import com.mycompany.bankonline.Model.User;
 import com.mycompany.bankonline.Session.Session;
 
 import javafx.animation.FadeTransition;
@@ -86,7 +89,7 @@ public class TransferController implements Initializable {
     private Button logoutButton;
 
     private final TransferHandler transferHandler = new TransferHandler();
-
+    private final UserInfoHandler userInfoHandler = new UserInfoHandler();
     private final AccountHandler accountHandler = new AccountHandler();
 
     /**
@@ -94,6 +97,8 @@ public class TransferController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        Account currentAccount = accountHandler.findAccountByAccountId(Session.getInstance().getAccountId());
+
         recipientAccountField.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
             if (!isNowFocused) { 
                 String accountNumber = recipientAccountField.getText().trim();
@@ -107,7 +112,7 @@ public class TransferController implements Initializable {
 
         transferButtonSubmit.setOnAction(this::handleTransfer);
         
-        balanceField.setText(String.format("%,.0f VND", accountHandler.getBalanceByAccountId(Session.getInstance().getAccountId())));
+        balanceField.setText(String.format("%,d VND", currentAccount.getBalance()));
         homeButton.setOnAction(event -> {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
@@ -186,9 +191,11 @@ public class TransferController implements Initializable {
             return;
         }
 
+        Account currentAccount = accountHandler.findAccountByAccountId(Session.getInstance().getAccountId());
+
         String enteredPin = pinController.getEnteredPin();
 
-        String currentAccountPin = accountHandler.getPinByAccountId(Session.getInstance().getAccountId());
+        String currentAccountPin = currentAccount.getPin();
         if (!enteredPin.equals(currentAccountPin)) {
             showMessage("Notification", "Incorrect PIN!");
             return;
@@ -216,13 +223,20 @@ public class TransferController implements Initializable {
                 return;
             }
             int senderAccountId = Session.getInstance().getAccountId();
-            String result = transferHandler.transferMoney(senderAccountId, recipient, amount, message);
+            Account senderAccount = accountHandler.findAccountByAccountId(senderAccountId);
+            if (senderAccount.getBalance() < amount) {
+                showErrorAlert("Insufficient balance.");
+                return;
+            }
+
+            Boolean result = transferHandler.transferMoney(senderAccountId, recipient, amount, message);
 
             if (result.equals("Success")) {
-                balanceField.setText(String.format("%,.0f VND", accountHandler.getBalanceByAccountId(Session.getInstance().getAccountId())));
+                Account currentAccount = accountHandler.findAccountByAccountId(Session.getInstance().getAccountId());
+                balanceField.setText(String.format("%,d VND", currentAccount.getBalance()));
                 showSuccessAlert("Money transferred successfully!");
             } else {
-                showErrorAlert(result);
+                showErrorAlert("Transfer failed.");
             }
 
         } catch (NumberFormatException e) {
@@ -232,8 +246,13 @@ public class TransferController implements Initializable {
 
     private void loadRecipientName(String accountNumber) {
         try {
-            String recipientName = accountHandler.getUserNameByAccountNumber(accountNumber);
-            String currentAccountNumber = accountHandler.getAccountNumberByAccountId(Session.getInstance().getAccountId());
+            Account currentAccount = accountHandler.findAccountByAccountId(Session.getInstance().getAccountId());
+            Account recipientAccount = accountHandler.findAccountByAccountNumber(accountNumber);
+            User recipientUser = userInfoHandler.getUserById(
+                    recipientAccount != null ? recipientAccount.getUserId() : -1);
+            String recipientName = recipientUser != null ? 
+                    recipientUser.getFullName() : "Unknown";
+            String currentAccountNumber = currentAccount.getAccountNumber();
             if (accountNumber.equals(currentAccountNumber)) {
                 recipientNameLabel.setText("You cannot transfer to your own account!");
                 return;

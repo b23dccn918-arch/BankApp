@@ -5,33 +5,58 @@ import java.sql.Timestamp;
 
 public class Transaction {
 
-    private final LongProperty transactionId;
-    private final StringProperty fromAccount;
-    private final StringProperty toAccount;
-    private final StringProperty type;
-    private final DoubleProperty amount;
-    private final StringProperty description;
-    private final ObjectProperty<Timestamp> createdAt;
-    private final StringProperty status;
+    private final Long transactionId;
+    private final String fromAccount;
+    private final String toAccount;
+    private final String type;
+    private final Double amount;
+    private final String description;
+    private final Timestamp createdAt;
+    private final String status;
 
     public Transaction(long id, String from, String to, String type,
                        double amount, String description, Timestamp createdAt, String status) {
-        this.transactionId = new SimpleLongProperty(id);
-        this.fromAccount = new SimpleStringProperty(from);
-        this.toAccount = new SimpleStringProperty(to);
-        this.type = new SimpleStringProperty(type);
-        this.amount = new SimpleDoubleProperty(amount);
-        this.description = new SimpleStringProperty(description);
-        this.createdAt = new SimpleObjectProperty<>(createdAt);
-        this.status = new SimpleStringProperty(status);
+        this.transactionId = id;
+        this.fromAccount = from;
+        this.toAccount = to;
+        this.type = type;
+        this.amount = amount;
+        this.description = description;
+        this.createdAt = createdAt;
+        this.status = status;
     }
 
-    public LongProperty transactionIdProperty() { return transactionId; }
-    public StringProperty fromAccountProperty() { return fromAccount; }
-    public StringProperty toAccountProperty() { return toAccount; }
-    public StringProperty typeProperty() { return type; }
-    public DoubleProperty amountProperty() { return amount; }
-    public StringProperty descriptionProperty() { return description; }
-    public ObjectProperty<Timestamp> createdAtProperty() { return createdAt; }
-    public StringProperty statusProperty() { return status; }
+    public Long getTransactionId() {
+        return transactionId;
+    }
+
+    public String getFromAccount() {
+        return fromAccount;
+    }
+
+    public String getToAccount() {
+        return toAccount;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public Double getAmount() {
+        return amount;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    
 }

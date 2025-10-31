@@ -10,6 +10,7 @@ import com.mycompany.bankonline.Database.Transaction.TransactionHandler;
 import com.mycompany.bankonline.Database.UserInfo.UserInfoHandler;
 import com.mycompany.bankonline.DisplayScene.toSignIn;
 import com.mycompany.bankonline.MainApp.Main;
+import com.mycompany.bankonline.Model.Account;
 import com.mycompany.bankonline.Model.User;
 import com.mycompany.bankonline.Session.Session;
 
@@ -72,7 +73,10 @@ public class DashBoardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        currentBalance = accountHandler.getBalanceByAccountId(Session.getInstance().getAccountId());
+        int accountId = Session.getInstance().getAccountId();
+        Account currentAccount = accountHandler.findAccountByAccountId(accountId);
+
+        currentBalance = currentAccount.getBalance();
         toggleBalanceButton.setOnAction(e -> {
             isBalanceVisible = !isBalanceVisible;
             if (isBalanceVisible) {
@@ -86,7 +90,7 @@ public class DashBoardController implements Initializable {
 
         loadNotifications(Session.getInstance().getAccountId());
         loadUserInfo(Session.getInstance().getUserId());
-        accountNumberField.setText(formatAccountNumber(accountHandler.getAccountNumberByAccountId(Session.getInstance().getAccountId())));
+        accountNumberField.setText(formatAccountNumber(currentAccount.getAccountNumber()));
         
         // Gán sự kiện cho các nút
         homeButton.setOnAction(event -> {

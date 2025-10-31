@@ -37,7 +37,23 @@
                     <TextField fx:id="Username" promptText="Enter username" styleClass="input-field"/>
 
                     <Label text="Password" styleClass="label-text" />
-                    <PasswordField fx:id="Password" promptText="Enter password" styleClass="input-field"/>
+
+
+                <StackPane>
+
+                    <PasswordField fx:id="Password" promptText="Enter password" styleClass="input-field" />
+
+
+                    <TextField fx:id="PasswordVisible" promptText="Enter password"
+                            styleClass="input-field" visible="false" managed="false" />
+
+
+                    <Button fx:id="togglePasswordVisibility" text="Show"
+                            onAction="#handleTogglePasswordVisibility"
+                            style="-fx-background-color: transparent; -fx-cursor: hand;"
+                            StackPane.alignment="CENTER_RIGHT" />
+                </StackPane>
+
 
                     <Hyperlink fx:id="forgotPassword" layoutX="260.0" layoutY="260.0" styleClass="forgot-password" text="Forgot password" />
                     <Hyperlink fx:id="changePassword" styleClass="change-password" text="Change password" />

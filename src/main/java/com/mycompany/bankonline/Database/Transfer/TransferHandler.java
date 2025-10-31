@@ -8,13 +8,15 @@ import java.sql.SQLException;
 
 import com.mycompany.bankonline.Database.Connect;
 import com.mycompany.bankonline.Database.Account.AccountHandler;
+import com.mycompany.bankonline.Model.Account;
 
 public class TransferHandler {
     private final AccountHandler accountHandler = new AccountHandler();
-    public String transferMoney(int senderAccountId, String recipientAccountNumber, double amount, String description) {
-        String senderAccountNumber = accountHandler.getAccountNumberByAccountId(senderAccountId);
+    public Boolean transferMoney(int senderAccountId, String recipientAccountNumber, double amount, String description) {
+        Account senderAccount = accountHandler.findAccountByAccountId(senderAccountId);
+        String senderAccountNumber = senderAccount.getAccountNumber();
         if(senderAccountNumber.equals(recipientAccountNumber)){
-            return "-1";
+            return false;
         }
 
         try (Connection conn = Connect.getConnection()) {
@@ -27,7 +29,7 @@ public class TransferHandler {
             ResultSet rsSender = psSender.executeQuery();
 
             if (!rsSender.next()) {
-                return "-1";
+                return false;
             }
 
             double senderBalance = rsSender.getDouble("balance");
@@ -39,7 +41,7 @@ public class TransferHandler {
             ResultSet rsRecipient = psRecipient.executeQuery();
 
             if (!rsRecipient.next()) {
-                return "-1";
+                return false;
             }
 
             int recipientAccountId = rsRecipient.getInt("account_id");
@@ -47,7 +49,7 @@ public class TransferHandler {
 
 
             if (senderBalance < amount) {
-                return "-1";
+                return false;
             }
 
 
@@ -76,11 +78,11 @@ public class TransferHandler {
 
             conn.commit();
 
-            return "Success";
+            return true;
 
         } catch (SQLException e) {
             e.printStackTrace();
-            return "Lỗi khi chuyển tiền: " + e.getMessage();
+            return false;
         }
     }
 }
