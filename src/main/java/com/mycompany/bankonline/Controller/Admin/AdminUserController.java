@@ -30,7 +30,7 @@ import javafx.scene.control.Tooltip;
 
 public class AdminUserController {
 	@FXML
-	private Button LogoutButton, AccountButton, BillButton;
+	private Button LogoutButton, AccountButton, BillButton, AnalyticButton;
 
 	@FXML
 	private Button BanButton, UnBanButton, DeleteButton;
@@ -123,6 +123,18 @@ public class AdminUserController {
 			e.printStackTrace();
 		}
 	}
+	
+	@FXML
+   	public void toAnalytic(ActionEvent event) {
+   		Button clickedButton = (Button) event.getSource();
+   	  	Scene currentScene = clickedButton.getScene();
+   	  	Stage currentStage = (Stage) currentScene.getWindow();
+           try {
+               toAdminDashBoard.Analytic(currentStage); 
+           } catch (Exception e) {
+               e.printStackTrace();
+           }
+   	}
 
 	private void showUserTable() {
 		ObservableList<User> list = UserRepository.getAllUsers();

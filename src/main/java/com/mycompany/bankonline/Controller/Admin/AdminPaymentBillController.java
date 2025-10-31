@@ -28,7 +28,7 @@ import javafx.scene.control.Tooltip;
 
 public class AdminPaymentBillController {
 	@FXML
-	private Button AccountButton, UserButton, HistoryButton;
+	private Button AccountButton, UserButton, HistoryButton, AnalyticButton;
 
 	@FXML
 	private Button UpdateButton, PaidButton, UnPaidButton, ClearButton, LogoutButton;
@@ -107,6 +107,18 @@ public class AdminPaymentBillController {
 			e.printStackTrace();
 		}
 	}
+	
+	@FXML
+   	public void toAnalytic(ActionEvent event) {
+   		Button clickedButton = (Button) event.getSource();
+   	  	Scene currentScene = clickedButton.getScene();
+   	  	Stage currentStage = (Stage) currentScene.getWindow();
+           try {
+               toAdminDashBoard.Analytic(currentStage); 
+           } catch (Exception e) {
+               e.printStackTrace();
+           }
+   	}
 
 	private void showBillTable() {
 		// Lấy dữ liệu từ repository
