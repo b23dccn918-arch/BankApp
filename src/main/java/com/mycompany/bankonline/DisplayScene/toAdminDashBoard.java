@@ -14,7 +14,7 @@ public class toAdminDashBoard {
         Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/Admin/Account/AdminAccount.fxml"));
         Scene scene = new Scene(root);
         scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/Admin/Account/StyleAdminAccount.css").toExternalForm());
-        stage.setTitle("DashBoard Scene");
+        stage.setTitle("Account Scene");
         stage.setScene(scene);
         stage.show();
     }
@@ -23,7 +23,7 @@ public class toAdminDashBoard {
         Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/Admin/SignIn/AdminSignIn.fxml"));
         Scene scene = new Scene(root);
         scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/Admin/SignIn/StyleAdminSignIn.css").toExternalForm());
-        stage.setTitle("DashBoard Scene");
+        stage.setTitle("Sign In Scene");
         stage.setScene(scene);
         stage.show();
     }
@@ -32,7 +32,7 @@ public class toAdminDashBoard {
         Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/Admin/User/AdminUser.fxml"));
         Scene scene = new Scene(root);
         scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/Admin/User/StyleAdminUser.css").toExternalForm());
-        stage.setTitle("DashBoard Scene");
+        stage.setTitle("User Scene");
         stage.setScene(scene);
         stage.show();
     }
@@ -41,7 +41,7 @@ public class toAdminDashBoard {
         Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/Admin/History/AdminHistory.fxml"));
         Scene scene = new Scene(root);
         scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/Admin/History/StyleAdminHistory.css").toExternalForm());
-        stage.setTitle("DashBoard Scene");
+        stage.setTitle("History Scene");
         stage.setScene(scene);
         stage.show();
     }
@@ -50,7 +50,7 @@ public class toAdminDashBoard {
         Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/Admin/Bill/AdminPaymentBill.fxml"));
         Scene scene = new Scene(root);
         scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/Admin/Bill/StyleAdminPaymentBill.css").toExternalForm());
-        stage.setTitle("DashBoard Scene");
+        stage.setTitle("Bill Scene");
         stage.setScene(scene);
         stage.show();
     }
@@ -59,7 +59,7 @@ public class toAdminDashBoard {
         Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/Admin/Analytic/AdminAnalytics.fxml"));
         Scene scene = new Scene(root);
         scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/Admin/Analytic/StyleAdminAnalytics.css").toExternalForm());
-        stage.setTitle("DashBoard Scene");
+        stage.setTitle("Analytic Scene");
         stage.setScene(scene);
         stage.show();
     }
