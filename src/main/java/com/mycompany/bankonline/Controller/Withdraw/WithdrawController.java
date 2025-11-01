@@ -181,21 +181,19 @@ public class WithdrawController implements Initializable {
             return;
         }
 
-        double amount;
-        try {
-            amount = Double.parseDouble(amountText);
-            if (amount <= 0) {
-                showMessage("Notice", "Amount must be greater than 0!");
-                return;
-            }
-        } catch (NumberFormatException e) {
-            showMessage("Notice", "Invalid amount!");
+        long amount = Long.parseLong(amountText);
+        if (amount <= 0) {
+            showMessage("Notice", "Amount must be greater than 0!");
             return;
         }
 
         int accountId = Session.getInstance().getAccountId();
+        Account account = accountHandler.findAccountByAccountId(accountId);
+        if (account.getBalance() < amount) {
+            showMessage("Notification", "Insufficient funds!");
+            return;
+        }
 
-        // Perform withdrawal in the database
         boolean success = accountHandler.withdrawMoney(accountId, amount, Timestamp.valueOf(LocalDateTime.now()));
 
         if (success) {
@@ -218,7 +216,7 @@ public class WithdrawController implements Initializable {
     private void updateBalanceUI() {
         Account currentAccount = accountHandler.findAccountByAccountId(Session.getInstance().getAccountId());
 
-        double updatedBalance = currentAccount.getBalance();
+        Long updatedBalance = currentAccount.getBalance();
         balanceField.setText(String.format("%,d VND", updatedBalance));
     }
 

@@ -130,21 +130,21 @@ public class DepositController implements Initializable {
 
     private void handleDeposit() {
         try {
-            // Mở hộp thoại xác nhận PIN
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/mycompany/bankonline/View/PinDialog/PinDialog.fxml"));
             Parent root = loader.load();
 
             Stage pinStage = new Stage();
-            pinStage.setTitle("Xác nhận mã PIN");
+            pinStage.setTitle("Pin Confirmation");
             pinStage.setScene(new Scene(root));
             pinStage.setResizable(false);
             pinStage.initModality(Modality.APPLICATION_MODAL);
             pinStage.showAndWait();
 
-            // Kiểm tra kết quả nhập PIN
+
             PinDialogController pinController = loader.getController();
             if (!pinController.isPinConfirmed()) {
-                showMessage("Thông báo", "Giao dịch đã bị hủy.");
+                showMessage("Notification", "Transaction cancelled.");
                 return;
             }
 
@@ -155,33 +155,26 @@ public class DepositController implements Initializable {
             String currentAccountPin = currentAccount.getPin();
 
             if (!enteredPin.equals(currentAccountPin)) {
-                showMessage("Thông báo", "Mã PIN không chính xác. Vui lòng thử lại!");
+                showMessage("Notification", "Pin is incorrect. Transaction cancelled.");
                 return;
             }
 
         } catch (IOException e) {
             e.printStackTrace();
-            showErrorAlert("Không thể mở hộp thoại nhập mã PIN.");
+            showMessage("Error","Cannot open PIN dialog.");
             return;
         }
 
         String amountText = amountField.getText().trim();
 
-        // Kiểm tra nhập liệu
         if (amountText.isEmpty()) {
-            showMessage("Thông báo", "Vui lòng nhập số tiền cần gửi.");
+            showMessage("Notification", "Please enter an amount to deposit.");
             return;
         }
 
-        double amount;
-        try {
-            amount = Double.parseDouble(amountText);
-            if (amount <= 0) {
-                showMessage("Thông báo", "Số tiền phải lớn hơn 0.");
-                return;
-            }
-        } catch (NumberFormatException e) {
-            showMessage("Thông báo", "Vui lòng nhập đúng định dạng số tiền.");
+        long amount = Long.parseLong(amountText);
+        if (amount <= 0) {
+            showMessage("Notification", "Please enter a valid amount greater than zero");
             return;
         }
 
@@ -195,24 +188,17 @@ public class DepositController implements Initializable {
             updateBalanceUI();
             amountField.clear();
         } else {
-            showMessage("Thất bại", "Không thể gửi tiền. Vui lòng thử lại sau.");
+            showMessage("Thất bại", "Không thể gửi tiền, vui lòng thử lại sau");
         }
     }
 
     private void updateBalanceUI() {
         int accountId = Session.getInstance().getAccountId();
         Account currentAccount = accountHandler.findAccountByAccountId(accountId);
-        double updatedBalance = currentAccount.getBalance();
+        Long updatedBalance = currentAccount.getBalance();
         balanceField.setText(String.format("%,d VND", updatedBalance));
     }
 
-    private void showErrorAlert(String message) {
-        Alert alert = new Alert(AlertType.ERROR);
-        alert.setTitle("Lỗi hệ thống");
-        alert.setHeaderText("Không thể thực hiện giao dịch");
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
 
     private void showMessage(String title, String content) {
         Alert alert = new Alert(AlertType.INFORMATION);
