@@ -4,7 +4,14 @@ package com.mycompany.bankonline.Controller.ComplaintList;
 import com.mycompany.bankonline.Controller.ComplaintDetail.ComplaintDetailController;
 import com.mycompany.bankonline.Database.Complaint.ComplaintHandler;
 import com.mycompany.bankonline.DisplayScene.toComplaint;
+import com.mycompany.bankonline.DisplayScene.toDashBoard;
+import com.mycompany.bankonline.DisplayScene.toDeposit;
+import com.mycompany.bankonline.DisplayScene.toHistory;
+import com.mycompany.bankonline.DisplayScene.toPayment;
 import com.mycompany.bankonline.DisplayScene.toSignIn;
+import com.mycompany.bankonline.DisplayScene.toTransfer;
+import com.mycompany.bankonline.DisplayScene.toUserInfo;
+import com.mycompany.bankonline.DisplayScene.toWithdraw;
 import com.mycompany.bankonline.MainApp.Main;
 import com.mycompany.bankonline.Model.Complaint;
 import com.mycompany.bankonline.Session.Session;
@@ -77,7 +84,7 @@ public class ComplaintListController {
         homeButton.setOnAction(event -> {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
-                Main.DashBoard(stage);
+                toDashBoard.DashBoard(stage);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -85,7 +92,7 @@ public class ComplaintListController {
         accountButton.setOnAction(event -> {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
-                Main.UserInfo(stage);
+                toUserInfo.UserInfo(stage);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -93,7 +100,7 @@ public class ComplaintListController {
         transferButton.setOnAction(event -> {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
-                Main.Transfer(stage);
+                toTransfer.Transfer(stage);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -101,7 +108,7 @@ public class ComplaintListController {
         historyButton.setOnAction(event -> {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
-                Main.History(stage);
+                toHistory.History(stage);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -109,7 +116,7 @@ public class ComplaintListController {
         withdrawButton.setOnAction(event -> {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
-                Main.WithDraw(stage);
+                toWithdraw.WithDraw(stage);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -117,7 +124,7 @@ public class ComplaintListController {
         paymentButton.setOnAction(event -> {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
-                Main.Payment(stage);
+                toPayment.Payment(stage);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -125,7 +132,7 @@ public class ComplaintListController {
         depositButton.setOnAction(event -> {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
-                Main.Deposit(stage);
+                toDeposit.Deposit(stage);
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -12,7 +12,14 @@ import com.mycompany.bankonline.Controller.PinDialog.PinDialogController;
 import com.mycompany.bankonline.Database.Account.AccountHandler;
 import com.mycompany.bankonline.Database.Transfer.TransferHandler;
 import com.mycompany.bankonline.Database.UserInfo.UserInfoHandler;
+import com.mycompany.bankonline.DisplayScene.toDashBoard;
+import com.mycompany.bankonline.DisplayScene.toDeposit;
+import com.mycompany.bankonline.DisplayScene.toHistory;
+import com.mycompany.bankonline.DisplayScene.toPayment;
 import com.mycompany.bankonline.DisplayScene.toSignIn;
+import com.mycompany.bankonline.DisplayScene.toTransfer;
+import com.mycompany.bankonline.DisplayScene.toUserInfo;
+import com.mycompany.bankonline.DisplayScene.toWithdraw;
 import com.mycompany.bankonline.MainApp.Main;
 import com.mycompany.bankonline.Model.Account;
 import com.mycompany.bankonline.Model.User;
@@ -116,7 +123,7 @@ public class TransferController implements Initializable {
         homeButton.setOnAction(event -> {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
-                Main.DashBoard(stage);
+                toDashBoard.DashBoard(stage);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -124,7 +131,7 @@ public class TransferController implements Initializable {
         accountButton.setOnAction(event -> {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
-                Main.UserInfo(stage);
+                toUserInfo.UserInfo(stage);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -132,7 +139,7 @@ public class TransferController implements Initializable {
         transferButton.setOnAction(event -> {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
-                Main.Transfer(stage);
+                toTransfer.Transfer(stage);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -140,7 +147,7 @@ public class TransferController implements Initializable {
         historyButton.setOnAction(event -> {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
-                Main.History(stage);
+                toHistory.History(stage);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -148,7 +155,7 @@ public class TransferController implements Initializable {
         withdrawButton.setOnAction(event -> {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
-                Main.WithDraw(stage);
+                toWithdraw.WithDraw(stage);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -156,7 +163,7 @@ public class TransferController implements Initializable {
         paymentButton.setOnAction(event -> {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
-                Main.Payment(stage);
+                toPayment.Payment(stage);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -164,13 +171,12 @@ public class TransferController implements Initializable {
         depositButton.setOnAction(event -> {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
-                Main.Deposit(stage);
+                toDeposit.Deposit(stage);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         });
         logoutButton.setOnAction(e -> handleLogout());
-
     }
 
     private void handleTransfer(ActionEvent event) {
