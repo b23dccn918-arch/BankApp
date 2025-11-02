@@ -89,7 +89,7 @@
                         <Button fx:id="btnReload"
                                 text="Reload"
                                 onAction="#handleReload"
-                                styleClass="reload-button"
+                                styleClass="logout-btn"
                                 graphicTextGap="8">
                         </Button>
                     </HBox>
