@@ -71,7 +71,7 @@
             </children>
         </AnchorPane>
 
-        <!-- Khu hiển thị bên phải -->
+
         <AnchorPane layoutX="200.0" layoutY="120.0"
                     prefHeight="548.0" prefWidth="667.0"
                     styleClass="main-content">
@@ -81,11 +81,17 @@
                         <Insets top="25" right="25" bottom="25" left="25"/>
                     </padding>
 
-                    <!-- Thanh tiêu đề -->
+
                     <HBox alignment="CENTER_RIGHT" prefWidth="620" spacing="10">
                         <Label text="📋 Complaint List"
                                style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
                         <Region HBox.hgrow="ALWAYS"/>
+                        <Button fx:id="btnReload"
+                                text="Reload"
+                                onAction="#handleReload"
+                                styleClass="reload-button"
+                                graphicTextGap="8">
+                        </Button>
                     </HBox>
 
                     <!-- KHUNG SCROLL -->

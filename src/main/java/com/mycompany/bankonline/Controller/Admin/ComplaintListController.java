@@ -107,10 +107,7 @@ public class ComplaintListController {
         alert.showAndWait().ifPresent(response -> {
         if (response == javafx.scene.control.ButtonType.OK) {
             try {
-                
-                // Lấy stage hiện tại
                 Stage stage = (Stage) LogoutButton.getScene().getWindow();
-                // Chuyển về trang đăng nhập
                 toAdminDashBoard.SignIn(stage);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -179,6 +176,12 @@ public class ComplaintListController {
                e.printStackTrace();
            }
    	}
+
+    @FXML
+    public void handleReload(ActionEvent event){
+        List<Complaint> complaints = complaintHandler.getAllComplaints();
+        displayComplaints(complaints);
+    }
 
     
 
