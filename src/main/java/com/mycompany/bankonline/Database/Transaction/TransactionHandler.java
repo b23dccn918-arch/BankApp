@@ -47,7 +47,7 @@ public class TransactionHandler {
                     rs.getString("from_acc"),
                     rs.getString("to_acc"),
                     rs.getString("type"),
-                    rs.getDouble("amount"),
+                    rs.getBigDecimal("amount"),
                     rs.getString("description"),
                     rs.getTimestamp("created_at"),
                     "Hoàn tất"
@@ -88,7 +88,7 @@ public class TransactionHandler {
                     rs.getString("from_acc"),
                     rs.getString("to_acc"),
                     rs.getString("type"),
-                    rs.getDouble("amount"),
+                    rs.getBigDecimal("amount"),
                     rs.getString("description"),
                     rs.getTimestamp("created_at"),
                     "Hoàn tất"

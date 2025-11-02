@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.sql.*;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
@@ -72,7 +73,7 @@ public class HistoryController implements Initializable {
     @FXML
     private TableColumn<Transaction, String> colType;
     @FXML
-    private TableColumn<Transaction, Double> colAmount;
+    private TableColumn<Transaction, BigDecimal> colAmount;
     @FXML
     private TableColumn<Transaction, String> colDescription;
     @FXML

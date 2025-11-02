@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 import com.mycompany.bankonline.Database.Admin.History.TransactionRepository;
 import com.mycompany.bankonline.DisplayScene.toAdminDashBoard;
-import com.mycompany.bankonline.Model.TransactionAdmin;
+import com.mycompany.bankonline.Model.Transaction;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -38,21 +38,21 @@ public class AdminHistoryController {
 	private DatePicker dateTo;
 
 	@FXML
-	private TableView<TransactionAdmin> tableHistory;
+	private TableView<Transaction> tableHistory;
 	@FXML
-	private TableColumn<TransactionAdmin, Integer> colTransactionId;
+	private TableColumn<Transaction, Integer> colTransactionId;
 	@FXML
-	private TableColumn<TransactionAdmin, String> colFromAccount;
+	private TableColumn<Transaction, String> colFromAccount;
 	@FXML
-	private TableColumn<TransactionAdmin, String> colToAccount;
+	private TableColumn<Transaction, String> colToAccount;
 	@FXML
-	private TableColumn<TransactionAdmin, String> colType;
+	private TableColumn<Transaction, String> colType;
 	@FXML
-	private TableColumn<TransactionAdmin, BigDecimal> colAmount;
+	private TableColumn<Transaction, BigDecimal> colAmount;
 	@FXML
-	private TableColumn<TransactionAdmin, String> colDescription;
+	private TableColumn<Transaction, String> colDescription;
 	@FXML
-	private TableColumn<TransactionAdmin, Timestamp> colCreatedAt;
+	private TableColumn<Transaction, Timestamp> colCreatedAt;
 
 	@FXML
 	private void backToSignIn(ActionEvent event) {
@@ -124,7 +124,7 @@ public class AdminHistoryController {
    	}
 
 	private void showHistoryTable() {
-		ObservableList<TransactionAdmin> list = TransactionRepository.getAllTransactions();
+		ObservableList<Transaction> list = TransactionRepository.getAllTransactions();
 
 		colTransactionId.setCellValueFactory(new PropertyValueFactory<>("transactionId"));
 		colFromAccount.setCellValueFactory(new PropertyValueFactory<>("fromAccount"));
@@ -190,7 +190,7 @@ public class AdminHistoryController {
 			return;
 		}
 
-		ObservableList<TransactionAdmin> list = TransactionRepository.getTransactionsByDate(from, to);
+		ObservableList<Transaction> list = TransactionRepository.getTransactionsByDate(from, to);
 		tableHistory.setItems(list);
 	}
 

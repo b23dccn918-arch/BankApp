@@ -10,16 +10,17 @@ import java.time.LocalDate;
 
 import com.mycompany.bankonline.Database.Connect;
 import com.mycompany.bankonline.Model.Account;
-import com.mycompany.bankonline.Model.TransactionAdmin;
+import com.mycompany.bankonline.Model.Transaction;
+
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class TransactionRepository {
-	public static ObservableList<TransactionAdmin> getAllTransactions() {
+	public static ObservableList<Transaction> getAllTransactions() {
 		Connection con = Connect.getConnection();
 		String sql = "select * from transactions";
-		ObservableList<TransactionAdmin> transactions = FXCollections.observableArrayList();
+		ObservableList<Transaction> transactions = FXCollections.observableArrayList();
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
@@ -37,8 +38,8 @@ public class TransactionRepository {
 				BigDecimal amount = rs.getBigDecimal("amount");
 				String description = rs.getString("description");
 				Timestamp createdAt = rs.getTimestamp("created_at");
-				transactions.add(new TransactionAdmin(transactionId, fromAccount, toAccount, type, amount, description,
-						createdAt));
+				transactions.add(new Transaction(transactionId, fromAccount, toAccount, type, amount, description,
+						createdAt, ""));
 
 			}
 			ps.close();
@@ -50,10 +51,10 @@ public class TransactionRepository {
 
 	}
 
-	public static ObservableList<TransactionAdmin> getTransactionsByDate(LocalDate from, LocalDate to) {
+	public static ObservableList<Transaction> getTransactionsByDate(LocalDate from, LocalDate to) {
 		Connection con = Connect.getConnection();
 		String sql = "SELECT * FROM transactions WHERE DATE(created_at) BETWEEN ? AND ?";
-		ObservableList<TransactionAdmin> transactions = FXCollections.observableArrayList();
+		ObservableList<Transaction> transactions = FXCollections.observableArrayList();
 
 		try (PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setDate(1, Date.valueOf(from));
@@ -77,8 +78,8 @@ public class TransactionRepository {
 				String description = rs.getString("description");
 				Timestamp createdAt = rs.getTimestamp("created_at");
 
-				transactions.add(new TransactionAdmin(transactionId, fromAccount, toAccount, type, amount, description,
-						createdAt));
+				transactions.add(new Transaction(transactionId, fromAccount, toAccount, type, amount, description,
+						createdAt, ""));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

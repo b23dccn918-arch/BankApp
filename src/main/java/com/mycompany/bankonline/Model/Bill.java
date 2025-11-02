@@ -11,7 +11,8 @@ public class Bill {
     private final String paidAt;
     private final String createdAt;
 
-    public Bill(long billId, String billType, double amount, String status, String dueDate,String paidAt ,String createdAt) {
+    public Bill(long billId, String billType, double amount, String status, String dueDate,
+    		String paidAt ,String createdAt) {
         this.billId = billId;
         this.billType = billType;
         this.amount = amount;
