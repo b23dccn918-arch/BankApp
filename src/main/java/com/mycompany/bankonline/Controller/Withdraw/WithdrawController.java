@@ -134,7 +134,7 @@ public class WithdrawController implements Initializable {
                 e.printStackTrace();
             }
         });
-
+        
         logoutButton.setOnAction(e -> handleLogout());
     }
 

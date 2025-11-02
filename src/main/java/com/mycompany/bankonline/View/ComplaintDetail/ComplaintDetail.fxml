@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.mycompany.bankonline.Controller.ComplaintDetail.ComplaintDetailController"
+            prefWidth="450" prefHeight="350">
+
+    <VBox spacing="10">
+
+        <padding>
+            <Insets top="15" right="15" bottom="15" left="15"/>
+        </padding>
+        <Label text="Complaint Detail" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+        <HBox spacing="10">
+            <Label text="Status:" style="-fx-font-weight: bold;"/>
+            <Label fx:id="lblStatus"/>
+        </HBox>
+
+        <HBox spacing="10">
+            <Label text="Subject :" style="-fx-font-weight: bold;"/>
+            <Label fx:id="lblSubject"/>
+        </HBox>
+
+        <Label text="Content:" style="-fx-font-weight: bold;"/>
+        <TextArea fx:id="txtContent" editable="false" wrapText="true"/>
+
+        <Label text="Respone from admin:" style="-fx-font-weight: bold;"/>
+        <TextArea fx:id="txtAdminNote" editable="false" wrapText="true"/>
+
+        <HBox spacing="10">
+            <Label text="Day created:" style="-fx-font-weight: bold;"/>
+            <Label fx:id="lblCreatedAt"/>
+        </HBox>
+
+        <Button text="Đóng" onAction="#closeWindow" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold;"/>
+    </VBox>
+</AnchorPane>

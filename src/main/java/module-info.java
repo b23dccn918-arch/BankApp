@@ -11,6 +11,7 @@ module com.mycompany.bankonline {
     opens com.mycompany.bankonline to javafx.fxml;
     opens com.mycompany.bankonline.Controller.SignIn to javafx.fxml;
     opens com.mycompany.bankonline.MainApp to javafx.fxml;
+    opens com.mycompany.bankonline.Controller.Complaint to javafx.fxml;
     opens com.mycompany.bankonline.Controller.DashBoard to javafx.fxml;
     opens com.mycompany.bankonline.Controller.UserInfo to javafx.fxml;
     opens com.mycompany.bankonline.Controller.Transfer to javafx.fxml;
@@ -26,6 +27,10 @@ module com.mycompany.bankonline {
     opens com.mycompany.bankonline.Controller.ChangePassword to javafx.fxml;
     opens com.mycompany.bankonline.Controller.TokenConfirmDialog to javafx.fxml;
     opens com.mycompany.bankonline.Controller.ResetPinDialog to javafx.fxml;
+    opens com.mycompany.bankonline.Controller.ComplaintList to javafx.fxml;
+    opens com.mycompany.bankonline.Controller.ComplaintDetail to javafx.fxml;
+    exports com.mycompany.bankonline.Controller.ComplaintDetail;
+    exports com.mycompany.bankonline.Controller.Complaint;
     exports com.mycompany.bankonline.Controller.ResetPinDialog;
     exports com.mycompany.bankonline.Controller.ConfirmToken;
     exports com.mycompany.bankonline.Controller.TokenConfirmDialog;

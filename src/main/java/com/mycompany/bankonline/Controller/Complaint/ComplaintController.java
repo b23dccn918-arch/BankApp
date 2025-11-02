@@ -1,37 +1,49 @@
-package com.mycompany.bankonline.Controller.DashBoard;
+package com.mycompany.bankonline.Controller.Complaint;
+
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
-import com.mycompany.bankonline.Database.Account.AccountHandler;
-import com.mycompany.bankonline.Database.Transaction.TransactionHandler;
-import com.mycompany.bankonline.Database.UserInfo.UserInfoHandler;
+import com.mycompany.bankonline.Database.Connect;
+import com.mycompany.bankonline.Database.Complaint.ComplaintHandler;
 import com.mycompany.bankonline.DisplayScene.toComplaint;
+import com.mycompany.bankonline.DisplayScene.toComplaintList;
 import com.mycompany.bankonline.DisplayScene.toSignIn;
 import com.mycompany.bankonline.MainApp.Main;
-import com.mycompany.bankonline.Model.Account;
-import com.mycompany.bankonline.Model.User;
 import com.mycompany.bankonline.Session.Session;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class DashBoardController implements Initializable {
+public class ComplaintController implements Initializable  {
 
     @FXML
-    private VBox notificationBox;
+    private TextField subjectField;
 
     @FXML
-    private Label helloField;
+    private TextArea contentField;
+
+    @FXML
+    private Button submitComplaintButton;
+
+    @FXML
+    private Button complaintListButton;
+
+    @FXML
+    private Label statusLabel;
+
+    @FXML
+    private Button logoutButton;
 
     @FXML
     private Button homeButton;
@@ -40,63 +52,27 @@ public class DashBoardController implements Initializable {
     private Button accountButton;
 
     @FXML
+    private Button transferButton;
+
+    @FXML
     private Button withdrawButton;
 
     @FXML
-    private Button transferButton;
-    
+    private Button depositButton;
+
+    @FXML
+    private Button paymentButton;
+
     @FXML
     private Button complaintButton;
 
     @FXML
     private Button historyButton;
 
-    @FXML
-    private Button paymentButton;
-
-    @FXML
-    private Button logoutButton;
-
-    @FXML
-    private Label accountNumberField;
-
-    @FXML
-    private Label balanceField;
-
-    @FXML
-    private Button depositButton;
-
-    @FXML
-    private Button toggleBalanceButton;
-    private boolean isBalanceVisible = false;
-    private double currentBalance = 0;
-
-    private final AccountHandler accountHandler = new AccountHandler();
-    private final UserInfoHandler userInfoHandler = new UserInfoHandler();
-    private final TransactionHandler transactionHandler = new TransactionHandler();
+    private final ComplaintHandler complaintHandler = new ComplaintHandler();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        int accountId = Session.getInstance().getAccountId();
-        Account currentAccount = accountHandler.findAccountByAccountId(accountId);
-
-        currentBalance = currentAccount.getBalance();
-        toggleBalanceButton.setOnAction(e -> {
-            isBalanceVisible = !isBalanceVisible;
-            if (isBalanceVisible) {
-                balanceField.setText(String.format("%,.0f VND", currentBalance));
-                toggleBalanceButton.setText("Hide");
-            } else {
-                balanceField.setText("•••••••• VND");
-                toggleBalanceButton.setText("Show");
-            }
-        });
-
-        loadNotifications(Session.getInstance().getAccountId());
-        loadUserInfo(Session.getInstance().getUserId());
-        accountNumberField.setText(formatAccountNumber(currentAccount.getAccountNumber()));
-        
-        // Gán sự kiện cho các nút
         homeButton.setOnAction(event -> {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
@@ -160,33 +136,43 @@ public class DashBoardController implements Initializable {
         catch (IOException ex) {
             ex.printStackTrace();
         }});
-        logoutButton.setOnAction(e -> handleLogout());
-
+        logoutButton.setOnAction(this::handleLogout);
+        submitComplaintButton.setOnAction(this::handleSubmitComplaint);
+        complaintListButton.setOnAction(e -> {
+            try{
+                toComplaintList.ComplaintList((Stage) complaintListButton.getScene().getWindow());
+            }
+            catch(IOException ex){
+                ex.printStackTrace();
+            }
+        });
     }
 
-    private void loadUserInfo(int userId) {
-        User user = userInfoHandler.getUserById(userId);
-        if (user != null) {
-            helloField.setText("Hello, " + user.getFullName() + "!");
-        }
-    }
+    private void handleSubmitComplaint(ActionEvent event) {
+        String subject = subjectField.getText().trim();
+        String content = contentField.getText().trim();
 
-    private void loadNotifications(int accountId) {
-        notificationBox.getChildren().clear();
-        int limitMessages = 5;
-        List<String> messages = transactionHandler.getRecentTransactions(accountId, limitMessages);
-
-        if (messages.isEmpty()) {
-            notificationBox.getChildren().add(new Label("• No recent notifications."));
+        if (subject.isEmpty() || content.isEmpty()) {
+            showMessage("Error", "Vui lòng nhập đầy đủ tiêu đề và nội dung khiếu nại.");
             return;
         }
 
-        for (String msg : messages) {
-            Label label = new Label("• " + msg);
-            label.setStyle("-fx-font-size: 14px; -fx-text-fill: #2E4053;");
-            notificationBox.getChildren().add(label);
+        int accountId = Session.getInstance().getAccountId();
+
+        Boolean result = complaintHandler.SendComplaint(accountId, subject, content);
+
+        if(result){
+            showMessage("Success", "");
+            subjectField.clear();
+            contentField.clear();
         }
+        else{
+            showMessage("Error", "");
+        }
+        
+        
     }
+
 
     private void showMessage(String title, String content) {
         Alert alert = new Alert(AlertType.INFORMATION);
@@ -196,7 +182,17 @@ public class DashBoardController implements Initializable {
         alert.showAndWait();
     }
 
-    private void handleLogout() {
+    private void handleViewComplaints(ActionEvent event) {
+        showMessage("123", "show message");
+    }
+
+    private void clearFields() {
+        subjectField.clear();
+        contentField.clear();
+    }
+
+
+    private void handleLogout(ActionEvent event) {
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Logout Confirmation");
         alert.setHeaderText(null);
@@ -215,21 +211,5 @@ public class DashBoardController implements Initializable {
                 }
             }
         });
-    }
-
-    public String formatAccountNumber(String accountNumber) {
-        if (accountNumber == null || accountNumber.isEmpty()) {
-            return "";
-        }
-        StringBuilder formatted = new StringBuilder();
-        int length = accountNumber.length();
-
-        for (int i = 0; i < length; i++) {
-            formatted.append(accountNumber.charAt(i));
-            if ((i + 1) % 4 == 0 && (i + 1) != length) {
-                formatted.append(".");
-            }
-        }
-        return formatted.toString();
     }
 }
