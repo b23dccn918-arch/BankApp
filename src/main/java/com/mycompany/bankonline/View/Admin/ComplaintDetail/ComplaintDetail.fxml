@@ -6,15 +6,15 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.mycompany.bankonline.Controller.ComplaintDetail.ComplaintDetailController"
+            fx:controller="com.mycompany.bankonline.Controller.Admin.ComplaintDetailController"
             prefWidth="480" prefHeight="400">
 
     <VBox spacing="10" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0"
           AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0">
-
         <padding>
             <Insets top="15" right="15" bottom="15" left="15"/>
         </padding>
+
         <Label text="Complaint Detail"
                style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
 
@@ -37,13 +37,24 @@
         <TextArea fx:id="txtContent" editable="false" wrapText="true" prefHeight="80"/>
 
         <Label text="Admin note:" style="-fx-font-weight: bold;"/>
-        <TextArea fx:id="txtAdminNote" wrapText="true" editable="false" promptText="Enter response here..." prefHeight="80"/>
+        <TextArea fx:id="txtAdminNote" wrapText="true" promptText="Enter response here..." prefHeight="80"/>
 
         <HBox spacing="10">
-            <Label text="Day created:" style="-fx-font-weight: bold;"/>
-            <Label fx:id="lblCreatedAt"/>
-        </HBox>
+            <Button text="Mark as Rejected"
+                    onAction="#markRejected"
+                    style="-fx-background-color: #e67e22; -fx-text-fill: white; -fx-font-weight: bold;"/>
 
-        <Button text="Đóng" onAction="#closeWindow" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold;"/>
+            <Button text="Mark as Resolved"
+                    onAction="#markResolved"
+                    style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;"/>
+
+            <Button text="Save Note"
+                    onAction="#saveAdminNote"
+                    style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-weight: bold;"/>
+
+            <Button text="Close"
+                    onAction="#closeWindow"
+                    style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold;"/>
+        </HBox>
     </VBox>
 </AnchorPane>

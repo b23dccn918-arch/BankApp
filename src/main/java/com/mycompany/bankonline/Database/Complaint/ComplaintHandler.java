@@ -39,7 +39,7 @@ public class ComplaintHandler {
 
     public static List<Complaint> getAllComplaintsByAccountId(int accountId){
         List<Complaint> list = new ArrayList<>();
-        String sql = "SELECT complaint_id,account_id,subject,content,status,created_at,updated_at FROM complaints WHERE account_id = ? ORDER BY created_at DESC";
+        String sql = "SELECT complaint_id,account_id,subject,content,status,admin_note,created_at,updated_at FROM complaints WHERE account_id = ? ORDER BY created_at DESC";
         try (Connection conn = Connect.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, accountId);
@@ -51,6 +51,7 @@ public class ComplaintHandler {
                                         .subject(rs.getString("subject"))
                                         .content(rs.getString("content"))
                                         .status(rs.getString("status"))
+                                        .adminNote(rs.getString("admin_note"))
                                         .createdAt(rs.getTimestamp("created_at"))
                                         .updatedAt(rs.getTimestamp("updated_at"))
                                         .build();
@@ -60,5 +61,68 @@ public class ComplaintHandler {
             e.printStackTrace();
         }
         return list;
+    }
+
+    public static List<Complaint> getAllComplaints(){
+        List<Complaint> list = new ArrayList<>();
+        String sql = "SELECT complaint_id,account_id,subject,content,status,admin_note,created_at,updated_at FROM complaints ORDER BY created_at DESC";
+        try (Connection conn = Connect.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Complaint c = new Complaint.Builder()
+                                        .complaintId(rs.getInt("complaint_id"))
+                                        .accountId(rs.getInt("account_id"))
+                                        .subject(rs.getString("subject"))
+                                        .content(rs.getString("content"))
+                                        .status(rs.getString("status"))
+                                        .adminNote(rs.getString("admin_note"))
+                                        .createdAt(rs.getTimestamp("created_at"))
+                                        .updatedAt(rs.getTimestamp("updated_at"))
+                                        .build();
+                list.add(c);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public static Boolean updateStatusByComplaintId(int complaintId,String status){
+        String sql = "UPDATE complaints SET status = ? WHERE complaint_id = ?";
+
+        try(Connection conn = Connect.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)){
+                stmt.setString(1, status);
+                stmt.setInt(2, complaintId);
+            int rows = stmt.executeUpdate();
+            if(rows > 0){
+                return true;
+            }
+            return false;
+        }
+        catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    public static Boolean updateAdminNoteByComplaintId(int complaintId,String adminNote){
+        String sql = "UPDATE complaints SET admin_note = ? WHERE complaint_id = ?";
+
+        try(Connection conn = Connect.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)){
+                stmt.setString(1, adminNote);
+                stmt.setInt(2, complaintId);
+            int rows = stmt.executeUpdate();
+            if(rows > 0){
+                return true;
+            }
+            return false;
+        }
+        catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return false;
     }
 }

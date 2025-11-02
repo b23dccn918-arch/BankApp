@@ -22,7 +22,7 @@ public class Complaint {
         this.status = builder.status;
         this.createdAt = builder.createdAt;
         this.updatedAt = builder.updatedAt;
-        this.adminNote = adminNote;
+        this.adminNote = builder.adminNote;
     }
 
     public static class Builder {
@@ -89,6 +89,30 @@ public class Complaint {
     public String getStatus() { return status; }
     public Timestamp getUpdatedAt(){
         return updatedAt;
+    }
+    public void setComplaintId(int complaintId) {
+        this.complaintId = complaintId;
+    }
+    public void setAccountId(int accountId) {
+        this.accountId = accountId;
+    }
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+    public void setContent(String content) {
+        this.content = content;
+    }
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    public void setAdminNote(String adminNote) {
+        this.adminNote = adminNote;
+    }
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
+    }
+    public void setUpdatedAt(Timestamp updatedAt) {
+        this.updatedAt = updatedAt;
     }
     public String getAdminNote(){
         return adminNote;

@@ -169,15 +169,13 @@ public class ComplaintController implements Initializable  {
         Boolean result = complaintHandler.SendComplaint(accountId, subject, content);
 
         if(result){
-            showMessage("Success", "");
+            showMessage("Success", "Complaint has sended");
             subjectField.clear();
             contentField.clear();
         }
         else{
-            showMessage("Error", "");
+            showMessage("Error", "Error while sending complaint");
         }
-        
-        
     }
 
 

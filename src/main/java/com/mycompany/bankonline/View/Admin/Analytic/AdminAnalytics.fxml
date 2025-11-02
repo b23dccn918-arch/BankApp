@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="782.0" prefWidth="976.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.bankonline.Controller.Admin.AdminAnalyticController">
 
@@ -21,6 +22,11 @@
 				<Button fx:id="HistoryButton" layoutX="22.0" layoutY="198.0" onAction="#toHistory" prefHeight="45.0" prefWidth="180.0" styleClass="sidebar-button" text="📜  History" />
 				<Button fx:id="BillButton" layoutX="22.0" layoutY="267.0" onAction="#toBill" prefHeight="45.0" prefWidth="180.0" styleClass="sidebar-button" text="💸  Bill" />
 				<Button layoutX="22.0" layoutY="336.0" prefHeight="45.0" prefWidth="180.0" styleClass="sidebar-button" text="📊 Analytics" />
+				<Button fx:id="ComplaintButton" layoutX="22.0" layoutY="407.0" onAction="#toComplaint" prefHeight="45.0" prefWidth="180.0" styleClass="sidebar-button" text="✉️  Complaint">
+				<font>
+					<Font name="Segoe UI Semibold" size="16.0" />
+				</font>
+				</Button>
 			</children>
 		</AnchorPane>
 

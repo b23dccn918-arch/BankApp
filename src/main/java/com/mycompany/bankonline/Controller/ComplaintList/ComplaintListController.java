@@ -132,7 +132,7 @@ public class ComplaintListController {
         depositButton.setOnAction(event -> {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
-                toDeposit.Deposit(stage);
+                toDeposit.Deposit(stage); 
             } catch (IOException e) {
                 e.printStackTrace();
             }
