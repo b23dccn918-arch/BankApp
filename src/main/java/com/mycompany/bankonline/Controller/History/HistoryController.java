@@ -17,7 +17,14 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import com.mycompany.bankonline.Database.Transaction.TransactionHandler;
+import com.mycompany.bankonline.DisplayScene.toDashBoard;
+import com.mycompany.bankonline.DisplayScene.toDeposit;
+import com.mycompany.bankonline.DisplayScene.toHistory;
+import com.mycompany.bankonline.DisplayScene.toPayment;
 import com.mycompany.bankonline.DisplayScene.toSignIn;
+import com.mycompany.bankonline.DisplayScene.toTransfer;
+import com.mycompany.bankonline.DisplayScene.toUserInfo;
+import com.mycompany.bankonline.DisplayScene.toWithdraw;
 import com.mycompany.bankonline.MainApp.Main;
 import com.mycompany.bankonline.Model.Transaction;
 import com.mycompany.bankonline.Session.Session;
@@ -78,10 +85,10 @@ public class HistoryController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Navigation button events
-        homeButton.setOnAction(event -> {
+    	homeButton.setOnAction(event -> {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
-                Main.DashBoard(stage);
+                toDashBoard.DashBoard(stage);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -89,7 +96,7 @@ public class HistoryController implements Initializable {
         accountButton.setOnAction(event -> {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
-                Main.UserInfo(stage);
+                toUserInfo.UserInfo(stage);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -97,7 +104,7 @@ public class HistoryController implements Initializable {
         transferButton.setOnAction(event -> {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
-                Main.Transfer(stage);
+                toTransfer.Transfer(stage);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -105,7 +112,7 @@ public class HistoryController implements Initializable {
         historyButton.setOnAction(event -> {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
-                Main.History(stage);
+                toHistory.History(stage);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -113,7 +120,7 @@ public class HistoryController implements Initializable {
         withdrawButton.setOnAction(event -> {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
-                Main.WithDraw(stage);
+                toWithdraw.WithDraw(stage);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -121,7 +128,7 @@ public class HistoryController implements Initializable {
         paymentButton.setOnAction(event -> {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
-                Main.Payment(stage);
+                toPayment.Payment(stage);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -129,12 +136,13 @@ public class HistoryController implements Initializable {
         depositButton.setOnAction(event -> {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
-                Main.Deposit(stage);
+                toDeposit.Deposit(stage);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         });
         logoutButton.setOnAction(e -> handleLogout());
+    
 
         colId.setCellValueFactory(cell -> new SimpleObjectProperty<>(cell.getValue().getTransactionId()));
         colFrom.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getFromAccount()));
