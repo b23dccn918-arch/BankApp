@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import com.mycompany.bankonline.Database.Transaction.TransactionHandler;
+import com.mycompany.bankonline.DisplayScene.toComplaint;
 import com.mycompany.bankonline.DisplayScene.toDashBoard;
 import com.mycompany.bankonline.DisplayScene.toDeposit;
 import com.mycompany.bankonline.DisplayScene.toHistory;
@@ -31,6 +32,9 @@ import com.mycompany.bankonline.Model.Transaction;
 import com.mycompany.bankonline.Session.Session;
 
 public class HistoryController implements Initializable {
+
+    @FXML
+    private Button complaintButton;
 
     @FXML
     private Button homeButton;
@@ -143,8 +147,13 @@ public class HistoryController implements Initializable {
             }
         });
         logoutButton.setOnAction(e -> handleLogout());
-    
-
+        complaintButton.setOnAction(e ->{
+        try{
+            toComplaint.Complaint((Stage) complaintButton.getScene().getWindow());
+        } 
+        catch (IOException ex) {
+            ex.printStackTrace();
+        }});
         colId.setCellValueFactory(cell -> new SimpleObjectProperty<>(cell.getValue().getTransactionId()));
         colFrom.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getFromAccount()));
         colTo.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getToAccount()));

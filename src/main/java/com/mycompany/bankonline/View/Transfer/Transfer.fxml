@@ -41,6 +41,7 @@
                 <Button fx:id="depositButton" text="💵  Deposit" prefWidth="180" styleClass="sidebar-button"/>
                 <Button fx:id="paymentButton" text="🧾  Payment" prefWidth="180" styleClass="sidebar-button"/>
                 <Button fx:id="historyButton" text="📜  History" prefWidth="180" styleClass="sidebar-button"/>
+                <Button fx:id="complaintButton" text="✉️  Complaint" prefWidth="180" styleClass="sidebar-button"/>
             </VBox>
         </AnchorPane>
     </left>

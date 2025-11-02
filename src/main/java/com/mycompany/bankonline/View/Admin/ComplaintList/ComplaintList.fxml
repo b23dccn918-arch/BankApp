@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+
+<AnchorPane prefHeight="668.0" prefWidth="867.0"
+            xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.mycompany.bankonline.Controller.Admin.ComplaintListController">
+
+    <children>
+
+        <!-- Sidebar trái -->
+        <AnchorPane layoutY="120.0"
+                    prefHeight="548.0" prefWidth="200.0"
+                    styleClass="sidebar">
+            <children>
+                <VBox alignment="TOP_CENTER"
+                      layoutX="10.0" layoutY="61.0"
+                      spacing="15"/>
+                <Button fx:id="AccountButton" layoutX="10.0" layoutY="61.0"
+                        prefHeight="45.0" prefWidth="180.0"
+                        styleClass="sidebar-button" text="👤   Account">
+                    <font><Font name="Segoe UI Semibold" size="16.0"/></font>
+                </Button>
+                <Button fx:id="UserButton" layoutX="10.0" layoutY="120.0"
+                        onAction="#toUser"
+                        prefHeight="45.0" prefWidth="180.0"
+                        styleClass="sidebar-button" text="👥   User">
+                    <font><Font name="Segoe UI Semibold" size="16.0"/></font>
+                </Button>
+                <Button fx:id="HistoryButton" layoutX="10.0" layoutY="179.0"
+                        onAction="#toHistory"
+                        prefHeight="45.0" prefWidth="180.0"
+                        styleClass="sidebar-button" text="📜  History">
+                    <font><Font name="Segoe UI Semibold" size="16.0"/></font>
+                </Button>
+                <Button fx:id="BillButton" layoutX="10.0" layoutY="238.0"
+                        onAction="#toBill"
+                        prefHeight="45.0" prefWidth="180.0"
+                        styleClass="sidebar-button" text="💸  Bill">
+                    <font><Font name="Segoe UI Semibold" size="16.0"/></font>
+                </Button>
+                <Button fx:id="AnalyticButton" layoutX="10.0" layoutY="297.0"
+                        onAction="#toAnalytic"
+                        prefHeight="45.0" prefWidth="180.0"
+                        styleClass="sidebar-button" text="📊 Analytics">
+                    <font><Font name="Segoe UI Semibold" size="16.0"/></font>
+                </Button>
+                <Button fx:id="ComplaintButton" layoutX="10.0" layoutY="356.0"
+                        onAction="#toComplaint"
+                        prefHeight="45.0" prefWidth="180.0"
+                        styleClass="sidebar-button" text="✉️  Complaint">
+                    <font><Font name="Segoe UI Semibold" size="16.0"/></font>
+                </Button>
+            </children>
+        </AnchorPane>
+
+        <!-- Header -->
+        <AnchorPane layoutY="0.0" prefHeight="120.0" prefWidth="867.0"
+                    styleClass="header">
+            <children>
+                <Button fx:id="LogoutButton" layoutX="720.0" layoutY="42.0"
+                        onAction="#backToSignIn"
+                        styleClass="logout-btn" text="Logout"/>
+                <Label layoutX="40.0" layoutY="38.0"
+                       styleClass="header-title" text="Admin Dashboard"/>
+            </children>
+        </AnchorPane>
+
+
+        <AnchorPane layoutX="200.0" layoutY="120.0"
+                    prefHeight="548.0" prefWidth="667.0"
+                    styleClass="main-content">
+            <children>
+                <VBox alignment="TOP_CENTER" spacing="15" prefWidth="667" prefHeight="548">
+                    <padding>
+                        <Insets top="25" right="25" bottom="25" left="25"/>
+                    </padding>
+
+
+                    <HBox alignment="CENTER_RIGHT" prefWidth="620" spacing="10">
+                        <Label text="📋 Complaint List"
+                               style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button fx:id="btnReload"
+                                text="Reload"
+                                onAction="#handleReload"
+                                styleClass="reload-button"
+                                graphicTextGap="8">
+                        </Button>
+                    </HBox>
+
+                    <!-- KHUNG SCROLL -->
+                    <ScrollPane fx:id="scrollPane"
+                                fitToWidth="true"
+                                prefWidth="620" prefHeight="430"
+                                style="-fx-background-color: transparent;">
+                        <content>
+                            <VBox fx:id="complaintContainer"
+                                  spacing="15"
+                                  prefWidth="600"
+                                  alignment="TOP_CENTER">
+                                <padding>
+                                    <Insets top="10" right="10" bottom="10" left="10"/>
+                                </padding>
+                            </VBox>
+                        </content>
+                    </ScrollPane>
+
+                    <Label fx:id="statusLabel" text=""
+                           style="-fx-text-fill: green; -fx-font-size: 14px;"/>
+                </VBox>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

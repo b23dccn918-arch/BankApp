@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.geometry.Insets?>
+<BorderPane prefWidth="900" prefHeight="600"
+            xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.mycompany.bankonline.Controller.Complaint.ComplaintController"
+            styleClass="dashboard-root">
+
+    <top>
+        <AnchorPane prefHeight="70" styleClass="header-container">
+            <children>
+                <Label layoutX="30" layoutY="20" text="🏦 BASOUR BANK" styleClass="header-title"/>
+                <Label layoutX="400" layoutY="25" text="Dashboard" styleClass="header-subtitle"/>
+                <Button fx:id="logoutButton" layoutX="750" layoutY="22" text="Logout" styleClass="btn-logout"/>
+            </children>
+        </AnchorPane>
+    </top>
+
+    <left>
+        <AnchorPane prefHeight="600" prefWidth="200"
+                    styleClass="sidebar-container"
+                    BorderPane.alignment="CENTER">
+            <VBox spacing="15" alignment="TOP_CENTER"
+                  AnchorPane.topAnchor="30"
+                  AnchorPane.leftAnchor="0"
+                  AnchorPane.rightAnchor="0">
+
+                <Button fx:id="homeButton" text="🏠  Home" prefWidth="180" styleClass="sidebar-button"/>
+                <Button fx:id="accountButton" text="👤  User Info" prefWidth="180" styleClass="sidebar-button"/>
+                <Button fx:id="transferButton" text="💸  Transfer" prefWidth="180" styleClass="sidebar-button"/>
+                <Button fx:id="withdrawButton" text="💰  Withdraw" prefWidth="180" styleClass="sidebar-button"/>
+                <Button fx:id="depositButton" text="💵  Deposit" prefWidth="180" styleClass="sidebar-button"/>
+                <Button fx:id="paymentButton" text="🧾  Payment" prefWidth="180" styleClass="sidebar-button"/>
+                <Button fx:id="historyButton" text="📜  History" prefWidth="180" styleClass="sidebar-button"/>
+                <Button fx:id="complaintButton" text="✉️  Complaint" prefWidth="180" styleClass="sidebar-button"/>
+
+            </VBox>
+        </AnchorPane>
+    </left>
+
+    <!-- 🏦 MAIN CONTENT -->
+<!-- 🏦 MAIN CONTENT -->
+<center>
+        <ScrollPane fitToWidth="true" styleClass="main-scroll">
+            <VBox alignment="TOP_CENTER" spacing="25" styleClass="main-content">
+                <Label text="📝 GỬI ĐƠN KHIẾU NẠI" styleClass="page-title"/>
+
+                <GridPane hgap="20" vgap="20" alignment="CENTER">
+                    <columnConstraints>
+                        <ColumnConstraints halignment="RIGHT" minWidth="150"/>
+                        <ColumnConstraints halignment="LEFT" minWidth="400"/>
+                    </columnConstraints>
+
+                    <!-- Tiêu đề -->
+                    <Label text="Tiêu đề:" styleClass="form-label"
+                           GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                    <TextField fx:id="subjectField" promptText="Nhập tiêu đề khiếu nại..."
+                               styleClass="form-field"
+                               GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                    <!-- Nội dung -->
+                    <Label text="Nội dung:" styleClass="form-label"
+                           GridPane.rowIndex="1" GridPane.columnIndex="0" alignment="TOP_RIGHT"/>
+                    <TextArea fx:id="contentField" promptText="Nhập nội dung chi tiết..."
+                              prefRowCount="8"
+                              wrapText="true"
+                              styleClass="form-area"
+                              GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                </GridPane>
+
+                <!-- Hành động -->
+                <HBox spacing="15" alignment="CENTER">
+                    <Button fx:id="submitComplaintButton" text="📨 Gửi khiếu nại" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 20;"/>
+                    <Button fx:id="complaintListButton" text="📋 Xem danh sách khiếu nại" style="-fx-background-color: #1976D2; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 20;"/>
+                </HBox>
+
+                <Label fx:id="statusLabel" text="" styleClass="status-label"/>
+            </VBox>
+        </ScrollPane>
+    </center>
+
+
+</BorderPane>

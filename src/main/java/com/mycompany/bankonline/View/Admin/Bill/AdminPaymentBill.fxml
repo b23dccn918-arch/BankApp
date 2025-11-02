@@ -37,6 +37,11 @@
 					</font>
 				</Button>
 				<Button fx:id="AnalyticButton" layoutX="22.0" layoutY="337.0" onAction="#toAnalytic" prefHeight="45.0" prefWidth="180.0" styleClass="sidebar-button" text="📊 Analytics">
+				<font>
+					<Font name="Segoe UI Semibold" size="16.0" />
+				</font>
+				</Button>
+				<Button fx:id="ComplaintButton" layoutX="22.0" layoutY="407.0" onAction="#toComplaint" prefHeight="45.0" prefWidth="180.0" styleClass="sidebar-button" text="✉️  Complaint">
                <font>
                   <Font name="Segoe UI Semibold" size="16.0" />
                </font>

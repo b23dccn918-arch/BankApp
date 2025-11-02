@@ -78,7 +78,6 @@ public class UserInfoController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Gán sự kiện cho các nút
         loadUserInfo(Session.getInstance().getUserId());
         homeButton.setOnAction(event -> {
             try {

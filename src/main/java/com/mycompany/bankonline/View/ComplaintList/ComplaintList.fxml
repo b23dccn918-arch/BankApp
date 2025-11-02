@@ -3,25 +3,24 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
+<?import javafx.geometry.Insets?>
 
-<BorderPane prefHeight="600" prefWidth="900"
+<BorderPane prefWidth="900" prefHeight="600"
             xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.mycompany.bankonline.Controller.Withdraw.WithdrawController"
-            styleClass="withdraw-root">
+            fx:controller="com.mycompany.bankonline.Controller.ComplaintList.ComplaintListController"
+            styleClass="dashboard-root">
 
-    <!-- 🔷 HEADER -->
     <top>
         <AnchorPane prefHeight="70" styleClass="header-container">
             <children>
                 <Label layoutX="30" layoutY="20" text="🏦 BASOUR BANK" styleClass="header-title"/>
-                <Label layoutX="400" layoutY="25" text="Withdraw" styleClass="header-subtitle"/>
+                <Label layoutX="400" layoutY="25" text="Dashboard" styleClass="header-subtitle"/>
                 <Button fx:id="logoutButton" layoutX="750" layoutY="22" text="Logout" styleClass="btn-logout"/>
             </children>
         </AnchorPane>
     </top>
 
-    <!-- 🧭 SIDEBAR -->
     <left>
         <AnchorPane prefHeight="600" prefWidth="200"
                     styleClass="sidebar-container"
@@ -43,31 +42,40 @@
         </AnchorPane>
     </left>
 
-    <!-- 💸 MAIN CONTENT -->
+    <!-- 🏦 MAIN CONTENT -->
     <center>
-        <VBox spacing="25" styleClass="main-content" alignment="TOP_CENTER">
-
-            <!-- Page Title -->
-            <Label text="WITHDRAW MONEY" styleClass="page-title"/>
-
-            <!-- Balance Information -->
-            <HBox spacing="20" alignment="CENTER">
-                <VBox styleClass="info-box">
-                    <Label text="Current Balance" styleClass="info-title"/>
-                    <Label fx:id="balanceField" text="15,000,000 VND" styleClass="info-value"/>
-                </VBox>
+        <VBox alignment="TOP_CENTER" spacing="15" >
+            <padding>
+                <Insets top="25" right="25" bottom="25" left="25"/>
+            </padding>
+            <HBox alignment="CENTER_RIGHT" prefWidth="800" spacing="10">
+                <Label text="📋 Danh sách khiếu nại của bạn"
+                       style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button fx:id="backButton" text="Back"
+                        style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 6 15;"/>
             </HBox>
 
-            <!-- Input Form -->
-            <VBox spacing="15" alignment="CENTER">
-                <VBox spacing="5" alignment="CENTER_LEFT">
-                    <Label text="Withdrawal Amount:" styleClass="form-label"/>
-                    <TextField fx:id="amountField" promptText="Enter withdrawal amount" styleClass="form-field"/>
-                </VBox>
+            <!-- KHUNG SCROLL -->
+            <ScrollPane fx:id="scrollPane"
+                        fitToWidth="true"
+                        prefWidth="850"
+                        prefHeight="450"
+                        style="-fx-background-color: transparent;">
+                <content>
+                    <VBox fx:id="complaintContainer"
+                        spacing="15"
+                        prefWidth="820"
+                        alignment="TOP_CENTER">
+                        <padding>
+                            <Insets top="10" right="10" bottom="10" left="10"/>
+                        </padding>
+                    </VBox>
 
-                <Button fx:id="withdrawButtonSubmit" text="Withdraw" styleClass="confirm-button"/>
-                <Label fx:id="statusLabel" text="" style="-fx-font-weight: bold;"/>
-            </VBox>
+                </content>
+            </ScrollPane>
+
+            <Label fx:id="statusLabel" text="" style="-fx-text-fill: green; -fx-font-size: 14px;"/>
         </VBox>
     </center>
 </BorderPane>

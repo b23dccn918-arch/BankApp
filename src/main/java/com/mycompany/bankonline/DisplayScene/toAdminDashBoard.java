@@ -63,4 +63,21 @@ public class toAdminDashBoard {
         stage.setScene(scene);
         stage.show();
     }
+
+    public static void ComplaintList(Stage stage) throws IOException {
+        Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/Admin/ComplaintList/ComplaintList.fxml"));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/Admin/ComplaintList/ComplaintList.css").toExternalForm());
+        stage.setTitle("Analytic Scene");
+        stage.setScene(scene);
+        stage.show();
+    }
+    public static void ComplaintDetail(Stage stage) throws IOException {
+        Parent root = FXMLLoader.load(Main.class.getResource("/com/mycompany/bankonline/View/Admin/ComplaintDetail/ComplaintDetail.fxml"));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/Admin/ComplaintDetail/ComplaintDetail.css").toExternalForm());
+        stage.setTitle("Analytic Scene");
+        stage.setScene(scene);
+        stage.show();
+    }
 }

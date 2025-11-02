@@ -3,6 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
+<?import javafx.geometry.Insets?>
 
 <BorderPane prefWidth="900" prefHeight="600"
             xmlns="http://javafx.com/javafx/17"
@@ -36,7 +37,7 @@
                 <Button fx:id="depositButton" text="💵  Deposit" prefWidth="180" styleClass="sidebar-button"/>
                 <Button fx:id="paymentButton" text="🧾  Payment" prefWidth="180" styleClass="sidebar-button"/>
                 <Button fx:id="historyButton" text="📜  History" prefWidth="180" styleClass="sidebar-button"/>
-
+                <Button fx:id="complaintButton" text="✉️  Complaint" prefWidth="180" styleClass="sidebar-button"/>
             </VBox>
         </AnchorPane>
     </left>

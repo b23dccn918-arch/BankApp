@@ -35,6 +35,7 @@
                 <Button fx:id="depositButton" text="💵  Deposit" prefWidth="180" styleClass="sidebar-button"/>
                 <Button fx:id="paymentButton" text="🧾  Payment" prefWidth="180" styleClass="sidebar-button"/>
                 <Button fx:id="historyButton" text="📜  History" prefWidth="180" styleClass="sidebar-button"/>
+                <Button fx:id="complaintButton" text="✉️  Complaint" prefWidth="180" styleClass="sidebar-button"/>
             </VBox>
         </AnchorPane>
     </left>
@@ -42,36 +43,36 @@
     <!-- 👤 MAIN CONTENT -->
     <center>
         <VBox spacing="20" alignment="TOP_CENTER" styleClass="main-content">
-            <Label text="Thông tin người dùng" styleClass="page-title"/>
+            <Label text="Info User" styleClass="page-title"/>
 
             <VBox spacing="15">
                 <VBox styleClass="info-box">
-                    <Label text="Họ và tên:"/>
+                    <Label text="Full Name:"/>
                     <Label fx:id="fullNameLabel" text="------------"/>
                 </VBox>
 
                 <VBox styleClass="info-box">
-                    <Label text="CMND/CCCD:"/>
+                    <Label text="Citizen Identification:"/>
                     <Label fx:id="citizenIdLabel" text="----------"/>
                 </VBox>
 
                 <VBox styleClass="info-box">
-                    <Label text="Nghề nghiệp:"/>
+                    <Label text="Job:"/>
                     <Label fx:id="jobLabel" text="-----------"/>
                 </VBox>
 
                 <VBox styleClass="info-box">
-                    <Label text="Giới tính:"/>
+                    <Label text="Gender:"/>
                     <Label fx:id="genderLabel" text="-----------"/>
                 </VBox>
 
                 <VBox styleClass="info-box">
-                    <Label text="Ngày sinh:"/>
+                    <Label text="Date of birth:"/>
                     <Label fx:id="dateBirthLabel" text="------------"/>
                 </VBox>
 
                 <VBox styleClass="info-box">
-                    <Label text="Địa chỉ:"/>
+                    <Label text="Address:"/>
                     <Label fx:id="addressLabel" text="-------------"/>
                 </VBox>
 
@@ -81,7 +82,7 @@
                 </VBox>
 
                 <VBox styleClass="info-box">
-                    <Label text="Ngày tạo tài khoản:"/>
+                    <Label text="Account creation date:"/>
                     <Label fx:id="createdAtLabel" text="YYYY-MM-DD 10:00:00"/>
                 </VBox>
             </VBox>

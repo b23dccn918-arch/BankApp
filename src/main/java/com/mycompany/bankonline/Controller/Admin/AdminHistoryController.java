@@ -110,6 +110,18 @@ public class AdminHistoryController {
 			e.printStackTrace();
 		}
 	}
+
+	@FXML
+   	public void toComplaint(ActionEvent event) {
+   		Button clickedButton = (Button) event.getSource();
+   	  	Scene currentScene = clickedButton.getScene();
+   	  	Stage currentStage = (Stage) currentScene.getWindow();
+           try {
+               toAdminDashBoard.ComplaintList(currentStage); 
+           } catch (Exception e) {
+               e.printStackTrace();
+           }
+   	}
 	
 	@FXML
    	public void toAnalytic(ActionEvent event) {
