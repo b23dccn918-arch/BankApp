@@ -1,6 +1,8 @@
 package com.mycompany.bankonline.Controller.Admin;
 
+import com.mycompany.bankonline.Database.Account.AccountHandler;
 import com.mycompany.bankonline.Database.Complaint.ComplaintHandler;
+import com.mycompany.bankonline.Model.Account;
 import com.mycompany.bankonline.Model.Complaint;
 
 import javafx.fxml.FXML;
@@ -21,6 +23,9 @@ public class ComplaintDetailController {
     @FXML private Label lblCreatedAt;
     @FXML private TextArea txtContent;
     @FXML private TextArea txtAdminNote;
+    @FXML private Label lblFromAccount;
+
+    private final AccountHandler accountHandler = new AccountHandler();
 
     private Complaint complaint;
     private final ComplaintHandler complaintHandler = new ComplaintHandler();
@@ -35,6 +40,12 @@ public class ComplaintDetailController {
         lblCreatedAt.setText(formattedDate);
         txtContent.setText(complaint.getContent());
         txtAdminNote.setText(complaint.getAdminNote() == null ? "" : complaint.getAdminNote());
+
+        int accountId = complaint.getAccountId();
+
+        Account AccountSendComplaint = accountHandler.findAccountByAccountId(accountId);
+
+        lblFromAccount.setText(AccountSendComplaint.getAccountNumber());
     }
 
     @FXML
