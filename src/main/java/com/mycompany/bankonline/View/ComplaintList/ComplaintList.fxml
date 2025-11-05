@@ -49,7 +49,7 @@
                 <Insets top="25" right="25" bottom="25" left="25"/>
             </padding>
             <HBox alignment="CENTER_RIGHT" prefWidth="800" spacing="10">
-                <Label text="📋 Danh sách khiếu nại của bạn"
+                <Label text="📋 Your complaint list"
                        style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
                 <Region HBox.hgrow="ALWAYS"/>
                 <Button fx:id="backButton" text="Back"

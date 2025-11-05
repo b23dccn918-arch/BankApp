@@ -17,6 +17,7 @@ import java.util.ResourceBundle;
 
 import com.mycompany.bankonline.Controller.PinDialog.PinDialogController;
 import com.mycompany.bankonline.Database.Account.AccountHandler;
+import com.mycompany.bankonline.DisplayScene.toComplaint;
 import com.mycompany.bankonline.DisplayScene.toDashBoard;
 import com.mycompany.bankonline.DisplayScene.toDeposit;
 import com.mycompany.bankonline.DisplayScene.toHistory;
@@ -59,6 +60,9 @@ public class WithdrawController implements Initializable {
 
     @FXML
     private Button depositButton;
+    
+    @FXML
+    private Button complaintButton;
 
     @FXML
     private TextField amountField;
@@ -132,6 +136,14 @@ public class WithdrawController implements Initializable {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
                 toDeposit.Deposit(stage);
             } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        complaintButton.setOnAction(event -> {
+            try{
+                Stage stage = (Stage) complaintButton.getScene().getWindow();
+                toComplaint.Complaint(stage);
+            }catch(IOException e){
                 e.printStackTrace();
             }
         });

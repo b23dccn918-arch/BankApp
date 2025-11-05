@@ -12,6 +12,7 @@ import com.mycompany.bankonline.Controller.PinDialog.PinDialogController;
 import com.mycompany.bankonline.Database.Account.AccountHandler;
 import com.mycompany.bankonline.Database.Transfer.TransferHandler;
 import com.mycompany.bankonline.Database.UserInfo.UserInfoHandler;
+import com.mycompany.bankonline.DisplayScene.toComplaint;
 import com.mycompany.bankonline.DisplayScene.toDashBoard;
 import com.mycompany.bankonline.DisplayScene.toDeposit;
 import com.mycompany.bankonline.DisplayScene.toHistory;
@@ -60,6 +61,8 @@ public class TransferController implements Initializable {
     @FXML
     private TextField messageField;
 
+    @FXML
+    private Button complaintButton;
 
     @FXML
     private Label balanceField;
@@ -172,6 +175,14 @@ public class TransferController implements Initializable {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
                 toDeposit.Deposit(stage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        complaintButton.setOnAction(event -> {
+            try {
+                Stage stage = (Stage) transferButton.getScene().getWindow();
+                toComplaint.Complaint(stage);
             } catch (IOException e) {
                 e.printStackTrace();
             }

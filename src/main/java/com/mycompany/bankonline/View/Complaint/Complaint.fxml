@@ -47,7 +47,7 @@
 <center>
         <ScrollPane fitToWidth="true" styleClass="main-scroll">
             <VBox alignment="TOP_CENTER" spacing="25" styleClass="main-content">
-                <Label text="📝 GỬI ĐƠN KHIẾU NẠI" styleClass="page-title"/>
+                <Label text="📝 Submit Complaint" styleClass="page-title"/>
 
                 <GridPane hgap="20" vgap="20" alignment="CENTER">
                     <columnConstraints>
@@ -56,16 +56,16 @@
                     </columnConstraints>
 
                     <!-- Tiêu đề -->
-                    <Label text="Tiêu đề:" styleClass="form-label"
+                    <Label text="Title:" styleClass="form-label"
                            GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-                    <TextField fx:id="subjectField" promptText="Nhập tiêu đề khiếu nại..."
+                    <TextField fx:id="subjectField" promptText="Enter title complaint..."
                                styleClass="form-field"
                                GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
                     <!-- Nội dung -->
-                    <Label text="Nội dung:" styleClass="form-label"
+                    <Label text="Content:" styleClass="form-label"
                            GridPane.rowIndex="1" GridPane.columnIndex="0" alignment="TOP_RIGHT"/>
-                    <TextArea fx:id="contentField" promptText="Nhập nội dung chi tiết..."
+                    <TextArea fx:id="contentField" promptText="Enter detail content..."
                               prefRowCount="8"
                               wrapText="true"
                               styleClass="form-area"
@@ -74,8 +74,8 @@
 
                 <!-- Hành động -->
                 <HBox spacing="15" alignment="CENTER">
-                    <Button fx:id="submitComplaintButton" text="📨 Gửi khiếu nại" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 20;"/>
-                    <Button fx:id="complaintListButton" text="📋 Xem danh sách khiếu nại" style="-fx-background-color: #1976D2; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 20;"/>
+                    <Button fx:id="submitComplaintButton" text="📨 Submit" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 20;"/>
+                    <Button fx:id="complaintListButton" text="📋 View Complaint List" style="-fx-background-color: #1976D2; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 20;"/>
                 </HBox>
 
                 <Label fx:id="statusLabel" text="" styleClass="status-label"/>
