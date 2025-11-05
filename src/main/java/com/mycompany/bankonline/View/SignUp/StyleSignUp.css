@@ -12,7 +12,7 @@
 
 /* ===== BÊN PHẢI ===== */
 .right-signup-container {
-    -fx-background-color: #f8faff;
+    -fx-background-color: linear-gradient(to bottom right, #c2e0ff, #dcecff, #f0f6ff);
 }
 
 /* Tiêu đề */
