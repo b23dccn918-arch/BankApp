@@ -11,10 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mycompany.bankonline.Database.Connect;
+import com.mycompany.bankonline.Database.Account.AccountHandler;
 import com.mycompany.bankonline.Model.Bill;
 
 public class PaymentHandler {
-
+    public final AccountHandler accountHandler = new AccountHandler();
 
     public ObservableList<Bill> getBillsByAccountId(int accountId) {
         ObservableList<Bill> bills = FXCollections.observableArrayList();
@@ -33,12 +34,17 @@ public class PaymentHandler {
                 String billType = rs.getString("bill_type");
                 double amount = rs.getDouble("amount");
                 String status = rs.getString("status");
-                String payAt = rs.getTimestamp("paid_at") != null ?
-                        rs.getTimestamp("paid_at").toLocalDateTime().format(fmt) : "--/--";
+                String payAt = rs.getTimestamp("paid_at") != null ? rs.getTimestamp("paid_at").toLocalDateTime().format(fmt) : "--/--";
                 String due = rs.getTimestamp("due_date").toLocalDateTime().format(fmt);
                 String created = rs.getTimestamp("created_at").toLocalDateTime().format(fmt);
 
-                bills.add(new Bill(billId, billType, amount, status, due,payAt, created));
+                bills.add(new Bill.Builder().billId(billId)
+                                            .billType(billType)
+                                            .amount(amount)
+                                            .status(status)
+                                            .dueDate(due)
+                                            .payAt(payAt)
+                                            .createdAt(created).build());
             }
 
         } catch (SQLException e) {
@@ -48,7 +54,7 @@ public class PaymentHandler {
         return bills;
     }
 
-    // Lấy danh sách bill_id chua thanh toán
+
     public static ObservableList<String> getUnpaidBillIds(int accountId) {
         ObservableList<String> pendingIds = FXCollections.observableArrayList();
 
@@ -71,7 +77,6 @@ public class PaymentHandler {
         return pendingIds;
     }
 
-    // Thực hiện thanh toán hóa đơn
     public static int payBill(int accountId, long billId) {
         Connection conn = null;
 
@@ -79,21 +84,20 @@ public class PaymentHandler {
             conn = Connect.getConnection();
             conn.setAutoCommit(false);
 
-            // Lấy thông tin hóa đơn
             String billQuery = "SELECT amount, status FROM payment_bills WHERE bill_id = ?";
             PreparedStatement billStmt = conn.prepareStatement(billQuery);
             billStmt.setLong(1, billId);
             ResultSet rs = billStmt.executeQuery();
 
             if (!rs.next()) {
-                return 3; // Không tìm thấy hóa đơn
+                return 3; 
             }
 
             double amount = rs.getDouble("amount");
             String status = rs.getString("status");
 
             if ("paid".equalsIgnoreCase(status)) {
-                return 2; // Hóa đơn đã thanh toán
+                return 2; 
             }
 
             String balanceQuery = "SELECT balance FROM accounts WHERE account_id = ?";
@@ -102,13 +106,13 @@ public class PaymentHandler {
             ResultSet accRs = accStmt.executeQuery();
 
             if (!accRs.next()) {
-                return 3; // Không tìm thấy tài khoản
+                return 3; 
             }
 
             double balance = accRs.getDouble("balance");
 
             if (balance < amount) {
-                return 1; // Không đủ số dư
+                return 1; 
             }
 
             String updateBalance = "UPDATE accounts SET balance = balance - ? WHERE account_id = ?";
@@ -122,7 +126,6 @@ public class PaymentHandler {
             billUpdateStmt.setLong(1, billId);
             billUpdateStmt.executeUpdate();
 
-            //Ghi vào transactions
             String insertTrans = "INSERT INTO transactions (from_account_id, bill_id, type, amount, description, created_at) VALUES (?, ?, 'payment', ?, ?, NOW())";
             PreparedStatement transStmt = conn.prepareStatement(insertTrans);
             transStmt.setInt(1, accountId);
@@ -132,12 +135,12 @@ public class PaymentHandler {
             transStmt.executeUpdate();
 
             conn.commit();
-            return 0; // Thành công
+            return 0;
 
         } catch (SQLException e) {
             try { if (conn != null) conn.rollback(); } catch (Exception ignored) {}
             e.printStackTrace();
-            return 99; // Lỗi hệ thống
+            return 99;
         } finally {
             try { if (conn != null) conn.close(); } catch (Exception ignored) {}
         }
@@ -168,8 +171,8 @@ public class PaymentHandler {
         return null;
     }
 
-    public static List<Bill> getBillsByStatus(int accountId, String status) {
-        List<Bill> bills = new ArrayList<>();
+    public static ObservableList<Bill> getBillsByStatus(int accountId, String status) {
+        ObservableList<Bill> bills = FXCollections.observableArrayList();
         String query = "SELECT * FROM payment_bills WHERE account_id = ? AND status = ? ORDER BY created_at DESC";
 
         try (Connection conn = Connect.getConnection();
