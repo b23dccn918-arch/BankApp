@@ -237,7 +237,7 @@ public class TransferController implements Initializable {
 
             Boolean result = transferHandler.transferMoney(senderAccountId, recipient, amount, message);
 
-            if (result.equals("Success")) {
+            if (result) {
                 Account currentAccount = accountHandler.findAccountByAccountId(Session.getInstance().getAccountId());
                 balanceField.setText(String.format("%,d VND", currentAccount.getBalance()));
                 showSuccessAlert("Money transferred successfully!");
@@ -256,8 +256,7 @@ public class TransferController implements Initializable {
             Account recipientAccount = accountHandler.findAccountByAccountNumber(accountNumber);
             User recipientUser = userInfoHandler.getUserById(
                     recipientAccount != null ? recipientAccount.getUserId() : -1);
-            String recipientName = recipientUser != null ? 
-                    recipientUser.getFullName() : "Unknown";
+            String recipientName = recipientUser != null ? recipientUser.getFullName() : "Unknown";
             String currentAccountNumber = currentAccount.getAccountNumber();
             if (accountNumber.equals(currentAccountNumber)) {
                 recipientNameLabel.setText("You cannot transfer to your own account!");

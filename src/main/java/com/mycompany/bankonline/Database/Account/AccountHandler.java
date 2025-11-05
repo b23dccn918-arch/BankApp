@@ -17,7 +17,7 @@ public class AccountHandler {
         String sqlUpdateBalance = "UPDATE accounts SET balance = balance - ? WHERE account_id = ?";
         String sqlInsertTransaction = 
             "INSERT INTO transactions (from_account_id, to_account_id, bill_id, type, amount, description, created_at) " +
-            "VALUES (?, NULL, NULL, 'withdraw', ?, 'Rút tiền từ tài khoản', ?)";
+            "VALUES (?, NULL, NULL, 'withdraw', ?, 'Withdraw money from account', ?)";
 
         try (Connection conn = Connect.getConnection();
             PreparedStatement stmtUpdate = conn.prepareStatement(sqlUpdateBalance);
@@ -48,7 +48,7 @@ public class AccountHandler {
         String sqlUpdateBalance = "UPDATE accounts SET balance = balance + ? WHERE account_id = ?";
         String sqlInsertTransaction = 
             "INSERT INTO transactions (from_account_id, to_account_id, bill_id, type, amount, description, created_at) " +
-            "VALUES (?, NULL, NULL, 'deposit', ?, 'Nạp tiền vào tài khoản', ?)";
+            "VALUES (?, NULL, NULL, 'deposit', ?, 'Deposit money to account', ?)";
 
         try (Connection conn = Connect.getConnection();
             PreparedStatement stmtUpdate = conn.prepareStatement(sqlUpdateBalance);

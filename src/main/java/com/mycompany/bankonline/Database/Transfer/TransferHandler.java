@@ -19,59 +19,39 @@ public class TransferHandler {
             return false;
         }
 
-        try (Connection conn = Connect.getConnection()) {
+        if(senderAccount.getBalance() < amount){
+            return false;
+        }
+
+        try {
+            Connection conn = Connect.getConnection();
             conn.setAutoCommit(false);
             
 
-            String sqlSender = "SELECT account_id, balance FROM accounts WHERE account_id = ?";
-            PreparedStatement psSender = conn.prepareStatement(sqlSender);
-            psSender.setInt(1, senderAccountId);
-            ResultSet rsSender = psSender.executeQuery();
+            Account repipientAccount = accountHandler.findAccountByAccountNumber(recipientAccountNumber);
 
-            if (!rsSender.next()) {
+            if(recipientAccountNumber == null){
                 return false;
             }
-
-            double senderBalance = rsSender.getDouble("balance");
-
-
-            String sqlRecipient = "SELECT account_id, balance FROM accounts WHERE account_number = ?";
-            PreparedStatement psRecipient = conn.prepareStatement(sqlRecipient);
-            psRecipient.setString(1, recipientAccountNumber);
-            ResultSet rsRecipient = psRecipient.executeQuery();
-
-            if (!rsRecipient.next()) {
-                return false;
-            }
-
-            int recipientAccountId = rsRecipient.getInt("account_id");
-            double recipientBalance = rsRecipient.getDouble("balance");
-
-
-            if (senderBalance < amount) {
-                return false;
-            }
-
 
             PreparedStatement psUpdateSender = conn.prepareStatement(
                 "UPDATE accounts SET balance = ? WHERE account_id = ?");
-            psUpdateSender.setDouble(1, senderBalance - amount);
+            psUpdateSender.setDouble(1, senderAccount.getBalance() - amount);
             psUpdateSender.setInt(2, senderAccountId);
             psUpdateSender.executeUpdate();
 
 
             PreparedStatement psUpdateRecipient = conn.prepareStatement(
                 "UPDATE accounts SET balance = ? WHERE account_id = ?");
-            psUpdateRecipient.setDouble(1, recipientBalance + amount);
-            psUpdateRecipient.setInt(2, recipientAccountId);
+            psUpdateRecipient.setDouble(1, repipientAccount.getBalance() + amount);
+            psUpdateRecipient.setInt(2, repipientAccount.getAccountId());
             psUpdateRecipient.executeUpdate();
 
-            // Ghi log giao dịch
             PreparedStatement psLog = conn.prepareStatement(
                 "INSERT INTO transactions (from_account_id, to_account_id, type, amount, description, created_at) " +
                 "VALUES (?, ?, 'transfer', ?, ?, NOW())");
             psLog.setInt(1, senderAccountId);
-            psLog.setInt(2, recipientAccountId);
+            psLog.setInt(2, repipientAccount.getAccountId());
             psLog.setDouble(3, amount);
             psLog.setString(4, description);
             psLog.executeUpdate();

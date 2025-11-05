@@ -24,6 +24,11 @@
         </HBox>
 
         <HBox spacing="10">
+            <Label text="From Account: " style="-fx-font-weight: bold;"/>
+            <Label fx:id="lblFromAccount"/>
+        </HBox>
+
+        <HBox spacing="10">
             <Label text="Subject:" style="-fx-font-weight: bold;"/>
             <Label fx:id="lblSubject"/>
         </HBox>

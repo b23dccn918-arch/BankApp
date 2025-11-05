@@ -203,7 +203,7 @@ public class PaymentController implements Initializable {
 
         String selected = statusFilterCombo.getValue();
 
-        List<Bill> filteredList = new ArrayList<>();
+        ObservableList<Bill> filteredList = FXCollections.observableArrayList();
 
         if (selected == null || selected.equals("All")) {
             filteredList = paymentHandler.getBillsByAccountId(accountId);
@@ -213,7 +213,7 @@ public class PaymentController implements Initializable {
             filteredList = paymentHandler.getBillsByStatus(accountId, "unpaid");
         }
 
-        billTable.setItems(paymentHandler.getBillsByAccountId(accountId));
+        billTable.setItems(filteredList);
         billIdCombo.setItems(paymentHandler.getUnpaidBillIds(accountId));
     }
 
@@ -266,13 +266,13 @@ public class PaymentController implements Initializable {
             }
         } catch (IOException e) {
             e.printStackTrace();
-            showErrorAlert("Error opening PIN dialog.");
+            showMessage("Error","Error opening PIN dialog.");
             return;
         }
 
         String selected = billIdCombo.getValue();
         if (selected == null) {
-            showAlert("Notification", "Please select a bill to pay!", Alert.AlertType.WARNING);
+            showMessage("Notification", "Please select a bill to pay!");
             return;
         }
 
@@ -283,22 +283,19 @@ public class PaymentController implements Initializable {
 
         switch (resultCode) {
             case 0:
-                showAlert("Success", "Bill #" + billId + " has been paid successfully!", Alert.AlertType.INFORMATION);
+                showMessage("Success", "Bill #" + billId + " has been paid successfully!");
                 break;
             case 1:
-                showAlert("Insufficient Balance", "Your account balance is not enough to pay this bill.", Alert.AlertType.WARNING);
+                showMessage("Insufficient Balance", "Your account balance is not enough to pay this bill.");
                 break;
             case 2:
-                showAlert("Already Paid", "Bill #" + billId + " has already been paid.", Alert.AlertType.INFORMATION);
+                showMessage("Already Paid", "Bill #" + billId + " has already been paid.");
                 break;
             case 3:
-                showAlert("Not Found", "Bill or account not found!", Alert.AlertType.ERROR);
-                break;
-            case 99:
-                showAlert("System Error", "An error occurred during payment. Please try again!", Alert.AlertType.ERROR);
+                showMessage("Not Found", "Bill or account not found!");
                 break;
             default:
-                showAlert("Unknown", "Unexpected result. Error code: " + resultCode, Alert.AlertType.ERROR);
+                showMessage("Error", "An error occurred during payment. Please try again!");
                 break;
         }
 
@@ -313,21 +310,8 @@ public class PaymentController implements Initializable {
         alert.showAndWait();
     }
 
-    private void showAlert(String title, String message, Alert.AlertType type) {
-        Alert alert = new Alert(type);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
 
-    private void showErrorAlert(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Transaction Error");
-        alert.setHeaderText("Transaction failed");
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
+
 
     private void handleLogout() {
         Alert alert = new Alert(AlertType.CONFIRMATION);
