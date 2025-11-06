@@ -122,7 +122,7 @@ public class TransferController implements Initializable {
 
         transferButtonSubmit.setOnAction(this::handleTransfer);
         
-        balanceField.setText(String.format("%,d VND", currentAccount.getBalance()));
+        balanceField.setText(String.format("%.2f VND", currentAccount.getBalance()));
         homeButton.setOnAction(event -> {
             try {
                 Stage stage = (Stage) transferButton.getScene().getWindow();
@@ -191,37 +191,37 @@ public class TransferController implements Initializable {
     }
 
     private void handleTransfer(ActionEvent event) {
-         try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/mycompany/bankonline/View/PinDialog/PinDialog.fxml"));
-        Parent root = loader.load();
-
-        Stage pinStage = new Stage();
-        pinStage.setTitle("PIN Verification");
-        pinStage.setScene(new Scene(root));
-        pinStage.setResizable(false);
-        pinStage.initModality(Modality.APPLICATION_MODAL); // Chặn các cửa sổ khác
-        pinStage.showAndWait();
-
-        PinDialogController pinController = loader.getController();
-        if (!pinController.isPinConfirmed()) {
-            showMessage("Notification", "Transaction canceled!");
-            return;
-        }
-
-        Account currentAccount = accountHandler.findAccountByAccountId(Session.getInstance().getAccountId());
-
-        String enteredPin = pinController.getEnteredPin();
-
-        String currentAccountPin = currentAccount.getPin();
-        if (!enteredPin.equals(currentAccountPin)) {
-            showMessage("Notification", "Incorrect PIN!");
-            return;
-        }
-        } catch (IOException e) {
-            e.printStackTrace();
-            showErrorAlert("Error opening PIN verification dialog.");
-            return;
-        }
+//         try {
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/mycompany/bankonline/View/PinDialog/PinDialog.fxml"));
+//        Parent root = loader.load();
+//
+//        Stage pinStage = new Stage();
+//        pinStage.setTitle("PIN Verification");
+//        pinStage.setScene(new Scene(root));
+//        pinStage.setResizable(false);
+//        pinStage.initModality(Modality.APPLICATION_MODAL); 
+//        pinStage.showAndWait();
+//
+//        PinDialogController pinController = loader.getController();
+//        if (!pinController.isPinConfirmed()) {
+//            showMessage("Notification", "Transaction canceled!");
+//            return;
+//        }
+//
+//        Account currentAccount = accountHandler.findAccountByAccountId(Session.getInstance().getAccountId());
+//
+//        String enteredPin = pinController.getEnteredPin();
+//
+//        String currentAccountPin = currentAccount.getPin();
+//        if (!enteredPin.equals(currentAccountPin)) {
+//            showMessage("Notification", "Incorrect PIN!");
+//            return;
+//        }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            showErrorAlert("Error opening PIN verification dialog.");
+//            return;
+//        }
 
         String recipient = recipientAccountField.getText().trim();
         String amountText = amountField.getText().trim();
@@ -232,6 +232,7 @@ public class TransferController implements Initializable {
             showErrorAlert("Please fill in all required fields.");
             return;
         }
+        
 
         try {
             double amount = Double.parseDouble(amountText);
@@ -245,13 +246,48 @@ public class TransferController implements Initializable {
                 showErrorAlert("Insufficient balance.");
                 return;
             }
+            
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/mycompany/bankonline/View/PinDialog/PinDialog.fxml"));
+                Parent root = loader.load();
+
+                Stage pinStage = new Stage();
+                pinStage.setTitle("PIN Verification");
+                pinStage.setScene(new Scene(root));
+                pinStage.setResizable(false);
+                pinStage.initModality(Modality.APPLICATION_MODAL); 
+                pinStage.showAndWait();
+
+                PinDialogController pinController = loader.getController();
+//                if (!pinController.isPinConfirmed()) {
+//                    showMessage("Notification", "Transaction canceled!");
+//                    return;
+//                }
+
+                Account currentAccount = accountHandler.findAccountByAccountId(Session.getInstance().getAccountId());
+
+                String enteredPin = pinController.getEnteredPin();
+
+                String currentAccountPin = currentAccount.getPin();
+                if (!enteredPin.equals(currentAccountPin)) {
+                    showMessage("Notification", "Incorrect PIN!");
+                    return;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                showErrorAlert("Error opening PIN verification dialog.");
+                return;
+            }
 
             Boolean result = transferHandler.transferMoney(senderAccountId, recipient, amount, message);
 
             if (result) {
                 Account currentAccount = accountHandler.findAccountByAccountId(Session.getInstance().getAccountId());
-                balanceField.setText(String.format("%,d VND", currentAccount.getBalance()));
+                balanceField.setText(String.format("%.2f VND", currentAccount.getBalance()));
                 showSuccessAlert("Money transferred successfully!");
+                recipientAccountField.clear();
+                amountField.clear();
+                messageField.clear();
             } else {
                 showErrorAlert("Transfer failed.");
             }

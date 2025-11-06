@@ -106,7 +106,7 @@ public class PaymentController implements Initializable {
         payBillButton.setOnAction(e -> handlePayBill());
         refreshButton.setOnAction(e -> loadData());
 
-        balanceField.setText(String.format("%,d VND", currentAccount.getBalance()));
+        balanceField.setText(String.format("%.2f VND", currentAccount.getBalance()));
 
         homeButton.setOnAction(event -> {
             try {
@@ -199,7 +199,7 @@ public class PaymentController implements Initializable {
     private void loadData() {
         int accountId = Session.getInstance().getAccountId();
         Account currentAccount = accountHandler.findAccountByAccountId(accountId);
-        balanceField.setText(String.format("%,d VND", currentAccount.getBalance()));
+        balanceField.setText(String.format("%.2f VND", currentAccount.getBalance()));
 
         String selected = statusFilterCombo.getValue();
 

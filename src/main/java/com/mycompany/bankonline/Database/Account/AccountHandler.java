@@ -170,7 +170,7 @@ public class AccountHandler {
                 .setPassword(rs.getString("password"))
                 .setUserId(rs.getInt("user_id"))
                 .setAccountNumber(rs.getString("account_number"))
-                .setBalance(rs.getLong("balance"))
+                .setBalance(rs.getDouble("balance"))
                 .setPin(rs.getString("pin"))
                 .setStatus(rs.getInt("status"))
                 .setCreatedAt(rs.getTimestamp("created_at"))

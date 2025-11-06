@@ -1,5 +1,6 @@
 package com.mycompany.bankonline.Database.Admin.Account;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -28,7 +29,7 @@ public class AccountRepository {
 				String password = rs.getString("password");
 				int userId = rs.getInt("user_id");
 				String accountNumber = rs.getString("account_number");
-				long balance = (long)(rs.getInt("balance"));
+				double balance = rs.getDouble("balance");
 				String pinID = rs.getString("pin");
 				int status = rs.getInt("status");
 				Timestamp createdAt = rs.getTimestamp("created_at");

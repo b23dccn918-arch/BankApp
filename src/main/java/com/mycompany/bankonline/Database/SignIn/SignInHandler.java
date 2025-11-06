@@ -36,7 +36,7 @@ public class SignInHandler {
             e.printStackTrace();
         }
         
-        return false; // Không tìm thấy tài khoản
+        return false; 
     }
     
     public static boolean checkStatus(String username, String password) {

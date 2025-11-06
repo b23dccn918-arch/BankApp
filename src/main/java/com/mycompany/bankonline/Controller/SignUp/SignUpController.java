@@ -84,7 +84,7 @@ public class SignUpController  {
 		String mail = Email.getText().trim();
 		String address = Address.getText().trim();
 
-		// Kiểm tra trống
+		
 		if (identification.isEmpty() || fullName.isEmpty() || job.isEmpty()
 		        || gender == null || birth == null || mail.isEmpty() || address.isEmpty()) {
 		    showAlert(AlertType.ERROR, "Failed", "Please fill in all the information");
@@ -92,26 +92,25 @@ public class SignUpController  {
 		}
 
 
-		// Kiểm tra email đúng định dạng chưa
 		if (!isValidEmail(mail)) {
 			showAlert(AlertType.ERROR, "Invalid Email", "Please enter a valid email address");
 			return;
 		}
-
-		// Kiểm tra số căn cước
+   
+	
 		if (!NextHandler.isIdentificationExist(identification)) {
-			System.out.println("Qua buoc 1");
+//			System.out.println("Qua buoc 1");
+//			
+//			System.out.println(identification + " " + fullName + " " + job + " " + gender + " " + birth + " " + mail
+//					+ " " + address);
 			
-			System.out.println(identification + " " + fullName + " " + job + " " + gender + " " + birth + " " + mail
-					+ " " + address);
 			
-			// Tạo FXMLLoader để load màn SignUp2
 		    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/mycompany/bankonline/View/SignUp/SignUpInterface_2.fxml"));    
 		    Parent root = loader.load();
 		    Scene scene = new Scene(root);
 		    scene.getStylesheets().add(Main.class.getResource("/com/mycompany/bankonline/View/SignUp/StyleSignUp.css").toExternalForm());
 
-		    // Lấy controller của màn SignUp2
+		    
 		    SignUpController2 controller2 = loader.getController();
 		    
 		    controller2.setUserData(identification, fullName, job, gender, birth, mail, address);
@@ -126,7 +125,6 @@ public class SignUpController  {
 		}
 	}
 
-	// Hàm kiểm tra định dạng email
 	private boolean isValidEmail(String email) {
 		String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$";
 		Pattern pattern = Pattern.compile(emailRegex);

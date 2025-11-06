@@ -79,7 +79,7 @@ public class WithdrawController implements Initializable {
 
         Account currentAccount = accountHandler.findAccountByAccountId(Session.getInstance().getAccountId());
 
-        balanceField.setText(String.format("%,d VND", currentAccount.getBalance()));
+        balanceField.setText(String.format("%.2f VND", currentAccount.getBalance()));
         withdrawButtonSubmit.setOnAction(e -> handleWithdraw());
 
         // Set navigation button events
@@ -228,7 +228,7 @@ public class WithdrawController implements Initializable {
     private void updateBalanceUI() {
         Account currentAccount = accountHandler.findAccountByAccountId(Session.getInstance().getAccountId());
 
-        Long updatedBalance = currentAccount.getBalance();
+        double updatedBalance = currentAccount.getBalance();
         balanceField.setText(String.format("%,d VND", updatedBalance));
     }
 
@@ -248,10 +248,10 @@ public class WithdrawController implements Initializable {
         alert.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
                 try {
-                    // Clear current session (authentication info)
+                
                     Session.getInstance().clear();
 
-                    // Get current stage and navigate back to Sign In
+                
                     Stage stage = (Stage) logoutButton.getScene().getWindow();
                     toSignIn.SignIn(stage);
                 } catch (IOException e) {

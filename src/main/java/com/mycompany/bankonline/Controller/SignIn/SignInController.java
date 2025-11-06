@@ -118,7 +118,7 @@ public class SignInController {
 			PasswordVisible.setManaged(true);
 			Password.setVisible(false);
 			Password.setManaged(false);
-			togglePasswordVisibility.setText("Hide"); // đổi icon nếu muốn
+			togglePasswordVisibility.setText("Hide"); 
 		} else {
 			PasswordVisible.setVisible(false);
 			PasswordVisible.setManaged(false);
@@ -130,7 +130,6 @@ public class SignInController {
 
 	
 	  public void handleSignUpButton(ActionEvent event) {
-	        // Lấy stage hiện tại từ nút được nhấn
 		  	Button clickedButton = (Button) event.getSource();
 		  	Scene currentScene = clickedButton.getScene();
 		  	Stage currentStage = (Stage) currentScene.getWindow();

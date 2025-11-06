@@ -73,7 +73,7 @@ public class DepositController implements Initializable {
         depositButtonSubmit.setOnAction(e -> handleDeposit());
         int accountId = Session.getInstance().getAccountId();
         Account currentAccount = accountHandler.findAccountByAccountId(accountId);
-        balanceField.setText(String.format("%,d VND", currentAccount.getBalance()));
+        balanceField.setText(String.format("%.2f VND", currentAccount.getBalance()));
 
         // Gán sự kiện cho các nút điều hướng
         homeButton.setOnAction(event -> {
@@ -202,7 +202,7 @@ public class DepositController implements Initializable {
     private void updateBalanceUI() {
         int accountId = Session.getInstance().getAccountId();
         Account currentAccount = accountHandler.findAccountByAccountId(accountId);
-        Long updatedBalance = currentAccount.getBalance();
+        double updatedBalance = currentAccount.getBalance();
         balanceField.setText(String.format("%,d VND", updatedBalance));
     }
 

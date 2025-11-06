@@ -1,5 +1,6 @@
 package com.mycompany.bankonline.Model;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 public class Account {
@@ -8,7 +9,7 @@ public class Account {
     private String password;
     private int userId;
 	private String accountNumber;
-    private long balance;
+    private double balance;
     private String pin;
     private int status;
     private Timestamp createdAt;
@@ -18,7 +19,7 @@ public class Account {
 	}
 
 	public Account(int accountId, String username, String password, int userId, 
-			String accountNumber, long balance, String pin, int status, Timestamp createdAt) {
+			String accountNumber, double balance, String pin, int status, Timestamp createdAt) {
 		this.accountId = accountId;
 		this.username = username;
 		this.password = password;
@@ -48,7 +49,7 @@ public class Account {
         private String password;
         private int userId;
         private String accountNumber;
-        private long balance;
+        private double balance;
         private String pin;
         private int status;
         private Timestamp createdAt;
@@ -78,7 +79,7 @@ public class Account {
             return this;
         }
 
-        public Builder setBalance(long balance) {
+        public Builder setBalance(double balance) {
             this.balance = balance;
             return this;
         }
@@ -145,11 +146,11 @@ public class Account {
 		this.accountNumber = accountNumber;
 	}
 
-	public long getBalance() {
+	public double getBalance() {
 		return balance;
 	}
 
-	public void setBalance(long balance) {
+	public void setBalance(double balance) {
 		this.balance = balance;
 	}
 
