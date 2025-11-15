@@ -28,6 +28,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
@@ -55,6 +56,16 @@ public class SignUpController  {
 	@FXML
 	public void initialize() {
 	    Gender.getItems().addAll("Male", "Female");
+	    
+	 // Chỉ cho phép nhập số
+//	    Identification.setTextFormatter(new TextFormatter<>(change -> {
+//	        if (change.getControlNewText().matches("\\d*")) {
+//	            return change; // chấp nhận nếu chỉ toàn số
+//	        }
+//	        return null; // bỏ qua nếu có ký tự khác
+//	    }));
+
+	    // ... phần còn lại trong initialize() của m
 	}
 
 	public void backToSignIn(ActionEvent event) {

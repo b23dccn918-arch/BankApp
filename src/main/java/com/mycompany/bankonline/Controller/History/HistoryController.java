@@ -59,6 +59,8 @@ public class HistoryController implements Initializable {
 
     @FXML
     private Button depositButton;
+    
+
 
     @FXML
     private DatePicker fromDate;
@@ -213,4 +215,6 @@ public class HistoryController implements Initializable {
             }
         });
     }
+    
+   
 }

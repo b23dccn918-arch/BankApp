@@ -1,44 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="600" prefWidth="1000"
-            xmlns="http://javafx.com/javafx/17"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.mycompany.bankonline.Controller.History.HistoryController"
-            styleClass="history-root">
+<BorderPane prefHeight="600" prefWidth="1000" styleClass="history-root" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.bankonline.Controller.History.HistoryController">
 
     <!-- 🔷 HEADER -->
     <top>
         <AnchorPane prefHeight="70" styleClass="header-container">
             <children>
-                <Label layoutX="30" layoutY="20" text="🏦 BASOUR BANK" styleClass="header-title"/>
-                <Label layoutX="420" layoutY="25" text="Transaction History" styleClass="header-subtitle"/>
-                <Button fx:id="logoutButton" layoutX="850" layoutY="22" text="Logout" styleClass="btn-logout"/>
+                <Label layoutX="30" layoutY="20" styleClass="header-title" text="🏦 BASOUR BANK" />
+                <Label layoutX="420" layoutY="25" styleClass="header-subtitle" text="Transaction History" />
+                <Button fx:id="logoutButton" layoutX="850" layoutY="22" styleClass="btn-logout" text="Logout" />
             </children>
         </AnchorPane>
     </top>
 
     <!-- 🧭 SIDEBAR -->
     <left>
-        <AnchorPane prefHeight="600" prefWidth="200"
-                    styleClass="sidebar-container"
-                    BorderPane.alignment="CENTER">
-            <VBox spacing="15" alignment="TOP_CENTER"
-                  AnchorPane.topAnchor="30"
-                  AnchorPane.leftAnchor="0"
-                  AnchorPane.rightAnchor="0">
+        <AnchorPane prefHeight="600" prefWidth="200" styleClass="sidebar-container" BorderPane.alignment="CENTER">
+            <VBox alignment="TOP_CENTER" spacing="15" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="30">
 
-                <Button fx:id="homeButton" text="🏠  Home" prefWidth="180" styleClass="sidebar-button"/>
-                <Button fx:id="accountButton" text="👤  User Info" prefWidth="180" styleClass="sidebar-button"/>
-                <Button fx:id="transferButton" text="💸  Transfer" prefWidth="180" styleClass="sidebar-button"/>
-                <Button fx:id="withdrawButton" text="💰  Withdraw" prefWidth="180" styleClass="sidebar-button"/>
-                <Button fx:id="depositButton" text="💵  Deposit" prefWidth="180" styleClass="sidebar-button"/>
-                <Button fx:id="paymentButton" text="🧾  Payment" prefWidth="180" styleClass="sidebar-button"/>
-                <Button fx:id="historyButton" text="📜  History" prefWidth="180" styleClass="sidebar-button"/>
-                <Button fx:id="complaintButton" text="✉️  Complaint" prefWidth="180" styleClass="sidebar-button"/>
+                <Button fx:id="homeButton" prefWidth="180" styleClass="sidebar-button" text="🏠  Home" />
+                <Button fx:id="accountButton" prefWidth="180" styleClass="sidebar-button" text="👤  User Info" />
+                <Button fx:id="transferButton" prefWidth="180" styleClass="sidebar-button" text="💸  Transfer" />
+                <Button fx:id="withdrawButton" prefWidth="180" styleClass="sidebar-button" text="💰  Withdraw" />
+                <Button fx:id="depositButton" prefWidth="180" styleClass="sidebar-button" text="💵  Deposit" />
+                <Button fx:id="paymentButton" prefWidth="180" styleClass="sidebar-button" text="🧾  Payment" />
+                <Button fx:id="historyButton" prefWidth="180" styleClass="sidebar-button" text="📜  History" />
+                <Button fx:id="complaintButton" prefWidth="180" styleClass="sidebar-button" text="✉️  Complaint" />
             </VBox>
         </AnchorPane>
     </left>
@@ -47,28 +44,28 @@
     <center>
         <VBox spacing="20" styleClass="main-content">
 
-            <Label text="TRANSACTION HISTORY" styleClass="page-title"/>
+            <Label styleClass="page-title" text="TRANSACTION HISTORY" />
 
             <!-- Date Filter -->
-            <HBox spacing="15" alignment="CENTER_LEFT">
-                <Label text="From date:" styleClass="form-label"/>
-                <DatePicker fx:id="fromDate" styleClass="date-picker"/>
-                <Label text="To date:" styleClass="form-label"/>
-                <DatePicker fx:id="toDate" styleClass="date-picker"/>
-                <Button fx:id="filterButton" text="Filter" styleClass="filter-button"/>
+            <HBox alignment="CENTER_LEFT" spacing="15">
+                <Label styleClass="form-label" text="From date:" />
+                <DatePicker fx:id="fromDate" styleClass="date-picker" />
+                <Label styleClass="form-label" text="To date:" />
+                <DatePicker fx:id="toDate" styleClass="date-picker" />
+                <Button fx:id="filterButton" styleClass="filter-button" text="Filter" />
             </HBox>
 
             <!-- Transaction Table -->
             <TableView fx:id="transactionTable" prefHeight="400" styleClass="table-view">
                 <columns>
-                    <TableColumn fx:id="colId" prefWidth="80" text="Transaction ID"/>
-                    <TableColumn fx:id="colFrom" prefWidth="120" text="Sender"/>
-                    <TableColumn fx:id="colTo" prefWidth="120" text="Receiver"/>
-                    <TableColumn fx:id="colType" prefWidth="100" text="Type"/>
-                    <TableColumn fx:id="colAmount" prefWidth="120" text="Amount"/>
-                    <TableColumn fx:id="colDescription" prefWidth="180" text="Description"/>
-                    <TableColumn fx:id="colDate" prefWidth="150" text="Created At"/>
-                    <TableColumn fx:id="colStatus" prefWidth="100" text="Status"/>
+                    <TableColumn fx:id="colId" prefWidth="80" text="Transaction ID" />
+                    <TableColumn fx:id="colFrom" prefWidth="120" text="Sender" />
+                    <TableColumn fx:id="colTo" prefWidth="120" text="Receiver" />
+                    <TableColumn fx:id="colType" prefWidth="100" text="Type" />
+                    <TableColumn fx:id="colAmount" prefWidth="120" text="Amount" />
+                    <TableColumn fx:id="colDescription" prefWidth="180" text="Description" />
+                    <TableColumn fx:id="colDate" prefWidth="150" text="Created At" />
+                    <TableColumn fx:id="colStatus" prefWidth="100" text="Status" />
                 </columns>
             </TableView>
 

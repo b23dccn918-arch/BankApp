@@ -2,6 +2,7 @@ package com.mycompany.bankonline.Controller.ComplaintList;
 
 
 import com.mycompany.bankonline.Controller.ComplaintDetail.ComplaintDetailController;
+import com.mycompany.bankonline.Database.Connect;
 import com.mycompany.bankonline.Database.Complaint.ComplaintHandler;
 import com.mycompany.bankonline.DisplayScene.toComplaint;
 import com.mycompany.bankonline.DisplayScene.toDashBoard;
@@ -27,6 +28,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.layout.HBox;
@@ -70,6 +72,12 @@ public class ComplaintListController {
 
     @FXML
     private Button historyButton;
+    
+//    @FXML
+//    private Button Filter;
+//    
+//    @FXML 
+//    private TextField FilterField;
 
     @FXML
     private ScrollPane scrollPane;
@@ -151,11 +159,39 @@ public class ComplaintListController {
         catch (IOException ex) {
             ex.printStackTrace();
         }});
+//        Filter.setOnAction(this::handleFilter);
         logoutButton.setOnAction(this::handleLogout);
         int accountId = Session.getInstance().getAccountId();
         List<Complaint> complaints = complaintHandler.getAllComplaintsByAccountId(accountId);
         displayComplaints(complaints);
     }
+    
+//    private void handleFilter(ActionEvent event) {
+//    	String subject = FilterField.getText();
+//    	List<Complaint> list = new ArrayList<>();
+//    	try(Connection conn = Connect.getConnection();){
+//    		
+//    		String sql = "select * from complaints where subject like '%" + subject + "%' ";
+//    		PreparedStatement stmt = conn.prepareStatement(sql);
+//    		ResultSet rs = stmt.executeQuery();
+//    		while(rs.next()) {
+//    			Complaint c = new Complaint.Builder()
+//                        .complaintId(rs.getInt("complaint_id"))
+//                        .accountId(rs.getInt("account_id"))
+//                        .subject(rs.getString("subject"))
+//                        .content(rs.getString("content"))
+//                        .status(rs.getString("status"))
+//                        .adminNote(rs.getString("admin_note"))
+//                        .createdAt(rs.getTimestamp("created_at"))
+//                        .updatedAt(rs.getTimestamp("updated_at"))
+//                        .build();
+//list.add(c);
+//    		}
+//    	}catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    	displayComplaints(list);
+//    }
 
     private String getStatusStyle(String status) {
         switch (status) {

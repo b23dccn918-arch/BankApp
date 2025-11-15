@@ -20,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.stage.Stage;
 
 public class SignInController {
@@ -73,6 +74,16 @@ public class SignInController {
 				e.printStackTrace();
 			}
 		});
+		
+		// Chỉ cho phép nhập số
+//	    Username.setTextFormatter(new TextFormatter<>(change -> {
+//	        if (change.getControlNewText().matches("\\d*")) {
+//	            return change; // chấp nhận nếu chỉ toàn số
+//	        }
+//	        return null; // bỏ qua nếu có ký tự khác
+//	    }));
+
+	    // ... phần còn lại trong initialize() của m
 
         SignInButton.disableProperty().bind(
                 Username.textProperty().isEmpty()

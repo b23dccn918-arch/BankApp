@@ -38,6 +38,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -108,6 +109,13 @@ public class TransferController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         Account currentAccount = accountHandler.findAccountByAccountId(Session.getInstance().getAccountId());
+        
+        recipientAccountField.setTextFormatter(new TextFormatter<>(change -> {
+	        if (change.getControlNewText().matches("\\d*")) {
+	            return change; 
+	        }
+	        return null; 
+	    }));
 
         recipientAccountField.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
             if (!isNowFocused) { 

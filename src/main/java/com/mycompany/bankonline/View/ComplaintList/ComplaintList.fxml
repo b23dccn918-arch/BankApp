@@ -1,81 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane prefWidth="900" prefHeight="600"
-            xmlns="http://javafx.com/javafx/17"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.mycompany.bankonline.Controller.ComplaintList.ComplaintListController"
-            styleClass="dashboard-root">
+<BorderPane prefHeight="600" prefWidth="900" styleClass="dashboard-root" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.bankonline.Controller.ComplaintList.ComplaintListController">
 
     <top>
         <AnchorPane prefHeight="70" styleClass="header-container">
             <children>
-                <Label layoutX="30" layoutY="20" text="🏦 BASOUR BANK" styleClass="header-title"/>
-                <Label layoutX="400" layoutY="25" text="Dashboard" styleClass="header-subtitle"/>
-                <Button fx:id="logoutButton" layoutX="750" layoutY="22" text="Logout" styleClass="btn-logout"/>
+                <Label layoutX="30" layoutY="20" styleClass="header-title" text="🏦 BASOUR BANK" />
+                <Label layoutX="400" layoutY="25" styleClass="header-subtitle" text="Dashboard" />
+                <Button fx:id="logoutButton" layoutX="750" layoutY="22" styleClass="btn-logout" text="Logout" />
             </children>
         </AnchorPane>
     </top>
 
     <left>
-        <AnchorPane prefHeight="600" prefWidth="200"
-                    styleClass="sidebar-container"
-                    BorderPane.alignment="CENTER">
-            <VBox spacing="15" alignment="TOP_CENTER"
-                  AnchorPane.topAnchor="30"
-                  AnchorPane.leftAnchor="0"
-                  AnchorPane.rightAnchor="0">
+        <AnchorPane prefHeight="600" prefWidth="200" styleClass="sidebar-container" BorderPane.alignment="CENTER">
+            <VBox alignment="TOP_CENTER" spacing="15" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="30">
 
-                <Button fx:id="homeButton" text="🏠  Home" prefWidth="180" styleClass="sidebar-button"/>
-                <Button fx:id="accountButton" text="👤  User Info" prefWidth="180" styleClass="sidebar-button"/>
-                <Button fx:id="transferButton" text="💸  Transfer" prefWidth="180" styleClass="sidebar-button"/>
-                <Button fx:id="withdrawButton" text="💰  Withdraw" prefWidth="180" styleClass="sidebar-button"/>
-                <Button fx:id="depositButton" text="💵  Deposit" prefWidth="180" styleClass="sidebar-button"/>
-                <Button fx:id="paymentButton" text="🧾  Payment" prefWidth="180" styleClass="sidebar-button"/>
-                <Button fx:id="historyButton" text="📜  History" prefWidth="180" styleClass="sidebar-button"/>
-                <Button fx:id="complaintButton" text="✉️  Complaint" prefWidth="180" styleClass="sidebar-button"/>
+                <Button fx:id="homeButton" prefWidth="180" styleClass="sidebar-button" text="🏠  Home" />
+                <Button fx:id="accountButton" prefWidth="180" styleClass="sidebar-button" text="👤  User Info" />
+                <Button fx:id="transferButton" prefWidth="180" styleClass="sidebar-button" text="💸  Transfer" />
+                <Button fx:id="withdrawButton" prefWidth="180" styleClass="sidebar-button" text="💰  Withdraw" />
+                <Button fx:id="depositButton" prefWidth="180" styleClass="sidebar-button" text="💵  Deposit" />
+                <Button fx:id="paymentButton" prefWidth="180" styleClass="sidebar-button" text="🧾  Payment" />
+                <Button fx:id="historyButton" prefWidth="180" styleClass="sidebar-button" text="📜  History" />
+                <Button fx:id="complaintButton" prefWidth="180" styleClass="sidebar-button" text="✉️  Complaint" />
             </VBox>
         </AnchorPane>
     </left>
 
     <!-- 🏦 MAIN CONTENT -->
     <center>
-        <VBox alignment="TOP_CENTER" spacing="15" >
+        <VBox alignment="TOP_CENTER" spacing="15">
             <padding>
-                <Insets top="25" right="25" bottom="25" left="25"/>
+                <Insets bottom="25" left="25" right="25" top="25" />
             </padding>
             <HBox alignment="CENTER_RIGHT" prefWidth="800" spacing="10">
-                <Label text="📋 Your complaint list"
-                       style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Button fx:id="backButton" text="Back"
-                        style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 6 15;"/>
+<!--  <TextField fx:id="FilterField" /> -->         
+ <!--  <Button fx:id="Filter" mnemonicParsing="false" text="Button" /> -->            
+                <Label style="-fx-font-size: 22px; -fx-font-weight: bold;" text="📋 Your complaint list" />
+                <Button fx:id="backButton" style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 6 15;" text="Back" />
             </HBox>
 
             <!-- KHUNG SCROLL -->
-            <ScrollPane fx:id="scrollPane"
-                        fitToWidth="true"
-                        prefWidth="850"
-                        prefHeight="450"
-                        style="-fx-background-color: transparent;">
+            <ScrollPane fx:id="scrollPane" fitToWidth="true" prefHeight="450" prefWidth="850" style="-fx-background-color: transparent;">
                 <content>
-                    <VBox fx:id="complaintContainer"
-                        spacing="15"
-                        prefWidth="820"
-                        alignment="TOP_CENTER">
+                    <VBox fx:id="complaintContainer" alignment="TOP_CENTER" prefWidth="820" spacing="15">
                         <padding>
-                            <Insets top="10" right="10" bottom="10" left="10"/>
+                            <Insets bottom="10" left="10" right="10" top="10" />
                         </padding>
                     </VBox>
 
                 </content>
             </ScrollPane>
 
-            <Label fx:id="statusLabel" text="" style="-fx-text-fill: green; -fx-font-size: 14px;"/>
+            <Label fx:id="statusLabel" style="-fx-text-fill: green; -fx-font-size: 14px;" text="" />
         </VBox>
     </center>
 </BorderPane>
